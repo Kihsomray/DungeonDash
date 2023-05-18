@@ -83,11 +83,72 @@ public class Dungeon {
     }
 
     /**
-     * TODO Implement Pillar Generation
-     * Symbols: A E I P
+     * Generate pillars for Abstraction, Encapsulation,
+     * Inheritance, and Polymorphism in random, non-occupied
+     * spaces.
      */
     private void generatePillars() {
+        final char[] pillars = {'A', 'E', 'I', 'P'};
+        int count = 0;
+        int row, col;
 
+        while (count < 4) {
+            row = RAND.nextInt(myMaze.length);
+            col = RAND.nextInt(myMaze.length);
+
+            if (myMaze[row][col].getContents() == ' ') {
+                myMaze[row][col] = new Room(pillars[count]);
+                count++;
+            }
+        }
+    }
+
+    /**
+     * Prints out all the enemy spawns.
+     * Used for debugging.
+     * @return Returns of all enemy spawns.
+     */
+    public String enemySpawns() {
+        StringBuilder sr = new StringBuilder();
+        for (int row = 0; row < myMaze.length; row++) {
+            for (int col = 0; col < myMaze.length; col++) {
+                sr.append(" | ").append(myMaze[row][col].getEnemySpawns());
+            }
+            sr.append(" |\n");
+        }
+        return sr.toString();
+    }
+
+    /**
+     * Prints out the entire dungeon with all trap spawns.
+     * Used for debugging.
+     * @return Returns of a String with all trap spawns.
+     */
+    public String trapSpawns() {
+        StringBuilder sr = new StringBuilder();
+        for (int row = 0; row < myMaze.length; row++) {
+            for (int col = 0; col < myMaze.length; col++) {
+                sr.append(" | ").append(myMaze[row][col].getTrapSpawns());
+            }
+            sr.append(" |\n");
+        }
+        return sr.toString();
+    }
+
+    /**
+     * Prints out the entire dungeon with potion spawns.
+     * Used for debugging.
+     * @return Returns of a String with potion spawns.
+     */
+    public String potionSpawns() {
+        StringBuilder sr = new StringBuilder();
+        for (int row = 0; row < myMaze.length; row++) {
+            for (int col = 0; col < myMaze.length; col++) {
+                sr.append(" | ").append(myMaze[row][col].getPotionSpawns());
+            }
+            sr.append(" |\n");
+        }
+        return sr.toString();
     }
 
     /**
@@ -99,9 +160,9 @@ public class Dungeon {
         StringBuilder sr = new StringBuilder();
         for (int row = 0; row < myMaze.length; row++) {
             for (int col = 0; col < myMaze.length; col++) {
-                sr.append("|").append(myMaze[row][col].getContents());
+                sr.append(" | ").append(myMaze[row][col].getContents());
             }
-            sr.append("|\n");
+            sr.append(" |\n");
         }
         return sr.toString();
     }
