@@ -88,7 +88,7 @@ public class Dungeon {
      * spaces.
      */
     private void generatePillars() {
-        final char[] pillars = {'A', 'E', 'I', 'P'};
+        final char[] pillars = {'A', 'E', 'I', 'P'};  // TODO Change to enums?
         int count = 0;
         int row, col;
 
