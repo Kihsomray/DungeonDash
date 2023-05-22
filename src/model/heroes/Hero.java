@@ -4,6 +4,8 @@ import model.DungeonCharacter;
 import model.monsters.Monster;
 
 public class Hero extends DungeonCharacter {
+    private int myMinHeal;
+    private int myMaxHeal;
     private final Inventory myInventory;
 
     // Block chance.
@@ -25,6 +27,8 @@ public class Hero extends DungeonCharacter {
                 theAttackSpeed,
                 theHitChance
         );
+        myMinHeal = 5;
+        myMaxHeal = 15;
         myInventory = new Inventory();
         myBlockChance = theBlockChance;
     }
@@ -54,5 +58,32 @@ public class Hero extends DungeonCharacter {
 
     public void attackMonster(Monster theMonster, Boolean theAbility) {
 
+    }
+
+    public String healHero() {
+        if (myInventory.canUseHealthPotion()) {
+            int hpToHeal = RANDOM.nextInt(myMinHeal, myMaxHeal + 1);
+            healCharacter(hpToHeal);
+            return generateHealMessage(hpToHeal);
+        }
+        else {
+            return "You don't have any health potions.";
+        }
+    }
+
+    private String generateHealMessage(final int theHealAmount) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getName());
+        sb.append(" healed for ").append(theHealAmount);
+
+        if (theHealAmount + getHP() > getMaxHP()) {
+            int healthWasted = (theHealAmount + getHP()) - getMaxHP();
+
+            sb.append(", though they wasted ");
+            sb.append(healthWasted).append(" hit points");
+        }
+
+        sb.append(".\n Current HP is now: ").append(getHP());
+        return sb.toString();
     }
 }
