@@ -39,6 +39,11 @@ public class Room {
      * items as well.
      */
     private void randomizeSpawns() {
+        // As long as the room isn't an entrance/exit, spawn stuff.
+        // Doing it this way so that there can be multiple things
+        // of interest per each room. So, a room could have an
+        // enemy, trap, AND a potion. Along with primary content
+        // like pillars.
         if (myContents != 'i' && myContents != 'O') {
             if (RAND.nextDouble() < ENEMY_SPAWN_RATE) {
                 myEnemySpawn = 'm';

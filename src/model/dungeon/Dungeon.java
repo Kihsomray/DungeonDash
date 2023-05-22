@@ -9,6 +9,9 @@ public class Dungeon {
     /** Random object for generating indexes. */
     private static final Random RAND = new Random();
 
+    private int myHeroRow;
+    private int myHeroCol;
+
     /**
      * Constructor for the dungeon that creates a new dungeon
      * and fills it using private methods.
@@ -24,8 +27,44 @@ public class Dungeon {
         // Generate an entrance and an exit for the Dungeon.
         generateEntranceAndExit();
 
-        // Generate the 4 Pillars of OO
+        // Generate the 4 Pillars of OO.
         generatePillars();
+
+        // Place the character at the start.
+        placeCharacter();
+    }
+
+    /**
+     * The row the Hero is currently in.
+     * @return Returns an integer of the row.
+     */
+    public int getHeroRow() {
+        return myHeroRow;
+    }
+
+    /**
+     * The column the Hero is currently in.
+     * @return Returns an integer of the row.
+     */
+    public int getHeroCol() {
+        return myHeroCol;
+    }
+
+    /**
+     * Temporary solution for placing the character in the dungeon.
+     * There is definitely a better way of doing this, so this is
+     * just a band-aid fix for now.
+     */
+    private void placeCharacter() {
+        for (int row = 0; row < myMaze.length; row++) {
+            for (int col = 0; col < myMaze.length; col++) {
+                if (myMaze[row][col].getContents() == 'i') {
+                    myHeroRow = row;
+                    myHeroCol = col;
+                    break;
+                }
+            }
+        }
     }
 
     /**
@@ -88,7 +127,10 @@ public class Dungeon {
      * spaces.
      */
     private void generatePillars() {
-        final char[] pillars = {'A', 'E', 'I', 'P'};  // TODO Change to enums?
+        // ENUMS don't make sense with the current setup. Maybe if the
+        // maze was more generic with just "Object" but it just doesn't
+        // fit with what's trying to be achieved.
+        final char[] pillars = {'A', 'E', 'I', 'P'};
         int count = 0;
         int row, col;
 

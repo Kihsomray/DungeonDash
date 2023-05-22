@@ -6,7 +6,8 @@ public class DungeonCharacter {
     //      FIELDS      //
     protected static final Random RANDOM = new Random();
     private final String myName;
-    private final int myHP;
+    private int myHP;
+    private final int myMaxHP;
     private final int myMinDamage;
     private final int myMaxDamage;
     private final int myAttackSpeed;
@@ -14,15 +15,16 @@ public class DungeonCharacter {
 
     //      CONSTRUCTORS        //
     public DungeonCharacter(
-            String theName,
-            int    theHP,
-            int    theMinDamage,
-            int    theMaxDamage,
-            int    theAttackSpeed,
-            double theHitChance
+            final String theName,
+            final int    theHP,
+            final int    theMinDamage,
+            final int    theMaxDamage,
+            final int    theAttackSpeed,
+            final double theHitChance
     ) {
         myName = theName;
         myHP = theHP;
+        myMaxHP = theHP;
         myMinDamage = theMinDamage;
         myMaxDamage = theMaxDamage;
         myAttackSpeed = theAttackSpeed;
@@ -38,6 +40,8 @@ public class DungeonCharacter {
     public final int getHP() {
         return myHP;
     }
+
+    public final int getMaxHP() { return myMaxHP; }
 
     public final int getMinDamage() {
         return myMinDamage;
@@ -70,5 +74,9 @@ public class DungeonCharacter {
 
         // Attack the other character.
         theCharacter.receiveDamage(RANDOM.nextInt(myMinDamage, myMaxDamage));
+    }
+
+    protected void healCharacter(final int theHealAmount) {
+        myHP = theHealAmount;
     }
 }
