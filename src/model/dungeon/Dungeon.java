@@ -1,6 +1,6 @@
 package model.dungeon;
 
-import java.util.Random;
+import java.util.*;
 
 public class Dungeon {
     /** The dungeon/maze made of Rooms. */
@@ -8,6 +8,13 @@ public class Dungeon {
 
     /** Random object for generating indexes. */
     private static final Random RAND = new Random();
+
+    /** Doors between Rooms, Each */
+    private Map<String, String> myDoors = new HashMap<String, String>();
+    /** String to represent the current room */
+    private String myCurRoom = "";
+    /** String to store the entrance and exit locations */
+    private String myEntrance = "";
 
     /**
      * Constructor for the dungeon that creates a new dungeon
@@ -101,6 +108,40 @@ public class Dungeon {
                 count++;
             }
         }
+    }
+
+    private void generateDoors() {
+        // The current room is represented by a string such as "0-0" is the top left room
+        for (int row = 0; row < myMaze.length; row++) {
+            for (int col = 0; col < myMaze.length; col++) {
+                if (myMaze[row][col].equals("i")) {
+                    myEntrance = Integer.toString(row) +"-" + Integer.toString(col);
+                }
+            }
+        }
+
+        // Do depth first search with a sprinkle of randomness to create the room layout.
+        // After completing the search, go back and add the way back from rooms into the previous rooms.
+
+        // PsuedoCode
+        // step 0 create a map pointing strings to an array of strings representing rooms
+        // 1 set a pointer to the room entrance to the maze
+        // 2 add it to a stack, and to a list
+        // 3 randomly decide on a direction to go, check if it exists and is not in the list
+        // 4 add that room which was in that direction to the stack and to the list
+        // 5 change the pointer to that room
+        // 6 repeat 2 - 5 until there isn't a possible room
+        // 7 pop off of the top of the stack and save it to a var called poppedOff
+        // 8 add poppedOff to the map with the only thing in its array as the previous room as
+        // well as add poppedOff to the previous rooms mapping in the map
+        // 9 set the pointer to the previous room and go back to step 2
+        // 10 Once the stack is empty there should be a map of doors pointing from a room to all possible
+        // rooms from that room
+
+        // When controlling the player, start the player in the entrance room and give the options as the rooms which
+        // are adjacent to that room, which are found using the map of doors.
+
+        // This ensures dead ends exist while the entire dungeon is still connected
     }
 
     /**
