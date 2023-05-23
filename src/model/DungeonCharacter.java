@@ -8,37 +8,47 @@ import java.util.Random;
  * @version 1.0.0
  * @author Kihsomray
  */
-public class DungeonCharacter {
+public abstract class DungeonCharacter {
 
     //      FIELDS      //
 
-    // Used as a base to represent a character within the dungeon game.
+    /** Used to generate random numbers. */
     protected static final Random RANDOM = new Random();
 
-    // Character name.
+    /** Character name. */
     private final String myName;
 
-    // Current health.
+    /** Current health. */
     private int myHP;
 
-    // Maximum health.
+    /** Maximum health. */
     private final int myMaxHP;
 
-    // Minimum damage.
+    /** Minimum damage. */
     private final int myMinDamage;
 
-    // Maximum damage.
+    /** Maximum damage. */
     private final int myMaxDamage;
 
-    // Attack speed.
+    /** Attack speed. */
     private final int myAttackSpeed;
 
-    // Hit chance.
+    /** Hit chance. */
     private final double myHitChance;
 
 
     //      CONSTRUCTORS        //
 
+    /**
+     * Create an instance of DungeonCharacter.
+     *
+     * @param theName Name.
+     * @param theHP Hit points.
+     * @param theMinDamage Minimum damage.
+     * @param theMaxDamage Maximum damage.
+     * @param theAttackSpeed Attack speed.
+     * @param theHitChance Hit chance.
+     */
     public DungeonCharacter(
             final String theName,
             final int    theHP,
@@ -47,6 +57,7 @@ public class DungeonCharacter {
             final int    theAttackSpeed,
             final double theHitChance
     ) {
+
         myName = theName;
         myHP = theHP;
         myMaxHP = theHP;
@@ -54,6 +65,7 @@ public class DungeonCharacter {
         myMaxDamage = theMaxDamage;
         myAttackSpeed = theAttackSpeed;
         myHitChance = theHitChance;
+
     }
 
 
@@ -132,7 +144,7 @@ public class DungeonCharacter {
      * @throws IllegalArgumentException Negative damage is received.
      * @throws IndexOutOfBoundsException Character has died.
      */
-    protected void receiveDamage(final int theDamage) {
+    public void receiveDamage(final int theDamage) {
 
         // Prevent negative damage.
         if (theDamage < 0)
@@ -154,7 +166,7 @@ public class DungeonCharacter {
      * @param theHealth Health to give to the character.
      * @throws IllegalArgumentException Negative health is given.
      */
-    protected void receiveHealth(final int theHealth) {
+    public void receiveHealth(final int theHealth) {
 
         // Prevent negative health.
         if (theHealth < 0)
@@ -177,10 +189,10 @@ public class DungeonCharacter {
     protected void attack(final DungeonCharacter theCharacter) {
 
         // If out of the range, no damage.
-        if (RANDOM.nextDouble() > myHitChance) return;
+        if (RANDOM.nextDouble() >= myHitChance) return;
 
         // Attack the other character.
-        theCharacter.receiveDamage(RANDOM.nextInt(myMinDamage, myMaxDamage));
+        theCharacter.receiveDamage(RANDOM.nextInt(myMinDamage, myMaxDamage + 1));
 
     }
 

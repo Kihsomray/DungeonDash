@@ -60,9 +60,9 @@ public class Inventory {
         return sb.toString();
     }
 
-    public boolean canUseHealthPotion() {
+    public boolean hasPotion(final boolean theUsePotion) {
         if (myHealthPotion > 0) {
-            myHealthPotion--;
+            if (theUsePotion) myHealthPotion--;
             return true;
         }
         return false;
