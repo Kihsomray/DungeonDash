@@ -1,4 +1,4 @@
-package model.hero;
+package model.inventory;
 
 public class Inventory {
 

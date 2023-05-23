@@ -1,4 +1,6 @@
-package model;
+package model.character;
+
+import model.Utility;
 
 import java.util.Random;
 
@@ -11,9 +13,6 @@ import java.util.Random;
 public abstract class DungeonCharacter {
 
     //      FIELDS      //
-
-    /** Used to generate random numbers. */
-    protected static final Random RANDOM = new Random();
 
     /** Character name. */
     private final String myName;
@@ -207,10 +206,12 @@ public abstract class DungeonCharacter {
     ) {
 
         // If out of the range, no damage.
-        if (RANDOM.nextDouble() >= myHitChance) return;
+        if (Utility.RANDOM.nextDouble() >= myHitChance) return;
 
         // Attack the other character.
-        theCharacter.receiveDamage(RANDOM.nextInt(theMinDamage, theMaxDamage + 1));
+        theCharacter.receiveDamage(
+                Utility.RANDOM.nextInt(theMinDamage, theMaxDamage + 1)
+        );
 
     }
 

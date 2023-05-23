@@ -1,6 +1,7 @@
-package model.hero;
+package model.character.hero;
 
-import model.monster.Monster;
+import model.Utility;
+import model.character.monster.Monster;
 
 /**
  * A type of Hero that can be chosen when playing.
@@ -49,7 +50,7 @@ public class Warrior extends Hero {
     //        MUTATORS        //
 
     /**
-     * Attacks a monster.
+     * Attack a monster.
      *
      * @param theMonster Monster to attack.
      * @param theUseAbility Should the hero use the Crushing Blow ability.
@@ -61,7 +62,7 @@ public class Warrior extends Hero {
     ) {
 
         // Should use ability and 40% chance?
-        if (theUseAbility && RANDOM.nextDouble() <= ABILITY_CHANCE) {
+        if (theUseAbility && Utility.RANDOM.nextDouble() <= ABILITY_CHANCE) {
 
             // Attack the monster with the range of the ability.
             attack(theMonster, ABILITY_MIN_DAMAGE, ABILITY_MAX_DAMAGE);

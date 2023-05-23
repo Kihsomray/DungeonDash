@@ -1,6 +1,7 @@
-package model.hero;
+package model.character.hero;
 
-import model.monster.Monster;
+import model.Utility;
+import model.character.monster.Monster;
 
 /**
  * A type of Hero that can be chosen when playing.
@@ -46,7 +47,7 @@ public class Priestess extends Hero {
     //        MUTATORS        //
 
     /**
-     * Attacks a monster.
+     * Attack a monster.
      *
      * @param theMonster Monster to attack.
      * @param theUseAbility Should the hero use Heal ability.
@@ -61,7 +62,12 @@ public class Priestess extends Hero {
         if (theUseAbility) {
 
             // Add the necessary health.
-            receiveHealth(RANDOM.nextInt(ABILITY_MIN_HEAL, ABILITY_MAX_HEAL + 1));
+            receiveHealth(
+                    Utility.RANDOM.nextInt(
+                            ABILITY_MIN_HEAL,
+                            ABILITY_MAX_HEAL + 1
+                    )
+            );
 
         } else {
 

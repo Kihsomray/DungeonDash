@@ -1,7 +1,9 @@
-package model.hero;
+package model.character.hero;
 
-import model.DungeonCharacter;
-import model.monster.Monster;
+import model.Utility;
+import model.character.DungeonCharacter;
+import model.inventory.Inventory;
+import model.character.monster.Monster;
 
 /**
  * Used as a base to represent a hero within the dungeon game.
@@ -20,10 +22,10 @@ public abstract class Hero extends DungeonCharacter {
     private final double myBlockChance;
 
     /** Minimum heal */
-    private final int myMinHeal;
+    private final int myMinPotionHeal;
 
     /** Maximum heal */
-    private final int myMaxHeal;
+    private final int myMaxPotionHeal;
 
 
     //        CONSTRUCTORS        //
@@ -38,8 +40,8 @@ public abstract class Hero extends DungeonCharacter {
      * @param theAttackSpeed Attack speed.
      * @param theHitChance Hit chance.
      * @param theBlockChance Block chance.
-     * @param theMinHeal Minimum heal.
-     * @param theMaxHeal Maximum heal.
+     * @param theMinPotionHeal Minimum potion heal.
+     * @param theMaxPotionHeal Maximum potion heal.
      */
     public Hero(
             final String    theName,
@@ -49,8 +51,8 @@ public abstract class Hero extends DungeonCharacter {
             final int       theAttackSpeed,
             final double    theHitChance,
             final double    theBlockChance,
-            final int       theMinHeal,
-            final int       theMaxHeal
+            final int       theMinPotionHeal,
+            final int       theMaxPotionHeal
     ) {
 
         super(
@@ -64,8 +66,8 @@ public abstract class Hero extends DungeonCharacter {
 
         myInventory = new Inventory();
         myBlockChance = theBlockChance;
-        myMinHeal = theMinHeal;
-        myMaxHeal = theMaxHeal;
+        myMinPotionHeal = theMinPotionHeal;
+        myMaxPotionHeal = theMaxPotionHeal;
 
     }
 
@@ -95,8 +97,8 @@ public abstract class Hero extends DungeonCharacter {
      *
      * @return Minimum heal.
      */
-    public int getMinHeal() {
-        return myMinHeal;
+    public int getMinPotionHeal() {
+        return myMinPotionHeal;
     }
 
     /**
@@ -104,8 +106,8 @@ public abstract class Hero extends DungeonCharacter {
      *
      * @return Maximum heal.
      */
-    public int getMaxHeal() {
-        return myMaxHeal;
+    public int getMaxPotionHeal() {
+        return myMaxPotionHeal;
     }
 
 
@@ -120,7 +122,7 @@ public abstract class Hero extends DungeonCharacter {
     public void receiveDamage(final int theDamage) {
 
         // If out of the range, no damage.
-        if (RANDOM.nextDouble() >= myBlockChance) return;
+        if (Utility.RANDOM.nextDouble() >= myBlockChance) return;
 
         // Otherwise, call super.
         super.receiveDamage(theDamage);
@@ -128,7 +130,7 @@ public abstract class Hero extends DungeonCharacter {
     }
 
     /**
-     * Attacks a monster.
+     * Attack a monster.
      *
      * @param theMonster Monster to attack.
      * @param theUseAbility Should the hero use its ability.
@@ -143,8 +145,11 @@ public abstract class Hero extends DungeonCharacter {
     public String healHero() {
         if (myInventory.hasPotion(true)) {
 
-            // Amount to heal hero.
-            final int hpToHeal = RANDOM.nextInt(myMinHeal, myMaxHeal + 1);
+            // Amount to heal hero with potion.
+            final int hpToHeal = Utility.RANDOM.nextInt(
+                    myMinPotionHeal,
+                    myMaxPotionHeal + 1
+            );
 
             // Give the hero the necessary health.
             receiveHealth(hpToHeal);

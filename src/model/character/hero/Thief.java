@@ -1,6 +1,7 @@
-package model.hero;
+package model.character.hero;
 
-import model.monster.Monster;
+import model.Utility;
+import model.character.monster.Monster;
 
 /**
  * A type of Hero that can be chosen when playing.
@@ -48,7 +49,7 @@ public class Thief extends Hero {
     //        MUTATORS        //
 
     /**
-     * Attacks a monster.
+     * Attack a monster.
      *
      * @param theMonster Monster to attack.
      * @param theUseAbility Should the hero use Surprise Attack ability.
@@ -63,13 +64,13 @@ public class Thief extends Hero {
         if (theUseAbility) {
 
             // If succeeds in extra attack.
-            if (RANDOM.nextDouble() <= ABILITY_SUCCESS_CHANCE) {
+            if (Utility.RANDOM.nextDouble() <= ABILITY_SUCCESS_CHANCE) {
 
                 // Attack the monster.
                 attack(theMonster);
 
             // Elif fails an attack.
-            } else if (RANDOM.nextDouble() <= ABILITY_FAILURE_CHANCE /
+            } else if (Utility.RANDOM.nextDouble() <= ABILITY_FAILURE_CHANCE /
                             (1.0 - ABILITY_SUCCESS_CHANCE)
             ) {
 
