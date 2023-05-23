@@ -188,11 +188,29 @@ public abstract class DungeonCharacter {
      */
     protected void attack(final DungeonCharacter theCharacter) {
 
+        // Call parameter specific attack method.
+        attack(theCharacter, myMinDamage, myMaxDamage);
+
+    }
+
+    /**
+     * Attacks another character.
+     *
+     * @param theCharacter Character to attack.
+     * @param theMinDamage Minimum damage.
+     * @param theMaxDamage Maximum damage.
+     */
+    protected void attack(
+            final DungeonCharacter theCharacter,
+            final int theMinDamage,
+            final int theMaxDamage
+    ) {
+
         // If out of the range, no damage.
         if (RANDOM.nextDouble() >= myHitChance) return;
 
         // Attack the other character.
-        theCharacter.receiveDamage(RANDOM.nextInt(myMinDamage, myMaxDamage + 1));
+        theCharacter.receiveDamage(RANDOM.nextInt(theMinDamage, theMaxDamage + 1));
 
     }
 
