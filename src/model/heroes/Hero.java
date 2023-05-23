@@ -4,12 +4,11 @@ import model.DungeonCharacter;
 import model.monsters.Monster;
 
 public class Hero extends DungeonCharacter {
-    private int myMinHeal;
-    private int myMaxHeal;
+    private final int myMinHeal;
+    private final int myMaxHeal;
     private final Inventory myInventory;
-
-    // Block chance.
     private final double myBlockChance;
+
     public Hero(
             String theName,
             int theHP,
@@ -35,11 +34,11 @@ public class Hero extends DungeonCharacter {
 
     //        ACCESSORS        //
 
-    public final double GetBlockChance() {
+    public final double getBlockChance() {
         return myBlockChance;
     }
 
-    public final Inventory GetInventory() {
+    public final Inventory getInventory() {
         return myInventory;
     }
 
@@ -63,7 +62,7 @@ public class Hero extends DungeonCharacter {
     public String healHero() {
         if (myInventory.canUseHealthPotion()) {
             int hpToHeal = RANDOM.nextInt(myMinHeal, myMaxHeal + 1);
-            healCharacter(hpToHeal);
+            receiveHealth(hpToHeal);
             return generateHealMessage(hpToHeal);
         }
         else {
