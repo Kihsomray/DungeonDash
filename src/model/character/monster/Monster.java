@@ -1,8 +1,18 @@
 package model.character.monster;
 
+import model.Utility;
 import model.character.DungeonCharacter;
+import model.character.hero.Hero;
 
+/**
+ * Used as a base to represent a monster within the dungeon game.
+ *
+ * @version 1.0.0
+ * @author Kihsomray
+ */
 public abstract class Monster extends DungeonCharacter {
+
+    //        FIELDS        //
 
     /** Minimum heal. */
     private final int myMinHeal;
@@ -13,8 +23,11 @@ public abstract class Monster extends DungeonCharacter {
     /** Heal chance. */
     private final double myHealChance;
 
+
+    //        CONSTRUCTORS        //
+
     /**
-     * Create an instance of Hero.
+     * Create an instance of Monster.
      *
      * @param theName Name.
      * @param theHP Hit points.
@@ -24,6 +37,7 @@ public abstract class Monster extends DungeonCharacter {
      * @param theHitChance Hit chance.
      * @param theMinHeal Minimum heal.
      * @param theMaxHeal Maximum heal.
+     * @param theHealChance Heal chance.
      */
     public Monster(
             String theName,
@@ -52,15 +66,72 @@ public abstract class Monster extends DungeonCharacter {
 
     }
 
+
+    //        ACCESSORS        //
+
+    /**
+     * Get minimum heal.
+     *
+     * @return Minimum heal.
+     */
     public int getMinHeal() {
         return myMinHeal;
     }
 
+    /**
+     * Get maximum heal.
+     *
+     * @return Maximum heal.
+     */
     public int getMaxHealAmt() {
         return myMaxHeal;
     }
 
+    /**
+     * Get heal chance.
+     *
+     * @return Heal chance.
+     */
     public double getHealChance() {
         return myHealChance;
     }
+
+
+    //        MUTATORS        //
+
+    /**
+     * Attack this monster. Has a chance of healing itself after.
+     *
+     * @param theDamage Damage to deal to the monster.
+     */
+    @Override
+    public void receiveDamage(final int theDamage) {
+        super.receiveDamage(theDamage);
+
+        // If no error is thrown, heal the monster.
+        healMonster();
+    }
+
+    /**
+     * Heal the monster after it has been attacked.
+     */
+    private void healMonster() {
+
+        // If the chance is generated.
+        if (Utility.RANDOM.nextDouble() < myHealChance) {
+
+            // Give the monster some health back.
+            receiveHealth(Utility.RANDOM.nextInt(myMinHeal, myMaxHeal + 1));
+
+        }
+
+    }
+
+    /**
+     * Attack a hero.
+     *
+     * @param theHero Hero to attack.
+     */
+    public abstract void attackHero(final Hero theHero);
+
 }

@@ -152,10 +152,12 @@ public abstract class DungeonCharacter {
             );
 
         // If lost too much health, the character has died. End the game here.
-        if ((myHP = myHP - theDamage) <= 0.0)
+        if ((myHP = myHP - theDamage) <= 0) {
+            myHP = 0;
             throw new IndexOutOfBoundsException(
                     "You died!"
             );
+        }
 
     }
 
