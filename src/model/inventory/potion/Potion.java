@@ -1,18 +1,22 @@
 package model.inventory.potion;
 
 import model.character.hero.Hero;
+import model.inventory.Item;
 
-public abstract class Potion {
+/**
+ * A type of item that can give the hero a certain effect.
+ *
+ * @version 1.0.0
+ * @author Kihsomray
+ */
+public abstract class Potion implements Item {
 
-    protected final Hero myHero;
 
     /**
-     * Creates a potion object binded to a hero.
-     *
-     * @param theHero Hero the potion is used on.
+     * Creates a potion object.
      */
-    public Potion(final Hero theHero) {
-        myHero = theHero;
+    public Potion() {
+
     }
 
     /**
@@ -20,7 +24,7 @@ public abstract class Potion {
      *
      * @return Message from using the potion.
      */
-    public String usePotion() {
+    public String usePotion(final Hero theHero) {
         return "Not implemented";
     }
 

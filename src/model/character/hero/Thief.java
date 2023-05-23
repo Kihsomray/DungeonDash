@@ -38,9 +38,7 @@ public class Thief extends Hero {
                 60,
                 4,
                 0.8,
-                0.2,
-                5,
-                15
+                0.2
         );
 
     }

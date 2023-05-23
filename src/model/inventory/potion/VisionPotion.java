@@ -13,13 +13,27 @@ import model.character.hero.Hero;
  */
 public class VisionPotion extends Potion {
 
+    //        FIELDS        //
+
+    /** Display character of vision potion */
+    private static final char DISPLAY_CHAR = 'V';
+
+
+    //        CONSTRUCTORS        //
+
     /**
-     * Creates a vision potion object binded to a hero.
-     *
-     * @param theHero Hero the potion is used on.
+     * Creates a vision potion object.
      */
-    public VisionPotion(final Hero theHero) {
-        super(theHero);
+    public VisionPotion() {
+
+    }
+
+
+    //        ACCESSORS        //
+
+    @Override
+    public char getDisplayChar() {
+        return DISPLAY_CHAR;
     }
 
 }

@@ -16,47 +16,31 @@ public final class HealthPotion extends Potion {
 
     //        FIELDS        //
 
+    /** Display character of vision potion */
+    private static final char DISPLAY_CHAR = 'H';
+
     /** Minimum heal percentage */
     private static final double MIN_HEAL_PERCENTAGE = 0.06;
 
     /** Maximum heal percentage */
     private static final double MAX_HEAL_PERCENTAGE = 0.14;
 
-    /** Amount to heal the hero by */
-    private final int myHealAmount;
-
 
     //        CONSTRUCTORS        //
 
     /**
-     * Creates a health potion object binded to a hero.
-     *
-     * @param theHero Hero the potion is used on.
+     * Creates a health potion object.
      */
-    public HealthPotion(final Hero theHero) {
-
-        super(theHero);
-
-        // Generate the amount to heal by.
-        myHealAmount = (int) (theHero.getMaxHP() *
-                Utility.RANDOM.nextDouble(
-                        MIN_HEAL_PERCENTAGE,
-                        MAX_HEAL_PERCENTAGE
-                )
-        );
+    public HealthPotion() {
 
     }
 
 
     //        ACCESSORS        //
 
-    /**
-     * Gets heal amount.
-     *
-     * @return Heal amount.
-     */
-    public int getHealAmount() {
-        return myHealAmount;
+    @Override
+    public char getDisplayChar() {
+        return DISPLAY_CHAR;
     }
 
 
@@ -66,13 +50,21 @@ public final class HealthPotion extends Potion {
      * Uses heal potion on the hero.
      */
     @Override
-    public String usePotion() {
+    public String usePotion(final Hero theHero) {
+
+        // Generate the amount to heal by.
+        final int healAmount = (int) (theHero.getMaxHP() *
+                Utility.RANDOM.nextDouble(
+                        MIN_HEAL_PERCENTAGE,
+                        MAX_HEAL_PERCENTAGE
+                )
+        );
 
         // Give the hero the necessary health.
-        myHero.receiveHealth(myHealAmount);
+        theHero.receiveHealth(healAmount);
 
         // Generate heal message.
-        return generateHealMessage();
+        return generateHealMessage(theHero, healAmount);
 
     }
 
@@ -81,15 +73,15 @@ public final class HealthPotion extends Potion {
      *
      * @return String representation of the event.
      */
-    private String generateHealMessage() {
+    private static String generateHealMessage(final Hero theHero, final int theHealAmount) {
 
         // Using a StringBuilder.
-        final StringBuilder sb = new StringBuilder(myHero.getName());
-        sb.append(" was healed for ").append(myHealAmount);
+        final StringBuilder sb = new StringBuilder(theHero.getName());
+        sb.append(" was healed for ").append(theHealAmount);
 
         // Potential health wasted.
-        final int healthWasted = myHealAmount +
-                myHero.getHP() - myHero.getMaxHP();
+        final int healthWasted = theHealAmount +
+                theHero.getHP() - theHero.getMaxHP();
 
         // Did the character lose any health?
         if (healthWasted > 0) {
@@ -103,7 +95,7 @@ public final class HealthPotion extends Potion {
 
         // Final lines appended and returned.
         return sb.append(".\nCurrent HP is now: ")
-                .append(myHero.getHP()).toString();
+                .append(theHero.getHP()).toString();
 
     }
 

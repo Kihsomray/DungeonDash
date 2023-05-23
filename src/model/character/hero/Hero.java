@@ -21,12 +21,6 @@ public abstract class Hero extends DungeonCharacter {
     /** Block chance. */
     private final double myBlockChance;
 
-    /** Minimum heal */
-    private final int myMinPotionHeal;
-
-    /** Maximum heal */
-    private final int myMaxPotionHeal;
-
 
     //        CONSTRUCTORS        //
 
@@ -40,8 +34,6 @@ public abstract class Hero extends DungeonCharacter {
      * @param theAttackSpeed Attack speed.
      * @param theHitChance Hit chance.
      * @param theBlockChance Block chance.
-     * @param theMinPotionHeal Minimum potion heal.
-     * @param theMaxPotionHeal Maximum potion heal.
      */
     public Hero(
             final String    theName,
@@ -50,9 +42,7 @@ public abstract class Hero extends DungeonCharacter {
             final int       theMaxDamage,
             final int       theAttackSpeed,
             final double    theHitChance,
-            final double    theBlockChance,
-            final int       theMinPotionHeal,
-            final int       theMaxPotionHeal
+            final double    theBlockChance
     ) {
 
         super(
@@ -66,8 +56,6 @@ public abstract class Hero extends DungeonCharacter {
 
         myInventory = new Inventory();
         myBlockChance = theBlockChance;
-        myMinPotionHeal = theMinPotionHeal;
-        myMaxPotionHeal = theMaxPotionHeal;
 
     }
 
@@ -90,24 +78,6 @@ public abstract class Hero extends DungeonCharacter {
      */
     public final Inventory getInventory() {
         return myInventory;
-    }
-
-    /**
-     * Get minimum heal.
-     *
-     * @return Minimum heal.
-     */
-    public int getMinPotionHeal() {
-        return myMinPotionHeal;
-    }
-
-    /**
-     * Get maximum heal.
-     *
-     * @return Maximum heal.
-     */
-    public int getMaxPotionHeal() {
-        return myMaxPotionHeal;
     }
 
 
@@ -137,61 +107,4 @@ public abstract class Hero extends DungeonCharacter {
      */
     public abstract void attackMonster(final Monster theMonster, final boolean theUseAbility);
 
-    /**
-     * Heal the hero based on min/max values.
-     *
-     * @return String status of the heal procedure.
-     */
-    public String healHero() {
-        if (myInventory.hasPotion(true)) {
-
-            // Amount to heal hero with potion.
-            final int hpToHeal = Utility.RANDOM.nextInt(
-                    myMinPotionHeal,
-                    myMaxPotionHeal + 1
-            );
-
-            // Give the hero the necessary health.
-            receiveHealth(hpToHeal);
-
-            // Generate and return heal message.
-            return generateHealMessage(hpToHeal);
-
-        } else {
-
-            // Otherwise, the user doesn't have any potions.
-            return "You don't have any health potions.";
-
-        }
-    }
-
-    /**
-     * Generates heal message based on parameters.
-     *
-     * @param theHealAmount Amount healed.
-     * @return String representation of the event.
-     */
-    private String generateHealMessage(final int theHealAmount) {
-
-        // Using a StringBuilder.
-        final StringBuilder sb = new StringBuilder(getName());
-        sb.append(" was healed for ").append(theHealAmount);
-
-        // Potential health wasted.
-        final int healthWasted = theHealAmount + getHP() - getMaxHP();
-
-        // Did the character lose any health?
-        if (healthWasted > 0) {
-
-            // Append the information.
-            sb.append(", though they wasted ")
-                    .append(healthWasted)
-                    .append(" hit points");
-
-        }
-
-        // Final lines appended and returned.
-        return sb.append(".\nCurrent HP is now: ").append(getHP()).toString();
-
-    }
 }

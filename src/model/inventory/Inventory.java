@@ -2,6 +2,7 @@ package model.inventory;
 
 public class Inventory {
 
+    private final Item[] myInventorySlots = new Item[12];
     private int myHealthPotion;
     private int myVisionPotion;
     private final char[] myPillarsObtained;

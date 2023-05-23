@@ -36,9 +36,7 @@ public class Priestess extends Hero {
                 45,
                 5,
                 0.7,
-                0.3,
-                5,
-                10
+                0.3
         );
 
     }
