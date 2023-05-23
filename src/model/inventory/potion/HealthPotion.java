@@ -73,7 +73,10 @@ public final class HealthPotion extends Potion {
      *
      * @return String representation of the event.
      */
-    private static String generateHealMessage(final Hero theHero, final int theHealAmount) {
+    private static String generateHealMessage(
+            final Hero theHero,
+            final int theHealAmount
+    ) {
 
         // Using a StringBuilder.
         final StringBuilder sb = new StringBuilder(theHero.getName());

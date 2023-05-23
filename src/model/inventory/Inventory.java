@@ -66,4 +66,13 @@ public class Inventory {
         }
         return false;
     }
+
+
+
+    public Item getItemAt(final int theX, final int theY) {
+
+        return null; // TODO implement
+
+    }
+
 }

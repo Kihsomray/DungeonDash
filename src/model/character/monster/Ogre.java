@@ -10,9 +10,13 @@ package model.character.monster;
  */
 public class Ogre extends Monster {
 
+    /**
+     * Create an instance of Ogre.
+     */
     public Ogre() {
 
-        super("Ogre",
+        super(
+                "Ogre",
                 200,
                 30,
                 6,
