@@ -59,19 +59,18 @@ public class Thief extends Hero {
             final boolean theUseAbility
     ) {
 
-        // If use ability
+        // If use ability.
         if (theUseAbility) {
 
-            // If succeeds in double attack
+            // If succeeds in extra attack.
             if (RANDOM.nextDouble() <= ABILITY_SUCCESS_CHANCE) {
 
-                // Attack the monster
+                // Attack the monster.
                 attack(theMonster);
 
-            // Elif use ability and fails an attack.
-            } else if (RANDOM.nextDouble()
-                    <= ABILITY_FAILURE_CHANCE /
-                    (1.0 - ABILITY_SUCCESS_CHANCE)
+            // Elif fails an attack.
+            } else if (RANDOM.nextDouble() <= ABILITY_FAILURE_CHANCE /
+                            (1.0 - ABILITY_SUCCESS_CHANCE)
             ) {
 
                 // Return, don't proceed.
