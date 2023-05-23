@@ -48,7 +48,7 @@ public abstract class Monster extends DungeonCharacter {
             double theHitChance,
             int theMinHeal,
             int theMaxHeal,
-            int theHealChance
+            double theHealChance
     ) {
 
         super(
@@ -132,6 +132,8 @@ public abstract class Monster extends DungeonCharacter {
      *
      * @param theHero Hero to attack.
      */
-    public abstract void attackHero(final Hero theHero);
+    public void attackHero(final Hero theHero) {
+        attack(theHero);
+    }
 
 }
