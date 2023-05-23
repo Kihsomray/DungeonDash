@@ -1,7 +1,7 @@
-package model.heroes;
+package model.hero;
 
 import model.DungeonCharacter;
-import model.monsters.Monster;
+import model.monster.Monster;
 
 /**
  * Used as a base to represent a hero within the dungeon game.
@@ -24,6 +24,9 @@ public abstract class Hero extends DungeonCharacter {
 
     /** Maximum heal */
     private final int myMaxHeal;
+
+
+    //        CONSTRUCTORS        //
 
     /**
      * Create an instance of Hero.
@@ -113,6 +116,7 @@ public abstract class Hero extends DungeonCharacter {
      *
      * @param theDamage Damage to deal to the hero.
      */
+    @Override
     public void receiveDamage(final int theDamage) {
 
         // If out of the range, no damage.

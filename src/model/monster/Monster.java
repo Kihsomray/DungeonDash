@@ -1,4 +1,4 @@
-package model.monsters;
+package model.monster;
 
 import model.DungeonCharacter;
 

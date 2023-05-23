@@ -1,7 +1,6 @@
 package controller;
 
 import model.dungeon.Dungeon;
-import model.heroes.Hero;
 
 public class DungeonAdventure {
     public static void main(String[] args) {

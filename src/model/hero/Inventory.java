@@ -1,6 +1,4 @@
-package model.heroes;
-
-import java.util.Arrays;
+package model.hero;
 
 public class Inventory {
 

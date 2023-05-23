@@ -1,6 +1,6 @@
-package model.heroes;
+package model.hero;
 
-import model.monsters.Monster;
+import model.monster.Monster;
 
 /**
  * A type of Hero that can be chosen when playing.
@@ -22,6 +22,9 @@ public class Warrior extends Hero {
 
     /** Ability chance. */
     private static final double ABILITY_CHANCE = 0.4;
+
+
+    //        CONSTRUCTORS        //
 
     /**
      * Create an instance of a warrior.
@@ -51,6 +54,7 @@ public class Warrior extends Hero {
      * @param theMonster Monster to attack.
      * @param theUseAbility Should the hero use the Crushing Blow ability.
      */
+    @Override
     public void attackMonster(
             final Monster theMonster,
             final boolean theUseAbility
