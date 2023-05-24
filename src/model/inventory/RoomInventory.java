@@ -13,9 +13,7 @@ import java.util.Set;
  */
 public class RoomInventory implements Inventory {
 
-    /**
-     * Set of all items in the inventory.
-     */
+    /** Set of all items in the inventory.*/
     private final Set<Item> myItems;
 
     /**

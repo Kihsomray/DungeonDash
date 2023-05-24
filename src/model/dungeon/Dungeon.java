@@ -26,10 +26,10 @@ public class Dungeon {
         // TODO - create character selection, pass it in here.
         final DungeonGenerator generator = new PrimsGenerator(theSize, theSize, new Warrior());
 
-        // Generate the maze
+        // Generate the maze.
         myMaze = generator.generate();
 
-        //
+        // Gets the room count.
         myRoomCount = generator.getRoomCount();
 
     }

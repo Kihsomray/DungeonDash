@@ -3,6 +3,7 @@ package model.dungeon.generator;
 import model.Utility;
 import model.dungeon.tile.Cell;
 import model.dungeon.tile.Wall;
+import model.dungeon.tile.room.Neighbors;
 import model.dungeon.tile.room.Room;
 import model.entity.hero.Hero;
 
@@ -119,20 +120,31 @@ public class PrimsGenerator implements DungeonGenerator {
         int found = 0;
 
         // Get the north wall.
-        if (getCellAt(theX, theY + 1) instanceof Room) found++;
+        if (isRoom(theX, theY + 1)) found++;
 
         // Get the east wall.
-        if (getCellAt(theX + 1, theY) instanceof Room) found++;
+        if (isRoom(theX + 1, theY)) found++;
 
         // Get the south wall.
-        if (getCellAt(theX, theY - 1) instanceof Room) found++;
+        if (isRoom(theX, theY - 1)) found++;
 
         // Get the west wall.
-        if (getCellAt(theX - 1, theY) instanceof Room) found++;
+        if (isRoom(theX - 1, theY)) found++;
 
         // Return the found amount
         return found == 1;
 
+    }
+
+    /**
+     * Checks if the cell is a room.
+     *
+     * @param theX X coordinate of cell.
+     * @param theY Y coordinate of cell.
+     * @return If the cell is a room.
+     */
+    private boolean isRoom(final int theX, final int theY) {
+        return getCellAt(theX, theY) instanceof Room;
     }
 
     /**
@@ -143,33 +155,47 @@ public class PrimsGenerator implements DungeonGenerator {
      */
     private void addSurrounding(final int theX, final int theY) {
 
+        final Neighbors neighbors = ((Room) getCellAt(theX, theY)).getNeighbors();
+
         // Get the north wall.
-        addIfWall(theX, theY + 1);
+        neighbors.setNorth(addIfWall(theX, theY + 1), true);
 
         // Get the east wall.
-        addIfWall(theX + 1, theY);
+        neighbors.setEast(addIfWall(theX + 1, theY), true);
 
         // Get the south wall.
-        addIfWall(theX, theY - 1);
+        neighbors.setSouth(addIfWall(theX, theY - 1), true);
 
         // Get the west wall.
-        addIfWall(theX - 1, theY);
+        neighbors.setWest(addIfWall(theX - 1, theY), true);
 
     }
 
     /**
      * Adds to wall list if the given cell is a wall.
+     * Adds to theRooms set if given cell is a room.
      *
      * @param theX X coordinate of cell.
      * @param theY Y coordinate of cell.
      */
-    private void addIfWall(final int theX, final int theY) {
+    private Room addIfWall(final int theX, final int theY) {
 
         // Get the surrounding cells, making sure no IOBE.
         Cell cell = getCellAt(theX, theY);
 
         // If a wall, return the wall, otherwise, null.
         if (cell instanceof Wall) myWalls.add((Wall) cell);
+
+        // If cell is a room.
+        else if (cell instanceof Room) {
+
+            // Return the room.
+            return (Room) cell;
+
+        }
+
+        // Otherwise, return null.
+        return null;
 
     }
 

@@ -27,6 +27,8 @@ public class Room extends Cell {
 
     private final Set<Enemy> myEnemies;
 
+    private final Neighbors myNeighbors;
+
     private final boolean myShouldSpawn;
 
     /**
@@ -35,12 +37,18 @@ public class Room extends Cell {
      * @param theShouldSpawn Should this room spawn items.
      */
     public Room(final boolean theShouldSpawn) {
+
         myInventory = new RoomInventory();
         myEnemies = new HashSet<>();
+        myNeighbors = new Neighbors(this);
         myShouldSpawn = theShouldSpawn;
 
         // Randomize the spawns.
         randomizeSpawns();
+    }
+
+    public Neighbors getNeighbors() {
+        return myNeighbors;
     }
 
     /**
