@@ -125,7 +125,9 @@ public class PrimsGenerator implements DungeonGenerator {
     private void generateEntities() {
 
         // Gets a random number of steps.
-        int steps = Utility.RANDOM.nextInt(2, myRoomCounter) - 1;
+        int steps = Utility.RANDOM.nextInt(
+                (int) Math.sqrt(myWidth * myWidth + myHeight * myHeight),
+                myRoomCounter) - 1;
 
         // Get origin.
         Passable current = myEntrance;
