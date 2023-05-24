@@ -146,16 +146,27 @@ public class PrimsGenerator implements DungeonGenerator {
                     .getNeighbors()
                     .getRandomNeighbor(previous);
 
+            // If can't go anywhere.
+            if (current == null) {
+
+                // Set it back to temp.
+                current = temp;
+
+                // Break out.
+                break;
+
+            }
+
             // Set previous to old current (temp).
             previous = temp;
 
         }
 
         // Ensure it is not null.
-        assert previous != null;
+        assert current != null;
 
         // Set the exit.
-        myExit = new Room(previous.getX(), previous.getY(), true);
+        myExit = new Room(current.getX(), current.getY(), true);
 
         // All the pillars.
         Stack<Collectable> collectables = new Stack<>();

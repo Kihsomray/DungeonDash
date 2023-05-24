@@ -48,7 +48,7 @@ public class Neighbors {
         if (myWest != null) rooms.add(myWest);
         Collections.shuffle(rooms);
         rooms.remove(theRoomIgnore);
-        return rooms.get(0);
+        return rooms.size() > 0 ? rooms.get(0) : null;
     }
 
     /**
