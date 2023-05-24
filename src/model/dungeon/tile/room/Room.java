@@ -12,7 +12,7 @@ import model.inventory.item.potion.VisionPotion;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Room extends Cell {
+public class Room implements Cell {
 
     /** Constant for monster spawn rate. */
     private static final double MONSTER_SPAWN_RATE = 0.5;
@@ -57,10 +57,12 @@ public class Room extends Cell {
         return myNeighbors;
     }
 
+    @Override
     public int getX() {
         return myX;
     }
 
+    @Override
     public int getY() {
         return myY;
     }
@@ -101,6 +103,10 @@ public class Room extends Cell {
 
     }
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
 
 

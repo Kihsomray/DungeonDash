@@ -1,6 +1,6 @@
 package model.dungeon.tile;
 
-public class Wall extends Cell {
+public class Wall implements Cell {
 
     private final int myX;
     private final int myY;
@@ -10,10 +10,12 @@ public class Wall extends Cell {
         myY = theY;
     }
 
+    @Override
     public int getX() {
         return myX;
     }
 
+    @Override
     public int getY() {
         return myY;
     }
