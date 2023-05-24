@@ -3,9 +3,11 @@ package model.dungeon.generator;
 import model.Utility;
 import model.dungeon.tile.Cell;
 import model.dungeon.tile.Wall;
-import model.dungeon.tile.room.Neighbors;
-import model.dungeon.tile.room.Room;
-import model.entity.hero.Hero;
+import model.dungeon.tile.passable.Door;
+import model.dungeon.tile.passable.Passable;
+import model.dungeon.tile.passable.Neighbors;
+import model.dungeon.tile.passable.Room;
+import model.sprite.hero.Hero;
 import model.inventory.item.collectable.Collectable;
 import model.inventory.item.collectable.Pillar;
 
@@ -39,10 +41,10 @@ public class PrimsGenerator implements DungeonGenerator {
     private int myRoomCounter;
 
     /** Entrance room. */
-    private Room myEntrance;
+    private Door myEntrance;
 
     /** Exit room. */
-    private Room myExit;
+    private Door myExit;
 
     /**
      * Base constructor for Prim's Generator.
@@ -78,7 +80,7 @@ public class PrimsGenerator implements DungeonGenerator {
         myRoomCounter = 1;
 
         // Start at bottom right.
-        myCells[0][0] = new Room(0, 0, true);
+        myCells[0][0] = myEntrance = new Door(0, 0, true);
 
         // Add the surrounding.
         addSurrounding(0, 0);
@@ -97,7 +99,7 @@ public class PrimsGenerator implements DungeonGenerator {
             if (checkSurrounding(x, y)) {
 
                 // Change it to a room.
-                myCells[x][y] = new Room(x, y,false);
+                myCells[x][y] = new Room(x, y);
 
                 // Increment room counter.
                 myRoomCounter++;
@@ -122,15 +124,12 @@ public class PrimsGenerator implements DungeonGenerator {
 
     private void generateEntities() {
 
-        // Set origin at 0, 0.
-        myEntrance = (Room) getCellAt(0, 0);
-
         // Gets a random number of steps.
-        int steps = Utility.RANDOM.nextInt((int) Math.sqrt(myHeight * myHeight + myWidth * myWidth), myRoomCounter) - 1;
+        int steps = Utility.RANDOM.nextInt(2, myRoomCounter) - 1;
 
         // Get origin.
-        Room current = myEntrance;
-        Room previous = myEntrance;
+        Passable current = myEntrance;
+        Passable previous = myEntrance;
 
         // Loop through the steps
         while (--steps >= 0) {
@@ -139,11 +138,12 @@ public class PrimsGenerator implements DungeonGenerator {
             assert current != null;
 
             // Set temp to current.
-            final Room temp = current;
+            final Passable temp = current;
+
+            System.out.println(current.getNeighbors());
 
             // Set current to next.
-            current = (current)
-                    .getNeighbors()
+            current = current.getNeighbors()
                     .getRandomNeighbor(previous);
 
             // If can't go anywhere.
@@ -166,7 +166,8 @@ public class PrimsGenerator implements DungeonGenerator {
         assert current != null;
 
         // Set the exit.
-        myExit = new Room(current.getX(), current.getY(), true);
+        myCells[current.getX()][current.getY()] = myExit
+                = new Door(current.getX(), current.getY(), false);
 
         // All the pillars.
         Stack<Collectable> collectables = new Stack<>();
@@ -187,8 +188,8 @@ public class PrimsGenerator implements DungeonGenerator {
             // Get the cell at that location.
             final Cell cell = getCellAt(i, j);
 
-            // If it's not a room or is a door, skip it.
-            if (!(cell instanceof Room) || ((Room) cell).isDoor()) continue;
+            // If it's not a room, skip it.
+            if (!(cell instanceof Room)) continue;
 
             // Otherwise, add the pillar to that spot.
             ((Room) cell).getInventory().addItem(collectables.pop());
@@ -210,16 +211,16 @@ public class PrimsGenerator implements DungeonGenerator {
         int found = 0;
 
         // Get the north wall.
-        if (isRoom(theX, theY + 1)) found++;
+        if (isPassable(theX, theY + 1)) found++;
 
         // Get the east wall.
-        if (isRoom(theX + 1, theY)) found++;
+        if (isPassable(theX + 1, theY)) found++;
 
         // Get the south wall.
-        if (isRoom(theX, theY - 1)) found++;
+        if (isPassable(theX, theY - 1)) found++;
 
         // Get the west wall.
-        if (isRoom(theX - 1, theY)) found++;
+        if (isPassable(theX - 1, theY)) found++;
 
         // Return the found amount
         return found == 1;
@@ -227,14 +228,14 @@ public class PrimsGenerator implements DungeonGenerator {
     }
 
     /**
-     * Checks if the cell is a room.
+     * Checks if the cell is passable.
      *
      * @param theX X coordinate of cell.
      * @param theY Y coordinate of cell.
-     * @return If the cell is a room.
+     * @return If the cell is passable.
      */
-    private boolean isRoom(final int theX, final int theY) {
-        return getCellAt(theX, theY) instanceof Room;
+    private boolean isPassable(final int theX, final int theY) {
+        return getCellAt(theX, theY) instanceof Passable;
     }
 
     /**
@@ -245,7 +246,7 @@ public class PrimsGenerator implements DungeonGenerator {
      */
     private void addSurrounding(final int theX, final int theY) {
 
-        final Neighbors neighbors = ((Room) getCellAt(theX, theY)).getNeighbors();
+        final Neighbors neighbors = ((Passable) getCellAt(theX, theY)).getNeighbors();
 
         // Get the north wall.
         neighbors.setNorth(addIfWall(theX, theY + 1), true);
@@ -268,7 +269,7 @@ public class PrimsGenerator implements DungeonGenerator {
      * @param theX X coordinate of cell.
      * @param theY Y coordinate of cell.
      */
-    private Room addIfWall(final int theX, final int theY) {
+    private Passable addIfWall(final int theX, final int theY) {
 
         // Get the surrounding cells, making sure no IOBE.
         Cell cell = getCellAt(theX, theY);
@@ -277,10 +278,10 @@ public class PrimsGenerator implements DungeonGenerator {
         if (cell instanceof Wall) myWalls.add((Wall) cell);
 
         // If cell is a room.
-        else if (cell instanceof Room) {
+        else if (cell instanceof Passable) {
 
             // Return the room.
-            return (Room) cell;
+            return (Passable) cell;
 
         }
 
@@ -330,12 +331,12 @@ public class PrimsGenerator implements DungeonGenerator {
     }
 
     @Override
-    public Room getEntrance() {
+    public Door getEntrance() {
         return myEntrance;
     }
 
     @Override
-    public Room getExit() {
+    public Door getExit() {
         return myExit;
     }
 

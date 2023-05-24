@@ -1,9 +1,9 @@
-package model.entity.enemy.monster;
+package model.sprite.enemy.monster;
 
 import model.Utility;
-import model.entity.DungeonCharacter;
-import model.entity.enemy.Enemy;
-import model.entity.hero.Hero;
+import model.sprite.DungeonCharacter;
+import model.sprite.enemy.Enemy;
+import model.sprite.hero.Hero;
 
 /**
  * Used as a base to represent a monster within the dungeon game.

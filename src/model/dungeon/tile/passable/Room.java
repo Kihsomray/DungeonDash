@@ -1,10 +1,12 @@
-package model.dungeon.tile.room;
+package model.dungeon.tile.passable;
 
+import model.Entity;
 import model.Utility;
-import model.dungeon.tile.Cell;
-import model.entity.DungeonCharacterFactory;
-import model.entity.enemy.Enemy;
-import model.entity.enemy.Trap;
+import model.dungeon.tile.passable.Neighbors;
+import model.dungeon.tile.passable.Passable;
+import model.sprite.DungeonCharacterFactory;
+import model.sprite.enemy.Enemy;
+import model.sprite.enemy.Trap;
 import model.inventory.RoomInventory;
 import model.inventory.item.potion.HealthPotion;
 import model.inventory.item.potion.VisionPotion;
@@ -12,7 +14,7 @@ import model.inventory.item.potion.VisionPotion;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Room implements Cell {
+public class Room implements Passable {
 
     /** Constant for monster spawn rate. */
     private static final double MONSTER_SPAWN_RATE = 0.5;
@@ -33,26 +35,24 @@ public class Room implements Cell {
 
     private final Neighbors myNeighbors;
 
-    private final boolean myIsDoor;
-
     /**
      * Creates a room.
      *
-     * @param theIsDoor Is this room a door?
+     *
      */
-    public Room(final int theX, final int theY, final boolean theIsDoor) {
+    public Room(final int theX, final int theY) {
 
         myX = theX;
         myY = theY;
         myInventory = new RoomInventory();
         myEnemies = new HashSet<>();
         myNeighbors = new Neighbors(this);
-        myIsDoor = theIsDoor;
 
         // Randomize the spawns.
         randomizeSpawns();
     }
 
+    @Override
     public Neighbors getNeighbors() {
         return myNeighbors;
     }
@@ -71,8 +71,10 @@ public class Room implements Cell {
         return myInventory;
     }
 
-    public boolean isDoor() {
-        return myIsDoor;
+    public Set<Entity> getEntities() {
+        final Set<Entity> entities = new HashSet<>(myInventory.getInventory());
+        entities.addAll(myEnemies);
+        return entities;
     }
 
     /**
@@ -81,9 +83,6 @@ public class Room implements Cell {
      * items as well.
      */
     private void randomizeSpawns() {
-
-        // Should you not want to spawn enemies or items.
-        if (myIsDoor) return;
 
         // Given a chance, generate a monster.
         if (Utility.RANDOM.nextDouble() <= MONSTER_SPAWN_RATE)
@@ -105,8 +104,22 @@ public class Room implements Cell {
 
     @Override
     public String toString() {
-        return super.toString();
+
+        final StringBuilder sb = new StringBuilder();
+        final Set<Entity> entities = getEntities();
+        int i = 1;
+        for (final Entity entity : entities) {
+
+            sb.append(entity.getDisplayChar())
+                    .append(i++ != 3 ? ' ' : '\n');
+
+        }
+        for (int a = i; a <= 6; a++) {
+            sb.append(' ').append(a % 3 == 0 ? a == 6 ? "" : '\n' : ' ');
+        }
+        return sb.toString();
     }
+
 }
 
 

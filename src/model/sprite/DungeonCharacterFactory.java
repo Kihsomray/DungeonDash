@@ -1,10 +1,10 @@
-package model.entity;
+package model.sprite;
 
 import model.Utility;
-import model.entity.enemy.monster.Gremlin;
-import model.entity.enemy.monster.Monster;
-import model.entity.enemy.monster.Ogre;
-import model.entity.enemy.monster.Skeleton;
+import model.sprite.enemy.monster.Gremlin;
+import model.sprite.enemy.monster.Monster;
+import model.sprite.enemy.monster.Ogre;
+import model.sprite.enemy.monster.Skeleton;
 
 public class DungeonCharacterFactory {
 

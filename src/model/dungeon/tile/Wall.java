@@ -20,4 +20,9 @@ public class Wall implements Cell {
         return myY;
     }
 
+    @Override
+    public String toString() {
+        return "#####\n#####";
+    }
+
 }

@@ -1,7 +1,7 @@
 package model.inventory.item.potion;
 
 import model.Utility;
-import model.entity.hero.Hero;
+import model.sprite.hero.Hero;
 
 /**
  * A type of potion that restores a hero's health.

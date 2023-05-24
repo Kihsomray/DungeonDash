@@ -1,10 +1,10 @@
-package model.entity.hero;
+package model.sprite.hero;
 
 import model.Utility;
-import model.dungeon.tile.room.Room;
-import model.entity.DungeonCharacter;
+import model.dungeon.tile.passable.Room;
+import model.sprite.DungeonCharacter;
 import model.inventory.HeroInventory;
-import model.entity.enemy.monster.Monster;
+import model.sprite.enemy.monster.Monster;
 
 /**
  * Used as a base to represent a hero within the dungeon game.

@@ -1,4 +1,4 @@
-package model.entity.enemy.monster;
+package model.sprite.enemy.monster;
 
 /**
  * A type of Monster that is randomly spawned.

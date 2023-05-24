@@ -1,8 +1,8 @@
 package model.dungeon.generator;
 
 import model.dungeon.tile.Cell;
-import model.dungeon.tile.room.Room;
-import model.entity.hero.Hero;
+import model.dungeon.tile.passable.Door;
+import model.sprite.hero.Hero;
 
 /**
  * A dungeon generator is used to create a dungeon with cells containing walls
@@ -40,14 +40,14 @@ public interface DungeonGenerator {
      *
      * @return Entrance of the dungeon.
      */
-    Room getEntrance();
+    Door getEntrance();
 
     /**
      * Gets the exit of the dungeon.
      *
      * @return Exit of the dungeon.
      */
-    Room getExit();
+    Door getExit();
 
     /**
      * Gets the height of the dungeon.
