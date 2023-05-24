@@ -1,6 +1,7 @@
 package model.dungeon.generator;
 
 import model.dungeon.tile.Cell;
+import model.dungeon.tile.room.Room;
 import model.entity.hero.Hero;
 
 /**
@@ -33,6 +34,20 @@ public interface DungeonGenerator {
      * @return Number of rooms in dungeon.
      */
     int getRoomCount();
+
+    /**
+     * Gets the entrance of the dungeon.
+     *
+     * @return Entrance of the dungeon.
+     */
+    Room getEntrance();
+
+    /**
+     * Gets the exit of the dungeon.
+     *
+     * @return Exit of the dungeon.
+     */
+    Room getExit();
 
     /**
      * Gets the height of the dungeon.

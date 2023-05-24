@@ -1,6 +1,8 @@
 package model.dungeon.tile.room;
 
-import model.entity.hero.Hero;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Neighboring rooms of the current room.
@@ -10,6 +12,7 @@ import model.entity.hero.Hero;
  */
 public class Neighbors {
 
+    /** Current room */
     private final Room myRoom;
 
     /** North room */
@@ -35,6 +38,17 @@ public class Neighbors {
         // Set all to null
         myNorth = myEast = mySouth = myWest = null;
 
+    }
+
+    public Room getRandomNeighbor(final Room theRoomIgnore) {
+        List<Room> rooms = new ArrayList<>();
+        if (myNorth != null) rooms.add(myNorth);
+        if (myEast != null) rooms.add(myEast);
+        if (mySouth != null) rooms.add(mySouth);
+        if (myWest != null) rooms.add(myWest);
+        Collections.shuffle(rooms);
+        rooms.remove(theRoomIgnore);
+        return rooms.get(0);
     }
 
     /**

@@ -1,6 +1,7 @@
 package model.entity.hero;
 
 import model.Utility;
+import model.dungeon.tile.room.Room;
 import model.entity.DungeonCharacter;
 import model.inventory.HeroInventory;
 import model.entity.enemy.monster.Monster;
@@ -18,11 +19,9 @@ public abstract class Hero extends DungeonCharacter {
     /** Hero's inventory. */
     private final HeroInventory myInventory;
 
-    /** Current X position */
-    private int myCurrentX;
+    /** Current room position */
+    private Room myCurrentRoom;
 
-    /** Current Y position */
-    private int myCurrentY;
 
     /** Block chance. */
     private final double myBlockChance;
@@ -96,6 +95,15 @@ public abstract class Hero extends DungeonCharacter {
         return 'H';
     }
 
+    /**
+     * Get the current room..
+     *
+     * @return Current room.
+     */
+    public Room getCurrentRoom() {
+        return myCurrentRoom;
+    }
+
 
     //        MUTATORS        //
 
@@ -121,6 +129,19 @@ public abstract class Hero extends DungeonCharacter {
      * @param theMonster Monster to attack.
      * @param theUseAbility Should the hero use its ability.
      */
-    public abstract void attackMonster(final Monster theMonster, final boolean theUseAbility);
+    public abstract void attackMonster(
+            final Monster theMonster,
+            final boolean theUseAbility
+    );
+
+    /**
+     * Set the current room.
+     *
+     * @param theRoom Room.
+     */
+    public void setCurrentX(final Room theRoom) {
+        myCurrentRoom = theRoom;
+    }
+
 
 }

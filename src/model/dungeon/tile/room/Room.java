@@ -23,25 +23,31 @@ public class Room extends Cell {
     /** Constant for potion spawn rate. */
     private static final double POTION_SPAWN_RATE = 0.10;
 
+    private final int myX;
+
+    private final int myY;
+
     private final RoomInventory myInventory;
 
     private final Set<Enemy> myEnemies;
 
     private final Neighbors myNeighbors;
 
-    private final boolean myShouldSpawn;
+    private final boolean myIsDoor;
 
     /**
      * Creates a room.
      *
-     * @param theShouldSpawn Should this room spawn items.
+     * @param theIsDoor Is this room a door?
      */
-    public Room(final boolean theShouldSpawn) {
+    public Room(final int theX, final int theY, final boolean theIsDoor) {
 
+        myX = theX;
+        myY = theY;
         myInventory = new RoomInventory();
         myEnemies = new HashSet<>();
         myNeighbors = new Neighbors(this);
-        myShouldSpawn = theShouldSpawn;
+        myIsDoor = theIsDoor;
 
         // Randomize the spawns.
         randomizeSpawns();
@@ -51,20 +57,31 @@ public class Room extends Cell {
         return myNeighbors;
     }
 
+    public int getX() {
+        return myX;
+    }
+
+    public int getY() {
+        return myY;
+    }
+
+    public RoomInventory getInventory() {
+        return myInventory;
+    }
+
+    public boolean isDoor() {
+        return myIsDoor;
+    }
+
     /**
      * Randomizes the spawns of the monsters, traps, and potions.
      * Makes sure entrances and exits cannot spawn these secondary
      * items as well.
      */
     private void randomizeSpawns() {
-        // As long as the room isn't an entrance/exit, spawn stuff.
-        // Doing it this way so that there can be multiple things
-        // of interest per each room. So, a room could have an
-        // enemy, trap, AND a potion. Along with primary content
-        // like pillars.
 
         // Should you not want to spawn enemies or items.
-        if (!myShouldSpawn) return;
+        if (myIsDoor) return;
 
         // Given a chance, generate a monster.
         if (Utility.RANDOM.nextDouble() <= MONSTER_SPAWN_RATE)

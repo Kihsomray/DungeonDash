@@ -39,7 +39,7 @@ public class Pillar implements Collectable {
     /**
      * Enum representing the specific pillar.
      */
-    enum Principle {
+    public enum Principle {
 
         ABSTRACTION('A'),
         ENCAPSULATION('E'),
