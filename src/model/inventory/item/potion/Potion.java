@@ -1,7 +1,7 @@
-package model.inventory.potion;
+package model.inventory.item.potion;
 
-import model.character.hero.Hero;
-import model.inventory.Item;
+import model.entity.hero.Hero;
+import model.inventory.item.Item;
 
 /**
  * A type of item that can give the hero a certain effect.

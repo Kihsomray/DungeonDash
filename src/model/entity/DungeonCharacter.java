@@ -1,8 +1,6 @@
-package model.character;
+package model.entity;
 
 import model.Utility;
-
-import java.util.Random;
 
 /**
  * Used as a base to represent a character within the dungeon game.
@@ -10,7 +8,7 @@ import java.util.Random;
  * @version 1.0.0
  * @author Kihsomray
  */
-public abstract class DungeonCharacter {
+public abstract class DungeonCharacter implements Entity {
 
     //      FIELDS      //
 

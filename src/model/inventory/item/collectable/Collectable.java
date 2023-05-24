@@ -1,6 +1,6 @@
-package model.inventory.collectable;
+package model.inventory.item.collectable;
 
-import model.inventory.Item;
+import model.inventory.item.Item;
 
 /**
  * A type of item that can be collected by the hero.

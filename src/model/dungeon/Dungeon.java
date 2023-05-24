@@ -1,13 +1,11 @@
 package model.dungeon;
 
-import java.util.Random;
+import model.Utility;
 
 public class Dungeon {
+
     /** The dungeon/maze made of Rooms. */
     private final Room[][] myMaze;
-
-    /** Random object for generating indexes. */
-    private static final Random RAND = new Random();
 
     private int myHeroRow;
     private int myHeroCol;
@@ -18,6 +16,7 @@ public class Dungeon {
      * @param theSize The dimension of the dungeon.
      */
     public Dungeon(int theSize) {
+
         // Initialize the Dungeon
         myMaze = new Room[theSize][theSize];
 
@@ -32,6 +31,7 @@ public class Dungeon {
 
         // Place the character at the start.
         placeCharacter();
+
     }
 
     /**
@@ -58,11 +58,12 @@ public class Dungeon {
     private void placeCharacter() {
         for (int row = 0; row < myMaze.length; row++) {
             for (int col = 0; col < myMaze.length; col++) {
-                if (myMaze[row][col].getContents() == 'i') {
-                    myHeroRow = row;
-                    myHeroCol = col;
-                    break;
-                }
+                if (myMaze[row][col].getContents() != 'i') continue;
+
+                myHeroRow = row;
+                myHeroCol = col;
+                break;
+
             }
         }
     }
@@ -91,8 +92,8 @@ public class Dungeon {
      * @param theSymbol The symbol used to denote a specific room.
      */
     private void addEdge(final char theSymbol) {
-        int borderNESW = RAND.nextInt(4);
-        int roomTile = RAND.nextInt(myMaze.length);
+        int borderNESW = Utility.RANDOM.nextInt(4);
+        int roomTile = Utility.RANDOM.nextInt(myMaze.length);
 
         // Re-rolls room tile and border to make sure i's and O's can't
         // spawn on top of each other.
@@ -100,8 +101,8 @@ public class Dungeon {
                 || myMaze[roomTile][0].getContents() != ' '
                 || myMaze[roomTile][myMaze.length - 1].getContents() != ' '
                 || myMaze[myMaze.length - 1][roomTile].getContents() != ' ') {
-            roomTile = RAND.nextInt(myMaze.length);
-            borderNESW = RAND.nextInt(4);
+            roomTile = Utility.RANDOM.nextInt(myMaze.length);
+            borderNESW = Utility.RANDOM.nextInt(4);
         }
         // Door spawns on the top border.
         if (borderNESW == 0) {
@@ -135,8 +136,8 @@ public class Dungeon {
         int row, col;
 
         while (count < 4) {
-            row = RAND.nextInt(myMaze.length);
-            col = RAND.nextInt(myMaze.length);
+            row = Utility.RANDOM.nextInt(myMaze.length);
+            col = Utility.RANDOM.nextInt(myMaze.length);
 
             if (myMaze[row][col].getContents() == ' ') {
                 myMaze[row][col] = new Room(pillars[count]);

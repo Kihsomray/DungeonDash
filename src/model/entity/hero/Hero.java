@@ -1,9 +1,9 @@
-package model.character.hero;
+package model.entity.hero;
 
 import model.Utility;
-import model.character.DungeonCharacter;
-import model.inventory.Inventory;
-import model.character.monster.Monster;
+import model.entity.DungeonCharacter;
+import model.inventory.HeroInventory;
+import model.entity.enemy.monster.Monster;
 
 /**
  * Used as a base to represent a hero within the dungeon game.
@@ -16,7 +16,7 @@ public abstract class Hero extends DungeonCharacter {
     //        FIELDS        //
 
     /** Hero's inventory. */
-    private final Inventory myInventory;
+    private final HeroInventory myInventory;
 
     /** Block chance. */
     private final double myBlockChance;
@@ -54,7 +54,7 @@ public abstract class Hero extends DungeonCharacter {
                 theHitChance
         );
 
-        myInventory = new Inventory();
+        myInventory = new HeroInventory();
         myBlockChance = theBlockChance;
 
     }
@@ -76,8 +76,18 @@ public abstract class Hero extends DungeonCharacter {
      *
      * @return Hero's inventory.
      */
-    public final Inventory getInventory() {
+    public final HeroInventory getInventory() {
         return myInventory;
+    }
+
+    /**
+     * Gets the display char of the hero.
+     *
+     * @return Display char of the hero.
+     */
+    @Override
+    public char getDisplayChar() {
+        return 'H';
     }
 
 

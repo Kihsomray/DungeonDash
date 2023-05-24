@@ -1,4 +1,4 @@
-package model.inventory.collectable;
+package model.inventory.item.collectable;
 
 /**
  * A type of collectable that the user need to discover.

@@ -1,78 +1,32 @@
 package model.inventory;
 
-public class Inventory {
+import model.inventory.item.Item;
 
-    private final Item[] myInventorySlots = new Item[12];
-    private int myHealthPotion;
-    private int myVisionPotion;
-    private final char[] myPillarsObtained;
+import java.util.Set;
 
-    public Inventory() {
-        myHealthPotion = 0;
-        myVisionPotion = 0;
-        myPillarsObtained = new char[]{' ', ' ', ' ', ' '};
-    }
+public interface Inventory {
 
-    public int getHealthPotions() {
-        return myHealthPotion;
-    }
+    /**
+     * Gets the inventory as a set.
+     *
+     * @return Inventory as a set.
+     */
+    Set<Item> getInventory();
 
-    public int getVisionPotions() {
-        return myVisionPotion;
-    }
+    /**
+     * Checks if the inventory contains an item.
+     *
+     * @param theItem Item to check.
+     * @return If the inventory contains an item.
+     */
+    boolean containsItem(final Item theItem);
 
-    public char[] getPillars() {
-        return myPillarsObtained;
-    }
-
-    public String grabPillar(final char thePillar) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("You found the pillar of ");
-        if (thePillar == 'A') {
-            sb.append("Abstraction! Your [effect goes here]!");
-            // Do some buff to the character.
-
-            // Add it to the obtained pillars.
-            myPillarsObtained[0] = 'A';
-        }
-        else if (thePillar == 'E') {
-            sb.append("Encapsulation! " +
-                    "Your potion efficacy has increased!");
-
-            // Add it to the obtained pillars.
-            myPillarsObtained[1] = 'E';
-        }
-        else if (thePillar == 'I') {
-            sb.append("Inheritance! Your [effect goes here]!");
-            // Do some buff to the character.
-
-            // Add it to the obtained pillars.
-            myPillarsObtained[2] = 'I';
-        }
-        else if (thePillar == 'P') {
-            sb.append("Polymorphism! Your [effect goes here]!");
-            // Do some buff to the character.
-
-            // Add it to the obtained pillars.
-            myPillarsObtained[3] = 'P';
-        }
-        return sb.toString();
-    }
-
-    public boolean hasPotion(final boolean theUsePotion) {
-        if (myHealthPotion > 0) {
-            if (theUsePotion) myHealthPotion--;
-            return true;
-        }
-        return false;
-    }
-
-
-
-    public Item getItemAt(final int theX, final int theY) {
-
-        return null; // TODO implement
-
-    }
+    /**
+     * Add an item to the inventory.
+     *
+     * @param theItem Item to add to inventory.
+     * @throws IndexOutOfBoundsException Inventory is full.
+     */
+    void addItem(final Item theItem);
 
 }

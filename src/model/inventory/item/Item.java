@@ -1,4 +1,4 @@
-package model.inventory;
+package model.inventory.item;
 
 /**
  * An item is an object that can be stored within an inventory.

@@ -1,35 +1,34 @@
 package model.dungeon;
 
+import model.Utility;
+import model.inventory.RoomInventory;
+
 import java.util.Random;
 
 public class Room {
-    /** Random object used for room spawns. */
-    private static final Random RAND = new Random();
+
     /** Constant for enemy spawn rate. */
     private static final double ENEMY_SPAWN_RATE = 0.5;
+
     /** Constant for trap spawn rate. */
     private static final double TRAP_SPAWN_RATE = 0.15;
+
     /** Constant for potion spawn rate. */
     private static final double POTION_SPAWN_RATE = 0.20;
-    /** Primary contents of the room (I.E. Pillar or entrance/exit). */
-    private final char myContents;
-    /** The potion that spawned in this room. */
-    private char myPotionSpawn;
-    /** The enemy that spawned in this room. */
-    private char myEnemySpawn;
-    /** The trap that spawned in this room, */
-    private char myTrapSpawn;
+
+    private final RoomInventory myInventory;
+
+    private final boolean myShouldSpawn;
 
     /**
      * Package level constructor that only Dungeon can access.
      * @param theContents The main content to fill the Room.
      */
-    Room(final char theContents) {
-        myContents = theContents;
-        myEnemySpawn = ' ';
-        myPotionSpawn = ' ';
-        myTrapSpawn = ' ';
+    Room(final boolean theShouldSpawn) {
+        myInventory = new RoomInventory();
+        myShouldSpawn = theShouldSpawn;
 
+        // Randomize the spawns.
         randomizeSpawns();
     }
 
@@ -44,8 +43,13 @@ public class Room {
         // of interest per each room. So, a room could have an
         // enemy, trap, AND a potion. Along with primary content
         // like pillars.
+
+        if (!myShouldSpawn) return;
+
+        if (Utility.RANDOM.nextDouble() <= ENEMY_SPAWN_RATE) myInventory.addItem(null);
+
         if (myContents != 'i' && myContents != 'O') {
-            if (RAND.nextDouble() < ENEMY_SPAWN_RATE) {
+            if (RAND.nextDouble() <= ENEMY_SPAWN_RATE) {
                 myEnemySpawn = 'm';
             }
 
@@ -64,6 +68,7 @@ public class Room {
 
     /**
      * Gets the primary contents of the room.
+     *
      * @return Returns a char of the contents.
      */
     public char getContents() {
@@ -72,6 +77,7 @@ public class Room {
 
     /**
      * Gets the potion spawned in the Room.
+     *
      * @return Returns the potion symbol ('H', 'V').
      */
     public char getPotionSpawns() {
@@ -80,6 +86,7 @@ public class Room {
 
     /**
      * Gets the enemy spawn in the Room.
+     *
      * @return Returns the enemy symbol ('m').
      */
     public char getEnemySpawns() {
@@ -88,6 +95,7 @@ public class Room {
 
     /**
      * Gets the trap spawn in the Room.
+     *
      * @return Returns the trap symbol ('X').
      */
     public char getTrapSpawns() {
