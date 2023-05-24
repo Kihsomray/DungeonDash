@@ -18,6 +18,12 @@ public abstract class Hero extends DungeonCharacter {
     /** Hero's inventory. */
     private final HeroInventory myInventory;
 
+    /** Current X position */
+    private int myCurrentX;
+
+    /** Current Y position */
+    private int myCurrentY;
+
     /** Block chance. */
     private final double myBlockChance;
 

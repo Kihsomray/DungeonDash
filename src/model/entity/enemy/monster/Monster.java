@@ -15,6 +15,9 @@ public abstract class Monster extends DungeonCharacter implements Enemy {
 
     //        FIELDS        //
 
+    /** Current X position */
+    private int myCurrentY;
+
     /** Minimum heal. */
     private final int myMinHeal;
 
@@ -42,6 +45,8 @@ public abstract class Monster extends DungeonCharacter implements Enemy {
      */
     public Monster(
             String theName,
+            int theSpawnX,
+            int theSpawnY,
             int theHP,
             int theMinDamage,
             int theMaxDamage,
