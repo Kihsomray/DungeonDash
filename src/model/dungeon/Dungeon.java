@@ -21,13 +21,12 @@ public class Dungeon {
     /**
      * Constructor for the dungeon that creates a new dungeon
      * and fills it using private methods.
-     * @param theSize The dimension of the dungeon.
      */
-    public Dungeon(int theSize) {
+    public Dungeon(final int theWidth, final int theHeight) {
 
         // Initialize the Dungeon using Prim's generator.
         // TODO - create character selection, pass it in here.
-        final DungeonGenerator generator = new PrimsGenerator(theSize, theSize, new Warrior());
+        final DungeonGenerator generator = new PrimsGenerator(theWidth, theHeight, new Warrior());
 
         // Generate the maze.
         myMaze = generator.generate();
@@ -44,15 +43,16 @@ public class Dungeon {
 
         sb.append(generateBorder());
 
-        for (int i = myMaze.length - 1; i >= 0; i--) {
-            Cell[] cells = myMaze[i];
+        for (int i = myMaze[0].length - 1; i >= 0; i--) {
 
             Queue<String> lowerHalf = new LinkedList<>();
             sb.append(Utility.generateSegment()).append(' ');
 
-            for (int j = 0; j < myMaze[0].length; j++) {
+            for (Cell[] cells : myMaze) {
 
-                String[] split = cells[j].toString().split("\n");
+                Cell cell = cells[i];
+
+                String[] split = cell.toString().split("\n");
 
                 sb.append(split[0]).append(' ');
                 lowerHalf.add(split[1]);

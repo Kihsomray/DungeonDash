@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Utility {
+public final class Utility {
 
     private static final List<Character> CHARACTERS
             = new ArrayList<>(List.of(new Character[]{

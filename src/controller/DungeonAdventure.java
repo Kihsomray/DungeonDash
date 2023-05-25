@@ -5,7 +5,7 @@ import model.dungeon.Dungeon;
 public class DungeonAdventure {
 
     public static void main(String[] args) {
-        Dungeon dungeonAdventure = new Dungeon(8);
+        Dungeon dungeonAdventure = new Dungeon(14, 8);
         System.out.print(dungeonAdventure);
         //welcomeMessage();
 

@@ -3,6 +3,7 @@ package model.dungeon.tile.passable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Neighboring rooms of the current room.
@@ -40,14 +41,14 @@ public class Neighbors {
 
     }
 
-    public Passable getRandomNeighbor(final Passable thePassableIgnore) {
+    public Passable getRandomNeighbor(final Set<Passable> thePassableIgnore) {
         List<Passable> rooms = new ArrayList<>();
         if (myNorth != null) rooms.add(myNorth);
         if (myEast != null) rooms.add(myEast);
         if (mySouth != null) rooms.add(mySouth);
         if (myWest != null) rooms.add(myWest);
         Collections.shuffle(rooms);
-        rooms.remove(thePassableIgnore);
+        thePassableIgnore.forEach(rooms::remove);
         return rooms.size() > 0 ? rooms.get(0) : null;
     }
 

@@ -125,51 +125,49 @@ public class PrimsGenerator implements DungeonGenerator {
     private void generateEntities() {
 
         // Gets a random number of steps.
-        int steps = Utility.RANDOM.nextInt(
-                (int) Math.sqrt(myWidth * myWidth + myHeight * myHeight),
-                myRoomCounter) - 1;
+        int steps = Utility.RANDOM.nextInt(myRoomCounter, myRoomCounter * 2) - 1;
 
         // Get origin.
-        Passable current = myEntrance;
-        Passable previous = myEntrance;
+        Stack<PassableInfo> previous = new Stack<>();
+        PassableInfo current = new PassableInfo(myEntrance);
 
         // Loop through the steps
         while (--steps >= 0) {
 
-            // Ensure it is not null.
-            assert current != null;
-
             // Set temp to current.
-            final Passable temp = current;
+            final PassableInfo temp = current;
 
-            System.out.println(current.getNeighbors());
+            System.out.println(current.myPassable.getNeighbors());
 
             // Set current to next.
-            current = current.getNeighbors()
-                    .getRandomNeighbor(previous);
+            current = new PassableInfo(current.myPassable
+                    .getNeighbors()
+                    .getRandomNeighbor(current.myBlacklist));
 
             // If can't go anywhere.
-            if (current == null) {
+            if (current.myPassable == null || previous.contains(temp)) {
 
                 // Set it back to temp.
-                current = temp;
+                PassableInfo last = previous.pop();
+                last.addBlacklist(temp.myPassable);
+                current = last;
+                ++steps;
 
-                // Break out.
-                break;
+            } else {
+
+                previous.push(temp);
 
             }
 
             // Set previous to old current (temp).
-            previous = temp;
+            // ----- previous = temp;
 
         }
 
-        // Ensure it is not null.
-        assert current != null;
-
         // Set the exit.
-        myCells[current.getX()][current.getY()] = myExit
-                = new Door(current.getX(), current.getY(), false);
+        final Passable passable = current.myPassable;
+        myCells[passable.getX()][passable.getY()] = myExit
+                = new Door(passable.getX(), passable.getY(), false);
 
         // All the pillars.
         Stack<Collectable> collectables = new Stack<>();
@@ -360,6 +358,24 @@ public class PrimsGenerator implements DungeonGenerator {
     @Override
     public Hero getHero() {
         return myHero;
+    }
+
+    private class PassableInfo {
+
+        private final Passable myPassable;
+        private final Set<Passable> myBlacklist;
+
+        public PassableInfo(final Passable thePassable) {
+            myPassable = thePassable;
+            myBlacklist = new HashSet<>();
+        }
+
+        public void addBlacklist(final Passable thePassable) {
+            myBlacklist.add(thePassable);
+        }
+
+
+
     }
 
 }
