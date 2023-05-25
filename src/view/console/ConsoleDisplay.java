@@ -23,11 +23,12 @@ public class ConsoleDisplay implements DungeonGUI {
 
             System.out.println(myMain.getDungeon());
 
-            switch (new Scanner(System.in)
+            char input = new Scanner(System.in)
                     .next()
                     .toUpperCase(Locale.ROOT)
-                    .charAt(0)
-            ) {
+                    .charAt(0);
+
+            switch (input) {
 
                 case 'W':
                     myMain.getDungeon().getHero().moveNorth();
@@ -43,6 +44,10 @@ public class ConsoleDisplay implements DungeonGUI {
 
                 case 'D':
                     myMain.getDungeon().getHero().moveEast();
+                    break;
+
+                case '1', '2', '3', '4', '5', '6', '7', '8':
+                    myMain.getDungeon().getHero().useInventoryItem(input - 48);
                     break;
 
 

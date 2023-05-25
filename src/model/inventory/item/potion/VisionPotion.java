@@ -1,5 +1,8 @@
 package model.inventory.item.potion;
 
+import model.dungeon.Dungeon;
+import model.sprite.hero.Hero;
+
 /**
  * A type of potion that allows a hero to see adjacent rooms.
  *
@@ -34,4 +37,12 @@ public class VisionPotion extends Potion {
         return DISPLAY_CHAR;
     }
 
+
+    @Override
+    public String usePotion(final Hero theHero) {
+
+        theHero.enableExtraVisibility();
+        return "Visibility increased!";
+
+    }
 }

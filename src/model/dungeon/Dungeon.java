@@ -64,12 +64,24 @@ public class Dungeon {
 
                 Cell cell = cells[i];
 
-                if (myHero.getCurrentRoom() == cell) {
+                if (myHero.getCurrentPassable() == cell) {
 
                     sb.append(Utility.getColor('8')).append(" _*_  ");
                     lowerHalf.add(Utility.getColor('8') + " /^\\ ");
 
-                } else if (cell instanceof Passable && !myHero.hasDiscovered((Passable) cell)) {
+                } else if ((myHero.isExtraVisibility() &&
+                        (Math.abs(cell.getX() - myHero.getCurrentPassable().getX()) < 3 &&
+                                Math.abs(cell.getY() - myHero.getCurrentPassable().getY()) < 3))
+                ) {
+
+                    String[] split = cell.toString().split("\n");
+
+                    sb.append(split[0]).append(' ');
+                    lowerHalf.add(split[1]);
+
+                } else if (cell instanceof Passable &&
+                        !myHero.hasDiscovered((Passable) cell)
+                ) {
 
                     sb.append(Utility.getColor('1')).append("***** ");
                     lowerHalf.add(Utility.getColor('1') + "*****");

@@ -4,6 +4,8 @@ import model.Utility;
 import model.dungeon.tile.Cell;
 import model.dungeon.tile.passable.Passable;
 import model.dungeon.tile.passable.Room;
+import model.inventory.item.Item;
+import model.inventory.item.potion.Potion;
 import model.sprite.DungeonCharacter;
 import model.inventory.HeroInventory;
 import model.sprite.enemy.monster.Monster;
@@ -32,6 +34,8 @@ public abstract class Hero extends DungeonCharacter {
 
     /** Block chance. */
     private final double myBlockChance;
+
+    private boolean myExtraVisibility;
 
 
     //        CONSTRUCTORS        //
@@ -69,6 +73,7 @@ public abstract class Hero extends DungeonCharacter {
         myInventory = new HeroInventory();
         myVisited = new HashSet<>();
         myBlockChance = theBlockChance;
+        myExtraVisibility = true;
 
     }
 
@@ -118,7 +123,7 @@ public abstract class Hero extends DungeonCharacter {
      *
      * @return Current room.
      */
-    public Passable getCurrentRoom() {
+    public Passable getCurrentPassable() {
         return myCurrentPassable;
     }
 
@@ -286,6 +291,16 @@ public abstract class Hero extends DungeonCharacter {
         return checkAndMove(myCurrentPassable.getNeighbors().getWest());
     }
 
+    public boolean useInventoryItem(final int theLocation) {
+        final Item item = myInventory.getItemAt(theLocation % 4 - 1, (theLocation + 4) / 4, true);
+
+        if (item instanceof Potion) {
+            ((Potion) item).usePotion(this);
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Checks the passable if possible to move to.
      *
@@ -294,6 +309,9 @@ public abstract class Hero extends DungeonCharacter {
     private boolean checkAndMove(final Passable thePassable) {
         if (thePassable == null) return false;
         myCurrentPassable = thePassable;
+
+        // Reset visibility.
+        myExtraVisibility = false;
 
         if (myVisited.contains(myCurrentPassable)) return true;
         myVisited.add(myCurrentPassable);
@@ -304,7 +322,7 @@ public abstract class Hero extends DungeonCharacter {
 
         // TODO fight monsters and traps if needed.
 
-        // transfer the inventory!
+        // Transfer the inventory.
         room.getInventory().addAllTo(myInventory);
 
         return true;
@@ -313,5 +331,18 @@ public abstract class Hero extends DungeonCharacter {
     public boolean hasDiscovered(final Passable passable) {
         return myVisited.contains(passable);
     }
+
+    public void addDiscovery(final Passable passable) {
+        myVisited.add(passable);
+    }
+
+    public void enableExtraVisibility() {
+        myExtraVisibility = true;
+    }
+
+    public boolean isExtraVisibility() {
+        return myExtraVisibility;
+    }
+
 
 }
