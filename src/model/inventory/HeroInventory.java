@@ -1,6 +1,7 @@
 package model.inventory;
 
 import com.sun.nio.sctp.IllegalUnbindException;
+import model.Utility;
 import model.inventory.item.collectable.Collectable;
 import model.inventory.item.Item;
 
@@ -225,4 +226,101 @@ public class HeroInventory implements Inventory {
         throw new IllegalArgumentException("Hero inventory is full!");
 
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+
+        // Append header.
+        appendBar(sb);
+
+        appendSegment(sb, true, 3);
+        sb.append(Utility.getColor('8'))
+                .append("    I N V E N T O R Y     ");
+        appendSegment(sb, false, 3);
+
+        // Append spacer.
+        appendBar(sb);
+
+        // Append pillar collection.
+        appendInventory(0, 4, sb, Utility.getColor('3') + "?");
+
+
+        // Append info row 1.
+        appendInfoBar(0, 4, sb);
+
+        // Append movable inventory 1.
+        appendInventory(4, 8, sb, Utility.getColor('2') + "+");
+
+        // Append info row 2.
+        appendInfoBar(4, 8, sb);
+
+        // Append movable inventory 2.
+        appendInventory(8, 12, sb, Utility.getColor('2') + "+");
+
+        // Append footer.
+        appendBar(sb);
+
+        return sb.toString();
+    }
+
+    private void appendBar(final StringBuilder theStringBuilder) {
+        for (int i = 0; i < 4; i++) {
+            appendSegment(theStringBuilder, true, 1);
+            appendSegment(theStringBuilder, true, 5);
+        }
+        appendSegment(theStringBuilder, false, 1);
+    }
+
+    private void appendInventory(
+            final int theStart,
+            final int theEnd,
+            final StringBuilder theStringBuilder,
+            final String theEmptyChar
+
+    ) {
+
+        for (int i = theStart; i < theEnd; i++) {
+            appendSegment(theStringBuilder, true, 1);
+            final Item item = myInventorySlots[i];
+            theStringBuilder.append("  ")
+                    .append(item == null ?
+                            theEmptyChar
+                            : item.getColoredDisplay())
+                    .append("   ");
+        }
+        appendSegment(theStringBuilder, false, 1);
+
+    }
+
+    private void appendInfoBar(
+            final int theStart,
+            final int theEnd,
+            final StringBuilder theStringBuilder
+
+    ) {
+
+        for (int i = theStart + 1; i < theEnd + 1; i++) {
+            appendSegment(theStringBuilder, true, 1);
+            theStringBuilder.append("-(")
+                    .append(Utility.getColor('8'))
+                    .append(i)
+                    .append(Utility.getColor('7'))
+                    .append(")- ");
+        }
+        appendSegment(theStringBuilder, false, 1);
+
+    }
+
+    private void appendSegment(
+            final StringBuilder theStringBuilder,
+            final boolean theSpace,
+            final int theWidth
+    ) {
+
+        theStringBuilder.append(Utility.generateSegment(theWidth))
+                .append(theSpace ? ' ' : '\n');
+
+    }
+
 }

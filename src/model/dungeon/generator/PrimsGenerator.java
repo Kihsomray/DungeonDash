@@ -82,6 +82,9 @@ public class PrimsGenerator implements DungeonGenerator {
         // Start at bottom right.
         myCells[0][0] = myEntrance = new Door(0, 0, true);
 
+        // Set the hero's location.
+        myHero.setCurrentPassable(myEntrance);
+
         // Add the surrounding.
         addSurrounding(0, 0);
 
@@ -137,7 +140,7 @@ public class PrimsGenerator implements DungeonGenerator {
             // Set temp to current.
             final PassableInfo temp = current;
 
-            System.out.println(current.myPassable.getNeighbors());
+            //System.out.println(current.myPassable.getNeighbors());
 
             // Set current to next.
             current = new PassableInfo(current.myPassable

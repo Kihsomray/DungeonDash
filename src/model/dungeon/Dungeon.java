@@ -34,6 +34,10 @@ public class Dungeon {
         // Gets the room count.
         myRoomCount = generator.getRoomCount();
 
+        System.out.println(generator.getHero().getInventory().toString());
+
+        System.out.println(generator.getHero().toString());
+
     }
 
 

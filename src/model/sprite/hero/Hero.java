@@ -1,6 +1,7 @@
 package model.sprite.hero;
 
 import model.Utility;
+import model.dungeon.tile.passable.Passable;
 import model.dungeon.tile.passable.Room;
 import model.sprite.DungeonCharacter;
 import model.inventory.HeroInventory;
@@ -20,7 +21,7 @@ public abstract class Hero extends DungeonCharacter {
     private final HeroInventory myInventory;
 
     /** Current room position */
-    private Room myCurrentRoom;
+    private Passable myCurrentPassable;
 
 
     /** Block chance. */
@@ -106,14 +107,119 @@ public abstract class Hero extends DungeonCharacter {
     }
 
     /**
-     * Get the current room..
+     * Get the current room.
      *
      * @return Current room.
      */
-    public Room getCurrentRoom() {
-        return myCurrentRoom;
+    public Passable getCurrentRoom() {
+        return myCurrentPassable;
     }
 
+    @Override
+    public String toString() {
+
+        final StringBuilder sb = new StringBuilder();
+
+        // Top bar.
+        appendBar(sb);
+
+        // Hero name.
+        sb.append(randomChar())
+                .append(Utility.getColor('8'))
+                .append(Utility.centerAndSpace(
+                        "HERO-" + this.getClass().getSimpleName(), 31, true))
+                .append(randomChar())
+                .append('\n');
+
+        // Player name.
+        sb.append(Utility.generateSegment(3))
+                .append(Utility.getColor('2'))
+                .append(Utility.centerAndSpace(getName(), 27, true))
+                .append(Utility.generateSegment(3))
+                .append('\n');
+
+        // Middle bar.
+        appendBar(sb);
+
+        // Empty line.
+        sb.append(randomChar())
+                .append(" ".repeat(31))
+                .append(randomChar())
+                .append('\n');
+
+        // HP info.
+        sb.append(randomChar())
+                .append("   ")
+                .append(Utility.getColor('8'))
+                .append("HP:    [")
+                .append(getHealthBar())
+                .append(Utility.getColor('8'))
+                .append("] ")
+                .append(randomChar())
+                .append('\n');
+
+        // Ability info.
+        sb.append(randomChar())
+                .append(" ")
+                .append(Utility.getColor('8'))
+                .append("ABILITY: [")
+                .append(Utility.createPointBar(20, 100, 18)) // TODO implement
+                .append(Utility.getColor('8'))
+                .append("] ")
+                .append(randomChar())
+                .append('\n');
+
+        // Empty line.
+        sb.append(randomChar())
+                .append(" ".repeat(7))
+                .append("_".repeat(17))
+                .append(" ".repeat(7))
+                .append(randomChar())
+                .append('\n');
+
+        // Coordinates.
+        final int x = myCurrentPassable.getX();
+        final int y = myCurrentPassable.getY();
+
+        // Display coordinates.
+        sb.append(Utility.generateSegment(3))
+                .append("    |  ")
+                .append(Utility.getColor('8'))
+                .append("X:")
+                .append(Utility.getColor('6'))
+                .append(x > 9 ? "" : "0").append(x)
+                .append(Utility.getColor('7'))
+                .append("  |  ")
+                .append(Utility.getColor('8'))
+                .append("Y:")
+                .append(Utility.getColor('6'))
+                .append(y > 9 ? "" : "0").append(y)
+                .append(Utility.getColor('7'))
+                .append("  |    ")
+                .append(Utility.generateSegment(3))
+                .append('\n');
+
+        // End bar.
+        appendBar(sb);
+
+        return sb.toString();
+    }
+
+    public String getHealthBar() {
+
+        return Utility.createPointBar(getHP(), getMaxHP(), 18);
+
+    }
+
+    private void appendBar(final StringBuilder theStringBuilder) {
+        theStringBuilder.append(randomChar())
+                .append(' ').append(Utility.generateSegment(29))
+                .append(' ').append(randomChar()).append('\n');
+    }
+
+    private String randomChar() {
+        return Utility.generateSegment(1);
+    }
 
     //        MUTATORS        //
 
@@ -145,12 +251,12 @@ public abstract class Hero extends DungeonCharacter {
     );
 
     /**
-     * Set the current room.
+     * Set the current passable.
      *
-     * @param theRoom Room.
+     * @param thePassable Passable.
      */
-    public void setCurrentX(final Room theRoom) {
-        myCurrentRoom = theRoom;
+    public void setCurrentPassable(final Passable thePassable) {
+        myCurrentPassable = thePassable;
     }
 
 
