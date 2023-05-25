@@ -44,6 +44,8 @@ public class RoomInventory implements Inventory {
             }
         }
 
+        myItems.removeAll(theInventory.getInventory());
+
         // Return a status string
         return loss > 0 ?
 

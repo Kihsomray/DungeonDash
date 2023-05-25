@@ -2,8 +2,6 @@ package model.dungeon.tile.passable;
 
 import model.Entity;
 import model.Utility;
-import model.dungeon.tile.passable.Neighbors;
-import model.dungeon.tile.passable.Passable;
 import model.sprite.DungeonCharacterFactory;
 import model.sprite.enemy.Enemy;
 import model.sprite.enemy.Trap;

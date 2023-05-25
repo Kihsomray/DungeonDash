@@ -1,16 +1,19 @@
 package model.dungeon;
 
+import controller.DungeonAdventure;
 import model.Utility;
 import model.dungeon.generator.PrimsGenerator;
 import model.dungeon.generator.DungeonGenerator;
 import model.dungeon.tile.Cell;
+import model.dungeon.tile.passable.Passable;
 import model.sprite.hero.Hero;
-import model.sprite.hero.Warrior;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class Dungeon {
+
+    private final DungeonAdventure myMain;
 
     /** The dungeon/maze made of Rooms. */
     private final Cell[][] myMaze;
@@ -19,19 +22,18 @@ public class Dungeon {
 
     private final int myRoomCount;
 
-    private int myHeroRow;
-    private int myHeroCol;
-
     /**
      * Constructor for the dungeon that creates a new dungeon
      * and fills it using private methods.
      */
     public Dungeon(
+            final DungeonAdventure theMain,
             final int theWidth,
             final int theHeight,
             final Hero theHero
     ) {
 
+        myMain = theMain;
         myHero = theHero;
 
         // Initialize the Dungeon using Prim's generator.
@@ -62,10 +64,24 @@ public class Dungeon {
 
                 Cell cell = cells[i];
 
-                String[] split = cell.toString().split("\n");
+                if (myHero.getCurrentRoom() == cell) {
 
-                sb.append(split[0]).append(' ');
-                lowerHalf.add(split[1]);
+                    sb.append(Utility.getColor('8')).append(" _*_  ");
+                    lowerHalf.add(Utility.getColor('8') + " /^\\ ");
+
+                } else if (cell instanceof Passable && !myHero.hasDiscovered((Passable) cell)) {
+
+                    sb.append(Utility.getColor('1')).append("***** ");
+                    lowerHalf.add(Utility.getColor('1') + "*****");
+
+                } else {
+
+                    String[] split = cell.toString().split("\n");
+
+                    sb.append(split[0]).append(' ');
+                    lowerHalf.add(split[1]);
+
+                }
 
             }
 
@@ -106,6 +122,11 @@ public class Dungeon {
         return sb.toString();
     }
 
+    public Hero getHero() {
+        return myHero;
+    }
 
-
+    public int getRoomCount() {
+        return myRoomCount;
+    }
 }

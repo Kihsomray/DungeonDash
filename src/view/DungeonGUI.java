@@ -1,4 +1,7 @@
 package view;
 
-public class DungeonGUI {
+public interface DungeonGUI {
+
+    void display();
+
 }

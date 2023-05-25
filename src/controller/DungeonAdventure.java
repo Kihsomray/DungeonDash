@@ -2,34 +2,34 @@ package controller;
 
 import model.dungeon.Dungeon;
 import model.sprite.hero.Warrior;
+import view.DungeonGUI;
+import view.console.ConsoleDisplay;
 
 public class DungeonAdventure {
 
+    private final Dungeon myDungeon;
+    private final DungeonGUI myGUI;
+
     public static void main(String[] args) {
-        Dungeon dungeonAdventure = new Dungeon(14, 8, new Warrior());
-        System.out.print(dungeonAdventure);
-        //welcomeMessage();
+        final DungeonAdventure game = new DungeonAdventure();
+        game.initialize();
+    }
 
+    private DungeonAdventure() {
+        myDungeon = new Dungeon(this, 14, 8, new Warrior());
+        myGUI = new ConsoleDisplay(this);
+    }
 
-        boolean gameOver = false;
-        while (!gameOver) {
+    private void initialize() {
+        myGUI.display();
+    }
 
-            break;
-        }
+    public Dungeon getDungeon() {
+        return myDungeon;
+    }
 
-//        System.out.println("Testing Dungeon Generation");
-//        System.out.println(dungeonAdventure);
-//        System.out.println("Hero location: " + d.getHeroRow() + " " + d.getHeroCol());
-//        System.out.println();
-//
-//        System.out.println("Testing Potion Generation");
-//        System.out.println(dungeonAdventure.potionSpawns());
-//
-//        System.out.println("Testing Trap Generation");
-//        System.out.println(dungeonAdventure.trapSpawns());
-//
-//        System.out.println("Testing Enemy Generation");
-//        System.out.println(dungeonAdventure.enemySpawns());
+    public DungeonGUI getGUI() {
+        return myGUI;
     }
 
     private static void welcomeMessage() {

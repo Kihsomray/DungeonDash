@@ -171,6 +171,7 @@ public class PrimsGenerator implements DungeonGenerator {
         final Passable passable = current.myPassable;
         myCells[passable.getX()][passable.getY()] = myExit
                 = new Door(passable.getX(), passable.getY(), false);
+        addSurrounding(passable.getX(), passable.getY());
 
         // All the pillars.
         Stack<Collectable> collectables = new Stack<>();

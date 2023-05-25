@@ -6,6 +6,7 @@ import model.inventory.item.collectable.Collectable;
 import model.inventory.item.Item;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -181,7 +182,7 @@ public class HeroInventory implements Inventory {
      */
     @Override
     public Set<Item> getInventory() {
-        return Set.of(myInventorySlots);
+        return new HashSet<>(Arrays.stream(myInventorySlots).toList());
     }
 
     /**
@@ -223,7 +224,7 @@ public class HeroInventory implements Inventory {
         }
 
         // Otherwise, the inventory is deemed full.
-        throw new IllegalArgumentException("Hero inventory is full!");
+        throw new IndexOutOfBoundsException("Hero inventory is full!");
 
     }
 

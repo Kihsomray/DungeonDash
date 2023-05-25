@@ -1,11 +1,15 @@
 package model.sprite.hero;
 
 import model.Utility;
+import model.dungeon.tile.Cell;
 import model.dungeon.tile.passable.Passable;
 import model.dungeon.tile.passable.Room;
 import model.sprite.DungeonCharacter;
 import model.inventory.HeroInventory;
 import model.sprite.enemy.monster.Monster;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Used as a base to represent a hero within the dungeon game.
@@ -22,6 +26,8 @@ public abstract class Hero extends DungeonCharacter {
 
     /** Current room position */
     private Passable myCurrentPassable;
+
+    private Set<Passable> myVisited;
 
 
     /** Block chance. */
@@ -61,6 +67,7 @@ public abstract class Hero extends DungeonCharacter {
         );
 
         myInventory = new HeroInventory();
+        myVisited = new HashSet<>();
         myBlockChance = theBlockChance;
 
     }
@@ -260,8 +267,51 @@ public abstract class Hero extends DungeonCharacter {
      * @param thePassable Passable.
      */
     public void setCurrentPassable(final Passable thePassable) {
-        myCurrentPassable = thePassable;
+        myVisited.add(myCurrentPassable = thePassable);
     }
 
+    public boolean moveNorth() {
+        return checkAndMove(myCurrentPassable.getNeighbors().getNorth());
+    }
+
+    public boolean moveEast() {
+        return checkAndMove(myCurrentPassable.getNeighbors().getEast());
+    }
+
+    public boolean moveSouth() {
+        return checkAndMove(myCurrentPassable.getNeighbors().getSouth());
+    }
+
+    public boolean moveWest() {
+        return checkAndMove(myCurrentPassable.getNeighbors().getWest());
+    }
+
+    /**
+     * Checks the passable if possible to move to.
+     *
+     * @return true if moved to the cell.
+     */
+    private boolean checkAndMove(final Passable thePassable) {
+        if (thePassable == null) return false;
+        myCurrentPassable = thePassable;
+
+        if (myVisited.contains(myCurrentPassable)) return true;
+        myVisited.add(myCurrentPassable);
+
+        if (!(myCurrentPassable instanceof Room)) return true;
+
+        final Room room = (Room) myCurrentPassable;
+
+        // TODO fight monsters and traps if needed.
+
+        // transfer the inventory!
+        room.getInventory().addAllTo(myInventory);
+
+        return true;
+    }
+
+    public boolean hasDiscovered(final Passable passable) {
+        return myVisited.contains(passable);
+    }
 
 }
