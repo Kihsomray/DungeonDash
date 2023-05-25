@@ -1,6 +1,7 @@
 package model.dungeon.tile.passable;
 
 import model.dungeon.tile.Cell;
+import model.sprite.hero.Hero;
 
 public interface Passable extends Cell {
 
@@ -10,5 +11,7 @@ public interface Passable extends Cell {
      * @return Neighbors.
      */
     Neighbors getNeighbors();
+
+    void interactWith(final Hero theHero);
 
 }

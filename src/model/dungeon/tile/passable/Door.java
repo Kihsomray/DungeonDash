@@ -1,5 +1,8 @@
 package model.dungeon.tile.passable;
 
+import model.Utility;
+import model.sprite.hero.Hero;
+
 public class Door implements Passable {
 
     private final int myX;
@@ -27,12 +30,19 @@ public class Door implements Passable {
 
     @Override
     public String toString() {
-        return (myIsEntrance ? "<___>" : ">___<") + "\n[]|[]";
+        return Utility.getColor('3')
+                + (myIsEntrance ? "<_^_>\n" : ">_^_<\n")
+                + Utility.getColor('3') + "[]|[]";
     }
 
     @Override
     public Neighbors getNeighbors() {
         return myNeighbors;
+    }
+
+    @Override
+    public void interactWith(final Hero theHero) {
+
     }
 
 }

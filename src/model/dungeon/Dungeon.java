@@ -1,5 +1,6 @@
 package model.dungeon;
 
+import model.Utility;
 import model.dungeon.generator.PrimsGenerator;
 import model.dungeon.generator.DungeonGenerator;
 import model.dungeon.tile.Cell;
@@ -41,16 +42,13 @@ public class Dungeon {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        final String halfTile = "#####";
-
-        final String border = (halfTile + " ").repeat(Math.max(0, myMaze.length + 1)) + halfTile + "\n";
-        sb.append(border).append(border);
+        sb.append(generateBorder());
 
         for (int i = myMaze.length - 1; i >= 0; i--) {
             Cell[] cells = myMaze[i];
 
             Queue<String> lowerHalf = new LinkedList<>();
-            sb.append(halfTile).append(' ');
+            sb.append(Utility.generateSegment()).append(' ');
 
             for (int j = 0; j < myMaze[0].length; j++) {
 
@@ -61,19 +59,29 @@ public class Dungeon {
 
             }
 
-            sb.append(halfTile).append("\n").append(halfTile).append(' ');
+            sb.append(Utility.generateSegment()).append("\n").append(Utility.generateSegment()).append(' ');
 
             while (!lowerHalf.isEmpty()) {
                 sb.append(lowerHalf.poll()).append(' ');
             }
 
-            sb.append(halfTile).append('\n');
+            sb.append(Utility.generateSegment()).append('\n');
 
         }
 
-        sb.append(border).append(border);
-        return sb.append('\n').toString();
+        return sb.append(generateBorder()).append('\n').toString();
 
+    }
+
+    private String generateBorder() {
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < myMaze.length + 1; j++) {
+                sb.append(Utility.generateSegment()).append(' ');
+            }
+            sb.append(Utility.generateSegment()).append("\n");
+        }
+        return sb.toString();
     }
 
 }

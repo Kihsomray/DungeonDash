@@ -107,6 +107,16 @@ public abstract class Monster extends DungeonCharacter implements Enemy {
         return 'M';
     }
 
+    /**
+     * Gets the colored display of the monster.
+     *
+     * @return Colored display of the monster.
+     */
+    @Override
+    public String getColoredDisplay() {
+        return Utility.getColor('1') + getDisplayChar();
+    }
+
 
     //        MUTATORS        //
 

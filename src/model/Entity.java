@@ -9,4 +9,11 @@ public interface Entity {
      */
     char getDisplayChar();
 
+    /**
+     * Gets the display char with a color applied.
+     *
+     * @return Display char with color.
+     */
+    String getColoredDisplay();
+
 }

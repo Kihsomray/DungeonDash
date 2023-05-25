@@ -1,5 +1,6 @@
 package model.inventory.item.potion;
 
+import model.Utility;
 import model.sprite.hero.Hero;
 import model.inventory.item.Item;
 
@@ -26,6 +27,16 @@ public abstract class Potion implements Item {
      */
     public String usePotion(final Hero theHero) {
         return "Not implemented";
+    }
+
+    /**
+     * Gets the colored display of the hero.
+     *
+     * @return Colored display of the hero.
+     */
+    @Override
+    public String getColoredDisplay() {
+        return Utility.getColor('6') + getDisplayChar();
     }
 
 }

@@ -1,5 +1,7 @@
 package model.dungeon.tile;
 
+import model.Utility;
+
 public class Wall implements Cell {
 
     private final int myX;
@@ -22,7 +24,7 @@ public class Wall implements Cell {
 
     @Override
     public String toString() {
-        return "#####\n#####";
+        return Utility.generateSegment() + "\n" + Utility.generateSegment();
     }
 
 }

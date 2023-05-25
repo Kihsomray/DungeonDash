@@ -1,5 +1,7 @@
 package model.inventory.item.collectable;
 
+import model.Utility;
+
 /**
  * A type of collectable that the user need to discover.
  *
@@ -33,6 +35,16 @@ public class Pillar implements Collectable {
     @Override
     public char getDisplayChar() {
         return myPrinciple.getDisplayChar();
+    }
+
+    /**
+     * Gets the colored display of the hero.
+     *
+     * @return Colored display of the hero.
+     */
+    @Override
+    public String getColoredDisplay() {
+        return Utility.getColor('5') + getDisplayChar();
     }
 
 

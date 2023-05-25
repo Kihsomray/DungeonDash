@@ -10,6 +10,7 @@ import model.sprite.enemy.Trap;
 import model.inventory.RoomInventory;
 import model.inventory.item.potion.HealthPotion;
 import model.inventory.item.potion.VisionPotion;
+import model.sprite.hero.Hero;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -55,6 +56,11 @@ public class Room implements Passable {
     @Override
     public Neighbors getNeighbors() {
         return myNeighbors;
+    }
+
+    @Override
+    public void interactWith(Hero theHero) {
+        // TODO interaction
     }
 
     @Override
@@ -110,7 +116,7 @@ public class Room implements Passable {
         int i = 1;
         for (final Entity entity : entities) {
 
-            sb.append(entity.getDisplayChar())
+            sb.append(entity.getColoredDisplay())
                     .append(i++ != 3 ? ' ' : '\n');
 
         }

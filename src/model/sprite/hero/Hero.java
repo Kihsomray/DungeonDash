@@ -96,6 +96,16 @@ public abstract class Hero extends DungeonCharacter {
     }
 
     /**
+     * Gets the colored display of the hero.
+     *
+     * @return Colored display of the hero.
+     */
+    @Override
+    public String getColoredDisplay() {
+        return Utility.getColor('7') + getDisplayChar();
+    }
+
+    /**
      * Get the current room..
      *
      * @return Current room.
