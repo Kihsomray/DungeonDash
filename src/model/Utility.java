@@ -4,6 +4,10 @@ import java.util.*;
 
 public final class Utility {
 
+    private Utility() {
+
+    }
+
     private static final List<Character> CHARACTERS
             = new ArrayList<>(List.of(new Character[]{
                     '#', '#', '#', '$', '$', '%', '%', '^', '@', '~'

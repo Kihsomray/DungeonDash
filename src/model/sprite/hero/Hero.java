@@ -163,7 +163,9 @@ public abstract class Hero extends DungeonCharacter {
                 .append(" ")
                 .append(Utility.getColor('8'))
                 .append("ABILITY: [")
-                .append(Utility.createPointBar(20, 100, 18)) // TODO implement
+                .append(Utility.createPointBar(
+                        Utility.RANDOM.nextInt(0, 100), 100, 18)
+                ) // TODO implement
                 .append(Utility.getColor('8'))
                 .append("] ")
                 .append(randomChar())
@@ -202,7 +204,9 @@ public abstract class Hero extends DungeonCharacter {
         // End bar.
         appendBar(sb);
 
-        return sb.toString();
+        return sb.append(" ".repeat(33))
+                .append('\n')
+                .append(myInventory.toString()).toString();
     }
 
     public String getHealthBar() {

@@ -4,6 +4,7 @@ import model.Utility;
 import model.dungeon.generator.PrimsGenerator;
 import model.dungeon.generator.DungeonGenerator;
 import model.dungeon.tile.Cell;
+import model.sprite.hero.Hero;
 import model.sprite.hero.Warrior;
 
 import java.util.LinkedList;
@@ -13,6 +14,9 @@ public class Dungeon {
 
     /** The dungeon/maze made of Rooms. */
     private final Cell[][] myMaze;
+
+    private final Hero myHero;
+
     private final int myRoomCount;
 
     private int myHeroRow;
@@ -22,21 +26,23 @@ public class Dungeon {
      * Constructor for the dungeon that creates a new dungeon
      * and fills it using private methods.
      */
-    public Dungeon(final int theWidth, final int theHeight) {
+    public Dungeon(
+            final int theWidth,
+            final int theHeight,
+            final Hero theHero
+    ) {
+
+        myHero = theHero;
 
         // Initialize the Dungeon using Prim's generator.
         // TODO - create character selection, pass it in here.
-        final DungeonGenerator generator = new PrimsGenerator(theWidth, theHeight, new Warrior());
+        final DungeonGenerator generator = new PrimsGenerator(theWidth, theHeight, theHero);
 
         // Generate the maze.
         myMaze = generator.generate();
 
         // Gets the room count.
         myRoomCount = generator.getRoomCount();
-
-        System.out.println(generator.getHero().getInventory().toString());
-
-        System.out.println(generator.getHero().toString());
 
     }
 
@@ -73,7 +79,19 @@ public class Dungeon {
 
         }
 
-        return sb.append(generateBorder()).append('\n').toString();
+        final String[] dungeonString = sb.append(generateBorder()).append('\n').toString().split("\n");
+        final String[] heroString = myHero.toString().split("\n");
+
+        sb = new StringBuilder();
+
+        for (int i = 0; i < dungeonString.length; i++) {
+            sb.append(heroString[i])
+                    .append("     ")
+                    .append(dungeonString[i])
+                    .append('\n');
+        }
+
+        return sb.toString();
 
     }
 
@@ -87,5 +105,7 @@ public class Dungeon {
         }
         return sb.toString();
     }
+
+
 
 }

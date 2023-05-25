@@ -1,11 +1,12 @@
 package controller;
 
 import model.dungeon.Dungeon;
+import model.sprite.hero.Warrior;
 
 public class DungeonAdventure {
 
     public static void main(String[] args) {
-        Dungeon dungeonAdventure = new Dungeon(14, 8);
+        Dungeon dungeonAdventure = new Dungeon(14, 8, new Warrior());
         System.out.print(dungeonAdventure);
         //welcomeMessage();
 
