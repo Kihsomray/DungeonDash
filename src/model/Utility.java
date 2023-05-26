@@ -221,8 +221,8 @@ public final class Utility {
         appendWall2(sb);
 
         for (String line : theMessage.split("\n"))
-            sb.append(getColor('8'))
-                    .append(generateSegment(1))
+            sb.append(generateSegment(1))
+                    .append(getColor('8'))
                     .append(centerAndSpace(line, 131, true))
                     .append(generateSegment(1))
                     .append('\n');
