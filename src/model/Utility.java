@@ -44,7 +44,8 @@ public final class Utility {
         for (char c : theString.toCharArray()) space.append(c).append(" ");
         space.deleteCharAt(space.length() - 1);
 
-        String spaceString = space.toString();
+        String spaceString = space.length() > theLength ?
+                space.substring(0, theLength) : space.toString();
 
         spaceString = " ".repeat(
                 (int) Math.floor((theLength - spaceString.length()) / 2.0)

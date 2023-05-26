@@ -145,8 +145,10 @@ public abstract class Hero extends DungeonCharacter {
 
         // Player name.
         sb.append(Utility.generateSegment(3))
+                .append(' ')
                 .append(Utility.getColor('2'))
-                .append(Utility.centerAndSpace(getName(), 27, true))
+                .append(Utility.centerAndSpace(getName(), 25, true))
+                .append(' ')
                 .append(Utility.generateSegment(3))
                 .append('\n');
 
