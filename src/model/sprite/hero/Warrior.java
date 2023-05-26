@@ -30,10 +30,10 @@ public class Warrior extends Hero {
     /**
      * Create an instance of a warrior.
      */
-    public Warrior() {
+    public Warrior(final String theName) {
 
         super(
-                "Warrior",
+                theName,
                 125,
                 35,
                 60,

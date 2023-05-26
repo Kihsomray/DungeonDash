@@ -29,10 +29,10 @@ public class Thief extends Hero {
     /**
      * Creates an instance of a Thief.
      */
-    public Thief() {
+    public Thief(final String theName) {
 
         super(
-                "Thief",
+                theName,
                 125,
                 35,
                 60,

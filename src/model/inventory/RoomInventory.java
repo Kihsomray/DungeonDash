@@ -40,6 +40,7 @@ public class RoomInventory implements Inventory {
                 theInventory.addItem(item);
                 gain++;
             } catch (final IndexOutOfBoundsException theIOBE) {
+                System.out.println(theIOBE.getMessage());
                 loss++;
             }
         }

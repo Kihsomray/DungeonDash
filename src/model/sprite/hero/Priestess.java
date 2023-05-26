@@ -27,10 +27,10 @@ public class Priestess extends Hero {
     /**
      * Creates an instance of Priestess
      */
-    public Priestess() {
+    public Priestess(final String theName) {
 
         super(
-                "Priestess",
+                theName,
                 75,
                 25,
                 45,

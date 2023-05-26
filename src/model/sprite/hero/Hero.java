@@ -201,13 +201,13 @@ public abstract class Hero extends DungeonCharacter {
                 .append(Utility.getColor('8'))
                 .append("X:")
                 .append(Utility.getColor('6'))
-                .append(x > 9 ? "" : "0").append(x)
+                .append(x > 10 ? "" : "0").append(x + 1)
                 .append(Utility.getColor('7'))
                 .append("  |  ")
                 .append(Utility.getColor('8'))
                 .append("Y:")
                 .append(Utility.getColor('6'))
-                .append(y > 9 ? "" : "0").append(y)
+                .append(y > 10 ? "" : "0").append(y + 1)
                 .append(Utility.getColor('7'))
                 .append("  |    ")
                 .append(Utility.generateSegment(3))
@@ -313,14 +313,11 @@ public abstract class Hero extends DungeonCharacter {
         // Reset visibility.
         myExtraVisibility = false;
 
-        if (myVisited.contains(myCurrentPassable)) return true;
         myVisited.add(myCurrentPassable);
 
-        if (!(myCurrentPassable instanceof Room)) return true;
+        if (!(myCurrentPassable instanceof final Room room)) return true;
 
-        final Room room = (Room) myCurrentPassable;
-
-        // TODO fight monsters and traps if needed.
+        // TODO fight monsters and traps.
 
         // Transfer the inventory.
         room.getInventory().addAllTo(myInventory);
