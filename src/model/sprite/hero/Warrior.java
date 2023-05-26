@@ -15,6 +15,18 @@ public class Warrior extends Hero {
 
     //        FIELDS        //
 
+    public static final int DEFAULT_HP = 125;
+
+    public static final int DEFAULT_MIN_DAMAGE = 35;
+
+    public static final int DEFAULT_MAX_DAMAGE = 60;
+
+    public static final int DEFAULT_ATTACK_SPEED = 4;
+
+    private static final double DEFAULT_HIT_CHANCE = 0.8;
+
+    private static final double DEFAULT_BLOCK_CHANCE = 0.2;
+
     /** Ability minimum damage. */
     private static final int ABILITY_MIN_DAMAGE = 75;
 
@@ -24,6 +36,7 @@ public class Warrior extends Hero {
     /** Ability chance. */
     private static final double ABILITY_CHANCE = 0.4;
 
+    /** 41 x 20 representation of the warrior */
     public static final String ASCII_SKIN =
             "                   ╚Ñ╥,,                 \n" +
             "                  ▌█▐▌▓▓L                \n" +
@@ -33,7 +46,7 @@ public class Warrior extends Hero {
             "       ▄      ▄▓▌ ]▒▒╟▓▓▓▓██╢▓,          \n" +
             "      ]▓▓▌╓╓▓▓██▀▒▒╢▓▓▓▓▓▓█▓█▓╣          \n" +
             "       ]╙╙╙╙╙╙╙   ▌^╙▓▓▓╣▓╢▓█▀▓╣▓        \n" +
-            " \"\"\"╟[\"`      ╓@▒j▓▓▓▓▓▓╢▒▓▓▓╣╢       \n" +
+            "    \"\"\"╟[\"`      ╓@▒j▓▓▓▓▓▓╢▒▓▓▓╣╢       \n" +
             "       ║[       @████████▓╣▓▓▒▓▓▓╣▓r     \n" +
             "       ╟[        ║]██▌▒╣██╣▓▓██╣▓▓╣L     \n" +
             "       ╟[        ║▒▓▓▒▒▓▓▓▓╣╢╫▓╢▓▓╣▓     \n" +
@@ -56,12 +69,12 @@ public class Warrior extends Hero {
 
         super(
                 theName,
-                125,
-                35,
-                60,
-                4,
-                0.8,
-                0.2
+                DEFAULT_HP,
+                DEFAULT_MIN_DAMAGE,
+                DEFAULT_MAX_DAMAGE,
+                DEFAULT_ATTACK_SPEED,
+                DEFAULT_HIT_CHANCE,
+                DEFAULT_BLOCK_CHANCE
         );
 
     }

@@ -17,12 +17,25 @@ public class Thief extends Hero {
 
     //        FIELDS        //
 
+    public static final int DEFAULT_HP = 75;
+
+    public static final int DEFAULT_MIN_DAMAGE = 20;
+
+    public static final int DEFAULT_MAX_DAMAGE = 40;
+
+    public static final int DEFAULT_ATTACK_SPEED = 6;
+
+    private static final double DEFAULT_HIT_CHANCE = 0.8;
+
+    private static final double DEFAULT_BLOCK_CHANCE = 0.4;
+
     // Ability success chance.
     private static final double ABILITY_SUCCESS_CHANCE = 0.4;
 
     // Ability failure chance.
     private static final double ABILITY_FAILURE_CHANCE = 0.2;
 
+    /** 41 x 20 representation of the thief */
     public static final String ASCII_SKIN =
             "                                         \n" +
             "                                         \n" +
@@ -55,12 +68,12 @@ public class Thief extends Hero {
 
         super(
                 theName,
-                125,
-                35,
-                60,
-                4,
-                0.8,
-                0.2
+                DEFAULT_HP,
+                DEFAULT_MIN_DAMAGE,
+                DEFAULT_MAX_DAMAGE,
+                DEFAULT_ATTACK_SPEED,
+                DEFAULT_HIT_CHANCE,
+                DEFAULT_BLOCK_CHANCE
         );
 
     }

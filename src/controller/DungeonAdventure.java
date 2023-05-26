@@ -1,5 +1,6 @@
 package controller;
 
+import model.Utility;
 import model.dungeon.Dungeon;
 import model.sprite.hero.Priestess;
 import model.sprite.hero.Thief;
@@ -8,21 +9,40 @@ import view.console.ConsoleDisplay;
 
 public class DungeonAdventure {
 
-    private final Dungeon myDungeon;
     private final DungeonGUI myGUI;
+    private Dungeon myDungeon;
 
     public static void main(String[] args) {
         final DungeonAdventure game = new DungeonAdventure();
-        game.initialize();
+        game.initializeGUI();
     }
 
     private DungeonAdventure() {
-        myDungeon = new Dungeon(this, 14, 8, new Priestess("MY NAME"));
         myGUI = new ConsoleDisplay(this);
     }
 
-    private void initialize() {
+    /**
+     * To be called from controller.
+     */
+    private void initializeGUI() {
         myGUI.display();
+    }
+
+    /**
+     * To be called from view.
+     */
+    public void initializeDungeon(
+            final char theHeroChar,
+            final String theUsername
+    ) {
+
+        myDungeon = new Dungeon(
+                this,
+                14,
+                8,
+                Utility.generateHeroFromChar(theHeroChar, theUsername)
+        );
+
     }
 
     public Dungeon getDungeon() {
