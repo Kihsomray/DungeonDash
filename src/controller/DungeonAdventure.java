@@ -1,8 +1,8 @@
 package controller;
 
 import model.dungeon.Dungeon;
+import model.sprite.hero.Priestess;
 import model.sprite.hero.Thief;
-import model.sprite.hero.Warrior;
 import view.DungeonGUI;
 import view.console.ConsoleDisplay;
 
@@ -17,7 +17,7 @@ public class DungeonAdventure {
     }
 
     private DungeonAdventure() {
-        myDungeon = new Dungeon(this, 14, 8, new Thief("TIMOFEJ RATSKO"));
+        myDungeon = new Dungeon(this, 14, 8, new Priestess("MY NAME"));
         myGUI = new ConsoleDisplay(this);
     }
 

@@ -52,13 +52,7 @@ public class ConsoleDisplay implements DungeonGUI {
 
 
             }
-
-
-
-
-
-
-
+            
         }
 
 
