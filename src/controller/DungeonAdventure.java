@@ -6,6 +6,7 @@ import model.sprite.hero.Priestess;
 import model.sprite.hero.Thief;
 import view.DungeonGUI;
 import view.console.ConsoleDisplay;
+import view.gui.GUIDisplay;
 
 public class DungeonAdventure {
 
@@ -18,7 +19,7 @@ public class DungeonAdventure {
     }
 
     private DungeonAdventure() {
-        myGUI = new ConsoleDisplay(this);
+        myGUI = new GUIDisplay(this);
     }
 
     /**
