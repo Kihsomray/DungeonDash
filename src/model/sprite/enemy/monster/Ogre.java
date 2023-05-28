@@ -7,6 +7,7 @@ package model.sprite.enemy.monster;
  *
  * @version 1.0.0
  * @author Kihsomray
+ * @author Patrick Hern
  */
 public class Ogre extends Monster {
 
@@ -19,7 +20,7 @@ public class Ogre extends Monster {
                 "Ogre",
                 200,
                 30,
-                6,
+                60,
                 2,
                 0.6,
                 30,

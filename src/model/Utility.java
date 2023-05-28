@@ -1,5 +1,6 @@
 package model;
 
+import model.sprite.DungeonCharacterFactory;
 import model.sprite.hero.Hero;
 import model.sprite.hero.Priestess;
 import model.sprite.hero.Thief;
