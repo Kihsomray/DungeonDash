@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 public class Map extends JPanel {
 
@@ -49,6 +50,7 @@ public class Map extends JPanel {
         }
 
         AddCharacter();
+        addDoor(1, 2);
 
 
 //        for (int i = 0; i < myWidth; i++) {
@@ -109,5 +111,18 @@ public class Map extends JPanel {
         } catch (Exception e) {
             System.out.println("Something Bad just happened" + e);
         }
+    }
+
+    private void addDoor(int theX, int theY) {
+        String doorPath = "res" + File.separator + "Door.png";
+        JLabel door = null;
+        try {
+            door = new JLabel(new ImageIcon(ImageIO.read(new File(doorPath))));
+        } catch (IOException e) {
+            System.out.println("There was an issue loading the door " + e);
+            return;
+        }
+        myPanels[theY][theX].removeAll();
+        myPanels[theY][theX].add(door,0);
     }
 }
