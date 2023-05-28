@@ -10,6 +10,7 @@ import model.sprite.hero.Hero;
  *
  * @version 1.0.0
  * @author Kihsomray
+ * @author Patrick Hern
  */
 public abstract class Monster extends DungeonCharacter implements Enemy {
 
