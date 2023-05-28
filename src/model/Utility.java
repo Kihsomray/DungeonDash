@@ -1,5 +1,6 @@
 package model;
 
+import model.sprite.DungeonCharacterFactory;
 import model.sprite.hero.Hero;
 import model.sprite.hero.Priestess;
 import model.sprite.hero.Thief;
@@ -19,6 +20,8 @@ public final class Utility {
             }));
 
     /** Used to generate random numbers. */
+    public static final DungeonCharacterFactory FACTORY = new DungeonCharacterFactory();
+
     public static final Random RANDOM = new Random();
 
     public static final String BOLD = "\u001B[1m";

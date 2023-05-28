@@ -14,7 +14,6 @@ public class DungeonAdventure {
     private Dungeon myDungeon;
 
     public static void main(String[] args) {
-        new DungeonCharacterFactory(); // Initialize Dungeon Characters
         final DungeonAdventure game = new DungeonAdventure();
         game.initializeGUI();
     }
