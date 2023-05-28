@@ -84,7 +84,6 @@ public class GUIDisplay implements DungeonGUI {
         // Turn it on
         frame.setVisible(true);
 
-
         // Choose a character and then initialize the dungeon then go to main game loop
 
         char chosen = 'W'; // TODO implement choosing an actual charater
@@ -108,7 +107,4 @@ public class GUIDisplay implements DungeonGUI {
     private void chooseCharacter() {
 
     }
-
-
-
 }
