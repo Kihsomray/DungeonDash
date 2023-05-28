@@ -37,6 +37,7 @@ public class DungeonAdventure {
             final String theUsername
     ) {
 
+        new DungeonCharacterFactory();
         myDungeon = new Dungeon(
                 this,
                 14,

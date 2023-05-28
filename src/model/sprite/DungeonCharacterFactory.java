@@ -8,10 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import model.Utility;
-import model.sprite.enemy.monster.Gremlin;
 import model.sprite.enemy.monster.Monster;
-import model.sprite.enemy.monster.Ogre;
-import model.sprite.enemy.monster.Skeleton;
 
 import java.util.ArrayList;
 
@@ -23,15 +20,21 @@ import java.util.ArrayList;
  * @author Kihsomray
  */
 public class DungeonCharacterFactory {
-    private static ArrayList<Monster> myCharactersData;
+    /** ArrayList of Monsters to randomly select from. **/
+    private static final ArrayList<Monster> MONSTER_DATA = new ArrayList<>();
 
+    /**
+     * Constructor that initializes the ArrayList of Monster and
+     * reads input from the database.
+     */
     public DungeonCharacterFactory() {
-
-        myCharactersData = new ArrayList<>();
         readFromSQLiteDB();
-
     }
 
+    /**
+     * Opens the database connection to "DungeonCharacters.db", queries for
+     * all monsters, adds them to an ArrayList, then closes.
+     */
     private void readFromSQLiteDB() {
 
         SQLiteDataSource dataSrc = null;
@@ -40,7 +43,7 @@ public class DungeonCharacterFactory {
         try {
 
             dataSrc = new SQLiteDataSource();
-            dataSrc.setUrl("jdbc:sqlite:characters.db");
+            dataSrc.setUrl("jdbc:sqlite:DungeonCharacters.db");
 
         }
         catch (Exception theException) {
@@ -63,9 +66,9 @@ public class DungeonCharacterFactory {
             ResultSet results = stmt.executeQuery(queryMonstersTable);
 
             // Read in the data, and add a new monster to the ArrayList
-            while( results.next() ) {
+            while(results.next()) {
 
-                myCharactersData.add(
+                MONSTER_DATA.add(
                         new Monster (
                                 results.getString("Name"        ),
                                 results.getInt(   "HP"          ),
@@ -80,6 +83,7 @@ public class DungeonCharacterFactory {
                 });
 
             }
+            results.close();
         }
         catch (SQLException theException) {
 
@@ -87,6 +91,7 @@ public class DungeonCharacterFactory {
             System.exit(0);
 
         }
+
     }
 
     /**
@@ -101,17 +106,10 @@ public class DungeonCharacterFactory {
         final double random = Utility.RANDOM.nextDouble();
 
         // If the database is found, then use the Database's values.
-        if (random < 0.333333) return myCharactersData.get(0);
-        else if (random < 0.666667) return myCharactersData.get(1);
-        else return myCharactersData.get(2);
-
-//        // If the database is not found, use the MockObjects.
-//        if (random < 0.333333) return new Ogre();
-//        else if (random < 0.666667) return new Gremlin();
-//        else return new Skeleton();
+        if (random < 0.333333) return MONSTER_DATA.get(0);
+        else if (random < 0.666667) return MONSTER_DATA.get(1);
+        else return MONSTER_DATA.get(2);
 
     }
-
-
 
 }
