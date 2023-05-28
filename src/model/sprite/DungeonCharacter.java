@@ -7,6 +7,7 @@ import model.Utility;
  *
  * @version 1.0.0
  * @author Kihsomray
+ * @author Patrick Hern
  */
 public abstract class DungeonCharacter implements Sprite {
 

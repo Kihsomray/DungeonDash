@@ -14,6 +14,7 @@ import java.util.Set;
  *
  * @version 1.0.0
  * @author Kihsomray
+ * @author Patrick Hern
  */
 public class HeroInventory implements Inventory {
 

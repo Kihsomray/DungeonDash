@@ -2,6 +2,7 @@ package controller;
 
 import model.Utility;
 import model.dungeon.Dungeon;
+import model.sprite.DungeonCharacterFactory;
 import model.sprite.hero.Priestess;
 import model.sprite.hero.Thief;
 import view.DungeonGUI;
@@ -36,6 +37,7 @@ public class DungeonAdventure {
             final String theUsername
     ) {
 
+        new DungeonCharacterFactory();
         myDungeon = new Dungeon(
                 this,
                 14,
