@@ -54,20 +54,8 @@ public class GUIDisplay implements DungeonGUI {
         panel.setLayout(new BorderLayout());
 
         //Grid for creating the map
-        JPanel grid = new JPanel();
-        GridLayout gridLayout = new GridLayout(heightOfMap, widthOfMap);
-        grid.setLayout(gridLayout);
+        Map grid = new Map(widthOfMap, heightOfMap);
 
-        for (int i = 0; i < widthOfMap; i++) {
-            for (int j = 0; j < heightOfMap; j++) {
-                //grid.add(new JLabel("box " + i + ", " + j));
-                //grid.add(GreyTileLabel);
-                grid.add(new JLabel(new ImageIcon(greyTileImage)));
-
-            }
-        }
-
-        //grid.add(new JLabel("Player"), 1, 1);
 
         // Create a label and a button
         JLabel label = new JLabel("JFrame By Example");
@@ -92,6 +80,7 @@ public class GUIDisplay implements DungeonGUI {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        //frame.pack();
         // Turn it on
         frame.setVisible(true);
 
