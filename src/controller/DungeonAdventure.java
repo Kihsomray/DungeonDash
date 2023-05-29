@@ -2,9 +2,7 @@ package controller;
 
 import model.Utility;
 import model.dungeon.Dungeon;
-import model.sprite.DungeonCharacterFactory;
-import model.sprite.hero.Priestess;
-import model.sprite.hero.Thief;
+import model.entity.DungeonCharacterFactory;
 import view.DungeonGUI;
 import view.console.ConsoleDisplay;
 

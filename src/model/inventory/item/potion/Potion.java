@@ -1,7 +1,7 @@
 package model.inventory.item.potion;
 
 import model.Utility;
-import model.sprite.hero.Hero;
+import model.entity.hero.Hero;
 import model.inventory.item.Item;
 
 /**

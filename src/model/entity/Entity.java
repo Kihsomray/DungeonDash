@@ -1,6 +1,6 @@
-package model.sprite;
+package model.entity;
 
-import model.Entity;
+import model.Interactable;
 
 /**
  * An entity is an object that can be interacted with but not collected.
@@ -8,6 +8,6 @@ import model.Entity;
  * @version 1.0.0
  * @author Kihsomray
  */
-public interface Sprite extends Entity {
+public interface Entity extends Interactable {
 
 }

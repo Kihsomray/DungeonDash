@@ -1,6 +1,6 @@
 package model.inventory.item;
 
-import model.Entity;
+import model.Interactable;
 
 /**
  * An item is an object that can be stored within an inventory.
@@ -8,6 +8,6 @@ import model.Entity;
  * @version 1.0.0
  * @author Kihsomray
  */
-public interface Item extends Entity {
+public interface Item extends Interactable {
 
 }

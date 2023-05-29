@@ -1,7 +1,7 @@
-package model.sprite.hero;
+package model.entity.hero;
 
 import model.Utility;
-import model.sprite.enemy.monster.Monster;
+import model.entity.enemy.monster.Monster;
 
 /**
  * A type of Hero that can be chosen when playing.

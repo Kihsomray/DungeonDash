@@ -1,8 +1,8 @@
 package model.dungeon.generator;
 
-import model.dungeon.tile.Cell;
-import model.dungeon.tile.passable.Door;
-import model.sprite.hero.Hero;
+import model.dungeon.cell.Cell;
+import model.dungeon.cell.passable.Door;
+import model.entity.hero.Hero;
 
 /**
  * A dungeon generator is used to create a dungeon with cells containing walls

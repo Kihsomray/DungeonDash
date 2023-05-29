@@ -1,14 +1,13 @@
-package model.sprite.hero;
+package model.entity.hero;
 
 import model.Utility;
-import model.dungeon.tile.Cell;
-import model.dungeon.tile.passable.Passable;
-import model.dungeon.tile.passable.Room;
+import model.dungeon.cell.passable.Passable;
+import model.dungeon.cell.passable.Room;
 import model.inventory.item.Item;
 import model.inventory.item.potion.Potion;
-import model.sprite.DungeonCharacter;
+import model.entity.DungeonCharacter;
 import model.inventory.HeroInventory;
-import model.sprite.enemy.monster.Monster;
+import model.entity.enemy.monster.Monster;
 
 import java.util.HashSet;
 import java.util.Set;

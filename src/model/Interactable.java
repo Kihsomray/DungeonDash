@@ -1,6 +1,6 @@
 package model;
 
-public interface Entity {
+public interface Interactable {
 
     /**
      * Gets the display char of the entity.

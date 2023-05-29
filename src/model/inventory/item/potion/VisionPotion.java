@@ -1,7 +1,6 @@
 package model.inventory.item.potion;
 
-import model.dungeon.Dungeon;
-import model.sprite.hero.Hero;
+import model.entity.hero.Hero;
 
 /**
  * A type of potion that allows a hero to see adjacent rooms.

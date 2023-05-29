@@ -1,4 +1,4 @@
-package model.dungeon.tile.passable;
+package model.dungeon.cell.passable;
 
 import java.util.ArrayList;
 import java.util.Collections;

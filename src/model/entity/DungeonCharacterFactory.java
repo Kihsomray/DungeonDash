@@ -1,4 +1,4 @@
-package model.sprite;
+package model.entity;
 
 import org.sqlite.SQLiteDataSource;
 
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import model.Utility;
-import model.sprite.enemy.monster.Monster;
+import model.entity.enemy.monster.Monster;
 
 import java.util.ArrayList;
 

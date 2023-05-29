@@ -1,4 +1,4 @@
-package model.dungeon.tile;
+package model.dungeon.cell;
 
 import model.Utility;
 
