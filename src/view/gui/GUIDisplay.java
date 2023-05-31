@@ -3,13 +3,11 @@ package view.gui;
 import controller.DungeonAdventure;
 import view.DungeonGUI;
 
-import javax.imageio.ImageIO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 
 public class GUIDisplay implements DungeonGUI {
 
@@ -24,19 +22,49 @@ public class GUIDisplay implements DungeonGUI {
     }
 
     public void display() {
+        // This is the first thing in the program
+
         String nameOfDisplay = "Dungeon Adventure";
         JFrame frame = new JFrame(nameOfDisplay);
 
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Choose a character and then initialize the dungeon then go to main game loop
+        JPanel startView = new JPanel(new BorderLayout());
+        frame.add(startView);
+
+        JLabel startLabel = new JLabel("\nStart the Dungeon adventure\n");
+        JButton startButton = new JButton("Start");
+
+
+
+        startView.add(startButton, BorderLayout.CENTER); startView.add(startLabel, BorderLayout.NORTH);
+
+        frame.setVisible(true);
+        frame.setSize(200, 400);
+
+
+        // First the player needs to see the start screen, then the character select screen, and the username select
 
         char chosen = 'W'; // TODO implement choosing an actual character
 
         String userName = "L Bozo"; // TODO implement choosing a name
 
 
+        startButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.remove(startView);
+                System.out.println("Start the Game.");
+                displayMainScene(frame, chosen, userName);
+            }
+        });
+        // Choose a character and then initialize the dungeon then go to main game loop
+
+        /*
+        // Initialize the dungeon before doing anything else
         myMain.initializeDungeon(chosen, userName);
 
+        // This is for the main game scene
 
         // Panel for sorting the elements in the display
         JPanel panel = new JPanel();
@@ -44,6 +72,10 @@ public class GUIDisplay implements DungeonGUI {
 
         //Grid for creating the map
         Map grid = new Map(myWidth, myHeight, myMain.getDungeon().getMaze());
+
+        panel.add(BorderLayout.CENTER, grid);
+
+
 
 
 
@@ -57,8 +89,6 @@ public class GUIDisplay implements DungeonGUI {
                 System.out.println("Testing the button.");
             }
         });
-
-        panel.add(BorderLayout.CENTER, grid);
 
         // Add it to the panel and later to the frame
         //panel.add(BorderLayout.PAGE_END, label);
@@ -76,6 +106,47 @@ public class GUIDisplay implements DungeonGUI {
 
 
 
+
+        // MAIN GAME LOOP, Keep this running till game ends
+        while (true) {
+            // Display the current state of the game
+
+            // Get players input, whether they want to move north south east or west. Or if they want to use pot
+
+            break;
+        }
+        System.out.println("Done!");
+
+         */
+    }
+
+    private void displayMainScene(JFrame frame, char chosen, String userName) {
+        // Initialize the dungeon before doing anything else
+        myMain.initializeDungeon(chosen, userName);
+
+        // This is for the main game scene
+
+        // Panel for sorting the elements in the display
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        //Grid for creating the map
+        Map grid = new Map(myWidth, myHeight, myMain.getDungeon().getMaze());
+
+        panel.add(BorderLayout.CENTER, grid);
+
+        // Add it to the panel and later to the frame
+        //panel.add(BorderLayout.PAGE_END, label);
+        //panel.add(button);
+        frame.add(panel);
+
+        // Set some defaults for the frame
+        frame.setSize(myWidth*64, myHeight*64);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Turn it on
+        frame.setVisible(true);
 
         // MAIN GAME LOOP, Keep this running till game ends
         while (true) {
