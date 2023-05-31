@@ -12,102 +12,84 @@ public class Map extends JPanel {
     private int myWidth;
     private int myHeight;
 
+    /** This is where the map is stored. In this 2d array, there are JPanels which contain the art for each tile. */
     private JComponent[][] myPanels;
 
-    private int size = 64; // Number of pixels each art asset is
+    private final static int PIXELS_IN_SPRITE = 64; // Number of pixels each art asset is
 
-    public Map(int myWidth, int myHeight) {
+    public Map(int theWidth, int theHeight) {
         super();
-        this.setLayout(new GridLayout(myHeight, myWidth)); // GONNA TRY WITHOUT LAYOUT MANGAGER
-        //this.setLayout(null);
 
-        String greyTile = "res" + File.separator + "GreyTile.jpg";
+        myWidth = theWidth;
+        myHeight = theHeight;
 
+        this.setLayout(new GridLayout(myHeight, myWidth));
+
+        String greyTile = "res" + File.separator + "DarkTile.png";
 
         File greyTileFile = new File(greyTile);
-        System.out.println(greyTileFile);
         BufferedImage greyTileImage;
-
         try {
             greyTileImage = ImageIO.read(greyTileFile);
 
         } catch (Exception e) {
-            System.out.println("something bad just happened " + e);
+            System.out.println("Had an issue loading the grey tile " + e);
             return;
         }
 
+        // This the tileMap that will have every sprite
         myPanels = new JComponent[myHeight][myWidth];
+
+        createTheTileMap();
+
+        AddCharacter(3, 3);
+        addDoor(1, 2);
+
+        addMonster(5, 5);
+        addMonster(1, 1);
+        addMonster(10, 2);
+    }
+
+    void createTheTileMap() {
+
+        String tilePath = "res" + File.separator + "DarkTile.png";
+        File tileFile = new File(tilePath);
+        String leftWallPath = "res" + File.separator + "DarkTileLeftWall.png";
+        File leftWallFile = new File(leftWallPath);
+
+        BufferedImage greyTileImage; BufferedImage leftWallImage;
+        try {
+            greyTileImage = ImageIO.read(tileFile);
+            leftWallImage =  ImageIO.read(leftWallFile);
+        } catch (Exception e) {
+            System.out.println("Had an issue loading the tile " + e);
+            return;
+        }
+
 
         for (int i = 0; i < myHeight; i++) {
             for (int j = 0; j < myWidth; j++) {
                 myPanels[i][j] = new JPanel();
                 myPanels[i][j].setLayout(new OverlayLayout(myPanels[i][j]));
-                myPanels[i][j].add(BorderLayout.CENTER,new JLabel(new ImageIcon(greyTileImage)));
+
+                if (j == 0) {
+                    myPanels[i][j].add(BorderLayout.CENTER,new JLabel(new ImageIcon(leftWallImage)));
+                } else {
+                    myPanels[i][j].add(BorderLayout.CENTER,new JLabel(new ImageIcon(greyTileImage)));
+                }
+
                 myPanels[i][j].setPreferredSize(new Dimension(64,64));
 
                 this.add(myPanels[i][j]);
             }
         }
-
-        AddCharacter();
-        addDoor(1, 2);
-
-
-//        for (int i = 0; i < myWidth; i++) {
-//            for (int j = 0; j < myHeight; j++) {
-//
-//                //if (i == j && j == 1) {continue;}
-//                //mapPanels[i][j] = new JPanel();
-//                //mapPanels[i][j].add(new JLabel(new ImageIcon(greyTileImage)));
-//                mapPanels[i][j] = new JLabel(new ImageIcon(greyTileImage));
-//
-//                mapPanels[i][j].setPreferredSize(new Dimension(64,64));
-//
-////                mapPanels[i][j].setBounds(i * size, j * size, size, size);
-//
-//                this.add(mapPanels[i][j]);
-//            }
-//        }
-
-
     }
 
-    void createTheTileMap() {
-        String realPath = "res" + File.separator + "GreyTile.jpg";
-        //System.out.println(getClass().getResource("/res/GreyTile.jpg").getPath());
-        //System.out.println("/res/GreyTile.jpg");
-        File greyTileFile = new File(realPath);
-        System.out.println(greyTileFile);
-        BufferedImage greyTileImage;
-
+    private void AddCharacter(int theX, int theY) {
+        String playerPath = "res" + File.separator + "Warrior.png";
         try {
-            greyTileImage = ImageIO.read(greyTileFile);
-
-        } catch (Exception e) {
-            System.out.println("something bad just happened " + e);
-            return;
-        }
-
-
-        for (int i = 0; i < myWidth; i++) {
-            for (int j = 0; j < myHeight; j++) {
-                this.add(new JLabel(new ImageIcon(greyTileImage)));
-            }
-        }
-    }
-
-    private void AddCharacter() {
-        try {
-
-            String playerPath = "res" + File.separator + "SamplePlayerCharacter.png";
             JLabel player = new JLabel(new ImageIcon(ImageIO.read(new File(playerPath))));
-            //JComponent cur = (JComponent) mapPanels[1][1].getComponent(0);
-            //mapPanels[1][1].removeAll();
-            myPanels[0][13].add(player,0);
-            //mapPanels[1][1].add(cur);
-//            player.setBounds(1 * size, 1 * size, size, size);
-//            mapPanels[1][1] = (player);
-//            this.add(player);
+            myPanels[theY][theX].add(player,0);
         } catch (Exception e) {
             System.out.println("Something Bad just happened" + e);
         }
@@ -124,5 +106,17 @@ public class Map extends JPanel {
         }
         myPanels[theY][theX].removeAll();
         myPanels[theY][theX].add(door,0);
+    }
+
+    private void addMonster(int theX, int theY) {
+        String sampleMonsterPath = "res" + File.separator + "SampleMonster.png";
+        JLabel monster = null;
+        try {
+            monster = new JLabel(new ImageIcon(ImageIO.read(new File(sampleMonsterPath))));
+        } catch (IOException e) {
+            System.out.println("There was an issue loading the Monster " + e);
+            return;
+        }
+        myPanels[theY][theX].add(monster,0);
     }
 }
