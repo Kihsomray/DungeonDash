@@ -10,6 +10,7 @@ import model.inventory.item.potion.HealthPotion;
 import model.inventory.item.potion.VisionPotion;
 import model.sprite.hero.Hero;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,6 +24,8 @@ public class Room implements Passable {
 
     /** Constant for potion spawn rate. */
     private static final double POTION_SPAWN_RATE = 0.10;
+
+    private static final String roomArtPath = "res" + File.separator + "GreyTile64.png";
 
     private final int myX;
 
@@ -122,6 +125,11 @@ public class Room implements Passable {
             sb.append(' ').append(a % 3 == 0 ? a == 6 ? "" : '\n' : ' ');
         }
         return sb.toString();
+    }
+
+    @Override
+    public String getArtPath() {
+        return roomArtPath;
     }
 
 }

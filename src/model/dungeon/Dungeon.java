@@ -141,4 +141,8 @@ public class Dungeon {
     public int getRoomCount() {
         return myRoomCount;
     }
+
+    public Cell[][] getMaze() {
+        return myMaze.clone();
+    }
 }

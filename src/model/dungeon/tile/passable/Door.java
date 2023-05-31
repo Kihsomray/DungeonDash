@@ -3,6 +3,8 @@ package model.dungeon.tile.passable;
 import model.Utility;
 import model.sprite.hero.Hero;
 
+import java.io.File;
+
 public class Door implements Passable {
 
     private final int myX;
@@ -10,6 +12,8 @@ public class Door implements Passable {
     private final boolean myIsEntrance;
 
     private final Neighbors myNeighbors;
+
+    private static final String doorArtPath = "res" + File.separator + "Door.png";
 
     public Door(final int theX, final int theY, final boolean theIsEntrance) {
         myX = theX;
@@ -43,6 +47,11 @@ public class Door implements Passable {
     @Override
     public void interactWith(final Hero theHero) {
 
+    }
+
+    @Override
+    public String getArtPath() {
+        return doorArtPath;
     }
 
 }

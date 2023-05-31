@@ -16,4 +16,5 @@ public interface Cell {
      */
     int getY();
 
+    String getArtPath();
 }

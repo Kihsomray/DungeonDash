@@ -1,5 +1,7 @@
 package view.gui;
 
+import model.dungeon.tile.Cell;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +19,7 @@ public class Map extends JPanel {
 
     private final static int PIXELS_IN_SPRITE = 64; // Number of pixels each art asset is
 
-    public Map(int theWidth, int theHeight) {
+    public Map(int theWidth, int theHeight, Cell[][] theMaze) {
         super();
 
         myWidth = theWidth;
@@ -25,32 +27,25 @@ public class Map extends JPanel {
 
         this.setLayout(new GridLayout(myHeight, myWidth));
 
-        String greyTile = "res" + File.separator + "DarkTile.png";
-
-        File greyTileFile = new File(greyTile);
-        BufferedImage greyTileImage;
-        try {
-            greyTileImage = ImageIO.read(greyTileFile);
-
-        } catch (Exception e) {
-            System.out.println("Had an issue loading the grey tile " + e);
-            return;
-        }
 
         // This the tileMap that will have every sprite
         myPanels = new JComponent[myHeight][myWidth];
 
-        createTheTileMap();
+        createTheTileMap(theMaze);
 
-        AddCharacter(3, 3);
-        addDoor(1, 2);
+        AddCharacter(0, 0);
 
-        addMonster(5, 5);
-        addMonster(1, 1);
-        addMonster(10, 2);
+//        String sampleMonsterPath = "res" + File.separator + "SampleMonster.png";
+//
+//        for (int i = 1; i < 10; i++) {
+//            addEntity(i, 5, sampleMonsterPath);
+//        }
     }
 
-    void createTheTileMap() {
+    private void createTheTileMap(Cell[][] theMaze) {
+
+
+
 
         String tilePath = "res" + File.separator + "DarkTile.png";
         File tileFile = new File(tilePath);
@@ -72,15 +67,26 @@ public class Map extends JPanel {
                 myPanels[i][j] = new JPanel();
                 myPanels[i][j].setLayout(new OverlayLayout(myPanels[i][j]));
 
-                if (j == 0) {
-                    myPanels[i][j].add(BorderLayout.CENTER,new JLabel(new ImageIcon(leftWallImage)));
-                } else {
-                    myPanels[i][j].add(BorderLayout.CENTER,new JLabel(new ImageIcon(greyTileImage)));
-                }
+
+
+//                if (j == 0) {
+//                    myPanels[i][j].add(BorderLayout.CENTER,new JLabel(new ImageIcon(leftWallImage)));
+//                } else {
+//                    myPanels[i][j].add(BorderLayout.CENTER,new JLabel(new ImageIcon(greyTileImage)));
+//                }
+
 
                 myPanels[i][j].setPreferredSize(new Dimension(64,64));
 
                 this.add(myPanels[i][j]);
+
+
+            }
+        }
+
+        for (int i = 0; i < myWidth; i++) {
+            for (int j = 0; j < myHeight; j++) {
+                addTile(i, j, theMaze[i][j].getArtPath());
             }
         }
     }
@@ -118,5 +124,30 @@ public class Map extends JPanel {
             return;
         }
         myPanels[theY][theX].add(monster,0);
+    }
+
+    private void addEntity(int theX, int theY, String thePath) {
+        JLabel entityLabel = null;
+        try {
+            entityLabel = new JLabel(new ImageIcon(ImageIO.read(new File(thePath))));
+        } catch (IOException e) {
+            System.out.println("There was an issue loading the Entity with path " + thePath + "\n with error "  + e);
+            return;
+        }
+        myPanels[theY][theX].add(entityLabel,0);
+    }
+
+    private void addTile(int theX, int theY, String thePath) {
+        JLabel tileLabel = null;
+        try {
+            tileLabel = new JLabel(new ImageIcon(ImageIO.read(new File(thePath))));
+        } catch (IOException e) {
+            System.out.println("There was an issue loading the Entity with path " + thePath + "\n with error "  + e);
+            return;
+        }
+        if (myPanels[theY][theX].getComponents().length != 0){
+            myPanels[theY][theX].removeAll();
+        }
+        myPanels[theY][theX].add(tileLabel,0);
     }
 }

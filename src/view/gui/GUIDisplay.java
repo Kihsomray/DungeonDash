@@ -13,48 +13,38 @@ import java.io.File;
 
 public class GUIDisplay implements DungeonGUI {
 
-    private int widthOfMap;
-    private int heightOfMap;
+    private int myWidth = 14;
+    private int myHeight = 8;
 
     private final DungeonAdventure myMain;
 
     public GUIDisplay(final DungeonAdventure theMain) {
         myMain = theMain;
         //TODO NEED SOME WAY OF PASSING WIDTH AND HEIGHT HERE OF DUNGEON
-        widthOfMap = 14;
-        heightOfMap = 8;
     }
 
     public void display() {
-
-
-        String greyTilePath = "GreyTile.jpg";
-        //String realPath = getClass().getResource("/res/GreyTile.jpg").getPath();
-        String realPath = "res" + File.separator + "GreyTile.jpg";
-        //System.out.println(getClass().getResource("/res/GreyTile.jpg").getPath());
-        //System.out.println("/res/GreyTile.jpg");
-        File greyTileFile = new File(realPath);
-        System.out.println(greyTileFile);
-        BufferedImage greyTileImage;
-        JLabel GreyTileLabel;
-        try {
-            greyTileImage = ImageIO.read(greyTileFile);
-
-        } catch (Exception e) {
-            System.out.println("something bad just happened " + e);
-            return;
-        }
-        GreyTileLabel = new JLabel(new ImageIcon(greyTileImage));
-
         String nameOfDisplay = "Dungeon Adventure";
         JFrame frame = new JFrame(nameOfDisplay);
+
+
+        // Choose a character and then initialize the dungeon then go to main game loop
+
+        char chosen = 'W'; // TODO implement choosing an actual character
+
+        String userName = "L Bozo"; // TODO implement choosing a name
+
+
+        myMain.initializeDungeon(chosen, userName);
+
 
         // Panel for sorting the elements in the display
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
         //Grid for creating the map
-        Map grid = new Map(widthOfMap, heightOfMap);
+        Map grid = new Map(myWidth, myHeight, myMain.getDungeon().getMaze());
+
 
 
         // Create a label and a button
@@ -76,7 +66,7 @@ public class GUIDisplay implements DungeonGUI {
         frame.add(panel);
 
         // Set some defaults for the frame
-        frame.setSize(14*64, 8*64);
+        frame.setSize(myWidth*64, myHeight*64);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -84,13 +74,7 @@ public class GUIDisplay implements DungeonGUI {
         // Turn it on
         frame.setVisible(true);
 
-        // Choose a character and then initialize the dungeon then go to main game loop
 
-        char chosen = 'W'; // TODO implement choosing an actual charater
-
-        String userName = "L Bozo"; // TODO implement choosing a name
-
-        myMain.initializeDungeon(chosen, userName);
 
 
         // MAIN GAME LOOP, Keep this running till game ends
