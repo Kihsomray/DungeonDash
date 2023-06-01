@@ -10,11 +10,11 @@ import java.io.IOException;
 
 public class Map extends JPanel {
 
-    private int myWidth;
-    private int myHeight;
+    private final int myWidth;
+    private final int myHeight;
 
     /** This is where the map is stored. In this 2d array, there are JPanels which contain the art for each tile. */
-    private JComponent[][] myPanels;
+    private final JComponent[][] myPanels;
 
     private final static int PIXELS_IN_SPRITE = 64; // Number of pixels each art asset is
 
@@ -65,7 +65,7 @@ public class Map extends JPanel {
     }
 
     private void addEntity(int theX, int theY, String thePath) {
-        JLabel entityLabel = null;
+        JLabel entityLabel;
         try {
             entityLabel = new JLabel(new ImageIcon(ImageIO.read(new File(thePath))));
         } catch (IOException e) {
@@ -76,7 +76,7 @@ public class Map extends JPanel {
     }
 
     private void addTile(int theX, int theY, String thePath) {
-        JLabel tileLabel = null;
+        JLabel tileLabel;
         try {
             tileLabel = new JLabel(new ImageIcon(ImageIO.read(new File(thePath))));
         } catch (IOException e) {
