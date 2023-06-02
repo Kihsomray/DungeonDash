@@ -1,13 +1,13 @@
 package model.dungeon.generator;
 
 import model.Utility;
-import model.dungeon.tile.Cell;
-import model.dungeon.tile.Wall;
-import model.dungeon.tile.passable.Door;
-import model.dungeon.tile.passable.Passable;
-import model.dungeon.tile.passable.Neighbors;
-import model.dungeon.tile.passable.Room;
-import model.sprite.hero.Hero;
+import model.dungeon.cell.Cell;
+import model.dungeon.cell.Wall;
+import model.dungeon.cell.passable.Door;
+import model.dungeon.cell.passable.Passable;
+import model.dungeon.cell.passable.Neighbors;
+import model.dungeon.cell.passable.Room;
+import model.entity.hero.Hero;
 import model.inventory.item.collectable.Collectable;
 import model.inventory.item.collectable.Pillar;
 

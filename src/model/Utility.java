@@ -1,10 +1,9 @@
 package model;
 
-import model.sprite.DungeonCharacterFactory;
-import model.sprite.hero.Hero;
-import model.sprite.hero.Priestess;
-import model.sprite.hero.Thief;
-import model.sprite.hero.Warrior;
+import model.entity.hero.Hero;
+import model.entity.hero.Priestess;
+import model.entity.hero.Thief;
+import model.entity.hero.Warrior;
 
 import java.util.*;
 
@@ -292,6 +291,20 @@ public final class Utility {
             default -> throw new IllegalArgumentException();
         };
 
+    }
+
+    public static void clearConsole() {
+        try {
+            final String os = System.getProperty("os.name");
+
+            if (os.contains("Windows")) {
+                Runtime.getRuntime().exec("cls");
+            } else {
+                Runtime.getRuntime().exec("clear");
+            }
+        } catch (final Exception e) {
+            //  Nothing
+        }
     }
 
 

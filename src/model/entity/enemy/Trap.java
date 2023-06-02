@@ -1,4 +1,4 @@
-package model.sprite.enemy;
+package model.entity.enemy;
 
 import model.Utility;
 

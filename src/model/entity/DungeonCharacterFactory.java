@@ -1,6 +1,5 @@
-package model.sprite;
+package model.entity;
 
-import model.sprite.enemy.monster.MockGremlin;
 import org.sqlite.SQLiteDataSource;
 
 import java.sql.Connection;
@@ -9,8 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import model.Utility;
-import model.sprite.enemy.monster.Monster;
-import model.sprite.enemy.monster.MonsterData;
+import model.entity.enemy.monster.Monster;
+import model.entity.enemy.monster.MonsterData;
 
 import java.util.ArrayList;
 

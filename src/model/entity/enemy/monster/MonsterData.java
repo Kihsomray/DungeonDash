@@ -1,4 +1,4 @@
-package model.sprite.enemy.monster;
+package model.entity.enemy.monster;
 
 /**
  * Monster data is used to store data retrieved from the

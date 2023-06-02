@@ -1,7 +1,7 @@
-package model.dungeon.tile.passable;
+package model.dungeon.cell.passable;
 
 import model.Utility;
-import model.sprite.hero.Hero;
+import model.entity.hero.Hero;
 
 public class Door implements Passable {
 

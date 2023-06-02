@@ -1,4 +1,4 @@
-package model.sprite;
+package model.entity;
 
 import model.Utility;
 
@@ -9,7 +9,7 @@ import model.Utility;
  * @author Kihsomray
  * @author Patrick Hern
  */
-public abstract class DungeonCharacter implements Sprite {
+public abstract class DungeonCharacter implements Entity {
 
     //      FIELDS      //
 

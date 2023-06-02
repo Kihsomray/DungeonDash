@@ -2,13 +2,8 @@ package view.console;
 
 import controller.DungeonAdventure;
 import model.Utility;
-import model.sprite.hero.Hero;
-import model.sprite.hero.Priestess;
-import model.sprite.hero.Thief;
-import model.sprite.hero.Warrior;
 import view.DungeonGUI;
 
-import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -33,6 +28,8 @@ public class ConsoleDisplay implements DungeonGUI {
 
         while(true) {
 
+            Utility.clearConsole();
+
             char input = new Scanner(System.in)
                     .next()
                     .toUpperCase(Locale.ROOT)
@@ -51,6 +48,8 @@ public class ConsoleDisplay implements DungeonGUI {
         myMain.initializeDungeon(chosen, new Scanner(System.in).nextLine());
 
         while(true) {
+
+            Utility.clearConsole();
 
             System.out.println(myMain.getDungeon());
 

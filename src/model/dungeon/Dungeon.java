@@ -4,9 +4,9 @@ import controller.DungeonAdventure;
 import model.Utility;
 import model.dungeon.generator.PrimsGenerator;
 import model.dungeon.generator.DungeonGenerator;
-import model.dungeon.tile.Cell;
-import model.dungeon.tile.passable.Passable;
-import model.sprite.hero.Hero;
+import model.dungeon.cell.Cell;
+import model.dungeon.cell.passable.Passable;
+import model.entity.hero.Hero;
 
 import java.util.LinkedList;
 import java.util.Queue;

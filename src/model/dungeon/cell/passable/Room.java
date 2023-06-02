@@ -1,14 +1,14 @@
-package model.dungeon.tile.passable;
+package model.dungeon.cell.passable;
 
-import model.Entity;
+import model.Interactable;
 import model.Utility;
-import model.sprite.DungeonCharacterFactory;
-import model.sprite.enemy.Enemy;
-import model.sprite.enemy.Trap;
+import model.entity.DungeonCharacterFactory;
+import model.entity.enemy.Enemy;
+import model.entity.enemy.Trap;
 import model.inventory.RoomInventory;
 import model.inventory.item.potion.HealthPotion;
 import model.inventory.item.potion.VisionPotion;
-import model.sprite.hero.Hero;
+import model.entity.hero.Hero;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -75,8 +75,8 @@ public class Room implements Passable {
         return myInventory;
     }
 
-    public Set<Entity> getEntities() {
-        final Set<Entity> entities = new HashSet<>(myInventory.getInventory());
+    public Set<Interactable> getEntities() {
+        final Set<Interactable> entities = new HashSet<>(myInventory.getInventory());
         entities.addAll(myEnemies);
         return entities;
     }
@@ -110,11 +110,11 @@ public class Room implements Passable {
     public String toString() {
 
         final StringBuilder sb = new StringBuilder();
-        final Set<Entity> entities = getEntities();
+        final Set<Interactable> entities = getEntities();
         int i = 1;
-        for (final Entity entity : entities) {
+        for (final Interactable interactable : entities) {
 
-            sb.append(entity.getColoredDisplay())
+            sb.append(interactable.getColoredDisplay())
                     .append(i++ != 3 ? ' ' : '\n');
 
         }

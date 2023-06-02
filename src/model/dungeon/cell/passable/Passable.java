@@ -1,7 +1,7 @@
-package model.dungeon.tile.passable;
+package model.dungeon.cell.passable;
 
-import model.dungeon.tile.Cell;
-import model.sprite.hero.Hero;
+import model.dungeon.cell.Cell;
+import model.entity.hero.Hero;
 
 public interface Passable extends Cell {
 
