@@ -109,8 +109,6 @@ public class DungeonCharacterFactory {
 
         MonsterData newMonster = MONSTER_DATA.get(random);
 
-        System.out.println("Creating a: " + newMonster.getName());
-
         return new Monster (
                 newMonster.getName(),
                 newMonster.getHP(),
