@@ -1,6 +1,7 @@
 package model.dungeon.cell.passable;
 
 import model.Utility;
+import model.dungeon.cell.passable.info.Neighbors;
 import model.entity.hero.Hero;
 
 public class Door implements Passable {

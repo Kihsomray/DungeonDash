@@ -5,7 +5,7 @@ import model.dungeon.cell.Cell;
 import model.dungeon.cell.Wall;
 import model.dungeon.cell.passable.Door;
 import model.dungeon.cell.passable.Passable;
-import model.dungeon.cell.passable.Neighbors;
+import model.dungeon.cell.passable.info.Neighbors;
 import model.dungeon.cell.passable.Room;
 import model.entity.hero.Hero;
 import model.inventory.item.collectable.Collectable;

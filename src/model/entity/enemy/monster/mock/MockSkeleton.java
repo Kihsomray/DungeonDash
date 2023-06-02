@@ -1,4 +1,6 @@
-package model.entity.enemy.monster;
+package model.entity.enemy.monster.mock;
+
+import model.entity.enemy.monster.Monster;
 
 /**
  * A type of Monster that is randomly spawned.

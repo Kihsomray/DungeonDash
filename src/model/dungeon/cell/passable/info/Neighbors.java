@@ -1,4 +1,6 @@
-package model.dungeon.cell.passable;
+package model.dungeon.cell.passable.info;
+
+import model.dungeon.cell.passable.Passable;
 
 import java.util.ArrayList;
 import java.util.Collections;

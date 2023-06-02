@@ -29,6 +29,28 @@ public class Monster extends DungeonCharacter implements Enemy {
     //        CONSTRUCTORS        //
 
     /**
+     * Create an instance of a monster based on MonsterData.
+     *
+     * @param theData MonsterData information.
+     */
+    public Monster(final MonsterData theData) {
+
+        // Call the other constructor.
+        this(
+                theData.getName(),
+                theData.getHP(),
+                theData.getMinDamage(),
+                theData.getMaxDamage(),
+                theData.getAttackSpeed(),
+                theData.getHitChance(),
+                theData.getMinHeal(),
+                theData.getMaxHeal(),
+                theData.getHealChance()
+        );
+
+    }
+
+    /**
      * Create an instance of Monster.
      *
      * @param theName Name.
@@ -42,15 +64,15 @@ public class Monster extends DungeonCharacter implements Enemy {
      * @param theHealChance Heal chance.
      */
     public Monster(
-            String theName,
-            int theHP,
-            int theMinDamage,
-            int theMaxDamage,
-            int theAttackSpeed,
-            double theHitChance,
-            int theMinHeal,
-            int theMaxHeal,
-            double theHealChance
+            final String theName,
+            final int theHP,
+            final int theMinDamage,
+            final int theMaxDamage,
+            final int theAttackSpeed,
+            final double theHitChance,
+            final int theMinHeal,
+            final int theMaxHeal,
+            final double theHealChance
     ) {
 
         super(

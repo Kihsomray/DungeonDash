@@ -2,6 +2,7 @@ package model.dungeon.cell.passable;
 
 import model.Interactable;
 import model.Utility;
+import model.dungeon.cell.passable.info.Neighbors;
 import model.entity.DungeonCharacterFactory;
 import model.entity.enemy.Enemy;
 import model.entity.enemy.Trap;

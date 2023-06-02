@@ -97,27 +97,15 @@ public class DungeonCharacterFactory {
 
     /**
      * Generates a random monster: Ogre, Gremlin, Skeleton.
-     * Roughly has a 1 in SIZE chance of generating.
+     * Has a 1 in 3 chance of generating.
      *
      * @return Randomly generated monster.
      */
     public static Monster generateMonster() {
 
-        // For modularity, a random int is chosen to for each monster.
-        final int random = Utility.RANDOM.nextInt(MONSTER_DATA.size());
-
-        MonsterData newMonster = MONSTER_DATA.get(random);
-
-        return new Monster (
-                newMonster.getName(),
-                newMonster.getHP(),
-                newMonster.getMinDamage(),
-                newMonster.getMaxDamage(),
-                newMonster.getAttackSpeed(),
-                newMonster.getHitChance(),
-                newMonster.getMinHeal(),
-                newMonster.getMaxHeal(),
-                newMonster.getHealChance()
+        // Randomly select a monster from the defined list.
+        return new Monster(
+                MONSTER_DATA.get(Utility.RANDOM.nextInt(MONSTER_DATA.size()))
         );
 
     }
