@@ -1,5 +1,7 @@
 package model.dungeon.cell;
 
+import java.io.Serializable;
+
 public interface Cell {
 
     /**

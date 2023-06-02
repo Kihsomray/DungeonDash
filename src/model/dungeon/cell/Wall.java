@@ -2,7 +2,9 @@ package model.dungeon.cell;
 
 import model.Utility;
 
-public class Wall implements Cell {
+import java.io.Serializable;
+
+public class Wall implements Cell, Serializable {
 
     private final int myX;
     private final int myY;

@@ -9,6 +9,7 @@ import model.entity.DungeonCharacter;
 import model.inventory.HeroInventory;
 import model.entity.enemy.monster.Monster;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ import java.util.Set;
  * @version 1.0.0
  * @author Kihsomray
  */
-public abstract class Hero extends DungeonCharacter {
+public abstract class Hero extends DungeonCharacter implements Serializable {
 
     //        FIELDS        //
 

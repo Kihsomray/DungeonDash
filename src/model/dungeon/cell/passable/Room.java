@@ -11,10 +11,11 @@ import model.inventory.item.potion.HealthPotion;
 import model.inventory.item.potion.VisionPotion;
 import model.entity.hero.Hero;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Room implements Passable {
+public class Room implements Passable, Serializable {
 
     /** Constant for monster spawn rate. */
     private static final double MONSTER_SPAWN_RATE = 0.5;

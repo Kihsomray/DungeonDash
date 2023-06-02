@@ -2,7 +2,9 @@ package model.entity.enemy;
 
 import model.Utility;
 
-public class Trap implements Enemy {
+import java.io.Serializable;
+
+public class Trap implements Enemy, Serializable {
 
 
     @Override

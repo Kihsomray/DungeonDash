@@ -5,6 +5,7 @@ import model.Utility;
 import model.inventory.item.collectable.Collectable;
 import model.inventory.item.Item;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +17,7 @@ import java.util.Set;
  * @author Kihsomray
  * @author Patrick Hern
  */
-public class HeroInventory implements Inventory {
+public class HeroInventory implements Inventory, Serializable {
 
     /**
      * Inventory array of items.

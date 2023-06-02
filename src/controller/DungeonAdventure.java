@@ -6,7 +6,9 @@ import model.entity.DungeonCharacterFactory;
 import view.DungeonGUI;
 import view.console.ConsoleDisplay;
 
-public class DungeonAdventure {
+import java.io.Serializable;
+
+public class DungeonAdventure implements Serializable {
 
     private final DungeonGUI myGUI;
     private Dungeon myDungeon;

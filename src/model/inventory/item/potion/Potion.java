@@ -4,13 +4,15 @@ import model.Utility;
 import model.entity.hero.Hero;
 import model.inventory.item.Item;
 
+import java.io.Serializable;
+
 /**
  * A type of item that can give the hero a certain effect.
  *
  * @version 1.0.0
  * @author Kihsomray
  */
-public abstract class Potion implements Item {
+public abstract class Potion implements Item, Serializable {
 
 
     /**

@@ -2,6 +2,8 @@ package model.entity;
 
 import model.Utility;
 
+import java.io.Serializable;
+
 /**
  * Used as a base to represent a character within the dungeon game.
  *

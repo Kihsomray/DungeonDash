@@ -2,12 +2,14 @@ package view.console;
 
 import controller.DungeonAdventure;
 import model.Utility;
+import model.dungeon.generator.SaveLoadGenerator;
 import view.DungeonGUI;
 
+import java.io.Serializable;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class ConsoleDisplay implements DungeonGUI {
+public class ConsoleDisplay implements DungeonGUI, Serializable {
 
     private final DungeonAdventure myMain;
 
@@ -17,7 +19,6 @@ public class ConsoleDisplay implements DungeonGUI {
     public ConsoleDisplay(final DungeonAdventure theMain) {
 
         myMain = theMain;
-
     }
 
     public void display() {
@@ -53,6 +54,8 @@ public class ConsoleDisplay implements DungeonGUI {
 
             System.out.println(myMain.getDungeon());
 
+            SaveLoadGenerator mySaveLoad = new SaveLoadGenerator(myMain.getDungeon());
+
             char input = new Scanner(System.in)
                     .next()
                     .toUpperCase(Locale.ROOT)
@@ -80,7 +83,15 @@ public class ConsoleDisplay implements DungeonGUI {
                     myMain.getDungeon().getHero().useInventoryItem(input - 48);
                     break;
 
+                case 'N':
+                    // Save dungeon's current state.
+                    mySaveLoad.saveDungeonState(myMain.getDungeon());
+                    break;
 
+                case 'L':
+                    // Load dungeon save state here.
+                    mySaveLoad.loadDungeonState();
+                    break;
             }
 
         }

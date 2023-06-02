@@ -2,6 +2,7 @@ package model.inventory;
 
 import model.inventory.item.Item;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import java.util.Set;
  * @version 1.0.0
  * @author Kihsomray
  */
-public class RoomInventory implements Inventory {
+public class RoomInventory implements Inventory, Serializable {
 
     /** Set of all items in the inventory.*/
     private final Set<Item> myItems;

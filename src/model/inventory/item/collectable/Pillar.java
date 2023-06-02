@@ -2,6 +2,8 @@ package model.inventory.item.collectable;
 
 import model.Utility;
 
+import java.io.Serializable;
+
 /**
  * A type of collectable that the user need to discover.
  *
@@ -10,7 +12,7 @@ import model.Utility;
  * @version 1.0.0
  * @author Kihsomray
  */
-public class Pillar implements Collectable {
+public class Pillar implements Collectable, Serializable {
 
     //        FIELDS        //
 

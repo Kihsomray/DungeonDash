@@ -2,6 +2,7 @@ package model.dungeon.cell.passable.info;
 
 import model.dungeon.cell.passable.Passable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.Set;
  * @version 1.0.0
  * @author Kihsomray
  */
-public class Neighbors {
+public class Neighbors implements Serializable {
 
     /** Current room */
     private final Passable myPassable;

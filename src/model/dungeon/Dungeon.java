@@ -8,10 +8,11 @@ import model.dungeon.cell.Cell;
 import model.dungeon.cell.passable.Passable;
 import model.entity.hero.Hero;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Dungeon {
+public class Dungeon implements Serializable {
 
     private final DungeonAdventure myMain;
 
@@ -21,6 +22,8 @@ public class Dungeon {
     private final Hero myHero;
 
     private final int myRoomCount;
+    private final int myWidth;
+    private final int myHeight;
 
     /**
      * Constructor for the dungeon that creates a new dungeon
@@ -35,6 +38,8 @@ public class Dungeon {
 
         myMain = theMain;
         myHero = theHero;
+        myWidth = theWidth;
+        myHeight = theHeight;
 
         // Initialize the Dungeon using Prim's generator.
         // TODO - create character selection, pass it in here.
@@ -138,7 +143,14 @@ public class Dungeon {
         return myHero;
     }
 
+    public Cell[][] getMaze() { return myMaze; }
+
     public int getRoomCount() {
         return myRoomCount;
     }
+
+    public int getMyWidth() { return myWidth; }
+
+    public int getMyHeight() { return myHeight; }
+
 }

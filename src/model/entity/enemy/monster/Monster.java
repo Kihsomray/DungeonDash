@@ -5,6 +5,8 @@ import model.entity.DungeonCharacter;
 import model.entity.enemy.Enemy;
 import model.entity.hero.Hero;
 
+import java.io.Serializable;
+
 /**
  * Used as a base to represent a monster within the dungeon game.
  *
@@ -12,7 +14,7 @@ import model.entity.hero.Hero;
  * @author Kihsomray
  * @author Patrick Hern
  */
-public class Monster extends DungeonCharacter implements Enemy {
+public class Monster extends DungeonCharacter implements Enemy, Serializable {
 
     //        FIELDS        //
 
