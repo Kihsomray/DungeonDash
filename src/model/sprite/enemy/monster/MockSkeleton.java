@@ -8,12 +8,12 @@ package model.sprite.enemy.monster;
  * @version 1.0.0
  * @author Kihsomray
  */
-public class Skeleton extends Monster {
+public class MockSkeleton extends Monster {
 
     /**
      * Create an instance of Skeleton.
      */
-    public Skeleton() {
+    public MockSkeleton() {
 
         super(
                 "Skeleton",

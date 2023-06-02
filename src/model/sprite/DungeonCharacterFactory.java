@@ -1,5 +1,6 @@
 package model.sprite;
 
+import model.sprite.enemy.monster.MockGremlin;
 import org.sqlite.SQLiteDataSource;
 
 import java.sql.Connection;
@@ -9,6 +10,7 @@ import java.sql.Statement;
 
 import model.Utility;
 import model.sprite.enemy.monster.Monster;
+import model.sprite.enemy.monster.MonsterData;
 
 import java.util.ArrayList;
 
@@ -21,7 +23,7 @@ import java.util.ArrayList;
  */
 public class DungeonCharacterFactory {
     /** ArrayList of Monsters to randomly select from. **/
-    private static final ArrayList<Monster> MONSTER_DATA = new ArrayList<>();
+    private static final ArrayList<MonsterData> MONSTER_DATA = new ArrayList<>();
 
     /**
      * Constructor that initializes the ArrayList of Monster and
@@ -69,7 +71,7 @@ public class DungeonCharacterFactory {
             while(results.next()) {
 
                 MONSTER_DATA.add(
-                        new Monster (
+                        new MonsterData (
                                 results.getString("Name"        ),
                                 results.getInt(   "HP"          ),
                                 results.getInt(   "MinDamage"   ),
@@ -96,19 +98,30 @@ public class DungeonCharacterFactory {
 
     /**
      * Generates a random monster: Ogre, Gremlin, Skeleton.
-     *
-     * Roughly has a 1 in 3 chance of generating.
+     * Roughly has a 1 in SIZE chance of generating.
      *
      * @return Randomly generated monster.
      */
     public static Monster generateMonster() {
 
-        final double random = Utility.RANDOM.nextDouble();
+        // For modularity, a random int is chosen to for each monster.
+        final int random = Utility.RANDOM.nextInt(MONSTER_DATA.size());
 
-        // If the database is found, then use the Database's values.
-        if (random < 0.333333) return MONSTER_DATA.get(0);
-        else if (random < 0.666667) return MONSTER_DATA.get(1);
-        else return MONSTER_DATA.get(2);
+        MonsterData newMonster = MONSTER_DATA.get(random);
+
+        System.out.println("Creating a: " + newMonster.getName());
+
+        return new Monster (
+                newMonster.getName(),
+                newMonster.getHP(),
+                newMonster.getMinDamage(),
+                newMonster.getMaxDamage(),
+                newMonster.getAttackSpeed(),
+                newMonster.getHitChance(),
+                newMonster.getMinHeal(),
+                newMonster.getMaxHeal(),
+                newMonster.getHealChance()
+        );
 
     }
 

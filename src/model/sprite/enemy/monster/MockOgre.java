@@ -9,12 +9,12 @@ package model.sprite.enemy.monster;
  * @author Kihsomray
  * @author Patrick Hern
  */
-public class Ogre extends Monster {
+public class MockOgre extends Monster {
 
     /**
      * Create an instance of Ogre.
      */
-    public Ogre() {
+    public MockOgre() {
 
         super(
                 "Ogre",
