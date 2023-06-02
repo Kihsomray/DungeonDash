@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SQLite">
+    <output-path>$PROJECT_DIR$/out/artifacts/SQLite</output-path>
+    <root id="archive" name="SQLite.jar">
+      <element id="library" level="application" name="sqlite-jdbc-3.42.0.0" />
+    </root>
+  </artifact>
+</component>
