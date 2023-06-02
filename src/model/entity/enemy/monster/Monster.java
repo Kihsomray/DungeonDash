@@ -12,7 +12,7 @@ import model.entity.hero.Hero;
  * @author Kihsomray
  * @author Patrick Hern
  */
-public abstract class Monster extends DungeonCharacter implements Enemy {
+public class Monster extends DungeonCharacter implements Enemy {
 
     //        FIELDS        //
 

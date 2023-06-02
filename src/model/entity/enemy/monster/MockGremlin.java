@@ -8,12 +8,12 @@ package model.entity.enemy.monster;
  * @version 1.0.0
  * @author Kihsomray
  */
-public class Gremlin extends Monster {
+public class MockGremlin extends Monster {
 
     /**
      * Create an instance of Gremlin.
      */
-    public Gremlin() {
+    public MockGremlin() {
 
         super(
                 "Gremlin",
