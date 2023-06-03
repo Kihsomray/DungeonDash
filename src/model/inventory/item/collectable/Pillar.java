@@ -2,6 +2,8 @@ package model.inventory.item.collectable;
 
 import model.Utility;
 
+import java.io.File;
+
 /**
  * A type of collectable that the user need to discover.
  *
@@ -16,6 +18,8 @@ public class Pillar implements Collectable {
 
     /** Principle of this pillar */
     private final Principle myPrinciple;
+
+    private static final String pillarArtPath = "res" + File.separator + "Pillar.png";
 
 
     //        CONSTRUCTORS        //
@@ -81,6 +85,10 @@ public class Pillar implements Collectable {
             return myDisplayChar;
         }
 
+    }
+
+    public String getArtPath() {
+        return pillarArtPath;
     }
 
 }

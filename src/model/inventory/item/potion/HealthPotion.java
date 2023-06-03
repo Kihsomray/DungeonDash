@@ -3,6 +3,8 @@ package model.inventory.item.potion;
 import model.Utility;
 import model.sprite.hero.Hero;
 
+import java.io.File;
+
 /**
  * A type of potion that restores a hero's health.
  *
@@ -13,6 +15,8 @@ import model.sprite.hero.Hero;
  * @author Patribird
  */
 public final class HealthPotion extends Potion {
+
+
 
     //        FIELDS        //
 
@@ -25,6 +29,7 @@ public final class HealthPotion extends Potion {
     /** Maximum heal percentage */
     private static final double MAX_HEAL_PERCENTAGE = 0.14;
 
+    private static final String healthPotionArtPath = "res" + File.separator + "HealthPotion.png";
 
     //        CONSTRUCTORS        //
 
@@ -100,6 +105,10 @@ public final class HealthPotion extends Potion {
         return sb.append(".\nCurrent HP is now: ")
                 .append(theHero.getHP()).toString();
 
+    }
+
+    public String getArtPath() {
+        return healthPotionArtPath;
     }
 
 }

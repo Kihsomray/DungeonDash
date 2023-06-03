@@ -1,12 +1,19 @@
 package view.gui;
 
+
+import model.dungeon.Dungeon;
 import model.dungeon.tile.Cell;
+import model.dungeon.tile.passable.Passable;
+import model.dungeon.tile.passable.Room;
+import model.inventory.item.Item;
+import model.sprite.enemy.Enemy;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
 public class Map extends JPanel {
 
@@ -18,7 +25,7 @@ public class Map extends JPanel {
 
     private final static int PIXELS_IN_SPRITE = 64; // Number of pixels each art asset is
 
-    public Map(int theWidth, int theHeight, Cell[][] theMaze) {
+    public Map(int theWidth, int theHeight, Dungeon theDungeon) {
         super();
 
         myWidth = theWidth;
@@ -30,9 +37,12 @@ public class Map extends JPanel {
         // This the tileMap that will have every sprite
         myPanels = new JComponent[myHeight][myWidth];
 
-        createTheTileMap(theMaze);
+        createTheTileMap(theDungeon.getMaze());
 
-        AddCharacter(0, 0);
+        //AddCharacter(0, 0);
+        addEntities(theDungeon.getMaze());
+
+        addPlayer(theDungeon);
     }
 
     private void createTheTileMap(Cell[][] theMaze) {
@@ -54,14 +64,27 @@ public class Map extends JPanel {
         }
     }
 
-    private void AddCharacter(int theX, int theY) {
-        String playerPath = "res" + File.separator + "Warrior.png";
-        try {
-            JLabel player = new JLabel(new ImageIcon(ImageIO.read(new File(playerPath))));
-            myPanels[theY][theX].add(player,0);
-        } catch (Exception e) {
-            System.out.println("Something Bad just happened when trying to load the character art " + e);
+    private void addEntities(Cell[][] theMaze) {
+        for (int i = 0; i < myWidth; i++) {
+            for (int j = 0; j < myHeight; j++) {
+                if (!(theMaze[i][j] instanceof Room)) {
+                    continue;
+                }
+                Set<Item> items = ((Room) theMaze[i][j]).getInventory().getInventory();
+                for (Item item : items) {
+                    addEntity(i, j, item.getArtPath());
+                }
+                Set<Enemy> enemies = ((Room) theMaze[i][j]).getEnemies();
+                for (Enemy en : enemies) {
+                    addEntity(i, j, en.getArtPath());
+                }
+            }
         }
+    }
+
+    private void addPlayer(Dungeon theDungeon) {
+        Passable heroRoom = theDungeon.getHero().getCurrentPassable();
+        addEntity(heroRoom.getX(), heroRoom.getY(), theDungeon.getHero().getArtPath());
     }
 
     private void addEntity(int theX, int theY, String thePath) {

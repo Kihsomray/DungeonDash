@@ -84,6 +84,11 @@ public class Room implements Passable {
         return entities;
     }
 
+    public Set<Enemy> getEnemies() {
+        final Set<Enemy> enemies = new HashSet<>(myEnemies);
+        return enemies;
+    }
+
     /**
      * Randomizes the spawns of the monsters, traps, and potions.
      * Makes sure entrances and exits cannot spawn these secondary

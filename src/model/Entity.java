@@ -16,4 +16,6 @@ public interface Entity {
      */
     String getColoredDisplay();
 
+    String getArtPath();
+
 }

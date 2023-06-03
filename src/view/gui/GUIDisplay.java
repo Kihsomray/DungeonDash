@@ -11,8 +11,8 @@ import java.awt.event.ActionListener;
 
 public class GUIDisplay implements DungeonGUI {
 
-    private int myWidth = 14;
-    private int myHeight = 8;
+    private final int myWidth = 14;
+    private final int myHeight = 8;
 
     private final DungeonAdventure myMain;
 
@@ -131,13 +131,10 @@ public class GUIDisplay implements DungeonGUI {
         panel.setLayout(new BorderLayout());
 
         //Grid for creating the map
-        Map grid = new Map(myWidth, myHeight, myMain.getDungeon().getMaze());
+        Map grid = new Map(myWidth, myHeight, myMain.getDungeon());
 
         panel.add(BorderLayout.CENTER, grid);
 
-        // Add it to the panel and later to the frame
-        //panel.add(BorderLayout.PAGE_END, label);
-        //panel.add(button);
         frame.add(panel);
 
         // Set some defaults for the frame

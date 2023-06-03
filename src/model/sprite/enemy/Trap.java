@@ -2,8 +2,11 @@ package model.sprite.enemy;
 
 import model.Utility;
 
+import java.io.File;
+
 public class Trap implements Enemy {
 
+    private static final String trapArtPath = "res" + File.separator + "Hole.png";
 
     @Override
     public char getDisplayChar() {
@@ -18,6 +21,11 @@ public class Trap implements Enemy {
     @Override
     public String getColoredDisplay() {
         return Utility.getColor('2') + getDisplayChar();
+    }
+
+    @Override
+    public String getArtPath() {
+        return trapArtPath;
     }
 
 }

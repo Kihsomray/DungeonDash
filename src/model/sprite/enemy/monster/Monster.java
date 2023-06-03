@@ -5,6 +5,8 @@ import model.sprite.DungeonCharacter;
 import model.sprite.enemy.Enemy;
 import model.sprite.hero.Hero;
 
+import java.io.File;
+
 /**
  * Used as a base to represent a monster within the dungeon game.
  *
@@ -23,6 +25,8 @@ public abstract class Monster extends DungeonCharacter implements Enemy {
 
     /** Heal chance. */
     private final double myHealChance;
+
+    private static final String monsterArtPath = "res" + File.separator + "SampleMonster.png";
 
 
     //        CONSTRUCTORS        //
@@ -155,6 +159,10 @@ public abstract class Monster extends DungeonCharacter implements Enemy {
      */
     public void attackHero(final Hero theHero) {
         attack(theHero);
+    }
+
+    public String getArtPath() {
+        return monsterArtPath;
     }
 
 }

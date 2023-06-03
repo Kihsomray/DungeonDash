@@ -1,7 +1,6 @@
 package model.sprite.hero;
 
 import model.Utility;
-import model.dungeon.tile.Cell;
 import model.dungeon.tile.passable.Passable;
 import model.dungeon.tile.passable.Room;
 import model.inventory.item.Item;
@@ -10,6 +9,7 @@ import model.sprite.DungeonCharacter;
 import model.inventory.HeroInventory;
 import model.sprite.enemy.monster.Monster;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,7 +29,7 @@ public abstract class Hero extends DungeonCharacter {
     /** Current room position */
     private Passable myCurrentPassable;
 
-    private Set<Passable> myVisited;
+    private final Set<Passable> myVisited;
 
 
     /** Block chance. */
@@ -37,6 +37,7 @@ public abstract class Hero extends DungeonCharacter {
 
     private boolean myExtraVisibility;
 
+    private static final String heroArtPath = "res" + File.separator + "Warrior.png";
 
     //        CONSTRUCTORS        //
 
@@ -341,6 +342,10 @@ public abstract class Hero extends DungeonCharacter {
 
     public boolean isExtraVisibility() {
         return myExtraVisibility;
+    }
+
+    public String getArtPath() {
+        return heroArtPath;
     }
 
 
