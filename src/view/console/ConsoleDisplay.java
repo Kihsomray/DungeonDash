@@ -2,7 +2,6 @@ package view.console;
 
 import controller.DungeonAdventure;
 import model.Utility;
-import model.dungeon.generator.SaveLoadGenerator;
 import view.DungeonGUI;
 
 import java.io.Serializable;
@@ -54,8 +53,6 @@ public class ConsoleDisplay implements DungeonGUI, Serializable {
 
             System.out.println(myMain.getDungeon());
 
-            SaveLoadGenerator mySaveLoad = new SaveLoadGenerator();
-
             char input = new Scanner(System.in)
                     .next()
                     .toUpperCase(Locale.ROOT)
@@ -85,12 +82,14 @@ public class ConsoleDisplay implements DungeonGUI, Serializable {
 
                 case 'N':
                     // Save dungeon's current state.
-                    mySaveLoad.saveDungeonState(myMain.getDungeon());
+                    Utility.saveDungeonState(myMain.getDungeon());
                     break;
 
                 case 'L':
                     // Load dungeon save state here.
-                    myMain.setDungeon(mySaveLoad.loadDungeonState());
+                    myMain.setDungeon(
+                            Utility.loadDungeonState(myMain.getDungeon())
+                    );
                     break;
             }
 

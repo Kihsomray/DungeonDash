@@ -1,10 +1,12 @@
 package model;
 
+import model.dungeon.Dungeon;
 import model.entity.hero.Hero;
 import model.entity.hero.Priestess;
 import model.entity.hero.Thief;
 import model.entity.hero.Warrior;
 
+import java.io.*;
 import java.util.*;
 
 public final class Utility {
@@ -20,12 +22,83 @@ public final class Utility {
 
     /** Used to generate random numbers. */
     public static final Random RANDOM = new Random();
+    public static final Scanner SCANNER = new Scanner(System.in);
 
     public static final String BOLD = "\u001B[1m";
 
     public static String getColor(final char theColor) {
         return "\u001B[3"  + theColor + 'm';
     }
+
+        public static void saveDungeonState(final Dungeon theDungeon) {
+            System.out.println("Name your safe file:");
+            String saveName = SCANNER.nextLine();
+
+            while (saveName.trim().equals("")) {
+                System.out.println("Please enter a non-empty name:");
+                saveName = SCANNER.nextLine();
+            }
+
+            try {
+                // Save the Dungeon in a file.
+                FileOutputStream fileStream = new FileOutputStream(saveName);
+
+                ObjectOutputStream outStream = new ObjectOutputStream((fileStream));
+
+                // Method to serialize object.
+                outStream.writeObject(theDungeon);
+
+                outStream.close();
+                fileStream.close();
+
+                System.out.println("Game has been saved.");
+
+            }
+            catch (IOException theIOException) {
+                System.out.println("IOException, could not save dungeon:\n" + theIOException);
+            }
+        }
+
+        public static Dungeon loadDungeonState(final Dungeon theDungeon) {
+            Dungeon dungeonToLoad = null;
+            System.out.println("Enter the file name to load (No extension): ");
+            String saveName = SCANNER.nextLine();
+            File isValid = new File(saveName);
+
+            if (!isValid.exists()) {
+
+                while (saveName.trim().equals("")) {
+                    System.out.println("Please enter a non-empty name:");
+                    saveName = SCANNER.nextLine();
+                }
+
+            }
+
+            saveName += ".ser";
+
+            try {
+                // Read in the object from a file.
+                FileInputStream fileStream = new FileInputStream(saveName);
+
+                ObjectInputStream inStream = new ObjectInputStream((fileStream));
+
+                // Deserialize the Dungeon.
+                dungeonToLoad = (Dungeon) inStream.readObject();
+
+                inStream.close();
+                fileStream.close();
+
+                return dungeonToLoad;
+            }
+            catch (IOException theIOException) {
+                System.out.println("IOException, could not load dungeon: \n" + theIOException);
+            }
+            catch (ClassNotFoundException theCNFException) {
+                System.out.println("ClassNotFoundException, could not find class.");
+            }
+
+            return theDungeon;
+        }
 
     public static String generateSegment() {
         return generateSegment(5);
