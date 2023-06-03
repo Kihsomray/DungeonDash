@@ -3,6 +3,8 @@ package model.sprite.hero;
 import model.Utility;
 import model.sprite.enemy.monster.Monster;
 
+import java.io.File;
+
 /**
  * A type of Hero that can be chosen when playing.
  *
@@ -34,6 +36,8 @@ public class Thief extends Hero {
 
     // Ability failure chance.
     private static final double ABILITY_FAILURE_CHANCE = 0.2;
+
+    private static final String thiefArtPath = "res" + File.separator + "Thief.png";
 
     /** 41 x 20 representation of the thief */
     public static final String ASCII_SKIN =
@@ -116,6 +120,10 @@ public class Thief extends Hero {
         // Perform attack.
         attack(theMonster);
 
+    }
+
+    public String getArtPath() {
+        return thiefArtPath;
     }
 
 }

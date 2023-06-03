@@ -3,6 +3,8 @@ package model.sprite.hero;
 import model.Utility;
 import model.sprite.enemy.monster.Monster;
 
+import java.io.File;
+
 /**
  * A type of Hero that can be chosen when playing.
  *
@@ -35,6 +37,8 @@ public class Warrior extends Hero {
 
     /** Ability chance. */
     private static final double ABILITY_CHANCE = 0.4;
+
+    private static final String warriorArtPath = "res" + File.separator + "Warrior.png";
 
     /** 41 x 20 representation of the warrior */
     public static final String ASCII_SKIN =
@@ -107,6 +111,10 @@ public class Warrior extends Hero {
 
         }
 
+    }
+
+    public String getArtPath() {
+        return warriorArtPath;
     }
 
 }

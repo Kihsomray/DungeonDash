@@ -3,6 +3,8 @@ package model.sprite.hero;
 import model.Utility;
 import model.sprite.enemy.monster.Monster;
 
+import java.io.File;
+
 /**
  * A type of Hero that can be chosen when playing.
  *
@@ -32,6 +34,8 @@ public class Priestess extends Hero {
 
     // Ability maximum heal.
     private static final int ABILITY_MAX_HEAL = 45;
+
+    private static final String priestessArtPath = "res" + File.separator + "Priestess.png";
 
     /** 41 x 20 representation of the priestess */
     public static final String ASCII_SKIN =
@@ -108,6 +112,10 @@ public class Priestess extends Hero {
             attack(theMonster);
         }
 
+    }
+
+    public String getArtPath() {
+        return priestessArtPath;
     }
 
 }

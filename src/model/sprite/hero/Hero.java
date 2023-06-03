@@ -37,8 +37,6 @@ public abstract class Hero extends DungeonCharacter {
 
     private boolean myExtraVisibility;
 
-    private static final String heroArtPath = "res" + File.separator + "Warrior.png";
-
     //        CONSTRUCTORS        //
 
     /**
@@ -342,10 +340,6 @@ public abstract class Hero extends DungeonCharacter {
 
     public boolean isExtraVisibility() {
         return myExtraVisibility;
-    }
-
-    public String getArtPath() {
-        return heroArtPath;
     }
 
 

@@ -179,6 +179,7 @@ public class Map extends JPanel {
         int curX = myDungeon.getHero().getCurrentPassable().getX();
         int curY = myDungeon.getHero().getCurrentPassable().getY();
 
+        addTile(curX, curY, myDungeon.getMaze()[curX][curY].getArtPath());
         addEntity(curX, curY, myDungeon.getHero().getArtPath());
 
         myFrame.revalidate();
