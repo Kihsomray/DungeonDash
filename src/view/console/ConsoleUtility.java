@@ -42,9 +42,15 @@ public final class ConsoleUtility {
     private static final String CHARACTER_MENU_HERO_SEPARATOR = "   ";
 
     /** Used to set the position of characters on the display. */
-    private static final char[] CHARACTER_POSITIONING = {'W', 'T', 'P'};
+    private static final char[] CHARACTER_POSITIONING = {'P', 'W', 'T'};
 
-
+    /**
+     * Generate a character menu based on a selected hero.
+     *
+     * @param theHero Hero to display.
+     * @param theMessage Tooltip message.
+     * @return A string representation of the menu.
+     */
     public static String generateCharacterMenu(final char theHero, final String theMessage) {
 
         final StringBuilder sb = new StringBuilder();
@@ -116,10 +122,10 @@ public final class ConsoleUtility {
                 .append('\n');
 
         // Top border of character selection.
-        sb.append(generateSimpleHorizontal());
+        generateSimpleHorizontal(sb);
 
         // Wall of character selection.
-        sb.append(generateSimpleVertical());
+        generateSimpleVertical(sb);
 
         // Each hero's skin.
         List<String[]> characters = new ArrayList<>();
@@ -161,10 +167,10 @@ public final class ConsoleUtility {
         }
 
         // Wall of character selection.
-        sb.append(generateSimpleVertical());
+        generateSimpleVertical(sb);
 
         // Bottom border of character selection.
-        sb.append(generateSimpleHorizontal());
+        generateSimpleHorizontal(sb);
 
 
         // ------- TIP TOOLBAR -------
@@ -173,10 +179,10 @@ public final class ConsoleUtility {
                 .append('\n');
 
         // Top border of tip toolbar.
-        sb.append(generateSimpleHorizontal());
+        generateSimpleHorizontal(sb);
 
         // Wall of tip toolbar.
-        sb.append(generateSimpleVertical());
+        generateSimpleVertical(sb);
 
         for (String line : theMessage.split("\n"))
             sb
@@ -184,16 +190,21 @@ public final class ConsoleUtility {
                     .append('\n');
 
         // Wall of tip toolbar.
-        sb.append(generateSimpleVertical());
+        generateSimpleVertical(sb);
 
         // Bottom border of tip toolbar.
-        sb.append(generateSimpleHorizontal());
+        generateSimpleHorizontal(sb);
 
         // Return completed string
         return sb.toString();
 
     }
 
+    /**
+     * Appends a horizontal border for header and stats.
+     *
+     * @param theStringBuilder StringBuild to append to.
+     */
     private static void appendHorizontalBorderHeaderStats(
             final StringBuilder theStringBuilder
     ) {
@@ -207,26 +218,60 @@ public final class ConsoleUtility {
 
     }
 
+    /**
+     * Appends a vertical border for header and stats.
+     *
+     * @param theStringBuilder StringBuild to append to.
+     */
     private static void appendVerticalBorderHeaderStats(
             final StringBuilder theStringBuilder
     ) {
 
         // Append the border.
         theStringBuilder
-                .append(PATTERN.generateVerticalBorder(true, CHARACTER_MENU_HEADER_WIDTH))
+                .append(PATTERN.generateVerticalBorder(
+                        true,
+                        CHARACTER_MENU_HEADER_WIDTH)
+                )
                 .append(CHARACTER_MENU_SEGMENT_SEPARATOR)
-                .append(PATTERN.generateVerticalBorder(true, CHARACTER_MENU_STATS_WIDTH))
+                .append(PATTERN.generateVerticalBorder(
+                        true,
+                        CHARACTER_MENU_STATS_WIDTH)
+                )
                 .append('\n');
 
     }
 
-    private static String generateSimpleHorizontal() {
-        return PATTERN.generateHorizontalBorder(CHARACTER_MENU_WIDTH) + '\n';
+    /**
+     * Appends a simple horizontal border spanning the total width.
+     *
+     * @param theStringBuilder StringBuild to append to.
+     */
+    private static void generateSimpleHorizontal(
+            final StringBuilder theStringBuilder
+    ) {
+
+        // Append the horizontal border.
+        theStringBuilder
+                .append(PATTERN.generateHorizontalBorder(CHARACTER_MENU_WIDTH))
+                .append('\n');
+
     }
 
-    private static String generateSimpleVertical() {
-        return PATTERN.generateVerticalBorder(true, CHARACTER_MENU_WIDTH) +
-                '\n';
+    /**
+     * Appends a simple vertical border spanning the total width.
+     *
+     * @param theStringBuilder StringBuild to append to.
+     */
+    private static void generateSimpleVertical(
+            final StringBuilder theStringBuilder
+    ) {
+        theStringBuilder
+                .append(PATTERN.generateVerticalBorder(
+                        true,
+                        CHARACTER_MENU_WIDTH)
+                )
+                .append('\n');
     }
 
 
