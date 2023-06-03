@@ -1,6 +1,6 @@
 package model.entity;
 
-import model.Utility;
+import model.util.Utility;
 
 import java.io.Serializable;
 

@@ -1,6 +1,6 @@
 package model.dungeon.cell;
 
-import model.Utility;
+import model.util.Utility;
 
 import java.io.Serializable;
 

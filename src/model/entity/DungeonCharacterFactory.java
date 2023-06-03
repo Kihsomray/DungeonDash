@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import model.Utility;
+import model.util.Utility;
 import model.entity.enemy.monster.Monster;
 import model.entity.enemy.monster.MonsterData;
 

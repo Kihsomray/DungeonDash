@@ -1,4 +1,4 @@
-package model;
+package model.util;
 
 import model.dungeon.Dungeon;
 import model.entity.hero.Hero;
@@ -61,14 +61,14 @@ public final class Utility {
 
     public static Dungeon loadDungeonState(final Dungeon theDungeon) {
         Dungeon dungeonToLoad = null;
-        System.out.println("Enter the file name to load (No extension): ");
+        System.out.print("Enter the file name to load (No extension): ");
         String saveName = SCANNER.nextLine();
         File isValid = new File(saveName);
 
         if (!isValid.exists()) {
 
             while (saveName.trim().equals("")) {
-                System.out.println("Please enter a non-empty name:");
+                System.out.print("Please enter a non-empty name:");
                 saveName = SCANNER.nextLine();
             }
 
@@ -120,6 +120,7 @@ public final class Utility {
             final int theLength,
             final boolean theCapitalize
     ) {
+
         StringBuilder space = new StringBuilder();
         for (char c : theString.toCharArray()) space.append(c).append(" ");
         space.deleteCharAt(space.length() - 1);
@@ -189,171 +190,6 @@ public final class Utility {
                 .append(theMaxColor)
                 .append("█".repeat(negative));
         return sb.toString();
-    }
-
-    public static String generateCharacterMenu(final char theHero, final String theMessage) {
-
-        final StringBuilder sb = new StringBuilder();
-        final Hero hero = generateHeroFromChar(theHero, "");
-
-        // ------- INFORMATION BAR -------
-
-        // Top border.
-        appendBorder1(sb);
-
-        // Wall.
-        appendWall1(sb);
-
-        // Hero name & statistics.
-        sb.append(generateSegment(1))
-                .append(getColor('8'))
-                .append(centerAndSpace("HERO-" +
-                                hero.getClass().getSimpleName(), 31, true))
-                .append(getColor('7'))
-                .append(generateSegment(1))
-                .append("     ")
-                .append(generateSegment(1))
-                .append(getColor('8'))
-                .append("     HP: [")
-                .append(createPointBar(hero.getMaxHP(),
-                        Math.max(Math.max(
-                                Warrior.DEFAULT_HP,
-                                Thief.DEFAULT_HP),
-                                Priestess.DEFAULT_HP), 18))
-                .append(getColor('8'))
-                .append("]  DAMAGE: [")
-                .append(createPointBar(hero.getMinDamage(),
-                        hero.getMaxDamage(),
-                        Math.max(Math.max(
-                                Warrior.DEFAULT_MAX_DAMAGE,
-                                Thief.DEFAULT_MAX_DAMAGE),
-                                Priestess.DEFAULT_MAX_DAMAGE), 18))
-                .append(getColor('8'))
-                .append("]  SPEED: [")
-                .append(createPointBar(hero.getAttackSpeed(),
-                        Math.max(Math.max(
-                                Warrior.DEFAULT_ATTACK_SPEED,
-                                Thief.DEFAULT_ATTACK_SPEED),
-                        Priestess.DEFAULT_ATTACK_SPEED), 18))
-                .append(getColor('8'))
-                .append("]     ")
-                .append(generateSegment(1))
-                .append('\n');
-
-        // Wall.
-        appendWall1(sb);
-
-        // Bottom border.
-        appendBorder1(sb);
-
-        // ------- HERO DISPLAY -------
-        sb.append(" ".repeat(133))
-                .append('\n');
-
-        // Top border.
-        appendBorder2(sb);
-
-        // Wall.
-        appendWall2(sb);
-
-        String[] priestess = Priestess.ASCII_SKIN.split("\n");
-        String[] warrior = Warrior.ASCII_SKIN.split("\n");
-        String[] thief = Thief.ASCII_SKIN.split("\n");
-
-        for (int i = 0; i < 20; i++) {
-
-            sb.append(generateSegment(1))
-                    .append(' ')
-                    .append(getColor(hero instanceof Priestess ? '2' : '3'))
-                    .append(priestess[i])
-                    .append("   ")
-                    .append(getColor(hero instanceof Warrior ? '2' : '3'))
-                    .append(warrior[i])
-                    .append("   ")
-                    .append(getColor(hero instanceof Thief ? '2' : '3'))
-                    .append(thief[i])
-                    .append(' ')
-                    .append(generateSegment(1))
-                    .append('\n');
-
-        }
-
-        // Wall.
-        appendWall2(sb);
-
-        // Bottom border.
-        appendBorder2(sb);
-
-
-        // ------- TIP TOOLBAR -------
-        sb.append(" ".repeat(133))
-                .append('\n');
-
-        // Top border.
-        appendBorder2(sb);
-
-        // Wall.
-        appendWall2(sb);
-
-        for (String line : theMessage.split("\n"))
-            sb.append(generateSegment(1))
-                    .append(getColor('8'))
-                    .append(centerAndSpace(line, 131, true))
-                    .append(generateSegment(1))
-                    .append('\n');
-
-        // Wall.
-        appendWall2(sb);
-
-        // Bottom border.
-        appendBorder2(sb);
-
-        // Return completed string
-        return sb.toString();
-
-    }
-
-    private static void appendBorder1(final StringBuilder theStringBuilder) {
-        theStringBuilder.append(getColor('7'))
-                .append(generateSegment(1))
-                .append(' ')
-                .append(generateSegment(29))
-                .append(' ')
-                .append(generateSegment(1))
-                .append("     ")
-                .append(generateSegment(1))
-                .append(' ')
-                .append(generateSegment(91))
-                .append(' ')
-                .append(generateSegment(1))
-                .append('\n');
-    }
-
-    private static void appendWall1(final StringBuilder theStringBuilder) {
-        theStringBuilder.append(generateSegment(3))
-                .append(" ".repeat(27))
-                .append(generateSegment(3))
-                .append("     ")
-                .append(generateSegment(3))
-                .append(" ".repeat(89))
-                .append(generateSegment(3))
-                .append('\n');
-    }
-
-    private static void appendBorder2(final StringBuilder theStringBuilder) {
-        theStringBuilder.append(generateSegment(1))
-                .append(' ')
-                .append(generateSegment(129))
-                .append(' ')
-                .append(generateSegment(1))
-                .append('\n');
-    }
-
-    private static void appendWall2(final StringBuilder theStringBuilder) {
-        theStringBuilder.append(generateSegment(3))
-                .append(" ".repeat(127))
-                .append(generateSegment(3))
-                .append('\n');
     }
 
 

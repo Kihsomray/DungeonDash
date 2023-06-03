@@ -1,6 +1,6 @@
 package model.entity.hero;
 
-import model.Utility;
+import model.util.Utility;
 import model.entity.enemy.monster.Monster;
 
 /**
@@ -8,7 +8,7 @@ import model.entity.enemy.monster.Monster;
  *
  * Special skill: Crushing Blow - 75 to 175 HP damage (40% success rate).
  *
- * @version 1.0.0
+ * @version 1.0.1
  * @author Kihsomray
  */
 public class Warrior extends Hero {
@@ -107,6 +107,11 @@ public class Warrior extends Hero {
 
         }
 
+    }
+
+    @Override
+    public char getDisplayChar() {
+        return 'W';
     }
 
 }

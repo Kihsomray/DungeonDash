@@ -1,7 +1,7 @@
 package model.dungeon;
 
 import controller.DungeonAdventure;
-import model.Utility;
+import model.util.Utility;
 import model.dungeon.generator.PrimsGenerator;
 import model.dungeon.generator.DungeonGenerator;
 import model.dungeon.cell.Cell;

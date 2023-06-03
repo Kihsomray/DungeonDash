@@ -1,7 +1,7 @@
 package view.console;
 
 import controller.DungeonAdventure;
-import model.Utility;
+import model.util.Utility;
 import view.DungeonGUI;
 
 import java.io.Serializable;
@@ -22,7 +22,7 @@ public class ConsoleDisplay implements DungeonGUI, Serializable {
 
     public void display() {
 
-        System.out.println(Utility.generateCharacterMenu('W', INTRO_TIP));
+        System.out.println(ConsoleUtility.generateCharacterMenu('W', INTRO_TIP));
 
         char chosen = ' ';
 
@@ -36,7 +36,7 @@ public class ConsoleDisplay implements DungeonGUI, Serializable {
                     .charAt(0);
 
             if (input == 'W' || input == 'T' || input == 'P')
-                System.out.println(Utility.generateCharacterMenu(input, INTRO_TIP));
+                System.out.println(ConsoleUtility.generateCharacterMenu(input, INTRO_TIP));
 
             // if selected twice.
             if (input == chosen) break;

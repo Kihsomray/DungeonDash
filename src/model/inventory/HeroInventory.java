@@ -1,7 +1,7 @@
 package model.inventory;
 
 import com.sun.nio.sctp.IllegalUnbindException;
-import model.Utility;
+import model.util.Utility;
 import model.inventory.item.collectable.Collectable;
 import model.inventory.item.Item;
 

@@ -1,6 +1,6 @@
 package model.entity.hero;
 
-import model.Utility;
+import model.util.Utility;
 import model.dungeon.cell.passable.Passable;
 import model.dungeon.cell.passable.Room;
 import model.inventory.item.Item;
@@ -79,6 +79,42 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
 
     //        ACCESSORS        //
+
+    /**
+     * Gets the max HP of Warrior, Thief, and Priestess.
+     *
+     * @return Max HP.
+     */
+    public static int getAllHeroMaxHP() {
+        return Math.max(Warrior.DEFAULT_HP,
+                Math.max(Thief.DEFAULT_HP,
+                        Priestess.DEFAULT_HP)
+        );
+    }
+
+    /**
+     * Gets the max damage of Warrior, Thief, and Priestess.
+     *
+     * @return Max damage.
+     */
+    public static int getAllHeroMaxDamage() {
+        return Math.max(Warrior.DEFAULT_MAX_DAMAGE,
+                Math.max(Thief.DEFAULT_MAX_DAMAGE,
+                        Priestess.DEFAULT_MAX_DAMAGE)
+        );
+    }
+
+    /**
+     * Gets the max damage of Warrior, Thief, and Priestess.
+     *
+     * @return Max damage.
+     */
+    public static int getAllHeroMaxAttackSpeed() {
+        return Math.max(Warrior.DEFAULT_ATTACK_SPEED,
+                Math.max(Thief.DEFAULT_ATTACK_SPEED,
+                        Priestess.DEFAULT_ATTACK_SPEED)
+        );
+    }
 
     /**
      * Get block chance.

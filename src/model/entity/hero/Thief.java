@@ -1,6 +1,6 @@
 package model.entity.hero;
 
-import model.Utility;
+import model.util.Utility;
 import model.entity.enemy.monster.Monster;
 
 /**
@@ -10,7 +10,7 @@ import model.entity.enemy.monster.Monster;
  *                                  One attack  (40% success rate)
  *                                  No attacks  (20% success rate)
  *
- * @version 1.0.0
+ * @version 1.0.1
  * @author Kihsomray
  */
 public class Thief extends Hero {
@@ -116,6 +116,11 @@ public class Thief extends Hero {
         // Perform attack.
         attack(theMonster);
 
+    }
+
+    @Override
+    public char getDisplayChar() {
+        return 'T';
     }
 
 }

@@ -1,6 +1,6 @@
 package model.inventory.item.potion;
 
-import model.Utility;
+import model.util.Utility;
 import model.entity.hero.Hero;
 
 /**

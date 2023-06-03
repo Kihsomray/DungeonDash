@@ -1,6 +1,6 @@
 package model.inventory.item.collectable;
 
-import model.Utility;
+import model.util.Utility;
 
 import java.io.Serializable;
 

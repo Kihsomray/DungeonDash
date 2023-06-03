@@ -1,6 +1,6 @@
 package model.entity.enemy.monster;
 
-import model.Utility;
+import model.util.Utility;
 import model.entity.DungeonCharacter;
 import model.entity.enemy.Enemy;
 import model.entity.hero.Hero;

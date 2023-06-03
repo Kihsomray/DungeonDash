@@ -1,6 +1,6 @@
 package controller;
 
-import model.Utility;
+import model.util.Utility;
 import model.dungeon.Dungeon;
 import model.entity.DungeonCharacterFactory;
 import view.DungeonGUI;

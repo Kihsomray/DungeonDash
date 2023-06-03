@@ -1,6 +1,6 @@
 package model.dungeon.generator;
 
-import model.Utility;
+import model.util.Utility;
 import model.dungeon.cell.Cell;
 import model.dungeon.cell.Wall;
 import model.dungeon.cell.passable.Door;

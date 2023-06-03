@@ -1,6 +1,6 @@
 package model.entity.hero;
 
-import model.Utility;
+import model.util.Utility;
 import model.entity.enemy.monster.Monster;
 
 /**
@@ -8,7 +8,7 @@ import model.entity.enemy.monster.Monster;
  *
  * Special skill: Heal - 25 to 45 HP (100% success rate).
  *
- * @version 1.0.0
+ * @version 1.0.1
  * @author Kihsomray
  */
 public class Priestess extends Hero {
@@ -108,6 +108,11 @@ public class Priestess extends Hero {
             attack(theMonster);
         }
 
+    }
+
+    @Override
+    public char getDisplayChar() {
+        return 'P';
     }
 
 }
