@@ -8,8 +8,8 @@ import model.entity.hero.Hero;
 import java.io.*;
 
 public class SaveLoadGenerator implements DungeonGenerator {
-    private Dungeon myDungeonState;
-    public SaveLoadGenerator(Dungeon theDungeonState) {
+    private final Dungeon myDungeonState;
+    public SaveLoadGenerator() {
         // Load the dungeon in
         myDungeonState = null;
     }

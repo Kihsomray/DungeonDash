@@ -54,7 +54,7 @@ public class ConsoleDisplay implements DungeonGUI, Serializable {
 
             System.out.println(myMain.getDungeon());
 
-            SaveLoadGenerator mySaveLoad = new SaveLoadGenerator(myMain.getDungeon());
+            SaveLoadGenerator mySaveLoad = new SaveLoadGenerator();
 
             char input = new Scanner(System.in)
                     .next()
@@ -90,7 +90,7 @@ public class ConsoleDisplay implements DungeonGUI, Serializable {
 
                 case 'L':
                     // Load dungeon save state here.
-                    mySaveLoad.loadDungeonState();
+                    myMain.setDungeon(mySaveLoad.loadDungeonState());
                     break;
             }
 

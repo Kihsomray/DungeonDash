@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author Kihsomray
  * @author Patrick Hern
  */
-public abstract class DungeonCharacter implements Entity {
+public abstract class DungeonCharacter implements Entity, Serializable {
 
     //      FIELDS      //
 

@@ -51,6 +51,10 @@ public class DungeonAdventure implements Serializable {
         return myDungeon;
     }
 
+    public void setDungeon(final Dungeon theDungeon) {
+        myDungeon = theDungeon;
+    }
+
     public DungeonGUI getGUI() {
         return myGUI;
     }
