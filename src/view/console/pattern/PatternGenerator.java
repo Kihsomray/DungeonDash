@@ -111,6 +111,7 @@ public class PatternGenerator {
                 1,
                 theWidth,
                 generateSegment(middleWidth, false),
+                false,
                 false
         );
 
@@ -153,6 +154,7 @@ public class PatternGenerator {
                 theTripleWidth ? 3 : 1,
                 theWidth,
                 theText,
+                true,
                 true
         );
 
@@ -165,13 +167,15 @@ public class PatternGenerator {
      * @param theTotalWidth Width of the completed string.
      * @param theText Text to place between the borders.
      * @param theCenterAndSpace Should text be centered and spaced?
+     * @param theWhiteText Should the text be white?
      * @return Generated vertical border.
      */
     public String generateVerticalBorder(
             final int theBorderWidth,
             final int theTotalWidth,
             final String theText,
-            final boolean theCenterAndSpace
+            final boolean theCenterAndSpace,
+            final boolean theWhiteText
     ) {
 
         // Available space for text.
@@ -187,7 +191,7 @@ public class PatternGenerator {
         // Generate the string.
         return (myColorize ? Color.BOLD + myWallColor : "") +
                 generateSegment(theBorderWidth, myColorize) +
-                ' ' +
+                (theWhiteText ? ' ' + Color.WHITE : ' ') +
                 (theCenterAndSpace ?
                         Utility.centerAndSpace(theText, availableSpace, true) :
                         theText) +

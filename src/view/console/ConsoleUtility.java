@@ -12,6 +12,12 @@ import view.console.pattern.ProgressBar;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Console GUI utilities to display game information.
+ *
+ * @version 1.0.1
+ * @author Kihsomray
+ */
 public final class ConsoleUtility {
 
     /** Create an instance of pattern generator. */
@@ -84,6 +90,7 @@ public final class ConsoleUtility {
                         1,
                         CHARACTER_MENU_HEADER_WIDTH,
                         hero.getClass().getSimpleName(),
+                        true,
                         true)
                 )
                 .append(CHARACTER_MENU_SEGMENT_SEPARATOR)
@@ -91,6 +98,7 @@ public final class ConsoleUtility {
                         1,
                         CHARACTER_MENU_STATS_WIDTH,
                         heroStats,
+                        false,
                         false)
                 )
                 .append('\n');
@@ -143,9 +151,11 @@ public final class ConsoleUtility {
 
             // Append the hero line.
             sb.append(PATTERN.generateVerticalBorder(
-                    1,
-                    CHARACTER_MENU_WIDTH,
-                    heroLine, false))
+                            1,
+                            CHARACTER_MENU_WIDTH,
+                            heroLine,
+                            false,
+                            false))
                     .append('\n');
 
         }
