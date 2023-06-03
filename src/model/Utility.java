@@ -55,7 +55,8 @@ public final class Utility {
 
             }
             catch (IOException theIOException) {
-                System.out.println("IOException, could not save dungeon:\n" + theIOException);
+                System.out.println("IOException, could not save dungeon:\n"
+                        + theIOException);
             }
         }
 
@@ -91,10 +92,12 @@ public final class Utility {
                 return dungeonToLoad;
             }
             catch (IOException theIOException) {
-                System.out.println("IOException, could not load dungeon: \n" + theIOException);
+                System.out.println("Could not find file '"
+                        + saveName + "': " + theIOException);
             }
             catch (ClassNotFoundException theCNFException) {
-                System.out.println("ClassNotFoundException, could not find class.");
+                System.out.println("ClassNotFoundException, "
+                        + "could not find class.");
             }
 
             return theDungeon;
