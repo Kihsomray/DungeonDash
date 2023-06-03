@@ -6,6 +6,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Pattern generator that aids in the creation of walls and console GUI
+ * elements.
+ *
+ * @author Kihsomray
+ * @version 1.0.1
+ */
 public class PatternGenerator {
 
     /** Collection of characters that can be present in a wall string. */
@@ -73,7 +80,7 @@ public class PatternGenerator {
         for (int i = 0; i < theWidth; i++) {
 
             // Add on the needed amount of walls.
-            sb.append(CHARACTERS.get(i % CHARACTERS.size()));
+            sb.append(CHARACTERS.get(myCounter));
 
             // Shuffle it for random order.
             if (++myCounter == CHARACTERS.size()) {
