@@ -131,7 +131,7 @@ public class GUIDisplay implements DungeonGUI {
         panel.setLayout(new BorderLayout());
 
         //Grid for creating the map
-        Map grid = new Map(myWidth, myHeight, myMain.getDungeon());
+        Map grid = new Map(myWidth, myHeight, myMain.getDungeon(), frame);
 
         panel.add(BorderLayout.CENTER, grid);
 
@@ -144,6 +144,8 @@ public class GUIDisplay implements DungeonGUI {
 
         // Turn it on
         frame.setVisible(true);
+
+
 
         // MAIN GAME LOOP, Keep this running till game ends
         while (true) {

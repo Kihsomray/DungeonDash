@@ -11,6 +11,7 @@ import model.sprite.enemy.Enemy;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Set;
@@ -25,11 +26,18 @@ public class Map extends JPanel {
 
     private final static int PIXELS_IN_SPRITE = 64; // Number of pixels each art asset is
 
-    public Map(int theWidth, int theHeight, Dungeon theDungeon) {
+    private Dungeon myDungeon;
+
+    private JFrame myFrame;
+
+    public Map(int theWidth, int theHeight, Dungeon theDungeon, JFrame theFrame) {
         super();
 
         myWidth = theWidth;
         myHeight = theHeight;
+
+        myDungeon = theDungeon;
+        myFrame = theFrame;
 
         this.setLayout(new GridLayout(myHeight, myWidth));
 
@@ -43,6 +51,8 @@ public class Map extends JPanel {
         addEntities(theDungeon.getMaze());
 
         addPlayer(theDungeon);
+
+        addKeyBinds();
     }
 
     private void createTheTileMap(Cell[][] theMaze) {
@@ -110,5 +120,67 @@ public class Map extends JPanel {
         // nothing else could possibly be on top of a tile
         myPanels[theY][theX].removeAll();
         myPanels[theY][theX].add(tileLabel,0);
+    }
+
+    private void addKeyBinds() {
+        addKeyBind("W");
+        addKeyBind("S");
+        addKeyBind("A");
+        addKeyBind("D");
+
+        System.out.println("added key binds");
+//        Action rightAction = new AbstractAction(){
+//            public void actionPerformed(ActionEvent e) {
+//                System.out.println("an action was performed");
+//            }
+//        };
+//
+//        InputMap inputMap = this.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
+//        ActionMap actionMap = this.getActionMap();
+//
+//        inputMap.put(KeyStroke.getKeyStroke("W"), "rightAction");
+//        actionMap.put("rightAction", rightAction);
+    }
+
+    private void addKeyBind(String key) {
+        Action keyAction = new AbstractAction(){
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(key + " was pressed");
+                moveHero(key);
+            }
+        };
+
+        InputMap inputMap = this.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap actionMap = this.getActionMap();
+
+        inputMap.put(KeyStroke.getKeyStroke(key), key + "keyAction");
+        actionMap.put(key + "keyAction", keyAction);
+    }
+
+    private void moveHero(String theDir) {
+        System.out.println("Trying to move in " + theDir);
+
+        int prevX = myDungeon.getHero().getCurrentPassable().getX();
+        int prevY = myDungeon.getHero().getCurrentPassable().getY();
+
+        addTile(prevX, prevY, myDungeon.getMaze()[prevX][prevY].getArtPath());
+
+        if (theDir.equals("W")) {
+            myDungeon.getHero().moveSouth();
+            System.out.println("Trying to move W " + theDir);
+        } else if (theDir.equals("A")) {
+            myDungeon.getHero().moveWest();
+        } else if (theDir.equals("S")) {
+            myDungeon.getHero().moveNorth();
+        } else if (theDir.equals("D")) {
+            myDungeon.getHero().moveEast();
+        }
+
+        int curX = myDungeon.getHero().getCurrentPassable().getX();
+        int curY = myDungeon.getHero().getCurrentPassable().getY();
+
+        addEntity(curX, curY, myDungeon.getHero().getArtPath());
+
+        myFrame.revalidate();
     }
 }
