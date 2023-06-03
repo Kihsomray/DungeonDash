@@ -30,78 +30,77 @@ public final class Utility {
         return "\u001B[3"  + theColor + 'm';
     }
 
-        public static void saveDungeonState(final Dungeon theDungeon) {
-            System.out.println("Name your safe file:");
-            String saveName = SCANNER.nextLine();
+    public static void saveDungeonState(final Dungeon theDungeon) {
+        System.out.println("Name your safe file:");
+        String saveName = SCANNER.nextLine();
+        while (saveName.trim().equals("")) {
+            System.out.println("Please enter a non-empty name:");
+            saveName = SCANNER.nextLine();
+        }
+
+        try {
+            // Save the Dungeon in a file.
+            FileOutputStream fileStream = new FileOutputStream(saveName);
+
+            ObjectOutputStream outStream = new ObjectOutputStream((fileStream));
+
+            // Method to serialize object.
+            outStream.writeObject(theDungeon);
+
+            outStream.close();
+            fileStream.close();
+
+            System.out.println("Game has been saved.");
+
+        }
+        catch (IOException theIOException) {
+            System.out.println("IOException, could not save dungeon:\n"
+                    + theIOException);
+        }
+    }
+
+    public static Dungeon loadDungeonState(final Dungeon theDungeon) {
+        Dungeon dungeonToLoad = null;
+        System.out.println("Enter the file name to load (No extension): ");
+        String saveName = SCANNER.nextLine();
+        File isValid = new File(saveName);
+
+        if (!isValid.exists()) {
 
             while (saveName.trim().equals("")) {
                 System.out.println("Please enter a non-empty name:");
                 saveName = SCANNER.nextLine();
             }
 
-            try {
-                // Save the Dungeon in a file.
-                FileOutputStream fileStream = new FileOutputStream(saveName);
-
-                ObjectOutputStream outStream = new ObjectOutputStream((fileStream));
-
-                // Method to serialize object.
-                outStream.writeObject(theDungeon);
-
-                outStream.close();
-                fileStream.close();
-
-                System.out.println("Game has been saved.");
-
-            }
-            catch (IOException theIOException) {
-                System.out.println("IOException, could not save dungeon:\n"
-                        + theIOException);
-            }
         }
 
-        public static Dungeon loadDungeonState(final Dungeon theDungeon) {
-            Dungeon dungeonToLoad = null;
-            System.out.println("Enter the file name to load (No extension): ");
-            String saveName = SCANNER.nextLine();
-            File isValid = new File(saveName);
+        saveName += ".ser";
 
-            if (!isValid.exists()) {
+        try {
+            // Read in the object from a file.
+            FileInputStream fileStream = new FileInputStream(saveName);
 
-                while (saveName.trim().equals("")) {
-                    System.out.println("Please enter a non-empty name:");
-                    saveName = SCANNER.nextLine();
-                }
+            ObjectInputStream inStream = new ObjectInputStream((fileStream));
 
-            }
+            // Deserialize the Dungeon.
+            dungeonToLoad = (Dungeon) inStream.readObject();
 
-            saveName += ".ser";
+            inStream.close();
+            fileStream.close();
 
-            try {
-                // Read in the object from a file.
-                FileInputStream fileStream = new FileInputStream(saveName);
-
-                ObjectInputStream inStream = new ObjectInputStream((fileStream));
-
-                // Deserialize the Dungeon.
-                dungeonToLoad = (Dungeon) inStream.readObject();
-
-                inStream.close();
-                fileStream.close();
-
-                return dungeonToLoad;
-            }
-            catch (IOException theIOException) {
-                System.out.println("Could not find file '"
-                        + saveName + "': " + theIOException);
-            }
-            catch (ClassNotFoundException theCNFException) {
-                System.out.println("ClassNotFoundException, "
-                        + "could not find class.");
-            }
-
-            return theDungeon;
+            return dungeonToLoad;
         }
+        catch (IOException theIOException) {
+            System.out.println("Could not find file '"
+                    + saveName + "': " + theIOException);
+        }
+        catch (ClassNotFoundException theCNFException) {
+            System.out.println("ClassNotFoundException, "
+                    + "could not find class.");
+        }
+
+        return theDungeon;
+    }
 
     public static String generateSegment() {
         return generateSegment(5);
