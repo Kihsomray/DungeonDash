@@ -31,16 +31,16 @@ public final class Utility {
     }
 
     public static void saveDungeonState(final Dungeon theDungeon) {
-        System.out.println("Name your safe file:");
+        System.out.print("Name your save file (Ex. \"save1\"): ");
         String saveName = SCANNER.nextLine();
         while (saveName.trim().equals("")) {
-            System.out.println("Please enter a non-empty name:");
+            System.out.print("Please enter a non-empty name: ");
             saveName = SCANNER.nextLine();
         }
 
         try {
             // Save the Dungeon in a file.
-            FileOutputStream fileStream = new FileOutputStream(saveName);
+            FileOutputStream fileStream = new FileOutputStream(saveName + ".ser");
 
             ObjectOutputStream outStream = new ObjectOutputStream((fileStream));
 
@@ -60,15 +60,15 @@ public final class Utility {
     }
 
     public static Dungeon loadDungeonState(final Dungeon theDungeon) {
-        Dungeon dungeonToLoad = null;
-        System.out.print("Enter the file name to load (No extension): ");
+        Dungeon dungeonToLoad;
+        System.out.print("Enter the file name to load (Ex. \"save1\"): ");
         String saveName = SCANNER.nextLine();
         File isValid = new File(saveName);
 
         if (!isValid.exists()) {
 
             while (saveName.trim().equals("")) {
-                System.out.print("Please enter a non-empty name:");
+                System.out.print("Please enter a non-empty name: ");
                 saveName = SCANNER.nextLine();
             }
 
