@@ -31,14 +31,14 @@ public class InventoryGUI extends JPanel {
         // This the tileMap that will have every sprite
         myPanels = new JComponent[myRows][myColumns];
 
-        for (int i = 0; i < myColumns; i++) {
-            for (int j = 0; j < myRows; j++) {
-                myPanels[j][i] = new JPanel();
-                myPanels[j][i].setLayout(new BorderLayout());
+        for (int i = 0; i < myRows; i++) {
+            for (int j = 0; j < myColumns; j++) {
+                myPanels[i][j] = new JPanel();
+                myPanels[i][j].setLayout(new BorderLayout());
 
                 //myPanels[j][i].setPreferredSize(new Dimension(32,32));
 
-                this.add(myPanels[j][i]);
+                this.add(myPanels[i][j]);
 
                 JLabel invLabel;
                 try {
@@ -48,7 +48,7 @@ public class InventoryGUI extends JPanel {
                     return;
                 }
                 invLabel.setPreferredSize(new Dimension(32, 32));
-                myPanels[j][i].add(invLabel, BorderLayout.CENTER);
+                myPanels[i][j].add(invLabel, BorderLayout.CENTER);
             }
         }
     }
