@@ -8,9 +8,6 @@ import view.console.panel.*;
 import view.console.util.BattleUtility;
 import view.console.util.ConsoleDisplayUtility;
 
-import java.util.Locale;
-import java.util.Scanner;
-
 public class DungeonGameFrame extends ConsoleFrame {
 
     private static final String[] ASK_TOM = {
@@ -147,9 +144,7 @@ public class DungeonGameFrame extends ConsoleFrame {
                     default:
                         sendUI("INVALID OPTION");
                         delayGame();
-                        result = Battle.Result.NORMAL_HERO;
-                        break;
-
+                        continue;
 
                 }
 

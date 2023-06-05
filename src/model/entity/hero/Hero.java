@@ -253,6 +253,9 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
         // Add to the visited tiles.
         myVisited.add(myCurrentPassable);
 
+        // Interact.
+        thePassable.interactWith(this);
+
         // Checks if it is a room.
         if (!(myCurrentPassable instanceof final Room room))
             return MovementResult.NORMAL;

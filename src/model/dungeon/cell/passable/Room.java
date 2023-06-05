@@ -60,7 +60,7 @@ public class Room implements Passable, Serializable {
 
     @Override
     public void interactWith(Hero theHero) {
-        // TODO interaction
+        // Nothing.
     }
 
     @Override
