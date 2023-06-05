@@ -1,6 +1,7 @@
 package model.dungeon;
 
 import controller.DungeonAdventure;
+import model.dungeon.cell.passable.Door;
 import model.dungeon.generator.PrimsGenerator;
 import model.dungeon.generator.DungeonGenerator;
 import model.dungeon.cell.Cell;
@@ -20,13 +21,13 @@ public class Dungeon implements Serializable {
     /** The dungeon/maze made of Rooms. */
     private final Cell[][] myMaze;
 
+    private final Door myExit;
+
     private final Hero myHero;
 
     private final int myRoomCount;
     private final int myWidth;
     private final int myHeight;
-
-    private boolean myGamePlaying;
 
     /**
      * Constructor for the dungeon that creates a new dungeon
@@ -50,16 +51,11 @@ public class Dungeon implements Serializable {
         // Generate the maze.
         myMaze = generator.generate();
 
+        myExit = generator.getExit();
+
         // Gets the room count.
         myRoomCount = generator.getRoomCount();
 
-        // Game is playing.
-        myGamePlaying = true;
-
-    }
-
-    public void setGamePlaying(final boolean theGamePlaying) {
-        this.myGamePlaying = theGamePlaying;
     }
 
     public Hero getHero() {
@@ -83,7 +79,7 @@ public class Dungeon implements Serializable {
     }
 
     public boolean isGamePlaying() {
-        return myGamePlaying;
+        return !myExit.hasEntered();
     }
 
 }

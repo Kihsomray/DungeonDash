@@ -14,11 +14,15 @@ public class Door implements Passable, Serializable {
 
     private final Neighbors myNeighbors;
 
+    private boolean hasEntered;
+
     public Door(final int theX, final int theY, final boolean theIsEntrance) {
         myX = theX;
         myY = theY;
         myIsEntrance = theIsEntrance;
         myNeighbors = new Neighbors(this);
+
+        hasEntered = false;
     }
 
     @Override
@@ -45,7 +49,12 @@ public class Door implements Passable, Serializable {
 
     @Override
     public void interactWith(final Hero theHero) {
-        // TODO ADD
+        if (theHero.getInventory().getSlots()[3] == null) return;
+        hasEntered = true;
+    }
+
+    public boolean hasEntered() {
+        return hasEntered;
     }
 
 }

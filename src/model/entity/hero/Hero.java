@@ -297,10 +297,6 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
         return myVisited.contains(passable);
     }
 
-    public void addDiscovery(final Passable passable) {
-        myVisited.add(passable);
-    }
-
     public void enableExtraVisibility() {
         myExtraVisibility = true;
     }
