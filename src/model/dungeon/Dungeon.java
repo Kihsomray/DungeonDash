@@ -12,6 +12,11 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ *
+ * @author Kihsomray
+ * @author Patrick Hern
+ */
 public class Dungeon implements Serializable {
 
     private final DungeonAdventure myMain;

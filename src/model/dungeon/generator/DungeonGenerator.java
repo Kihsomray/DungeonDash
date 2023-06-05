@@ -18,6 +18,7 @@ import model.entity.hero.Hero;
  *
  * @version 1.0.0
  * @author Kihsomray
+ * @author Patrick Hern
  */
 public interface DungeonGenerator {
 

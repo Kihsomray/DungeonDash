@@ -8,6 +8,7 @@ import model.entity.enemy.monster.Monster;
  * Overall, good middle ground monster.
  *
  * @version 1.0.0
+ * @author Patrick Hern
  * @author Kihsomray
  */
 public class MockSkeleton extends Monster {

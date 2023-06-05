@@ -8,6 +8,7 @@ import model.entity.enemy.monster.Monster;
  * Specializes in attack, weaker in health.
  *
  * @version 1.0.0
+ * @author Patrick Hern
  * @author Kihsomray
  */
 public class MockGremlin extends Monster {

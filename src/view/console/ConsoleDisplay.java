@@ -12,8 +12,9 @@ import java.util.Scanner;
 /**
  * A type of GUI for DungeonAdventure that is displayed in console.
  *
- * @author Kihsomray
  * @version 1.0.0
+ * @author Kihsomray
+ * @author Patrick Hern
  */
 public class ConsoleDisplay implements DungeonGUI {
 
