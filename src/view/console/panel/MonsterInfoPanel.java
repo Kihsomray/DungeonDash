@@ -44,8 +44,6 @@ public class MonsterInfoPanel extends ConsolePanel {
             // Get the monster.
             final Monster monster = myHero.getBattle().getMonster();
 
-            System.out.println(monster.getHP() + ", " + monster.getLastDamage());
-
             // Generate the health bar.
             final String healthBar =
                     ProgressBar.generate(
