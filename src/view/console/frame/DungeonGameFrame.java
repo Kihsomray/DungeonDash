@@ -120,7 +120,10 @@ public class DungeonGameFrame extends ConsoleFrame {
             // If there is a battle.
             } else {
 
-                Battle.Result result;
+                final int previousMonsterDamage = myHero.getBattle()
+                        .getMonster().getLastDamage();
+
+                final Battle.Result result;
 
                 switch (input) {
 
@@ -144,9 +147,23 @@ public class DungeonGameFrame extends ConsoleFrame {
 
                     default:
                         sendUI("INVALID OPTION");
-                        continue;
+                        delayGame();
+                        result = Battle.Result.NORMAL_HERO;
+                        break;
 
 
+                }
+
+                if (result != Battle.Result.MONSTER_DEAD) {
+                    // Send damage amount.
+                    sendUI(BattleUtility.HERO_ATTACKED.replace("{damage}",
+                            previousMonsterDamage == myHero.getBattle()
+                                    .getMonster().getLastDamage() ? "0" :
+                                    Integer.toString(myHero.getBattle()
+                                            .getMonster().getLastDamage())));
+
+                    // Delay.
+                    delayGame();
                 }
 
                 // Print the dungeon.
@@ -160,8 +177,18 @@ public class DungeonGameFrame extends ConsoleFrame {
                     continue;
                 }
 
+                final int previousHeroDamage = myHero.getLastDamage();
+
                 // Have the monster attack now.
                 myHero.getBattle().monsterAttackHero();
+
+                // Send damage amount.
+                sendUI(BattleUtility.ENEMY_ATTACKED.replace("{damage}",
+                        previousHeroDamage == myHero.getLastDamage() ? "0" :
+                                Integer.toString(myHero.getLastDamage())));
+
+                // Delay.
+                delayGame();
 
                 // Set to option menu.
                 myToolTipPanel.setMessage(BattleUtility.OPTION_MESSAGE);

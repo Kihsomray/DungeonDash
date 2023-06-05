@@ -176,8 +176,6 @@ public abstract class DungeonCharacter implements Entity, Serializable {
             );
         }
 
-        System.out.println("Called, " + Math.min(theDamage, myHP));
-
         myLastDamage = Math.min(theDamage, myHP);
 
     }

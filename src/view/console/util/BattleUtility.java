@@ -10,9 +10,19 @@ public class BattleUtility {
             A - ATTACK, S - SPECIAL ABILITY
             H - HEAL, T - ASK TOM""";
 
+    public static final String HERO_ATTACKED = """
+            
+            YOU DEALT {damage} DAMAGE.
+            """;
+
     public static final String MONSTER_ATTACKING = """
 
             MONSTER IS ATTACKING...
+            """;
+
+    public static final String ENEMY_ATTACKED = """
+            
+            ENEMY DEALT {damage} DAMAGE.
             """;
 
     public static final String[] HERO_DIED = {

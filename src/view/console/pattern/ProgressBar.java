@@ -100,8 +100,6 @@ public final class ProgressBar {
         // Get the finish value.
         final int finish = theLength - middle - start;
 
-        System.out.println(start + ", " + middle + ", " + finish + " :: " + theLength);
-
         // Return the combined string.
         return START_COLOR + "█".repeat(start) +
                 theMiddleColor + "█".repeat(middle) +
