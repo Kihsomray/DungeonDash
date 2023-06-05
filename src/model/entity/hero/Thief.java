@@ -17,11 +17,11 @@ public class Thief extends Hero {
 
     //        FIELDS        //
 
-    public static final int DEFAULT_HP = 225;
+    public static final int DEFAULT_HP = 425;
 
-    public static final int DEFAULT_MIN_DAMAGE = 20;
+    public static final int DEFAULT_MIN_DAMAGE = 35;
 
-    public static final int DEFAULT_MAX_DAMAGE = 40;
+    public static final int DEFAULT_MAX_DAMAGE = 85;
 
     public static final int DEFAULT_ATTACK_SPEED = 6;
 

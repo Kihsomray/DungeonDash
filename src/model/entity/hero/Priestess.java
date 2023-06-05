@@ -15,11 +15,11 @@ public class Priestess extends Hero {
 
     //        FIELDS        //
 
-    public static final int DEFAULT_HP = 175;
+    public static final int DEFAULT_HP = 315;
 
-    public static final int DEFAULT_MIN_DAMAGE = 25;
+    public static final int DEFAULT_MIN_DAMAGE = 35;
 
-    public static final int DEFAULT_MAX_DAMAGE = 45;
+    public static final int DEFAULT_MAX_DAMAGE = 55;
 
     public static final int DEFAULT_ATTACK_SPEED = 5;
 
@@ -28,10 +28,10 @@ public class Priestess extends Hero {
     private static final double DEFAULT_BLOCK_CHANCE = 0.3;
 
     // Ability minimum heal.
-    private static final int ABILITY_MIN_HEAL = 35;
+    private static final int ABILITY_MIN_HEAL = 30;
 
     // Ability maximum heal.
-    private static final int ABILITY_MAX_HEAL = 55;
+    private static final int ABILITY_MAX_HEAL = 65;
 
     /** 41 x 20 representation of the priestess */
     public static final String ASCII_SKIN =
