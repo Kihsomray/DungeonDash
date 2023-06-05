@@ -1,5 +1,6 @@
 package model.entity.hero;
 
+import model.entity.battle.Battle;
 import model.util.Utility;
 import model.dungeon.cell.passable.Passable;
 import model.dungeon.cell.passable.Room;
@@ -23,6 +24,8 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
     //        FIELDS        //
 
+    private static final String INVALID_MOVEMENT = "You can't move there!";
+
     /** Hero's inventory. */
     private final HeroInventory myInventory;
 
@@ -36,6 +39,8 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
     private final double myBlockChance;
 
     private boolean myExtraVisibility;
+
+    private Battle myBattle;
 
 
     //        CONSTRUCTORS        //
@@ -74,6 +79,7 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
         myVisited = new HashSet<>();
         myBlockChance = theBlockChance;
         myExtraVisibility = true;
+        myBattle = null;
 
     }
 
@@ -214,8 +220,10 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
                 .append(Utility.getColor('8'))
                 .append("ABILITY: [")
                 .append(Utility.createPointBar(
-                        Utility.RANDOM.nextInt(0, 100), 100, 18)
-                ) // TODO implement
+                        myBattle != null ?
+                                (myBattle.hasAbility() ? 100 : 0) :
+                                100, 100, 18)
+                )
                 .append(Utility.getColor('8'))
                 .append("] ")
                 .append(randomChar())
@@ -313,19 +321,19 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
         myVisited.add(myCurrentPassable = thePassable);
     }
 
-    public boolean moveNorth() {
+    public MovementResult moveNorth() {
         return checkAndMove(myCurrentPassable.getNeighbors().getNorth());
     }
 
-    public boolean moveEast() {
+    public MovementResult moveEast() {
         return checkAndMove(myCurrentPassable.getNeighbors().getEast());
     }
 
-    public boolean moveSouth() {
+    public MovementResult moveSouth() {
         return checkAndMove(myCurrentPassable.getNeighbors().getSouth());
     }
 
-    public boolean moveWest() {
+    public MovementResult moveWest() {
         return checkAndMove(myCurrentPassable.getNeighbors().getWest());
     }
 
@@ -344,8 +352,10 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
      *
      * @return true if moved to the cell.
      */
-    private boolean checkAndMove(final Passable thePassable) {
-        if (thePassable == null) return false;
+    private MovementResult checkAndMove(final Passable thePassable) {
+
+        // If it's a wall.
+        if (thePassable == null) return MovementResult.INVALID;
         myCurrentPassable = thePassable;
 
         // Reset visibility.
@@ -353,14 +363,15 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
         myVisited.add(myCurrentPassable);
 
-        if (!(myCurrentPassable instanceof final Room room)) return true;
+        if (!(myCurrentPassable instanceof final Room room))
+            return MovementResult.NORMAL;
 
         // TODO fight monsters and traps.
 
         // Transfer the inventory.
         room.getInventory().addAllTo(myInventory);
 
-        return true;
+        return MovementResult.NORMAL;
     }
 
     public boolean hasDiscovered(final Passable passable) {
@@ -379,5 +390,14 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
         return myExtraVisibility;
     }
 
+    public Battle getBattle() {
+        return myBattle;
+    }
+
+    public enum MovementResult{
+
+        NORMAL, INVALID, TRAP, HERO_DEAD
+
+    }
 
 }

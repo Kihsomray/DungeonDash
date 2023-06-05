@@ -25,6 +25,8 @@ public class Dungeon implements Serializable {
     private final int myWidth;
     private final int myHeight;
 
+    private boolean myGamePlaying;
+
     /**
      * Constructor for the dungeon that creates a new dungeon
      * and fills it using private methods.
@@ -42,7 +44,6 @@ public class Dungeon implements Serializable {
         myHeight = theHeight;
 
         // Initialize the Dungeon using Prim's generator.
-        // TODO - create character selection, pass it in here.
         final DungeonGenerator generator = new PrimsGenerator(theWidth, theHeight, theHero);
 
         // Generate the maze.
@@ -50,6 +51,9 @@ public class Dungeon implements Serializable {
 
         // Gets the room count.
         myRoomCount = generator.getRoomCount();
+
+        // Game is playing.
+        myGamePlaying = true;
 
     }
 
@@ -139,18 +143,32 @@ public class Dungeon implements Serializable {
         return sb.toString();
     }
 
+    public void setGamePlaying(final boolean theGamePlaying) {
+        this.myGamePlaying = theGamePlaying;
+    }
+
     public Hero getHero() {
         return myHero;
     }
 
-    public Cell[][] getMaze() { return myMaze; }
+    public Cell[][] getMaze() {
+        return myMaze;
+    }
 
     public int getRoomCount() {
         return myRoomCount;
     }
 
-    public int getMyWidth() { return myWidth; }
+    public int getMyWidth() {
+        return myWidth;
+    }
 
-    public int getMyHeight() { return myHeight; }
+    public int getMyHeight() {
+        return myHeight;
+    }
+
+    public boolean isGamePlaying() {
+        return myGamePlaying;
+    }
 
 }

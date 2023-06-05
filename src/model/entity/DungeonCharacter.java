@@ -36,6 +36,9 @@ public abstract class DungeonCharacter implements Entity, Serializable {
     /** Hit chance. */
     private final double myHitChance;
 
+    /** Last damage taken */
+    private Integer myLastDamage;
+
 
     //      CONSTRUCTORS        //
 
@@ -65,6 +68,8 @@ public abstract class DungeonCharacter implements Entity, Serializable {
         myMaxDamage = theMaxDamage;
         myAttackSpeed = theAttackSpeed;
         myHitChance = theHitChance;
+
+        myLastDamage = null;
 
     }
 
@@ -134,6 +139,14 @@ public abstract class DungeonCharacter implements Entity, Serializable {
         return myHitChance;
     }
 
+    /**
+     * Get last damage dealt to this character.
+     *
+     * @return Last damage dealt.
+     */
+    public Integer getLastDamage() {
+        return myLastDamage;
+    }
 
     //        MUTATORS        //
 
@@ -159,6 +172,8 @@ public abstract class DungeonCharacter implements Entity, Serializable {
                     "You died!"
             );
         }
+
+        myLastDamage = theDamage;
 
     }
 

@@ -139,23 +139,6 @@ public final class Utility {
 
     public static String createPointBar(
             final int theAmount,
-            final int theMiddle,
-            final int theMax,
-            final int theLength
-    ) {
-        return createPointBar(
-                theAmount,
-                getColor('2'),
-                theMiddle,
-                getColor('3'),
-                theMax,
-                getColor('1'),
-                theLength
-        );
-    }
-
-    public static String createPointBar(
-            final int theAmount,
             final int theMax,
             final int theLength
     ) {
@@ -202,20 +185,6 @@ public final class Utility {
             default -> throw new IllegalArgumentException();
         };
 
-    }
-
-    public static void clearConsole() {
-        try {
-            final String os = System.getProperty("os.name");
-
-            if (os.contains("Windows")) {
-                Runtime.getRuntime().exec("cls");
-            } else {
-                Runtime.getRuntime().exec("clear");
-            }
-        } catch (final Exception e) {
-            //  Nothing
-        }
     }
 
 

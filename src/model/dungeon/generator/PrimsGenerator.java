@@ -364,7 +364,7 @@ public class PrimsGenerator implements DungeonGenerator {
         return myHero;
     }
 
-    private class PassableInfo {
+    private static class PassableInfo {
 
         private final Passable myPassable;
         private final Set<Passable> myBlacklist;
@@ -377,8 +377,6 @@ public class PrimsGenerator implements DungeonGenerator {
         public void addBlacklist(final Passable thePassable) {
             myBlacklist.add(thePassable);
         }
-
-
 
     }
 

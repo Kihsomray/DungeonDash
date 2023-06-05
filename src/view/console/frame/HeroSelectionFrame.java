@@ -1,4 +1,4 @@
-package view.console;
+package view.console.frame;
 
 import model.entity.hero.Hero;
 import model.entity.hero.Priestess;
@@ -6,22 +6,20 @@ import model.entity.hero.Thief;
 import model.entity.hero.Warrior;
 import model.util.Utility;
 import view.console.pattern.Color;
-import view.console.pattern.PatternGenerator;
 import view.console.pattern.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
 
 /**
  * Console GUI utilities to display game information.
  *
- * @version 1.0.1
+ * @version 1.0.2
  * @author Kihsomray
  */
-public final class ConsoleUtility {
-
-    /** Create an instance of pattern generator. */
-    private static final PatternGenerator PATTERN = new PatternGenerator(true);
+public final class HeroSelectionFrame extends ConsoleFrame {
 
     /** Progress bar width */
     private static final int PROGRESS_BAR_WIDTH = 18;
@@ -44,14 +42,55 @@ public final class ConsoleUtility {
     /** Used to set the position of characters on the display. */
     private static final char[] CHARACTER_POSITIONING = {'P', 'W', 'T'};
 
+    /** Message to display in tooltip. */
+    private static final String MESSAGE = "TIP: W for warrior, T for thief, P for priestess\n" +
+            "Type letter twice to confirm.";
+
+    /**
+     * Display the hero selection panel.
+     *
+     * @return Selected hero by user as a character.
+     */
+    public char display() {
+
+        // Generate menu with no one selected.
+        System.out.println(generateMenu('W'));
+
+        // Character that was previously chosen.
+        char chosen = ' ';
+
+        // Character that is currently selected.
+        char input = 'W';
+
+        // While it hasn't been selected twice.
+        while (chosen != input) {
+
+            // Set the current to the previous.
+            chosen = input;
+
+            // Get the console input.
+            input = new Scanner(System.in)
+                    .next()
+                    .toUpperCase(Locale.ROOT)
+                    .charAt(0);
+
+            // Check the console input & update UI based on it.
+            if (input == 'W' || input == 'T' || input == 'P')
+                System.out.println(generateMenu(input));
+
+        }
+
+        return chosen;
+
+    }
+
     /**
      * Generate a character menu based on a selected hero.
      *
      * @param theHero Hero to display.
-     * @param theMessage Tooltip message.
      * @return A string representation of the menu.
      */
-    public static String generateCharacterMenu(final char theHero, final String theMessage) {
+    private String generateMenu(final char theHero) {
 
         final StringBuilder sb = new StringBuilder();
         final Hero hero = Utility.generateHeroFromChar(theHero, "");
@@ -184,7 +223,7 @@ public final class ConsoleUtility {
         // Wall of tip toolbar.
         generateSimpleVertical(sb);
 
-        for (String line : theMessage.split("\n"))
+        for (String line : MESSAGE.split("\n"))
             sb
                     .append(PATTERN.generateVerticalBorder(false, CHARACTER_MENU_WIDTH, line))
                     .append('\n');

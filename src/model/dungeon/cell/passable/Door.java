@@ -45,7 +45,7 @@ public class Door implements Passable, Serializable {
 
     @Override
     public void interactWith(final Hero theHero) {
-
+        // TODO ADD
     }
 
 }
