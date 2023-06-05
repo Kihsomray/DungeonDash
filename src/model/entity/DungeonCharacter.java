@@ -165,6 +165,9 @@ public abstract class DungeonCharacter implements Entity, Serializable {
                     "Cannot receive negative damage!"
             );
 
+        // Store temporarily.
+        final int previousHP = myHP;
+
         // Set it.
         myHP = myHP - theDamage;
 
@@ -176,7 +179,7 @@ public abstract class DungeonCharacter implements Entity, Serializable {
             );
         }
 
-        myLastDamage = Math.min(theDamage, myHP);
+        myLastDamage = previousHP - myHP;
 
     }
 
@@ -194,16 +197,15 @@ public abstract class DungeonCharacter implements Entity, Serializable {
                 "Cannot receive negative health!"
             );
 
-        // Temporarily store the previous HP state.
-        final int healAmount = Math.min(myHP + theHealth, myMaxHP);
+        final int previousHealth = myHP;
 
         // Set to max HP if overflowing, otherwise increment.
         // getMaxHP() call is necessary in the case we increase the max HP
         // later in the game.
-        myHP = healAmount;
+        myHP = Math.min(myHP + theHealth, myMaxHP);
 
         // Change last damage.
-        myLastDamage -= healAmount;
+        myLastDamage -= myHP - previousHealth;
 
         // Ensuring no negative last damage.
         myLastDamage = Math.max(0, myLastDamage);
@@ -235,11 +237,9 @@ public abstract class DungeonCharacter implements Entity, Serializable {
             final int theMaxDamage
     ) {
 
-        // If out of the range, no damage.
-        if (Utility.RANDOM.nextDouble() >= myHitChance) return;
-
         // Attack the other character.
         theCharacter.receiveDamage(
+                (Utility.RANDOM.nextDouble() >= myHitChance) ? 0 :
                 Utility.RANDOM.nextInt(theMinDamage, theMaxDamage + 1)
         );
 

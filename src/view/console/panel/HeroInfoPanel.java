@@ -46,7 +46,7 @@ public class HeroInfoPanel extends ConsolePanel {
 
         // Current hero health bar.
         final String healthBar =
-                myHero.getBattle() == null ?
+                myHero.getBattle() == null || myHero.getHP() == 0 ?
                         ProgressBar.generate(
                                 myHero.getHP(),
                                 myHero.getMaxHP(),

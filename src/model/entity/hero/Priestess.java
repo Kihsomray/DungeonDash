@@ -102,10 +102,13 @@ public class Priestess extends Hero {
                     )
             );
 
+            attack(theMonster, 0, 0);
+
         } else {
 
             // Otherwise, do a regular attack.
             attack(theMonster);
+
         }
 
     }

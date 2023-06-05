@@ -179,7 +179,9 @@ public class Monster extends DungeonCharacter implements Enemy, Serializable {
      * @param theHero Hero to attack.
      */
     public void attackHero(final Hero theHero) {
+
         attack(theHero);
+
     }
 
 }

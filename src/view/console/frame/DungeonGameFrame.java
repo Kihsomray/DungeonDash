@@ -37,7 +37,7 @@ public class DungeonGameFrame extends ConsoleFrame {
         myMonsterInfoPanel = new MonsterInfoPanel(myHero);
 
         myDungeonInfoPanel = new DungeonInfoPanel(myDungeon);
-        myToolTipPanel = new ToolTipPanel();
+        myToolTipPanel = new ToolTipPanel(myHero);
 
     }
 
@@ -131,6 +131,12 @@ public class DungeonGameFrame extends ConsoleFrame {
 
                     case 'S':
                         heroResult = myHero.getBattle().heroAttackMonster(Battle.Option.ABILITY);
+                        if (heroResult == Battle.Result.UNAVAILABLE) {
+                            sendUI(BattleUtility.ABILITY_UNAVAILABLE);
+                            delayGame();
+                            sendUI(BattleUtility.OPTION_MESSAGE);
+                            continue;
+                        }
                         break;
 
                     case 'H':
@@ -144,8 +150,9 @@ public class DungeonGameFrame extends ConsoleFrame {
                         break;
 
                     default:
-                        sendUI("INVALID OPTION");
+                        sendUI("\nINVALID OPTION");
                         delayGame();
+                        sendUI(BattleUtility.OPTION_MESSAGE);
                         continue;
 
                 }
@@ -184,7 +191,7 @@ public class DungeonGameFrame extends ConsoleFrame {
                                 Integer.toString(myHero.getLastDamage())));
 
                 if (myHero.getHP() == 0) {
-                    sendUI("You died. Game over!");
+                    sendUI("\nYou died. Game over!");
                     return;
                 }
 
@@ -202,7 +209,7 @@ public class DungeonGameFrame extends ConsoleFrame {
         }
 
         // Winner winner chicken dinner.
-        sendUI("Winner winner chicken dinner!");
+        sendUI("\nWinner winner chicken dinner!");
 
 
     }
