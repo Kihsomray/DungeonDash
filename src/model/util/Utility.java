@@ -9,6 +9,11 @@ import model.entity.hero.Warrior;
 import java.io.*;
 import java.util.*;
 
+/**
+ *
+ * @author Kihsomray
+ * @author Patrick Hern
+ */
 public final class Utility {
 
     private Utility() {

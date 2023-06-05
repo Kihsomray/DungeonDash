@@ -8,8 +8,8 @@ import model.entity.enemy.monster.Monster;
  * Specializes in health, weaker in attack.
  *
  * @version 1.0.0
- * @author Kihsomray
  * @author Patrick Hern
+ * @author Kihsomray
  */
 public class MockOgre extends Monster {
 

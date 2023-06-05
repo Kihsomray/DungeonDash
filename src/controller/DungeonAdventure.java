@@ -8,6 +8,11 @@ import view.console.ConsoleDisplay;
 
 import java.io.Serializable;
 
+/**
+ *
+ * @author Kihsomray
+ * @author Patrick Hern
+ */
 public class DungeonAdventure implements Serializable {
 
     private final DungeonGUI myGUI;
