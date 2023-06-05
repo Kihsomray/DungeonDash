@@ -24,9 +24,6 @@ public final class HeroSelectionFrame extends ConsoleFrame {
     /** Progress bar width */
     private static final int PROGRESS_BAR_WIDTH = 18;
 
-    /** With of character statistics display. */
-    private static final int CHARACTER_MENU_STATS_WIDTH = 95;
-
     /** Used to set the position of characters on the display. */
     private static final char[] CHARACTER_POSITIONING = {'P', 'W', 'T'};
 
@@ -129,7 +126,7 @@ public final class HeroSelectionFrame extends ConsoleFrame {
                 .append(MENU_SEGMENT_SEPARATOR_5)
                 .append(PATTERN.generateVerticalBorder(
                         1,
-                        CHARACTER_MENU_STATS_WIDTH,
+                        RIGHT_MENU_WIDTH,
                         heroStats,
                         false,
                         false)
@@ -240,7 +237,7 @@ public final class HeroSelectionFrame extends ConsoleFrame {
         theStringBuilder
                 .append(PATTERN.generateHorizontalBorder(LEFT_MENU_WIDTH))
                 .append(MENU_SEGMENT_SEPARATOR_5)
-                .append(PATTERN.generateHorizontalBorder(CHARACTER_MENU_STATS_WIDTH))
+                .append(PATTERN.generateHorizontalBorder(RIGHT_MENU_WIDTH))
                 .append('\n');
 
     }
@@ -263,7 +260,7 @@ public final class HeroSelectionFrame extends ConsoleFrame {
                 .append(MENU_SEGMENT_SEPARATOR_5)
                 .append(PATTERN.generateVerticalBorder(
                         true,
-                        CHARACTER_MENU_STATS_WIDTH)
+                        RIGHT_MENU_WIDTH)
                 )
                 .append('\n');
 

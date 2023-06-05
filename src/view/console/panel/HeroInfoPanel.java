@@ -75,8 +75,8 @@ public class HeroInfoPanel extends ConsolePanel {
         // Current hero ability bar.
         final String abilityBar = ProgressBar.generate(
                 myHero.getBattle() != null ?
-                        (myHero.getBattle().hasAbility() ? 100 : 0) :
-                        100, 100, 18);
+                        (myHero.getBattle().hasAbility() ? 1 : 0) :
+                        1, 1, 18);
 
         // Hero ability information.
         sb

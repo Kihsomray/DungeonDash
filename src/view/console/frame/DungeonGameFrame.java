@@ -7,6 +7,7 @@ import model.util.Utility;
 import view.console.panel.DungeonInfoPanel;
 import view.console.panel.HeroInfoPanel;
 import view.console.panel.InventoryInfoPanel;
+import view.console.panel.ToolTipPanel;
 import view.console.util.ConsoleDisplayUtility;
 
 import java.util.Locale;
@@ -29,6 +30,7 @@ public class DungeonGameFrame extends ConsoleFrame {
     private final HeroInfoPanel myHeroInfoPanel;
 
     private final DungeonInfoPanel myDungeonInfoPanel;
+    private final ToolTipPanel myToolTipPanel;
 
     public DungeonGameFrame(final Dungeon theDungeon) {
 
@@ -39,6 +41,7 @@ public class DungeonGameFrame extends ConsoleFrame {
         myHeroInfoPanel = new HeroInfoPanel(myHero);
 
         myDungeonInfoPanel = new DungeonInfoPanel(myDungeon);
+        myToolTipPanel = new ToolTipPanel();
 
     }
 
@@ -90,6 +93,8 @@ public class DungeonGameFrame extends ConsoleFrame {
                         continue;
 
                 }
+
+                //if (movementResult == null);
 
                 // If there is a battle.
             } else {
@@ -154,6 +159,8 @@ public class DungeonGameFrame extends ConsoleFrame {
                     .append(rightPanel[i])
                     .append('\n');
         }
+
+        sb.append(myToolTipPanel.generate());
 
         return sb.toString();
 

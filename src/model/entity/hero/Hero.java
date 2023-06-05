@@ -280,6 +280,9 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
         }
 
+        // Clear enemies
+        room.getEnemies().clear();
+
         // Transfer the inventory.
         room.getInventory().addAllTo(myInventory);
 
@@ -305,6 +308,9 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
     }
 
     public Battle getBattle() {
+        if (myBattle != null && myBattle.getMonster().getHP() == 0)
+            myBattle = null;
+
         return myBattle;
     }
 

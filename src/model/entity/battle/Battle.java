@@ -91,6 +91,9 @@ public class Battle {
 
     }
 
+    public Monster getMonster() {
+        return myMonster;
+    }
 
     public boolean hasAbility() {
         return myAbility;
