@@ -20,16 +20,9 @@ public final class Utility {
 
     }
 
-    private static final List<Character> CHARACTERS
-            = new ArrayList<>(List.of(new Character[]{
-                    '#', '#', '#', '$', '$', '%', '%', '^', '@', '~'
-            }));
-
     /** Used to generate random numbers. */
     public static final Random RANDOM = new Random();
     public static final Scanner SCANNER = new Scanner(System.in);
-
-    public static final String BOLD = "\u001B[1m";
 
     public static String getColor(final char theColor) {
         return "\u001B[3"  + theColor + 'm';

@@ -4,10 +4,8 @@ import model.dungeon.Dungeon;
 import model.entity.battle.Battle;
 import model.entity.hero.Hero;
 import model.util.Utility;
-import view.console.panel.DungeonInfoPanel;
-import view.console.panel.HeroInfoPanel;
-import view.console.panel.InventoryInfoPanel;
-import view.console.panel.ToolTipPanel;
+import view.console.panel.*;
+import view.console.util.BattleUtility;
 import view.console.util.ConsoleDisplayUtility;
 
 import java.util.Locale;
@@ -16,11 +14,10 @@ import java.util.Scanner;
 public class DungeonGameFrame extends ConsoleFrame {
 
     private static final String[] ASK_TOM = {
-            "USE AGILE METHODS!",
-            "UTILIZE OOP PRINCIPLES!",
-            "YOU'RE GOING TO MAKE ME CRY",
-            "WE'VE TALKED ABOUT THIS ALL QTR LONG!",
-            ""
+            "\nUSE AGILE METHODS!",
+            "\nUTILIZE OOP PRINCIPLES!",
+            "\nYOU'RE GOING TO MAKE ME CRY",
+            "WE'VE TALKED ABOUT\nTHIS ALL QUARTER LONG!"
     };
 
     private final Dungeon myDungeon;
@@ -28,6 +25,7 @@ public class DungeonGameFrame extends ConsoleFrame {
 
     private final InventoryInfoPanel myInventoryInfoPanel;
     private final HeroInfoPanel myHeroInfoPanel;
+    private final MonsterInfoPanel myMonsterInfoPanel;
 
     private final DungeonInfoPanel myDungeonInfoPanel;
     private final ToolTipPanel myToolTipPanel;
@@ -39,6 +37,7 @@ public class DungeonGameFrame extends ConsoleFrame {
 
         myInventoryInfoPanel = new InventoryInfoPanel(myHero);
         myHeroInfoPanel = new HeroInfoPanel(myHero);
+        myMonsterInfoPanel = new MonsterInfoPanel(myHero);
 
         myDungeonInfoPanel = new DungeonInfoPanel(myDungeon);
         myToolTipPanel = new ToolTipPanel();
@@ -47,11 +46,11 @@ public class DungeonGameFrame extends ConsoleFrame {
 
     public void display() {
 
+        // Print the dungeon.
+        System.out.println(generate());
+
         // While the game is in progress.
         while (myDungeon.isGamePlaying()) {
-
-            // Print the dungeon.
-            System.out.println(generate());
 
             // Get the user input.
             char input = new Scanner(System.in)
@@ -62,7 +61,7 @@ public class DungeonGameFrame extends ConsoleFrame {
             // If there is no hero battle.
             if (myHero.getBattle() == null) {
 
-                Hero.MovementResult movementResult;
+                Hero.MovementResult movementResult = null;
 
                 // Check input.
                 switch (input) {
@@ -85,21 +84,44 @@ public class DungeonGameFrame extends ConsoleFrame {
 
                     case '1', '2', '3', '4', '5', '6', '7', '8':
                         myHero.useInventoryItem(input - 48);
-                        continue;
+                        break;
 
                     case 'N':
                         // Save dungeon's current state.
                         Utility.saveDungeonState(myDungeon);
-                        continue;
+                        break;
 
                 }
 
-                //if (movementResult == null);
+                if (movementResult == Hero.MovementResult.TRAP) {
 
-                // If there is a battle.
+                    sendUI(BattleUtility.OPTION_MESSAGE);
+
+                    continue;
+
+                } else if (movementResult == Hero.MovementResult.TRAP_AND_MONSTER) {
+
+                    sendUI(BattleUtility.TRAP);
+
+                    delayGame();
+
+                    sendUI(BattleUtility.OPTION_MESSAGE);
+
+                    continue;
+
+                } else if (movementResult == Hero.MovementResult.MONSTER) {
+
+                    sendUI(BattleUtility.OPTION_MESSAGE);
+
+                    continue;
+
+                }
+
+            // If there is a battle.
             } else {
 
                 Battle.Result result;
+
                 switch (input) {
 
                     case 'A':
@@ -115,52 +137,97 @@ public class DungeonGameFrame extends ConsoleFrame {
                         break;
 
                     case 'T':
-                        System.out.println();
+                        sendUI(ASK_TOM[Utility.RANDOM.nextInt(ASK_TOM.length)]);
+                        delayGame();
+                        result = Battle.Result.NORMAL_HERO;
                         break;
 
+                    default:
+                        sendUI("INVALID OPTION");
+                        continue;
 
 
                 }
+
+                // Print the dungeon.
+                sendUI(BattleUtility.getResultMessage(result));
 
                 // "Wait" for the monster to attack.
-                try {
+                delayGame();
 
-                    // Wait between 0.5 and 3.0 seconds.
-                    Thread.sleep(Utility.RANDOM.nextLong(
-                            ConsoleDisplayUtility.MIN_ENEMY_RESPONSE_WAIT_MS,
-                            ConsoleDisplayUtility.MAX_ENEMY_RESPONSE_WAIT_MS)
-                    );
-
-                } catch (final InterruptedException ie) {
-
-                    // Some wack error.
-                    // TODO put some string here.
+                if (result == Battle.Result.MONSTER_DEAD) {
+                    sendUI("");
+                    continue;
                 }
 
+                // Have the monster attack now.
                 myHero.getBattle().monsterAttackHero();
 
+                // Set to option menu.
+                myToolTipPanel.setMessage(BattleUtility.OPTION_MESSAGE);
 
             }
+
+            // Print the dungeon.
+            sendUI(null);
 
         }
     }
 
+    private void delayGame() {
+        try {
+
+            // Wait between 0.5 and 3.0 seconds.
+            Thread.sleep(Utility.RANDOM.nextLong(
+                    ConsoleDisplayUtility.MIN_ENEMY_RESPONSE_WAIT_MS,
+                    ConsoleDisplayUtility.MAX_ENEMY_RESPONSE_WAIT_MS)
+            );
+
+        } catch (final InterruptedException ie) {
+
+            // Nothing.
+
+        }
+    }
+
+    private void sendUI(final String theMessage) {
+        if (theMessage != null) myToolTipPanel.setMessage(theMessage);
+        System.out.println(generate());
+    }
+
     private String generate() {
 
-        final String[] leftPanel = (myHeroInfoPanel.generate() + myInventoryInfoPanel.generate()).split("\n");
-        final String[] rightPanel = (myDungeonInfoPanel.generate()).split("\n");
+        // Left panel.
+        final String[] leftPanel = (myHeroInfoPanel.generate() +
+                " ".repeat(LEFT_MENU_WIDTH) + '\n' +
+                myInventoryInfoPanel.generate() +
+                " ".repeat(LEFT_MENU_WIDTH) + '\n' +
+                myMonsterInfoPanel.generate())
+                .split("\n");
 
+        // Right panel.
+        final String[] rightPanel = (myDungeonInfoPanel.generate() +
+                " ".repeat(RIGHT_MENU_WIDTH) + '\n' +
+                myToolTipPanel.generate()).split("\n");
 
+        // String builder.
         final StringBuilder sb = new StringBuilder();
 
-        for (int i = 0; i < leftPanel.length; i++) {
-            sb.append(leftPanel[i])
+        // Loop through and add each
+        for (
+                int i = 0;
+                i < Math.max(leftPanel.length, rightPanel.length);
+                i++
+        ) {
+            sb.append(i < leftPanel.length ?
+                            leftPanel[i] :
+                            " ".repeat(LEFT_MENU_WIDTH))
                     .append(MENU_SEGMENT_SEPARATOR_5)
-                    .append(rightPanel[i])
+                    .append(i < rightPanel.length ?
+                            rightPanel[i] :
+                            " ".repeat(RIGHT_MENU_WIDTH))
                     .append('\n');
         }
-
-        sb.append(myToolTipPanel.generate());
 
         return sb.toString();
 

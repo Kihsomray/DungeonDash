@@ -128,7 +128,7 @@ public class HeroInfoPanel extends ConsolePanel {
         // Bottom border of hero info.
         appendSimpleHorizontal(sb);
 
-        return sb.append(" ".repeat(33)).append('\n').toString();
+        return sb.toString();
 
     }
 

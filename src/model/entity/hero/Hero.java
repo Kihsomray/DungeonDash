@@ -275,6 +275,8 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
                 // Start a new battle with a monster.
                 myBattle = new Battle(this, monster);
+                if (result != MovementResult.TRAP) result = MovementResult.MONSTER;
+                else result = MovementResult.TRAP_AND_MONSTER;
 
             }
 
@@ -316,7 +318,7 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
     public enum MovementResult{
 
-        NORMAL, INVALID, TRAP
+        NORMAL, INVALID, TRAP, MONSTER, TRAP_AND_MONSTER
 
     }
 

@@ -92,10 +92,15 @@ public final class ProgressBar {
         final int start = (int) Math.round(theMin / theMax * theLength);
 
         // Get the middle value.
-        final int middle = (int) Math.round(theMiddle / theMax * theLength) - start;
+        final int middle = (int) Math.min(
+                Math.round(theMiddle / theMax * theLength) - start,
+                theLength - start
+        );
 
         // Get the finish value.
         final int finish = theLength - middle - start;
+
+        System.out.println(start + ", " + middle + ", " + finish + " :: " + theLength);
 
         // Return the combined string.
         return START_COLOR + "█".repeat(start) +

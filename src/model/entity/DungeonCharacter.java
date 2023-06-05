@@ -165,15 +165,20 @@ public abstract class DungeonCharacter implements Entity, Serializable {
                     "Cannot receive negative damage!"
             );
 
+        // Set it.
+        myHP = myHP - theDamage;
+
         // If lost too much health, the character has died. End the game here.
-        if ((myHP = myHP - theDamage) <= 0) {
+        if (myHP <= 0) {
             myHP = 0;
             throw new IndexOutOfBoundsException(
                     "You died!"
             );
         }
 
-        myLastDamage = theDamage;
+        System.out.println("Called, " + Math.min(theDamage, myHP));
+
+        myLastDamage = Math.min(theDamage, myHP);
 
     }
 

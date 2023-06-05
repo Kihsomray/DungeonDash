@@ -218,7 +218,8 @@ public class PatternGenerator {
         StringBuilder space = new StringBuilder();
 
         // For all chars, append a string.
-        for (char c : theString.toCharArray()) space.append(c).append(" ");
+        for (char c : (theString.isEmpty() ? " " : theString)
+                .toCharArray()) space.append(c).append(" ");
 
         // Fencepost
         space.deleteCharAt(space.length() - 1);

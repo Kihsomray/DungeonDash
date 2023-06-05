@@ -34,6 +34,7 @@ public class DungeonInfoPanel extends ConsolePanel {
             // Needs to be split in two halves
             Queue<String> lowerHalf = new LinkedList<>();
 
+            // Add a typical segment.
             sb.append(PATTERN.generateSegment(5, true)).append(' ');
 
             // Loop through height of cells.
