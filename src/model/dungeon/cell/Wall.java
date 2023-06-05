@@ -1,8 +1,8 @@
 package model.dungeon.cell;
 
-import model.util.Utility;
-
 import java.io.Serializable;
+
+import static view.console.frame.ConsoleFrame.PATTERN;
 
 public class Wall implements Cell, Serializable {
 
@@ -26,7 +26,8 @@ public class Wall implements Cell, Serializable {
 
     @Override
     public String toString() {
-        return Utility.generateSegment() + "\n" + Utility.generateSegment();
+        return PATTERN.generateSegment(5, true) + "\n" +
+                PATTERN.generateSegment(5, true) ;
     }
 
 }

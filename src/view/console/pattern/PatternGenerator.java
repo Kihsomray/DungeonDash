@@ -5,6 +5,7 @@ import model.util.Utility;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Pattern generator that aids in the creation of walls and console GUI
@@ -187,27 +188,56 @@ public class PatternGenerator {
         // Available space for text.
         final int availableSpace = theTotalWidth - theBorderWidth * 2 - 2;
 
-        // Check if text is too long.
-        /*if (theText.length() * (theCenterAndSpace ? 2 - 1 : 1) > availableSpace)
-            throw new IndexOutOfBoundsException(
-                    "The provided text is too long: " +
-                            theText.length() + ", " + availableSpace
-            );*/
-
         // Generate the string.
         return (myColorize ? Color.BOLD + myWallColor : "") +
                 generateSegment(theBorderWidth, myColorize) +
                 (theTextColor ? ' ' + myTextColor : ' ') +
                 (theCenterAndSpace ?
-                        Utility.centerAndSpace(theText, availableSpace, true) :
+                        centerAndSpace(theText, availableSpace, true) :
                         theText) +
                 ' ' +
                 generateSegment(theBorderWidth, myColorize);
 
     }
 
+    /**
+     * Centers and spaces out a string.
+     *
+     * @param theString String to parse.
+     * @param theLength Length of spacing.
+     * @param theCapitalize Should it be capitalized.
+     * @return Compiled String.
+     */
+    private static String centerAndSpace(
+            final String theString,
+            final int theLength,
+            final boolean theCapitalize
+    ) {
 
+        // New String builder.
+        StringBuilder space = new StringBuilder();
 
+        // For all chars, append a string.
+        for (char c : theString.toCharArray()) space.append(c).append(" ");
+
+        // Fencepost
+        space.deleteCharAt(space.length() - 1);
+
+        // Space of the string.
+        String spaceString = space.length() > theLength ?
+                space.substring(0, theLength) : space.toString();
+
+        // Repeat the two edges.
+        spaceString = " ".repeat(
+                (int) Math.floor((theLength - spaceString.length()) / 2.0)
+        ) + spaceString + " ".repeat(
+                (int) Math.ceil((theLength - spaceString.length()) / 2.0)
+        );
+
+        // Return a completed and capitalized string.
+        return theCapitalize ? spaceString.toUpperCase(Locale.ROOT) :
+                spaceString;
+    }
 
     /**
      * Set the wall color of the generator.

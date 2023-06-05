@@ -37,7 +37,7 @@ public abstract class DungeonCharacter implements Entity, Serializable {
     private final double myHitChance;
 
     /** Last damage taken */
-    private Integer myLastDamage;
+    private int myLastDamage;
 
 
     //      CONSTRUCTORS        //
@@ -69,7 +69,7 @@ public abstract class DungeonCharacter implements Entity, Serializable {
         myAttackSpeed = theAttackSpeed;
         myHitChance = theHitChance;
 
-        myLastDamage = null;
+        myLastDamage = 0;
 
     }
 
@@ -144,7 +144,7 @@ public abstract class DungeonCharacter implements Entity, Serializable {
      *
      * @return Last damage dealt.
      */
-    public Integer getLastDamage() {
+    public int getLastDamage() {
         return myLastDamage;
     }
 
