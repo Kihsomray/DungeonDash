@@ -4,10 +4,12 @@ import controller.DungeonAdventure;
 import view.DungeonGUI;
 
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class GUIDisplay implements DungeonGUI {
 
@@ -33,16 +35,28 @@ public class GUIDisplay implements DungeonGUI {
         JPanel startView = new JPanel(new BorderLayout());
         frame.add(startView);
 
-        JLabel startLabel = new JLabel("\nStart the Dungeon adventure\n");
-        JButton startButton = new JButton("Start");
+        String titlePath = "res" + File.separator + "DungeonAdventureTitle.png";
+        String beginPath = "res" + File.separator + "BeginAdventure.png";
+        String loadPath = "res" + File.separator + "LoadAdventure.png";
 
+        JLabel startLabel;
+        JButton startButton;
+        JButton loadButton;
+        try {
+            startLabel = new JLabel(new ImageIcon(ImageIO.read(new File(titlePath))));
+            startButton = new JButton(new ImageIcon(ImageIO.read(new File(beginPath))));
+            loadButton = new JButton(new ImageIcon(ImageIO.read(new File(loadPath))));
+        } catch (Exception e) {System.out.println("Issue with creating the title screen image"); return;}
 
 
         startView.add(startButton, BorderLayout.CENTER); startView.add(startLabel, BorderLayout.NORTH);
+        startView.add(loadButton, BorderLayout.SOUTH);
 
         frame.setVisible(true);
-        frame.setSize(200, 400);
+        frame.setSize(1000, 400);
+        frame.pack();
 
+        frame.setLocationRelativeTo(null);
 
         // First the player needs to see the start screen, then the character select screen, and the username select
 
@@ -60,65 +74,6 @@ public class GUIDisplay implements DungeonGUI {
             }
         });
         // Choose a character and then initialize the dungeon then go to main game loop
-
-        /*
-        // Initialize the dungeon before doing anything else
-        myMain.initializeDungeon(chosen, userName);
-
-        // This is for the main game scene
-
-        // Panel for sorting the elements in the display
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-
-        //Grid for creating the map
-        Map grid = new Map(myWidth, myHeight, myMain.getDungeon().getMaze());
-
-        panel.add(BorderLayout.CENTER, grid);
-
-
-
-
-
-        // Create a label and a button
-        JLabel label = new JLabel("JFrame By Example");
-        JButton button = new JButton();
-        button.setText("Button");
-
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Testing the button.");
-            }
-        });
-
-        // Add it to the panel and later to the frame
-        //panel.add(BorderLayout.PAGE_END, label);
-        //panel.add(button);
-        frame.add(panel);
-
-        // Set some defaults for the frame
-        frame.setSize(myWidth*64, myHeight*64);
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //frame.pack();
-        // Turn it on
-        frame.setVisible(true);
-
-
-
-
-        // MAIN GAME LOOP, Keep this running till game ends
-        while (true) {
-            // Display the current state of the game
-
-            // Get players input, whether they want to move north south east or west. Or if they want to use pot
-
-            break;
-        }
-        System.out.println("Done!");
-
-         */
     }
 
     private void displayMainScene(JFrame frame, char chosen, String userName) {
