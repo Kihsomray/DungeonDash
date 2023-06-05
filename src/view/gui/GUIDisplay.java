@@ -35,6 +35,8 @@ public class GUIDisplay implements DungeonGUI {
         JPanel startView = new JPanel(new BorderLayout());
         frame.add(startView);
 
+        startView.setBackground(new Color(0, 0, 0));
+
         String titlePath = "res" + File.separator + "DungeonAdventureTitle.png";
         String beginPath = "res" + File.separator + "BeginAdventure.png";
         String loadPath = "res" + File.separator + "LoadAdventure.png";
@@ -118,10 +120,22 @@ public class GUIDisplay implements DungeonGUI {
         JPanel characterPanel = new JPanel();
         characterPanel.setLayout(new GridLayout(2, 3));
 
+        String warriorPath = "res" + File.separator + "Warrior.png";
+        String priestessPath = "res" + File.separator + "Priestess.png";
+        String thiefPath = "res" + File.separator + "Thief.png";
 
-        JLabel warriorImg = new JLabel("Warrior");
-        JLabel priestessImg = new JLabel("Priestess");
-        JLabel thiefImg = new JLabel("Thief");
+        JLabel warriorImg;
+        JLabel priestessImg;
+        JLabel thiefImg;
+
+        try {
+            warriorImg = new JLabel(new ImageIcon(ImageIO.read(new File(warriorPath))));
+            priestessImg = new JLabel(new ImageIcon(ImageIO.read(new File(priestessPath))));
+            thiefImg = new JLabel(new ImageIcon(ImageIO.read(new File(thiefPath))));
+        } catch (Exception e) {
+            System.out.println("There was an issue loading the images in the choose character screen"); return;
+        }
+
 
         JButton warriorChoice = new JButton("Warrior");
         JButton priestessChoice = new JButton("Priestess");
@@ -132,7 +146,7 @@ public class GUIDisplay implements DungeonGUI {
 
         theFrame.add(characterPanel);
 
-        theFrame.setSize(500, 500);
+        theFrame.setSize(500, 300);
         theFrame.setLocationRelativeTo(null);
 
         theFrame.revalidate();
