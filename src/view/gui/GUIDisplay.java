@@ -6,6 +6,7 @@ import view.DungeonGUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -95,24 +96,35 @@ public class GUIDisplay implements DungeonGUI {
 
         frame.add(panel);
 
+        JPanel eastPanel = new JPanel();
+        eastPanel.setLayout(new BorderLayout());
+
+        InventoryGUI invGUI = new InventoryGUI(myMain.getDungeon());
+        grid.setInvGUI(invGUI);
+
+        eastPanel.add(BorderLayout.NORTH, invGUI);
+
+        JPanel hpSp = new JPanel();
+        hpSp.setLayout(new BorderLayout());
+
+        try {
+            hpSp.add(BorderLayout.EAST, new JLabel(new ImageIcon(ImageIO.read(new File("res" + File.separator + "PlayerRes" + File.separator + "BasicHealth.png")))));
+        } catch (Exception e) {System.out.println("Issue creating the basic health bar" + e); return;}
+
+        try {
+            hpSp.add(BorderLayout.WEST, new JLabel(new ImageIcon(ImageIO.read(new File("res" + File.separator + "PlayerRes" + File.separator + "BasicSP.png")))));
+        } catch (Exception e) {System.out.println("Issue creating the basic SP bar" + e); return;}
+
+        eastPanel.add(BorderLayout.SOUTH, hpSp);
+        panel.add(BorderLayout.EAST, eastPanel);
+
         // Set some defaults for the frame
-        frame.setSize(myWidth*64, myHeight*64);
+        frame.setSize(myWidth*64 + 32*4, myHeight*64);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Turn it on
         frame.setVisible(true);
-
-
-
-        // MAIN GAME LOOP, Keep this running till game ends
-        while (true) {
-            // Display the current state of the game
-
-            // Get players input, whether they want to move north south east or west. Or if they want to use pot
-
-            break;
-        }
         System.out.println("Done!");
     }
 

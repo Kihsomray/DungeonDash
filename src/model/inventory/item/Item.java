@@ -9,5 +9,5 @@ import model.Entity;
  * @author Kihsomray
  */
 public interface Item extends Entity {
-
+    public String getSlotArtPath();
 }

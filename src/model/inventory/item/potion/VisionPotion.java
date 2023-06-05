@@ -20,6 +20,7 @@ public class VisionPotion extends Potion {
     private static final char DISPLAY_CHAR = 'V';
 
     private static final String visionPotionArtPath = "res" + File.separator + "VisionPotion.png";
+    private static final String visionSlotPath = "res" + File.separator + "InventoryRes" + File.separator + "VisionSlot.png";
 
 
     //        CONSTRUCTORS        //
@@ -51,4 +52,5 @@ public class VisionPotion extends Potion {
     public String getArtPath() {
         return visionPotionArtPath;
     }
+    public String getSlotArtPath() {return visionSlotPath;}
 }

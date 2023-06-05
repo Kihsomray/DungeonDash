@@ -20,6 +20,7 @@ public class Pillar implements Collectable {
     private final Principle myPrinciple;
 
     private static final String pillarArtPath = "res" + File.separator + "Pillar.png";
+    private static final String pillarSlotPath = "res" + File.separator + "InventoryRes" + File.separator + "PillarSlot.png";
 
 
     //        CONSTRUCTORS        //
@@ -90,5 +91,6 @@ public class Pillar implements Collectable {
     public String getArtPath() {
         return pillarArtPath;
     }
+    public String getSlotArtPath() {return pillarSlotPath;}
 
 }

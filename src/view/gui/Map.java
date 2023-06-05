@@ -7,6 +7,7 @@ import model.dungeon.tile.passable.Passable;
 import model.dungeon.tile.passable.Room;
 import model.inventory.item.Item;
 import model.sprite.enemy.Enemy;
+import model.sprite.hero.Hero;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -30,6 +31,8 @@ public class Map extends JPanel {
 
     private JFrame myFrame;
 
+    private InventoryGUI myInvGUI;
+
     public Map(int theWidth, int theHeight, Dungeon theDungeon, JFrame theFrame) {
         super();
 
@@ -51,6 +54,8 @@ public class Map extends JPanel {
         addEntities(theDungeon.getMaze());
 
         addPlayer(theDungeon);
+
+//        generateClouds();
 
         addKeyBinds();
     }
@@ -182,6 +187,27 @@ public class Map extends JPanel {
         addTile(curX, curY, myDungeon.getMaze()[curX][curY].getArtPath());
         addEntity(curX, curY, myDungeon.getHero().getArtPath());
 
+        myInvGUI.updateInvGUI();
+
         myFrame.revalidate();
+    }
+
+    private void generateClouds() {
+        Hero hero = myDungeon.getHero();
+        String cloudPath = "res" + File.separator + "Cloud.png";
+
+
+        for (int i = 0; i < myHeight; i++) {
+            for (int j = 0; j < myWidth; j++) {
+                Cell cell = myDungeon.getMaze()[j][i];
+                if (cell instanceof Passable && !myDungeon.getHero().hasDiscovered((Passable) cell)) {
+                    addTile(j, i, cloudPath);
+                }
+            }
+        }
+    }
+
+    public void setInvGUI(InventoryGUI theInvGUI) {
+        myInvGUI = theInvGUI;
     }
 }

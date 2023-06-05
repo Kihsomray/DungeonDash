@@ -30,6 +30,7 @@ public final class HealthPotion extends Potion {
     private static final double MAX_HEAL_PERCENTAGE = 0.14;
 
     private static final String healthPotionArtPath = "res" + File.separator + "HealthPotion.png";
+    private static final String healthSlotPath = "res" + File.separator + "InventoryRes" + File.separator + "HealthSlot.png";
 
     //        CONSTRUCTORS        //
 
@@ -110,5 +111,6 @@ public final class HealthPotion extends Potion {
     public String getArtPath() {
         return healthPotionArtPath;
     }
+    public String getSlotArtPath() {return healthSlotPath;}
 
 }
