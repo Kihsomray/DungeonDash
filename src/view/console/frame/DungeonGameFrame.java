@@ -53,10 +53,7 @@ public class DungeonGameFrame extends ConsoleFrame {
         while (myDungeon.isGamePlaying()) {
 
             // Get the user input.
-            char input = new Scanner(System.in)
-                    .nextLine()
-                    .toUpperCase(Locale.ROOT)
-                    .charAt(0);
+            final char input = getInput();
 
             // If there is no hero battle.
             if (myHero.getBattle() == null) {
@@ -95,7 +92,9 @@ public class DungeonGameFrame extends ConsoleFrame {
 
                 if (movementResult == Hero.MovementResult.TRAP) {
 
-                    sendUI(BattleUtility.OPTION_MESSAGE);
+                    sendUI(BattleUtility.TRAP);
+
+                    sendUI(" ");
 
                     continue;
 

@@ -6,6 +6,7 @@ import view.DungeonGUI;
 import view.console.frame.DungeonGameFrame;
 import view.console.frame.HeroSelectionFrame;
 
+import java.io.Serializable;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ import java.util.Scanner;
  * @author Kihsomray
  * @author Patrick Hern
  */
-public class ConsoleDisplay implements DungeonGUI {
+public class ConsoleDisplay implements DungeonGUI, Serializable {
 
     /**
      * Instance of main.

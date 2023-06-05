@@ -5,9 +5,11 @@ import model.inventory.item.Item;
 import view.console.frame.ConsoleFrame;
 import view.console.pattern.Color;
 
+import java.io.Serializable;
+
 import static view.console.frame.ConsoleFrame.*;
 
-public abstract class ConsolePanel {
+public abstract class ConsolePanel implements Serializable {
 
 
     protected static void appendSimpleHorizontal(

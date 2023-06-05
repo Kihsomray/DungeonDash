@@ -20,10 +20,10 @@ public final class HealthPotion extends Potion {
     private static final char DISPLAY_CHAR = 'H';
 
     /** Minimum heal percentage */
-    private static final double MIN_HEAL_PERCENTAGE = 0.06;
+    private static final double MIN_HEAL_PERCENTAGE = 0.12;
 
     /** Maximum heal percentage */
-    private static final double MAX_HEAL_PERCENTAGE = 0.14;
+    private static final double MAX_HEAL_PERCENTAGE = 0.24;
 
 
     //        CONSTRUCTORS        //

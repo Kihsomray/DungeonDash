@@ -1,6 +1,10 @@
 package view.console.frame;
 
+import model.util.Utility;
 import view.console.pattern.PatternGenerator;
+
+import java.io.Serializable;
+import java.util.Locale;
 
 /**
  * A frame to display content to the console.
@@ -8,7 +12,7 @@ import view.console.pattern.PatternGenerator;
  * @author Kihsomray
  * @version 1.0.0
  */
-public abstract class ConsoleFrame {
+public abstract class ConsoleFrame implements Serializable {
 
     /** Create an instance of pattern generator. */
     public static final PatternGenerator PATTERN = new PatternGenerator(true);
@@ -27,6 +31,17 @@ public abstract class ConsoleFrame {
 
     /** Generic width separator. */
     public static final String GENERIC_SEPARATOR_3 = "   ";
+
+    protected static char getInput() {
+
+        // Get the user input.
+        String input = Utility.SCANNER
+                .nextLine()
+                .toUpperCase(Locale.ROOT);
+
+        return input.length() > 0 ? input.charAt(0) : ' ';
+
+    }
 
 
 }

@@ -2,6 +2,7 @@ package view.console.pattern;
 
 import model.util.Utility;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.Locale;
  * @author Kihsomray
  * @version 1.0.1
  */
-public class PatternGenerator {
+public class PatternGenerator implements Serializable {
 
     /** Collection of characters that can be present in a wall string. */
     private static final List<Character> CHARACTERS

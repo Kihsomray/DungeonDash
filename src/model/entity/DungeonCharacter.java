@@ -194,10 +194,19 @@ public abstract class DungeonCharacter implements Entity, Serializable {
                 "Cannot receive negative health!"
             );
 
+        // Temporarily store the previous HP state.
+        final int healAmount = Math.min(myHP + theHealth, myMaxHP);
+
         // Set to max HP if overflowing, otherwise increment.
         // getMaxHP() call is necessary in the case we increase the max HP
         // later in the game.
-        myHP = Math.min(myHP + theHealth, getMaxHP());
+        myHP = healAmount;
+
+        // Change last damage.
+        myLastDamage -= healAmount;
+
+        // Ensuring no negative last damage.
+        myLastDamage = Math.max(0, myLastDamage);
 
     }
 

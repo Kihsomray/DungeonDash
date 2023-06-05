@@ -54,10 +54,7 @@ public final class HeroSelectionFrame extends ConsoleFrame {
             chosen = input;
 
             // Get the console input.
-            input = new Scanner(System.in)
-                    .next()
-                    .toUpperCase(Locale.ROOT)
-                    .charAt(0);
+            input = getInput();
 
             // Check the console input & update UI based on it.
             if (input == 'W' || input == 'T' || input == 'P')
