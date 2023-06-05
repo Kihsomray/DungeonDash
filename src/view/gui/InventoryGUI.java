@@ -18,8 +18,6 @@ public class InventoryGUI extends JPanel {
 
     private final JComponent[][] myPanels;
 
-    private final String healthSlotPath = "res" + File.separator + "InventoryRes" + File.separator + "HealthSlot.png";
-    private final String visionSlotPath = "res" + File.separator + "InventoryRes" + File.separator + "VisionSlot.png";
     private final String emptySlotPath = "res" + File.separator + "InventoryRes" + File.separator + "EmptySlot.png";
 
     public InventoryGUI(Dungeon theDungeon) {
