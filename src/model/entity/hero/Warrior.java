@@ -15,7 +15,7 @@ public class Warrior extends Hero {
 
     //        FIELDS        //
 
-    public static final int DEFAULT_HP = 125;
+    public static final int DEFAULT_HP = 325;
 
     public static final int DEFAULT_MIN_DAMAGE = 35;
 

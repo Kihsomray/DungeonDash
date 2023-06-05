@@ -33,9 +33,9 @@ public class Trap implements Enemy, Serializable {
      * @param theHero Hero to damage.
      */
     public void damageHero(final Hero theHero) {
-        theHero.receiveDamage((int) Utility.RANDOM.nextDouble(
+        theHero.receiveDamage((int) (Utility.RANDOM.nextDouble(
                 MIN_HP_LOSS_PERCENTAGE, MAX_HP_LOSS_PERCENTAGE) *
-                theHero.getHP());
+                theHero.getHP()));
     }
 
 }

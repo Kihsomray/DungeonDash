@@ -183,7 +183,7 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
     public void receiveDamage(final int theDamage) {
 
         // If out of the range, no damage.
-        if (Utility.RANDOM.nextDouble() >= myBlockChance) return;
+        if (Utility.RANDOM.nextDouble() < myBlockChance) return;
 
         // Otherwise, call super.
         super.receiveDamage(theDamage);
@@ -271,7 +271,8 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
                 // Take damage and set result.
                 trap.damageHero(this);
-                result = MovementResult.TRAP;
+                if (result != MovementResult.MONSTER) result = MovementResult.TRAP;
+                else result = MovementResult.TRAP_AND_MONSTER;
 
             // If monster, start a battle.
             } else if (enemy instanceof final Monster monster) {

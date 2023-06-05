@@ -17,7 +17,7 @@ public class Thief extends Hero {
 
     //        FIELDS        //
 
-    public static final int DEFAULT_HP = 75;
+    public static final int DEFAULT_HP = 225;
 
     public static final int DEFAULT_MIN_DAMAGE = 20;
 
@@ -103,8 +103,8 @@ public class Thief extends Hero {
                 attack(theMonster);
 
             // Elif fails an attack.
-            } else if (Utility.RANDOM.nextDouble() <= ABILITY_FAILURE_CHANCE /
-                            (1.0 - ABILITY_SUCCESS_CHANCE)
+            } else if (Utility.RANDOM.nextDouble() <= ABILITY_FAILURE_CHANCE +
+                    ABILITY_SUCCESS_CHANCE
             ) {
 
                 // Return, don't proceed.

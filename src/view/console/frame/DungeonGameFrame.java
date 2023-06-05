@@ -91,6 +91,8 @@ public class DungeonGameFrame extends ConsoleFrame {
 
                     sendUI(BattleUtility.TRAP);
 
+                    delayGame();
+
                     sendUI(" ");
 
                     continue;
@@ -119,26 +121,26 @@ public class DungeonGameFrame extends ConsoleFrame {
                 final int previousMonsterDamage = myHero.getBattle()
                         .getMonster().getLastDamage();
 
-                final Battle.Result result;
+                final Battle.Result heroResult;
 
                 switch (input) {
 
                     case 'A':
-                        result = myHero.getBattle().heroAttackMonster(Battle.Option.ATTACK);
+                        heroResult = myHero.getBattle().heroAttackMonster(Battle.Option.ATTACK);
                         break;
 
                     case 'S':
-                        result = myHero.getBattle().heroAttackMonster(Battle.Option.ABILITY);
+                        heroResult = myHero.getBattle().heroAttackMonster(Battle.Option.ABILITY);
                         break;
 
                     case 'H':
-                        result = myHero.getBattle().heroAttackMonster(Battle.Option.HEAL);
+                        heroResult = myHero.getBattle().heroAttackMonster(Battle.Option.HEAL);
                         break;
 
                     case 'T':
                         sendUI(ASK_TOM[Utility.RANDOM.nextInt(ASK_TOM.length)]);
                         delayGame();
-                        result = Battle.Result.NORMAL_HERO;
+                        heroResult = Battle.Result.NORMAL_HERO;
                         break;
 
                     default:
@@ -148,7 +150,7 @@ public class DungeonGameFrame extends ConsoleFrame {
 
                 }
 
-                if (result != Battle.Result.MONSTER_DEAD) {
+                if (heroResult != Battle.Result.MONSTER_DEAD) {
                     // Send damage amount.
                     sendUI(BattleUtility.HERO_ATTACKED.replace("{damage}",
                             previousMonsterDamage == myHero.getBattle()
@@ -161,12 +163,12 @@ public class DungeonGameFrame extends ConsoleFrame {
                 }
 
                 // Print the dungeon.
-                sendUI(BattleUtility.getResultMessage(result));
+                sendUI(BattleUtility.getResultMessage(heroResult));
 
                 // "Wait" for the monster to attack.
                 delayGame();
 
-                if (result == Battle.Result.MONSTER_DEAD) {
+                if (heroResult == Battle.Result.MONSTER_DEAD) {
                     sendUI("");
                     continue;
                 }
@@ -181,6 +183,11 @@ public class DungeonGameFrame extends ConsoleFrame {
                         previousHeroDamage == myHero.getLastDamage() ? "0" :
                                 Integer.toString(myHero.getLastDamage())));
 
+                if (myHero.getHP() == 0) {
+                    sendUI("You died. Game over!");
+                    return;
+                }
+
                 // Delay.
                 delayGame();
 
@@ -193,6 +200,11 @@ public class DungeonGameFrame extends ConsoleFrame {
             sendUI(null);
 
         }
+
+        // Winner winner chicken dinner.
+        sendUI("Winner winner chicken dinner!");
+
+
     }
 
     private void delayGame() {
