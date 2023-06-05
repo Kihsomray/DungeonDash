@@ -204,6 +204,15 @@ public class HeroInventory implements Inventory, Serializable {
     }
 
     /**
+     * Get a copy of the inventory as an array.
+     *
+     * @return Copy of slots in inventory.
+     */
+    public Item[] getSlots() {
+        return Arrays.copyOf(myInventorySlots, myInventorySlots.length);
+    }
+
+    /**
      * Checks if the inventory contains an item.
      *
      * @param theItem Item to check.

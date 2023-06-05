@@ -3,6 +3,7 @@ package view.console;
 import controller.DungeonAdventure;
 import model.util.Utility;
 import view.DungeonGUI;
+import view.console.frame.DungeonGameFrame;
 import view.console.frame.HeroSelectionFrame;
 
 import java.util.Locale;
@@ -17,9 +18,19 @@ import java.util.Scanner;
 public class ConsoleDisplay implements DungeonGUI {
 
     /**
-     * Instance of main instance.
+     * Instance of main.
      */
     private final DungeonAdventure myMain;
+
+    /**
+     * Instance of hero selection frame.
+     */
+    private HeroSelectionFrame myHeroSelectionFrame;
+
+    /**
+     * Instance of dungeon game frame.
+     */
+    private DungeonGameFrame myDungeonGameFrame;
 
     /**
      * Creates an instance of console display.
@@ -56,10 +67,10 @@ public class ConsoleDisplay implements DungeonGUI {
         if (!load) {
 
             // Start with hero selection frame.
-            final HeroSelectionFrame heroSelection = new HeroSelectionFrame();
+            myHeroSelectionFrame = new HeroSelectionFrame();
 
             // Display the hero selection.
-            heroChar = heroSelection.display();
+            heroChar = myHeroSelectionFrame.display();
 
             // Prompt and get user input.
             System.out.print("Please input your username (up to 13 characters): ");
@@ -80,6 +91,12 @@ public class ConsoleDisplay implements DungeonGUI {
 
         // New line in console.
         System.out.println();
+
+        // Create new dungeon game frame.
+        myDungeonGameFrame = new DungeonGameFrame(myMain.getDungeon());
+
+        // Display the dungeon game frame.
+        myDungeonGameFrame.display();
 
     }
 

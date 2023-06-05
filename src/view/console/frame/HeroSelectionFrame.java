@@ -24,20 +24,8 @@ public final class HeroSelectionFrame extends ConsoleFrame {
     /** Progress bar width */
     private static final int PROGRESS_BAR_WIDTH = 18;
 
-    /** Width of display that shows the type of hero. */
-    private static final int CHARACTER_MENU_HEADER_WIDTH = 33;
-
     /** With of character statistics display. */
     private static final int CHARACTER_MENU_STATS_WIDTH = 95;
-
-    /** Width of separator between header and stats display. */
-    private static final String CHARACTER_MENU_SEGMENT_SEPARATOR = "     ";
-
-    /** Width of character display. */
-    private static final int CHARACTER_MENU_WIDTH = 133;
-
-    /** Width of separator between hero characters. */
-    private static final String CHARACTER_MENU_HERO_SEPARATOR = "   ";
 
     /** Used to set the position of characters on the display. */
     private static final char[] CHARACTER_POSITIONING = {'P', 'W', 'T'};
@@ -133,12 +121,12 @@ public final class HeroSelectionFrame extends ConsoleFrame {
         sb
                 .append(PATTERN.generateVerticalBorder(
                         1,
-                        CHARACTER_MENU_HEADER_WIDTH,
+                        LEFT_MENU_WIDTH,
                         hero.getClass().getSimpleName(),
                         true,
                         true)
                 )
-                .append(CHARACTER_MENU_SEGMENT_SEPARATOR)
+                .append(MENU_SEGMENT_SEPARATOR_5)
                 .append(PATTERN.generateVerticalBorder(
                         1,
                         CHARACTER_MENU_STATS_WIDTH,
@@ -157,14 +145,14 @@ public final class HeroSelectionFrame extends ConsoleFrame {
 
         // ------- HERO DISPLAY -------
         sb
-                .append(" ".repeat(CHARACTER_MENU_WIDTH))
+                .append(" ".repeat(TOTAL_FRAME_WIDTH))
                 .append('\n');
 
         // Top border of character selection.
-        generateSimpleHorizontal(sb);
+        appendSimpleHorizontal(sb);
 
         // Wall of character selection.
-        generateSimpleVertical(sb);
+        appendSimpleVertical(sb);
 
         // Each hero's skin.
         List<String[]> characters = new ArrayList<>();
@@ -187,17 +175,17 @@ public final class HeroSelectionFrame extends ConsoleFrame {
             // Create te hero line.
             final String heroLine = Color.getColor(0 == chosen  ? '2' : '3') +
                     characters.get(0)[i] +
-                    CHARACTER_MENU_HERO_SEPARATOR +
+                    GENERIC_SEPARATOR_3 +
                     Color.getColor(1 == chosen  ? '2' : '3') +
                     characters.get(1)[i] +
-                    CHARACTER_MENU_HERO_SEPARATOR +
+                    GENERIC_SEPARATOR_3 +
                     Color.getColor(2 == chosen  ? '2' : '3') +
                     characters.get(2)[i];
 
             // Append the hero line.
             sb.append(PATTERN.generateVerticalBorder(
                             1,
-                            CHARACTER_MENU_WIDTH,
+                            TOTAL_FRAME_WIDTH,
                             heroLine,
                             false,
                             false))
@@ -206,33 +194,33 @@ public final class HeroSelectionFrame extends ConsoleFrame {
         }
 
         // Wall of character selection.
-        generateSimpleVertical(sb);
+        appendSimpleVertical(sb);
 
         // Bottom border of character selection.
-        generateSimpleHorizontal(sb);
+        appendSimpleHorizontal(sb);
 
 
         // ------- TIP TOOLBAR -------
         sb
-                .append(" ".repeat(CHARACTER_MENU_WIDTH))
+                .append(" ".repeat(TOTAL_FRAME_WIDTH))
                 .append('\n');
 
         // Top border of tip toolbar.
-        generateSimpleHorizontal(sb);
+        appendSimpleHorizontal(sb);
 
         // Wall of tip toolbar.
-        generateSimpleVertical(sb);
+        appendSimpleVertical(sb);
 
         for (String line : MESSAGE.split("\n"))
             sb
-                    .append(PATTERN.generateVerticalBorder(false, CHARACTER_MENU_WIDTH, line))
+                    .append(PATTERN.generateVerticalBorder(false, TOTAL_FRAME_WIDTH, line))
                     .append('\n');
 
         // Wall of tip toolbar.
-        generateSimpleVertical(sb);
+        appendSimpleVertical(sb);
 
         // Bottom border of tip toolbar.
-        generateSimpleHorizontal(sb);
+        appendSimpleHorizontal(sb);
 
         // Return completed string
         return sb.toString();
@@ -250,8 +238,8 @@ public final class HeroSelectionFrame extends ConsoleFrame {
 
         // Append the border.
         theStringBuilder
-                .append(PATTERN.generateHorizontalBorder(CHARACTER_MENU_HEADER_WIDTH))
-                .append(CHARACTER_MENU_SEGMENT_SEPARATOR)
+                .append(PATTERN.generateHorizontalBorder(LEFT_MENU_WIDTH))
+                .append(MENU_SEGMENT_SEPARATOR_5)
                 .append(PATTERN.generateHorizontalBorder(CHARACTER_MENU_STATS_WIDTH))
                 .append('\n');
 
@@ -270,9 +258,9 @@ public final class HeroSelectionFrame extends ConsoleFrame {
         theStringBuilder
                 .append(PATTERN.generateVerticalBorder(
                         true,
-                        CHARACTER_MENU_HEADER_WIDTH)
+                        LEFT_MENU_WIDTH)
                 )
-                .append(CHARACTER_MENU_SEGMENT_SEPARATOR)
+                .append(MENU_SEGMENT_SEPARATOR_5)
                 .append(PATTERN.generateVerticalBorder(
                         true,
                         CHARACTER_MENU_STATS_WIDTH)
@@ -286,13 +274,13 @@ public final class HeroSelectionFrame extends ConsoleFrame {
      *
      * @param theStringBuilder StringBuild to append to.
      */
-    private static void generateSimpleHorizontal(
+    private static void appendSimpleHorizontal(
             final StringBuilder theStringBuilder
     ) {
 
         // Append the horizontal border.
         theStringBuilder
-                .append(PATTERN.generateHorizontalBorder(CHARACTER_MENU_WIDTH))
+                .append(PATTERN.generateHorizontalBorder(TOTAL_FRAME_WIDTH))
                 .append('\n');
 
     }
@@ -302,15 +290,18 @@ public final class HeroSelectionFrame extends ConsoleFrame {
      *
      * @param theStringBuilder StringBuild to append to.
      */
-    private static void generateSimpleVertical(
+    private static void appendSimpleVertical(
             final StringBuilder theStringBuilder
     ) {
+
+        // Append the vertical border.
         theStringBuilder
                 .append(PATTERN.generateVerticalBorder(
                         true,
-                        CHARACTER_MENU_WIDTH)
+                        TOTAL_FRAME_WIDTH)
                 )
                 .append('\n');
+
     }
 
 

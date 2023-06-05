@@ -30,6 +30,9 @@ public class PatternGenerator {
     /** Keeps track of what position we are at in the list */
     private int myCounter;
 
+    /** Color of text if selected. */
+    private String myTextColor;
+
     /**
      * Constructs a new pattern generator.
      *
@@ -45,6 +48,9 @@ public class PatternGenerator {
         // Initializes counter to 0.
         myCounter = 0;
 
+        // Set default color to white.
+        myTextColor = Color.WHITE;
+
     }
 
     /**
@@ -55,7 +61,7 @@ public class PatternGenerator {
     public String generateSingle() {
 
         // Calls the segment generator with 1.
-        return generateSegment(1, false);
+        return generateSegment(1, true);
 
     }
 
@@ -167,7 +173,7 @@ public class PatternGenerator {
      * @param theTotalWidth Width of the completed string.
      * @param theText Text to place between the borders.
      * @param theCenterAndSpace Should text be centered and spaced?
-     * @param theWhiteText Should the text be white?
+     * @param theTextColor Should the text be colored as set above?
      * @return Generated vertical border.
      */
     public String generateVerticalBorder(
@@ -175,7 +181,7 @@ public class PatternGenerator {
             final int theTotalWidth,
             final String theText,
             final boolean theCenterAndSpace,
-            final boolean theWhiteText
+            final boolean theTextColor
     ) {
 
         // Available space for text.
@@ -191,7 +197,7 @@ public class PatternGenerator {
         // Generate the string.
         return (myColorize ? Color.BOLD + myWallColor : "") +
                 generateSegment(theBorderWidth, myColorize) +
-                (theWhiteText ? ' ' + Color.WHITE : ' ') +
+                (theTextColor ? ' ' + myTextColor : ' ') +
                 (theCenterAndSpace ?
                         Utility.centerAndSpace(theText, availableSpace, true) :
                         theText) +
@@ -208,8 +214,17 @@ public class PatternGenerator {
      *
      * @param theWallColor Wall color.
      */
-    public void setMyWallColor(final String theWallColor) {
+    public void setWallColor(final String theWallColor) {
         this.myWallColor = theWallColor;
+    }
+
+    /**
+     * Set the color of the text to generate.
+     *
+     * @param theTextColor Color of text.
+     */
+    public void setTextColor(final String theTextColor) {
+        this.myTextColor = theTextColor;
     }
 
 }
