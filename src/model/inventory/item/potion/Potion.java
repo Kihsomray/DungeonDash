@@ -27,7 +27,7 @@ public abstract class Potion implements Item, Serializable {
      *
      * @return Message from using the potion.
      */
-    public String usePotion(final Hero theHero) {
+    public String applyPotion(final Hero theHero) {
         return "Not implemented";
     }
 

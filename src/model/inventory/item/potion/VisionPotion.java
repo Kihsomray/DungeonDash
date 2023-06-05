@@ -38,7 +38,7 @@ public class VisionPotion extends Potion {
 
 
     @Override
-    public String usePotion(final Hero theHero) {
+    public String applyPotion(final Hero theHero) {
 
         theHero.enableExtraVisibility();
         return "Visibility increased!";

@@ -54,7 +54,7 @@ public final class HeroSelectionFrame extends ConsoleFrame {
     public char display() {
 
         // Generate menu with no one selected.
-        System.out.println(generateMenu('W'));
+        System.out.println(generate('W'));
 
         // Character that was previously chosen.
         char chosen = ' ';
@@ -76,7 +76,7 @@ public final class HeroSelectionFrame extends ConsoleFrame {
 
             // Check the console input & update UI based on it.
             if (input == 'W' || input == 'T' || input == 'P')
-                System.out.println(generateMenu(input));
+                System.out.println(generate(input));
 
         }
 
@@ -90,7 +90,7 @@ public final class HeroSelectionFrame extends ConsoleFrame {
      * @param theHero Hero to display.
      * @return A string representation of the menu.
      */
-    private String generateMenu(final char theHero) {
+    private String generate(final char theHero) {
 
         final StringBuilder sb = new StringBuilder();
         final Hero hero = Utility.generateHeroFromChar(theHero, "");

@@ -1,6 +1,8 @@
 package model.entity.hero;
 
 import model.entity.battle.Battle;
+import model.entity.enemy.Enemy;
+import model.entity.enemy.Trap;
 import model.util.Utility;
 import model.dungeon.cell.passable.Passable;
 import model.dungeon.cell.passable.Room;
@@ -341,7 +343,7 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
         final Item item = myInventory.getItemAt(theLocation % 4 - 1, (theLocation + 4) / 4, true);
 
         if (item instanceof Potion) {
-            ((Potion) item).usePotion(this);
+            ((Potion) item).applyPotion(this);
             return true;
         }
         return false;
@@ -361,17 +363,42 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
         // Reset visibility.
         myExtraVisibility = false;
 
+        // Add to the visited tiles.
         myVisited.add(myCurrentPassable);
 
+        // Checks if it is a room.
         if (!(myCurrentPassable instanceof final Room room))
             return MovementResult.NORMAL;
 
-        // TODO fight monsters and traps.
+        // Keep track of result, defaulted to normal.
+        MovementResult result = MovementResult.NORMAL;
+
+        // Fight any enemies in this room.
+        for (Enemy enemy : room.getEnemies()) {
+
+            // If a trap, take the damage.
+            if (enemy instanceof final Trap trap) {
+
+                // Take damage and set result.
+                trap.damageHero(this);
+                result = MovementResult.TRAP;
+
+            // If monster, start a battle.
+            } else if (enemy instanceof final Monster monster) {
+
+                // Start a new battle with a monster.
+                myBattle = new Battle(this, monster);
+
+            }
+
+        }
 
         // Transfer the inventory.
         room.getInventory().addAllTo(myInventory);
 
-        return MovementResult.NORMAL;
+        // Return the result.
+        return result;
+
     }
 
     public boolean hasDiscovered(final Passable passable) {
@@ -396,7 +423,7 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
 
     public enum MovementResult{
 
-        NORMAL, INVALID, TRAP, HERO_DEAD
+        NORMAL, INVALID, TRAP
 
     }
 

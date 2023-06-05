@@ -5,7 +5,6 @@ import model.util.Utility;
 import view.DungeonGUI;
 import view.console.frame.HeroSelectionFrame;
 
-import java.io.Serializable;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -36,125 +35,52 @@ public class ConsoleDisplay implements DungeonGUI {
     @Override
     public void display() {
 
-        // Start with hero selection frame.
-        final HeroSelectionFrame heroSelection = new HeroSelectionFrame();
+        // Scanner object.
+        final Scanner scanner = new Scanner(System.in);
 
-        // Display the hero selection.
-        char heroChar = heroSelection.display();
+        // Selected hero, defaulted to warrior.
+        char heroChar = 'W';
 
+        // Username, by default- empty.
+        String username = "";
 
-        // Ask the player for a username.
-        System.out.print("Please input your username (up to 13 characters): ");
+        // Prompt the user.
+        System.out.print("\nWould you like a new game (N) or load a game (L)? ");
+
+        // Load if 'L', otherwise new game.
+        boolean load = scanner.nextLine()
+                .toUpperCase(Locale.ROOT)
+                .charAt(0) == 'L';
+
+        // If not load, prompt for username.
+        if (!load) {
+
+            // Start with hero selection frame.
+            final HeroSelectionFrame heroSelection = new HeroSelectionFrame();
+
+            // Display the hero selection.
+            heroChar = heroSelection.display();
+
+            // Prompt and get user input.
+            System.out.print("Please input your username (up to 13 characters): ");
+            username = scanner.nextLine();
+
+        }
 
         // Get the player's input for username.
-        myMain.initializeDungeon(heroChar, new Scanner(System.in).nextLine());
+        myMain.initializeDungeon(heroChar, username);
+
+        // Load if needed.
+        if (load) {
+
+            // Set the dungeon to previous state.
+            myMain.setDungeon(Utility.loadDungeonState(myMain.getDungeon()));
+
+        }
 
         // New line in console.
         System.out.println();
 
-
-        // While hero remains non-null.
-        while (myMain.getDungeon().getHero() != null) {
-
-            // Print the dungeon.
-            System.out.println(myMain.getDungeon());
-
-            // Get the user input.
-            char input = new Scanner(System.in)
-                    .next()
-                    .toUpperCase(Locale.ROOT)
-                    .charAt(0);
-
-            // If there is no hero battle.
-            if (myMain.getDungeon().getHero().getBattle() == null) {
-
-                // Check input.
-                switch (input) {
-
-                    case 'W':
-                        myMain.getDungeon().getHero().moveNorth();
-                        break;
-
-                    case 'A':
-                        myMain.getDungeon().getHero().moveWest();
-                        break;
-
-                    case 'S':
-                        myMain.getDungeon().getHero().moveSouth();
-                        break;
-
-                    case 'D':
-                        myMain.getDungeon().getHero().moveEast();
-                        break;
-
-                    case '1', '2', '3', '4', '5', '6', '7', '8':
-                        myMain.getDungeon().getHero().useInventoryItem(input - 48);
-                        break;
-
-                    case 'N':
-                        // Save dungeon's current state.
-                        Utility.saveDungeonState(myMain.getDungeon());
-                        break;
-
-                    case 'L':
-                        // Load dungeon save state here.
-                        myMain.setDungeon(
-                                Utility.loadDungeonState(myMain.getDungeon())
-                        );
-                        break;
-
-                }
-
-            // If there is a battle.
-            } else {
-
-                // Check input.
-                switch (input) {
-
-                    case 'A':
-                        // TODO attack
-                        break;
-
-                    case 'S':
-                        // TODO special
-                        break;
-
-                    case 'H':
-                        // TODO heal potion
-                        break;
-
-                    case 'T':
-                        // TODO ask tom
-                        break;
-
-
-
-                }
-
-                // "Wait" for the monster to attack.
-                try {
-
-                    // Wait between 0.5 and 3.0 seconds.
-                    Thread.sleep(Utility.RANDOM.nextLong(500L, 3000L));
-
-                } catch (final InterruptedException ie) {
-
-                    // Some wack error.
-                    // TODO put some string here.
-                }
-
-                myMain.getDungeon().getHero().getBattle().monsterAttackHero();
-
-
-            }
-
-        }
-
-
-
-
     }
-
-
 
 }

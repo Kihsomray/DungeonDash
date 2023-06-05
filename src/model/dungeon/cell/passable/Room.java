@@ -83,6 +83,10 @@ public class Room implements Passable, Serializable {
         return entities;
     }
 
+    public Set<Enemy> getEnemies() {
+        return myEnemies;
+    }
+
     /**
      * Randomizes the spawns of the monsters, traps, and potions.
      * Makes sure entrances and exits cannot spawn these secondary

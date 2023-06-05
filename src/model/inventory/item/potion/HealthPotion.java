@@ -50,7 +50,7 @@ public final class HealthPotion extends Potion {
      * Uses heal potion on the hero.
      */
     @Override
-    public String usePotion(final Hero theHero) {
+    public String applyPotion(final Hero theHero) {
 
         // Generate the amount to heal by.
         final int healAmount = (int) (theHero.getMaxHP() *

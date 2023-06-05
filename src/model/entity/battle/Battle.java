@@ -2,21 +2,14 @@ package model.entity.battle;
 
 import model.entity.enemy.monster.Monster;
 import model.entity.hero.Hero;
-import model.util.Utility;
+import model.inventory.item.potion.HealthPotion;
 
 public class Battle {
-
-    private static final long MIN_MONSTER_WAIT_MS = 500L;
-
-    private static final long MAX_MONSTER_WAIT_MS = 3000L;
 
     private final Hero myHero;
     private final Monster myMonster;
 
     private boolean myAbility;
-
-    private Integer myHeroDamage;
-    private Integer myMonsterDamage;
 
     public Battle(final Hero theHero, final Monster theMonster) {
 
@@ -24,9 +17,6 @@ public class Battle {
         myMonster = theMonster;
 
         myAbility = true;
-
-        myHeroDamage = 0;
-        myMonsterDamage = 0;
 
     }
 
@@ -59,15 +49,20 @@ public class Battle {
                 break;
 
             case HEAL:
-                myHero.getInventory().getInventory().stream().findFirst();
-                break;
+                HealthPotion potion = (HealthPotion) myHero.getInventory()
+                        .getInventory().stream()
+                        .filter(e -> e instanceof HealthPotion)
+                        .findFirst().orElse(null);
 
+                if (potion == null) return Result.UNAVAILABLE;
 
+                potion.applyPotion(myHero);
+                myHero.getInventory().removeItem(potion);
 
 
         }
 
-        return null;
+        return Result.NORMAL_HERO;
 
     }
 
@@ -104,13 +99,13 @@ public class Battle {
 
     public enum Option {
 
-        ATTACK, ABILITY, HEAL, ASK_TOM
+        ATTACK, ABILITY, HEAL
 
     }
 
     public enum Result {
 
-        NORMAL_HERO, NORMAL_MONSTER, UNAVAILABLE, MONSTER_DEAD, HERO_DEAD, ERROR
+        NORMAL_HERO, NORMAL_MONSTER, UNAVAILABLE, MONSTER_DEAD, HERO_DEAD
 
     }
 

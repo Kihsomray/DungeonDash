@@ -103,6 +103,22 @@ public class HeroInventory implements Inventory, Serializable {
     }
 
     /**
+     * Removes an item from the inventory, if present.
+     *
+     * @param theItem Item to remove.
+     */
+    public void removeItem(final Item theItem) {
+
+        for (int i = 0; i < myInventorySlots.length; i++) {
+            if (myInventorySlots[i] == theItem) {
+                myInventorySlots[i] = null;
+                return;
+            }
+        }
+
+    }
+
+    /**
      * Set an item at a specific location.
      *
      * X = 0, Y = 0 will be the item in position 0.
