@@ -150,7 +150,6 @@ public class Map extends JPanel {
     private void addKeyBind(String key) {
         Action keyAction = new AbstractAction(){
             public void actionPerformed(ActionEvent e) {
-                System.out.println(key + " was pressed");
                 moveHero(key);
             }
         };
@@ -163,7 +162,6 @@ public class Map extends JPanel {
     }
 
     private void moveHero(String theDir) {
-        System.out.println("Trying to move in " + theDir);
 
         int prevX = myDungeon.getHero().getCurrentPassable().getX();
         int prevY = myDungeon.getHero().getCurrentPassable().getY();
@@ -172,7 +170,6 @@ public class Map extends JPanel {
 
         if (theDir.equals("W")) {
             myDungeon.getHero().moveSouth();
-            System.out.println("Trying to move W " + theDir);
         } else if (theDir.equals("A")) {
             myDungeon.getHero().moveWest();
         } else if (theDir.equals("S")) {
