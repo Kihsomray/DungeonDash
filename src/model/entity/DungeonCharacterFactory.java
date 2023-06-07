@@ -1,5 +1,8 @@
 package model.entity;
 
+import model.entity.enemy.monster.mock.MockGremlin;
+import model.entity.enemy.monster.mock.MockOgre;
+import model.entity.enemy.monster.mock.MockSkeleton;
 import org.sqlite.SQLiteDataSource;
 
 import java.sql.Connection;
@@ -29,7 +32,7 @@ public class DungeonCharacterFactory {
      * reads input from the database.
      */
     public DungeonCharacterFactory() {
-        readFromSQLiteDB();
+        //readFromSQLiteDB();
     }
 
     /**
@@ -104,9 +107,18 @@ public class DungeonCharacterFactory {
     public static Monster generateMonster() {
 
         // Randomly select a monster from the defined list.
-        return new Monster(
-                MONSTER_DATA.get(Utility.RANDOM.nextInt(MONSTER_DATA.size()))
-        );
+//        return new Monster(
+//                MONSTER_DATA.get(Utility.RANDOM.nextInt(MONSTER_DATA.size()))
+//        );
+
+        double r = Utility.RANDOM.nextDouble();
+        if (r > 0.667) {
+            return new MockGremlin();
+        } else if (r < 0.333) {
+            return new MockOgre();
+        } else {
+            return new MockSkeleton();
+        }
 
     }
 
