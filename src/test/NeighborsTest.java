@@ -2,9 +2,7 @@ package test;
 
 import model.dungeon.cell.passable.Door;
 import model.dungeon.cell.passable.Passable;
-import model.dungeon.cell.passable.Room;
 import model.dungeon.cell.passable.info.Neighbors;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.HashSet;
