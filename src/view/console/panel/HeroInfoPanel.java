@@ -108,9 +108,9 @@ public class HeroInfoPanel extends ConsolePanel {
 
         // Current hero coordinate info.
         final String coordinateInfo = "     |  " + Color.WHITE + "X:" + Color.CYAN +
-                (x > 8 ? "" : "0") + (x + 1) + Color.GREY + "  |  " +
+                (x > 8 ? "" : "0") + (x + 1) + Color.BLACK + "  |  " +
                 Color.WHITE + "Y:" + Color.CYAN + (y > 8 ? "" : "0") +
-                (y + 1) + Color.GREY + "  |     ";
+                (y + 1) + Color.BLACK + "  |     ";
 
         // Hero coordinate info.
         sb

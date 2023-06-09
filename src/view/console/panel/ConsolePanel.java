@@ -2,7 +2,6 @@ package view.console.panel;
 
 import model.entity.hero.Hero;
 import model.inventory.item.Item;
-import view.console.frame.ConsoleFrame;
 import view.console.pattern.Color;
 
 import java.io.Serializable;
@@ -77,7 +76,7 @@ public abstract class ConsolePanel implements Serializable {
                     .append(" -(")
                     .append(Color.WHITE)
                     .append(i)
-                    .append(Color.GREY)
+                    .append(Color.BLACK)
                     .append(")- ");
         }
         theStringBuilder.append(PATTERN.generateSingle())

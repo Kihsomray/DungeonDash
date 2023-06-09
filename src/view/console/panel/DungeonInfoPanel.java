@@ -3,7 +3,6 @@ package view.console.panel;
 import model.dungeon.Dungeon;
 import model.dungeon.cell.Cell;
 import model.dungeon.cell.passable.Passable;
-import model.util.Utility;
 import view.console.pattern.Color;
 
 import java.util.LinkedList;
@@ -117,7 +116,7 @@ public class DungeonInfoPanel extends ConsolePanel {
         for (int i = 0; i < 2; i++) {
 
             // Color of wall.
-            theStringBuilder.append(Color.GREY);
+            theStringBuilder.append(Color.BLACK);
 
             // Loop through width of dungeon.
             for (int j = 0; j < myDungeon.getMyWidth() + 1; j++) {
