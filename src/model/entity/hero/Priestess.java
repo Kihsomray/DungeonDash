@@ -41,7 +41,7 @@ public class Priestess extends Hero {
     public static final String ASCII_SKIN =
             "                                         \n" +
             "           ,                             \n" +
-            "     φ╓▄µ▄╨▀⌐       ,.⌐⌐,               \n" +
+            "     φ╓▄µ▄╨▀⌐       ,.⌐⌐,                \n" +
             "      ▄▓▒▓` '▓▒▄  ╔ⁿ╟▒ W`*▓╔             \n" +
             "     ≡ƒ▒ ╟▒╣▄▄██P ▓▓▀▓▌▀▀╩▌░▌            \n" +
             "     '█▒m▄▐█▓▒█▌   ▓▌▓▓╣UL▐              \n" +
