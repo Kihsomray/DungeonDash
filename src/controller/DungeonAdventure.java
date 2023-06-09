@@ -8,6 +8,8 @@ import view.console.ConsoleDisplay;
 
 import java.io.Serializable;
 
+import static model.util.Utility.SCANNER;
+
 /**
  *
  * @author Kihsomray
@@ -21,6 +23,7 @@ public class DungeonAdventure implements Serializable {
     public static void main(String[] args) {
         final DungeonAdventure game = new DungeonAdventure();
         game.initializeGUI();
+        SCANNER.nextLine();
     }
 
     private DungeonAdventure() {
