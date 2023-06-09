@@ -17,8 +17,6 @@ import java.io.Serializable;
  */
 public class Monster extends DungeonCharacter implements Enemy, Serializable {
 
-    //        FIELDS        //
-
     /** Minimum heal. */
     private final int myMinHeal;
 
@@ -28,8 +26,6 @@ public class Monster extends DungeonCharacter implements Enemy, Serializable {
     /** Heal chance. */
     private final double myHealChance;
 
-
-    //        CONSTRUCTORS        //
 
     /**
      * Create an instance of a monster based on MonsterData.
@@ -94,7 +90,45 @@ public class Monster extends DungeonCharacter implements Enemy, Serializable {
     }
 
 
-    //        ACCESSORS        //
+    /**
+     * Attack this monster. Has a chance of healing itself after.
+     *
+     * @param theDamage Damage to deal to the monster.
+     */
+    @Override
+    public void receiveDamage(final int theDamage) {
+        super.receiveDamage(theDamage);
+
+        // If no error is thrown, heal the monster.
+        healMonster();
+    }
+
+    /**
+     * Heal the monster after it has been attacked.
+     */
+    private void healMonster() {
+
+        // If the chance is generated.
+        if (Utility.RANDOM.nextDouble() < myHealChance) {
+
+            // Give the monster some health back.
+            receiveHealth(Utility.RANDOM.nextInt(myMinHeal, myMaxHeal + 1));
+
+        }
+
+    }
+
+    /**
+     * Attack a hero.
+     *
+     * @param theHero Hero to attack.
+     */
+    public void attackHero(final Hero theHero) {
+
+        attack(theHero);
+
+    }
+
 
     /**
      * Get minimum heal.
@@ -141,48 +175,6 @@ public class Monster extends DungeonCharacter implements Enemy, Serializable {
     @Override
     public String getColoredDisplay() {
         return Color.RED + getDisplayChar();
-    }
-
-
-    //        MUTATORS        //
-
-    /**
-     * Attack this monster. Has a chance of healing itself after.
-     *
-     * @param theDamage Damage to deal to the monster.
-     */
-    @Override
-    public void receiveDamage(final int theDamage) {
-        super.receiveDamage(theDamage);
-
-        // If no error is thrown, heal the monster.
-        healMonster();
-    }
-
-    /**
-     * Heal the monster after it has been attacked.
-     */
-    private void healMonster() {
-
-        // If the chance is generated.
-        if (Utility.RANDOM.nextDouble() < myHealChance) {
-
-            // Give the monster some health back.
-            receiveHealth(Utility.RANDOM.nextInt(myMinHeal, myMaxHeal + 1));
-
-        }
-
-    }
-
-    /**
-     * Attack a hero.
-     *
-     * @param theHero Hero to attack.
-     */
-    public void attackHero(final Hero theHero) {
-
-        attack(theHero);
-
     }
 
 }
