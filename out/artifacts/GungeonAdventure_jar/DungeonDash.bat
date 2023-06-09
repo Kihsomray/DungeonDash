@@ -1,3 +1,3 @@
-java -jar DungeonAdventure.jar
+java -jar GungeonAdventure.jar
 pause >nul
 cls
