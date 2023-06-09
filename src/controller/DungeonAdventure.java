@@ -7,8 +7,6 @@ import view.console.ConsoleDisplay;
 
 import java.io.Serializable;
 
-import static model.util.Utility.SCANNER;
-
 /**
  * Main class of the Dungeon Adventure game.
  *
