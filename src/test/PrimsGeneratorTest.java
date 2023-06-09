@@ -21,7 +21,7 @@ class PrimsGeneratorTest {
 
     @Test
     void generate() {
-
+        //TODO test this method
     }
 
     @Test
