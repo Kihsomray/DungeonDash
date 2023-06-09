@@ -4,21 +4,25 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class WallTest {
+/** Class to test the Wall object. */
+class WallTest { // TODO find if wall needs testing to begin with
 
-    @Test
-    void getX() {
-        return;
-    }
+//    /** Simple test for a getter. */
+//    @Test
+//    void getX() {
+//        return;
+//    }
 
-    @Test
-    void getY() {
-        return;
-    }
+//    /** Simple test for a getter. */
+//    @Test
+//    void getY() {
+//        return;
+//    }
 
-    @Test
-    void testToString() {
-        return; // TODO figure out if this needs testing
-        // This returns two lines of random characters to display a wall so it shouldn't need testing
-    }
+//    /** Simple test for a getter. */
+//    @Test
+//    void testToString() {
+//        return; // TODO figure out if this needs testing
+//        // This returns two lines of random characters to display a wall so it shouldn't need testing
+//    }
 }
