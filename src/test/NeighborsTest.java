@@ -14,9 +14,7 @@ class NeighborsTest {
 
     Neighbors myNeighbors;
 
-    /** Set up a Neigbors object and set up dummy Passables as neighbors.
-     *
-     */
+    /** Set up a Neighbors object and set up dummy Passable as neighbors. */
     @BeforeEach
     void setUp() {
         myNeighbors = new Neighbors(new Door(1, 1, false));
@@ -33,12 +31,12 @@ class NeighborsTest {
     }
 
     /** Tests getRandomNeighbor by creating a neighbors object and setting north, south, east, west to some dummy
-     *  Passables and then check if when getting the random neighbors it acts like it should.
+     *  Passable and then check if when getting the random neighbors it acts like it should.
      */
     @org.junit.jupiter.api.Test
     void getRandomNeighbor() {
 
-        Set<Passable> foundSet = new HashSet<Passable>();
+        Set<Passable> foundSet = new HashSet<>();
         for (int i = 0; i < 4; i++) {
             Passable rand = myNeighbors.getRandomNeighbor(foundSet);
             //System.out.println(rand.getX());
@@ -76,27 +74,27 @@ class NeighborsTest {
     @org.junit.jupiter.api.Test
     void setNorth() {
         myNeighbors.setNorth(null, false);
-        assertEquals(null, myNeighbors.getNorth());
+        assertNull(myNeighbors.getNorth());
     }
 
     /** Tests if the setting the neighbor works in the east position. */
     @org.junit.jupiter.api.Test
     void setEast() {
         myNeighbors.setEast(null, false);
-        assertEquals(null, myNeighbors.getEast());
+        assertNull(myNeighbors.getEast());
     }
 
     /** Tests if the setting the neighbor works in the south position. */
     @org.junit.jupiter.api.Test
     void setSouth() {
         myNeighbors.setSouth(null, false);
-        assertEquals(null, myNeighbors.getSouth());
+        assertNull(myNeighbors.getSouth());
     }
 
     /** Tests if the setting the neighbor works in the west position. */
     @org.junit.jupiter.api.Test
     void setWest() {
         myNeighbors.setWest(null, false);
-        assertEquals(null, myNeighbors.getWest());
+        assertNull(myNeighbors.getWest());
     }
 }
