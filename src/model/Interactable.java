@@ -1,5 +1,11 @@
 package model;
 
+/**
+ * An interactable is something that can be interacted with.
+ *
+ * @version 1.0.0
+ * @author Kihsomray
+ */
 public interface Interactable {
 
     /**

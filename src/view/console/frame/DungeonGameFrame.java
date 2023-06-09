@@ -8,8 +8,15 @@ import view.console.panel.*;
 import view.console.util.BattleUtility;
 import view.console.util.ConsoleDisplayUtility;
 
+/**
+ * A type of console frame that contains the main dungeon game display.
+ *
+ * @version 1.0.0
+ * @author Kihsomray
+ */
 public class DungeonGameFrame extends ConsoleFrame {
 
+    /** Array of answers to your questions from Tom. */
     private static final String[] ASK_TOM = {
             "\nUSE AGILE METHODS!",
             "\nUTILIZE OOP PRINCIPLES!",
@@ -17,30 +24,53 @@ public class DungeonGameFrame extends ConsoleFrame {
             "WE'VE TALKED ABOUT\nTHIS ALL QUARTER LONG!"
     };
 
+    /** Dungeon contained in the controller. */
     private final Dungeon myDungeon;
+
+    /** Hero contained in the dungeon. */
     private final Hero myHero;
 
+    /** Inventory information panel. */
     private final InventoryInfoPanel myInventoryInfoPanel;
+
+    /** Hero information panel. */
     private final HeroInfoPanel myHeroInfoPanel;
+
+    /** Monster information panel. */
     private final MonsterInfoPanel myMonsterInfoPanel;
 
+    /** Dungeon information panel. */
     private final DungeonInfoPanel myDungeonInfoPanel;
+
+    /** Tooltip panel. */
     private final ToolTipPanel myToolTipPanel;
 
+
+    /**
+     * Creates a new dungeon game frame.
+     *
+     * @param theDungeon Dungeon to display.
+     */
     public DungeonGameFrame(final Dungeon theDungeon) {
 
         myDungeon = theDungeon;
         myHero = theDungeon.getHero();
 
+        // Left panels.
         myInventoryInfoPanel = new InventoryInfoPanel(myHero);
         myHeroInfoPanel = new HeroInfoPanel(myHero);
         myMonsterInfoPanel = new MonsterInfoPanel(myHero);
 
+        // Right panels.
         myDungeonInfoPanel = new DungeonInfoPanel(myDungeon);
         myToolTipPanel = new ToolTipPanel(myHero);
 
     }
 
+
+    /**
+     * Displays the frame.
+     */
     public void display() {
 
         // Print the dungeon.
@@ -214,6 +244,9 @@ public class DungeonGameFrame extends ConsoleFrame {
 
     }
 
+    /**
+     * Delays the game with values mention in the utility class.
+     */
     private void delayGame() {
         try {
 
@@ -230,11 +263,26 @@ public class DungeonGameFrame extends ConsoleFrame {
         }
     }
 
+    /**
+     * Sends the current UI after updating the message.
+     *
+     * @param theMessage Message to update UI with (null for same).
+     */
     private void sendUI(final String theMessage) {
+
+        // Sets the message.
         if (theMessage != null) myToolTipPanel.setMessage(theMessage);
+
+        // Print it out!
         System.out.println(generate());
+
     }
 
+    /**
+     * Generates the panel based on the current state of the game.
+     *
+     * @return Generated string of the game state.
+     */
     private String generate() {
 
         // Left panel.
@@ -272,6 +320,5 @@ public class DungeonGameFrame extends ConsoleFrame {
         return sb.toString();
 
     }
-
 
 }

@@ -9,6 +9,4 @@ import model.inventory.item.Item;
  */
 public interface Collectable extends Item {
 
-
-
 }

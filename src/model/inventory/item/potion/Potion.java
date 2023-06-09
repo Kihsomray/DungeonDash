@@ -1,6 +1,5 @@
 package model.inventory.item.potion;
 
-import model.util.Utility;
 import model.entity.hero.Hero;
 import model.inventory.item.Item;
 import view.console.pattern.Color;
@@ -15,22 +14,13 @@ import java.io.Serializable;
  */
 public abstract class Potion implements Item, Serializable {
 
-
-    /**
-     * Creates a potion object.
-     */
-    public Potion() {
-
-    }
-
     /**
      * Use a potion on the hero.
      *
      * @return Message from using the potion.
      */
-    public String applyPotion(final Hero theHero) {
-        return "Not implemented";
-    }
+    public abstract void applyPotion(final Hero theHero);
+
 
     /**
      * Gets the colored display of the hero.
