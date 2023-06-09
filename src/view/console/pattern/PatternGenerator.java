@@ -1,7 +1,5 @@
 package view.console.pattern;
 
-import model.util.Utility;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,6 +33,7 @@ public class PatternGenerator implements Serializable {
     /** Color of text if selected. */
     private String myTextColor;
 
+
     /**
      * Constructs a new pattern generator.
      *
@@ -45,7 +44,7 @@ public class PatternGenerator implements Serializable {
         myColorize = theColorize;
 
         // Default wall color.
-        myWallColor = Color.GREY;
+        myWallColor = Color.BLACK;
 
         // Initializes counter to 0.
         myCounter = 0;
@@ -54,6 +53,7 @@ public class PatternGenerator implements Serializable {
         myTextColor = Color.WHITE;
 
     }
+
 
     /**
      * Generates a single non-colorized random wall character.

@@ -15,24 +15,28 @@ import model.entity.enemy.monster.Monster;
  */
 public class Thief extends Hero {
 
-    //        FIELDS        //
-
+    /** Default HP. */
     public static final int DEFAULT_HP = 425;
 
+    /** Default minimum damage. */
     public static final int DEFAULT_MIN_DAMAGE = 35;
 
+    /** Default maximum damage. */
     public static final int DEFAULT_MAX_DAMAGE = 85;
 
+    /** Default attack speed. */
     public static final int DEFAULT_ATTACK_SPEED = 6;
 
+    /** Default hit chance. */
     private static final double DEFAULT_HIT_CHANCE = 0.8;
 
+    /** Default block chance. */
     private static final double DEFAULT_BLOCK_CHANCE = 0.4;
 
-    // Ability success chance.
+    /** Ability success chance. */
     private static final double ABILITY_SUCCESS_CHANCE = 0.4;
 
-    // Ability failure chance.
+    /** Ability failure chance. */
     private static final double ABILITY_FAILURE_CHANCE = 0.2;
 
     /** 41 x 20 representation of the thief */
@@ -59,8 +63,6 @@ public class Thief extends Hero {
             "                                         ";
 
 
-    //        CONSTRUCTORS        //
-
     /**
      * Creates an instance of a Thief.
      */
@@ -78,8 +80,6 @@ public class Thief extends Hero {
 
     }
 
-
-    //        MUTATORS        //
 
     /**
      * Attack a monster.
@@ -117,6 +117,7 @@ public class Thief extends Hero {
         attack(theMonster);
 
     }
+
 
     @Override
     public char getDisplayChar() {

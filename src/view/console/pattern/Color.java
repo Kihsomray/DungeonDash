@@ -8,10 +8,13 @@ package view.console.pattern;
  */
 public final class Color {
 
+    /** Reset ANSI value. */
+    public static final String RESET = "\033[0m";
+
     /** Bold ANSI value. */
     public static final String BOLD = "\u001B[1m";
 
-    /** Black ANSI value. */
+    /** Grey ANSI value. */
     public static final String BLACK = "\u001B[30m";
 
     /** Red ANSI value. */
@@ -32,11 +35,9 @@ public final class Color {
     /** Cyan ANSI value. */
     public static final String CYAN = "\u001B[36m";
 
-    /** Grey ANSI value. */
-    public static final String GREY = "\u001B[37m";
-
     /** White ANSI value. */
-    public static final String WHITE = "\u001B[38m";
+    public static final String WHITE = "\u001B[37m";
+
 
     /**
      * Private constructor to assert singleton class.
@@ -44,6 +45,7 @@ public final class Color {
     private Color() {
 
     }
+
 
     /**
      * Retrieves a specific ANSI console color. Will return the color based on
@@ -72,6 +74,5 @@ public final class Color {
         return "\u001B[3" + theColor + 'm';
 
     }
-
 
 }

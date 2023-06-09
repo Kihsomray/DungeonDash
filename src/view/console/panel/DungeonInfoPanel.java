@@ -3,7 +3,6 @@ package view.console.panel;
 import model.dungeon.Dungeon;
 import model.dungeon.cell.Cell;
 import model.dungeon.cell.passable.Passable;
-import model.util.Utility;
 import view.console.pattern.Color;
 
 import java.util.LinkedList;
@@ -11,13 +10,27 @@ import java.util.Queue;
 
 import static view.console.frame.ConsoleFrame.PATTERN;
 
+/**
+ * A type of console panel that generates the dungeon's info.
+ *
+ * @version 1.0.0
+ * @author Kihsomray
+ */
 public class DungeonInfoPanel extends ConsolePanel {
 
+    /** Dungeon to generate info for. */
     private final Dungeon myDungeon;
 
+
+    /**
+     * Create an instance of dungeon info panel.
+     *
+     * @param theDungeon Dungeon to create panel for.
+     */
     public DungeonInfoPanel(final Dungeon theDungeon) {
         myDungeon = theDungeon;
     }
+
 
     @Override
     public String generate() {
@@ -111,13 +124,18 @@ public class DungeonInfoPanel extends ConsolePanel {
         return sb.toString();
     }
 
+    /**
+     * Appends the top/bottom border of the dungeon.
+     *
+     * @param theStringBuilder String Builder to append to.
+     */
     private void appendHorizontal(final StringBuilder theStringBuilder) {
 
         // Loop through 2 height.
         for (int i = 0; i < 2; i++) {
 
             // Color of wall.
-            theStringBuilder.append(Color.GREY);
+            theStringBuilder.append(Color.BLACK);
 
             // Loop through width of dungeon.
             for (int j = 0; j < myDungeon.getMyWidth() + 1; j++) {

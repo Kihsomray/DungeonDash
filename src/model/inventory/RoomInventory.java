@@ -17,14 +17,17 @@ public class RoomInventory implements Inventory, Serializable {
     /** Set of all items in the inventory.*/
     private final Set<Item> myItems;
 
+
     /**
      * Creates a new RoomInventory.
      */
     public RoomInventory() {
 
+        // Set to empty hashset.
         myItems = new HashSet<>();
 
     }
+
 
     /**
      * Move all items from one this inventory to another.
@@ -60,6 +63,12 @@ public class RoomInventory implements Inventory, Serializable {
     }
 
     @Override
+    public void addItem(final Item theItem) {
+        myItems.add(theItem);
+    }
+
+
+    @Override
     public Set<Item> getInventory() {
         return new HashSet<>(myItems);
     }
@@ -67,11 +76,6 @@ public class RoomInventory implements Inventory, Serializable {
     @Override
     public boolean containsItem(final Item theItem) {
         return myItems.contains(theItem);
-    }
-
-    @Override
-    public void addItem(final Item theItem) {
-        myItems.add(theItem);
     }
 
 }

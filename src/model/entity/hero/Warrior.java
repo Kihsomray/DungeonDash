@@ -13,18 +13,22 @@ import model.entity.enemy.monster.Monster;
  */
 public class Warrior extends Hero {
 
-    //        FIELDS        //
-
+    /** Default HP. */
     public static final int DEFAULT_HP = 575;
 
+    /** Default minimum damage. */
     public static final int DEFAULT_MIN_DAMAGE = 25;
 
+    /** Default maximum damage. */
     public static final int DEFAULT_MAX_DAMAGE = 60;
 
+    /** Default attack speed. */
     public static final int DEFAULT_ATTACK_SPEED = 4;
 
+    /** Default hit chance. */
     private static final double DEFAULT_HIT_CHANCE = 0.8;
 
+    /** Default block chance. */
     private static final double DEFAULT_BLOCK_CHANCE = 0.2;
 
     /** Ability minimum damage. */
@@ -60,8 +64,6 @@ public class Warrior extends Hero {
             "                                         ";
 
 
-    //        CONSTRUCTORS        //
-
     /**
      * Create an instance of a warrior.
      */
@@ -79,8 +81,6 @@ public class Warrior extends Hero {
 
     }
 
-
-    //        MUTATORS        //
 
     /**
      * Attack a monster.
@@ -108,6 +108,7 @@ public class Warrior extends Hero {
         }
 
     }
+
 
     @Override
     public char getDisplayChar() {

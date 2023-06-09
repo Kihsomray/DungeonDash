@@ -11,11 +11,16 @@ import model.inventory.item.potion.HealthPotion;
 import model.inventory.item.potion.VisionPotion;
 import model.entity.hero.Hero;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Room implements Passable, Serializable {
+/**
+ * A type of passable that acts as a room containing items and enemies.
+ *
+ * @version 1.0.0
+ * @author Kihsomray
+ */
+public class Room implements Passable {
 
     /** Constant for monster spawn rate. */
     private static final double MONSTER_SPAWN_RATE = 0.5;
@@ -26,65 +31,96 @@ public class Room implements Passable, Serializable {
     /** Constant for potion spawn rate. */
     private static final double POTION_SPAWN_RATE = 0.10;
 
+    /** X coordinate of this cell. */
     private final int myX;
 
+    /** Y coordinate of this cell. */
     private final int myY;
 
+    /** Inventory of this room. */
     private final RoomInventory myInventory;
 
+    /** Enemies contained in this room. */
     private final Set<Enemy> myEnemies;
 
+    /** Surrounding neighbors of this passable. */
     private final Neighbors myNeighbors;
 
+
     /**
-     * Creates a room.
+     * Creates an instance of a room.
      *
-     *
+     * @param theX X coordinate of this cell.
+     * @param theY Y coordinate of this cell.
      */
     public Room(final int theX, final int theY) {
 
         myX = theX;
         myY = theY;
+
+        // Bind a new inventory.
         myInventory = new RoomInventory();
+
+        // Empty set of enemies.
         myEnemies = new HashSet<>();
+
+        //
         myNeighbors = new Neighbors(this);
 
         // Randomize the spawns.
         randomizeSpawns();
     }
 
+    /**
+     * Gets a string representation of the room.
+     *
+     * @return String representation of the room.
+     */
     @Override
-    public Neighbors getNeighbors() {
-        return myNeighbors;
+    public String toString() {
+
+        // String builder.
+        final StringBuilder sb = new StringBuilder();
+
+        // Get all interactables in this room.
+        final Set<Interactable> interactables = getInteractables();
+
+        // Start counter at 1.
+        int i = 1;
+
+        // Loop through all interactables.
+        for (final Interactable interactable : interactables) {
+
+            // Append the char if needed, otherwise empty line.
+            sb.append(interactable.getColoredDisplay())
+                    .append(i++ != 3 ? ' ' : '\n');
+
+        }
+
+        // Fill the remainder with blank-space.
+        for (int a = i; a <= 6; a++) {
+
+            sb.append(' ').append(a % 3 == 0 ? a == 6 ? "" : '\n' : ' ');
+
+        }
+
+        // Return completed version of the string.
+        return sb.toString();
+
     }
 
+    /**
+     * Used to capture when the hero has walked through.
+     * Transfers all items from the room to the hero.
+     *
+     * @param theHero Hero in question.
+     */
     @Override
-    public void interactWith(Hero theHero) {
-        // Nothing.
-    }
+    public void interactWith(final Hero theHero) {
 
-    @Override
-    public int getX() {
-        return myX;
-    }
+        // Transfer the inventory.
+        myInventory.addAllTo(theHero.getInventory());
 
-    @Override
-    public int getY() {
-        return myY;
-    }
-
-    public RoomInventory getInventory() {
-        return myInventory;
-    }
-
-    public Set<Interactable> getEntities() {
-        final Set<Interactable> entities = new HashSet<>(myInventory.getInventory());
-        entities.addAll(myEnemies);
-        return entities;
-    }
-
-    public Set<Enemy> getEnemies() {
-        return myEnemies;
     }
 
     /**
@@ -112,24 +148,57 @@ public class Room implements Passable, Serializable {
 
     }
 
+
     @Override
-    public String toString() {
+    public int getX() {
+        return myX;
+    }
 
-        final StringBuilder sb = new StringBuilder();
-        final Set<Interactable> entities = getEntities();
-        int i = 1;
-        for (final Interactable interactable : entities) {
+    @Override
+    public int getY() {
+        return myY;
+    }
 
-            sb.append(interactable.getColoredDisplay())
-                    .append(i++ != 3 ? ' ' : '\n');
+    /**
+     * Gets the room's inventory.
+     *
+     * @return Room's inventory.
+     */
+    public RoomInventory getInventory() {
+        return myInventory;
+    }
 
-        }
-        for (int a = i; a <= 6; a++) {
-            sb.append(' ').append(a % 3 == 0 ? a == 6 ? "" : '\n' : ' ');
-        }
-        return sb.toString();
+    /**
+     * Gets all the entities in this room.
+     *
+     * @return Entities in this room.
+     */
+    public Set<Interactable> getInteractables() {
+
+        // Creates a new set with the inventory.
+        final Set<Interactable> interactables =
+                new HashSet<>(myInventory.getInventory());
+
+        // Adds all the enemies.
+        interactables.addAll(myEnemies);
+
+        // Returns the created set.
+        return interactables;
+
+    }
+
+    /**
+     * Gets all the enemies in this room.
+     *
+     * @return Enemies in this room.
+     */
+    public Set<Enemy> getEnemies() {
+        return myEnemies;
+    }
+
+    @Override
+    public Neighbors getNeighbors() {
+        return myNeighbors;
     }
 
 }
-
-

@@ -5,7 +5,7 @@ import model.entity.hero.Hero;
 /**
  * A type of potion that allows a hero to see adjacent rooms.
  *
- * Only the 4 adjacent room will be visible until the hero moves.
+ * Only the surrounding room will be visible until the hero moves.
  *
  * @version 1.0.0
  * @author Kihsomray
@@ -13,35 +13,22 @@ import model.entity.hero.Hero;
  */
 public class VisionPotion extends Potion {
 
-    //        FIELDS        //
-
     /** Display character of vision potion */
     private static final char DISPLAY_CHAR = 'V';
 
 
-    //        CONSTRUCTORS        //
+    @Override
+    public void applyPotion(final Hero theHero) {
 
-    /**
-     * Creates a vision potion object.
-     */
-    public VisionPotion() {
+        // Give the hero more visibility.
+        theHero.enableExtraVisibility();
 
     }
 
-
-    //        ACCESSORS        //
 
     @Override
     public char getDisplayChar() {
         return DISPLAY_CHAR;
     }
 
-
-    @Override
-    public String applyPotion(final Hero theHero) {
-
-        theHero.enableExtraVisibility();
-        return "Visibility increased!";
-
-    }
 }

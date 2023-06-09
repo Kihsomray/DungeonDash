@@ -2,39 +2,63 @@ package controller;
 
 import model.util.Utility;
 import model.dungeon.Dungeon;
-import model.entity.DungeonCharacterFactory;
 import view.DungeonGUI;
 import view.console.ConsoleDisplay;
 
 import java.io.Serializable;
 
 /**
+ * Main class of the Dungeon Adventure game.
  *
  * @author Kihsomray
  * @author Patrick Hern
  */
-public class DungeonAdventure implements Serializable {
+public final class DungeonAdventure implements Serializable {
 
+    /** Instance of the GUI - view. */
     private final DungeonGUI myGUI;
+
+    /** Instance of the Dungeon - model. */
     private Dungeon myDungeon;
 
+    /**
+     * Main method of the program. All execution begins here.
+     *
+     * @param args Command line arguments (non required).
+     */
     public static void main(String[] args) {
-        final DungeonAdventure game = new DungeonAdventure();
-        game.initializeGUI();
-    }
 
-    private DungeonAdventure() {
-        myGUI = new ConsoleDisplay(this);
+        // Creates a new game.
+        final DungeonAdventure game = new DungeonAdventure();
+
+        // Initializes GUI. Will in turn call initializeDungeon when needed.
+        game.initializeGUI();
+
     }
 
     /**
+     * No one should be able to make this class.
+     */
+    private DungeonAdventure() {
+
+        // Creates a new GUI.
+        myGUI = new ConsoleDisplay(this);
+
+    }
+
+    /**
+     * Initializes the GUI.
      * To be called from controller.
      */
     private void initializeGUI() {
+
+        // Display the GUI.
         myGUI.display();
+
     }
 
     /**
+     * Initializes the Dungeon based on character letter.
      * To be called from view.
      */
     public void initializeDungeon(
@@ -42,7 +66,7 @@ public class DungeonAdventure implements Serializable {
             final String theUsername
     ) {
 
-        new DungeonCharacterFactory();
+        // Initializes dungeon.
         myDungeon = new Dungeon(
                 this,
                 14,

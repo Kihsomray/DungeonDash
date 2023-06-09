@@ -19,15 +19,12 @@ import java.util.Set;
  */
 public class HeroInventory implements Inventory, Serializable {
 
-    /**
-     * Inventory array of items.
-     */
+    /** Inventory array of items. */
     private final Item[] myInventorySlots;
 
-    /**
-     * Width of the inventory.
-     */
+    /** Width of the inventory. */
     private final int myWidth;
+
 
     /**
      * Creates a new HeroInventory.
@@ -57,50 +54,6 @@ public class HeroInventory implements Inventory, Serializable {
         myWidth = theWidth;
     }
 
-    /**
-     * Get the height of the inventory.
-     *
-     * @return Height of the inventory.
-     */
-    public int getHeight() {
-        return myInventorySlots.length / myWidth;
-    }
-
-    /**
-     * Get the width of the inventory.
-     *
-     * @return Width of the inventory.
-     */
-    public int getWidth() {
-        return myWidth;
-    }
-
-    /**
-     * Gets an item at an X and Y coordinate within the inventory.
-     *
-     * X = 0, Y = 0 will be the item in position 0.
-     *
-     * @param theX X-coordinate.
-     * @param theY Y-coordinate.
-     * @return Item at that inventory location.
-     * @throws IndexOutOfBoundsException If values out of range.
-     */
-    public Item getItemAt(
-            final int theX,
-            final int theY,
-            final boolean theRemoveItem
-    ) {
-
-        // If remove the item.
-        return theRemoveItem ?
-
-                // Call the swap method with null.
-                swapItemAt(theX, theY, null) :
-
-                // Otherwise, return the item at the location.
-                myInventorySlots[theX + myWidth * theY];
-
-    }
 
     /**
      * Removes an item from the inventory, if present.
@@ -115,44 +68,6 @@ public class HeroInventory implements Inventory, Serializable {
                 return;
             }
         }
-
-    }
-
-    /**
-     * Set an item at a specific location.
-     *
-     * X = 0, Y = 0 will be the item in position 0.
-     *
-     * @param theX X-coordinate.
-     * @param theY Y-coordinate.
-     * @param theItem The item to place in.
-     * @throws IndexOutOfBoundsException If values out of range.
-     * @throws IllegalUnbindException If there is an item in the spot.
-     * @throws IllegalArgumentException If invalid collectable in reservation.
-     */
-    public void setItemAt(
-            final int theX,
-            final int theY,
-            final Item theItem
-    ) {
-
-        // Is there an item there?
-        if (getItemAt(theX, theY, false) != null)
-            throw new IllegalUnbindException(
-                    "There is an item in that spot!"
-            );
-
-        // Index value of the array.
-        final int index = theX + myWidth * theY;
-
-        // Check collectable slots
-        if (index < 4 && !(theItem instanceof Collectable))
-            throw new IllegalArgumentException(
-                    "A non-collectable cannot be placed in that spot!"
-            );
-
-        // Set the item
-        myInventorySlots[index] = theItem;
 
     }
 
@@ -192,37 +107,6 @@ public class HeroInventory implements Inventory, Serializable {
 
     }
 
-
-    /**
-     * Gets the inventory as a set.
-     *
-     * @return Inventory as a set.
-     */
-    @Override
-    public Set<Item> getInventory() {
-        return new HashSet<>(Arrays.stream(myInventorySlots).toList());
-    }
-
-    /**
-     * Get a copy of the inventory as an array.
-     *
-     * @return Copy of slots in inventory.
-     */
-    public Item[] getSlots() {
-        return Arrays.copyOf(myInventorySlots, myInventorySlots.length);
-    }
-
-    /**
-     * Checks if the inventory contains an item.
-     *
-     * @param theItem Item to check.
-     * @return If the inventory contains an item.
-     */
-    @Override
-    public boolean containsItem(final Item theItem) {
-        return Arrays.stream(myInventorySlots).anyMatch(e -> e == theItem);
-    }
-
     /**
      * Add an item to the inventory.
      *
@@ -254,5 +138,84 @@ public class HeroInventory implements Inventory, Serializable {
         throw new IndexOutOfBoundsException("Hero inventory is full!");
 
     }
+
+
+    /**
+     * Get the height of the inventory.
+     *
+     * @return Height of the inventory.
+     */
+    public int getHeight() {
+        return myInventorySlots.length / myWidth;
+    }
+
+    /**
+     * Get the width of the inventory.
+     *
+     * @return Width of the inventory.
+     */
+    public int getWidth() {
+        return myWidth;
+    }
+
+
+    /**
+     * Gets an item at an X and Y coordinate within the inventory.
+     *
+     * X = 0, Y = 0 will be the item in position 0.
+     *
+     * @param theX X-coordinate.
+     * @param theY Y-coordinate.
+     * @return Item at that inventory location.
+     * @throws IndexOutOfBoundsException If values out of range.
+     */
+    public Item getItemAt(
+            final int theX,
+            final int theY,
+            final boolean theRemoveItem
+    ) {
+
+        // If remove the item.
+        return theRemoveItem ?
+
+                // Call the swap method with null.
+                swapItemAt(theX, theY, null) :
+
+                // Otherwise, return the item at the location.
+                myInventorySlots[theX + myWidth * theY];
+
+    }
+
+
+    /**
+     * Gets the inventory as a set.
+     *
+     * @return Inventory as a set.
+     */
+    @Override
+    public Set<Item> getInventory() {
+        return new HashSet<>(Arrays.stream(myInventorySlots).toList());
+    }
+
+    /**
+     * Get a copy of the inventory as an array.
+     *
+     * @return Copy of slots in inventory.
+     */
+    public Item[] getSlots() {
+        return Arrays.copyOf(myInventorySlots, myInventorySlots.length);
+    }
+
+    /**
+     * Checks if the inventory contains an item.
+     *
+     * @param theItem Item to check.
+     * @return If the inventory contains an item.
+     */
+    @Override
+    public boolean containsItem(final Item theItem) {
+        return Arrays.stream(myInventorySlots).anyMatch(e -> e == theItem);
+    }
+
 
 }

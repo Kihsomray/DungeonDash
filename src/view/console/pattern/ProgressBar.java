@@ -103,10 +103,9 @@ public final class ProgressBar {
         // Return the combined string.
         return START_COLOR + "█".repeat(start) +
                 theMiddleColor + "█".repeat(middle) +
-                FINISH_COLOR + "█".repeat(finish);
+                FINISH_COLOR + "█".repeat(finish) +
+                Color.RESET;
 
     }
-
-
 
 }

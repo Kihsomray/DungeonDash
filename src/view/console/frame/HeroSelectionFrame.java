@@ -10,8 +10,6 @@ import view.console.pattern.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
 
 /**
  * Console GUI utilities to display game information.
@@ -30,6 +28,7 @@ public final class HeroSelectionFrame extends ConsoleFrame {
     /** Message to display in tooltip. */
     private static final String MESSAGE = "TIP: W for warrior, T for thief, P for priestess\n" +
             "Type letter twice to confirm.";
+
 
     /**
      * Display the hero selection panel.
@@ -74,7 +73,7 @@ public final class HeroSelectionFrame extends ConsoleFrame {
      */
     private String generate(final char theHero) {
 
-        final StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder("\n\n\n\n\n\n\n\n\n\n");
         final Hero hero = Utility.generateHeroFromChar(theHero, "");
 
         // Top border of header and stats.

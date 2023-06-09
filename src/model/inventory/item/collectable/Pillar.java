@@ -1,6 +1,6 @@
 package model.inventory.item.collectable;
 
-import model.util.Utility;
+import view.console.pattern.Color;
 
 import java.io.Serializable;
 
@@ -14,13 +14,9 @@ import java.io.Serializable;
  */
 public class Pillar implements Collectable, Serializable {
 
-    //        FIELDS        //
-
     /** Principle of this pillar */
     private final Principle myPrinciple;
 
-
-    //        CONSTRUCTORS        //
 
     /**
      * Create a Pillar object.
@@ -31,8 +27,6 @@ public class Pillar implements Collectable, Serializable {
         myPrinciple = thePrinciple;
     }
 
-
-    //        ACCESSORS        //
 
     @Override
     public char getDisplayChar() {
@@ -46,7 +40,7 @@ public class Pillar implements Collectable, Serializable {
      */
     @Override
     public String getColoredDisplay() {
-        return Utility.getColor('5') + getDisplayChar();
+        return Color.PURPLE + getDisplayChar();
     }
 
 

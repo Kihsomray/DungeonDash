@@ -6,13 +6,27 @@ import view.console.pattern.ProgressBar;
 
 import static view.console.frame.ConsoleFrame.*;
 
+/**
+ * A type of console panel that generates the hero's info.
+ *
+ * @version 1.0.0
+ * @author Kihsomray
+ */
 public class HeroInfoPanel extends ConsolePanel {
 
+    /** Hero to generate info for. */
     private final Hero myHero;
 
+
+    /**
+     * Create an instance of hero info panel.
+     *
+     * @param theHero Hero to create the panel for.
+     */
     public HeroInfoPanel(final Hero theHero) {
         myHero = theHero;
     }
+
 
     @Override
     public String generate() {
@@ -108,9 +122,9 @@ public class HeroInfoPanel extends ConsolePanel {
 
         // Current hero coordinate info.
         final String coordinateInfo = "     |  " + Color.WHITE + "X:" + Color.CYAN +
-                (x > 8 ? "" : "0") + (x + 1) + Color.GREY + "  |  " +
+                (x > 8 ? "" : "0") + (x + 1) + Color.BLACK + "  |  " +
                 Color.WHITE + "Y:" + Color.CYAN + (y > 8 ? "" : "0") +
-                (y + 1) + Color.GREY + "  |     ";
+                (y + 1) + Color.BLACK + "  |     ";
 
         // Hero coordinate info.
         sb

@@ -2,7 +2,13 @@ package model.dungeon.cell;
 
 import java.io.Serializable;
 
-public interface Cell {
+/**
+ * A cell represents a location in a maze with given data.
+ *
+ * @version 1.0.0
+ * @author Kihsomray
+ */
+public interface Cell extends Serializable {
 
     /**
      * Get the X coordinate of the cell.

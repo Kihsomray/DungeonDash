@@ -5,12 +5,26 @@ import model.entity.hero.Hero;
 import static view.console.frame.ConsoleFrame.PATTERN;
 import static view.console.frame.ConsoleFrame.RIGHT_MENU_WIDTH;
 
+/**
+ * A type of console panel that displays a message related to the game.
+ *
+ * @version 1.0.0
+ * @author Kihsomray
+ */
 public class ToolTipPanel extends ConsolePanel {
 
+    /** Hero to generate info for. */
     private final Hero myHero;
 
+    /** Current message to display. */
     private String myMessage;
 
+
+    /**
+     * Create an instance of tooltip panel.
+     *
+     * @param theHero Hero to create the panel for.
+     */
     public ToolTipPanel(final Hero theHero) {
 
         myHero = theHero;
@@ -18,6 +32,7 @@ public class ToolTipPanel extends ConsolePanel {
         myMessage = "\nUSE WASD TO MOVE AROUND";
 
     }
+
 
     @Override
     public String generate() {
@@ -59,6 +74,11 @@ public class ToolTipPanel extends ConsolePanel {
 
     }
 
+    /**
+     * Set the message being display on the panel.
+     *
+     * @param theMessage Message to display next.
+     */
     public void setMessage(final String theMessage) {
         myMessage = theMessage;
     }

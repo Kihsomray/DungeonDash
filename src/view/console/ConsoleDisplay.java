@@ -34,6 +34,7 @@ public class ConsoleDisplay implements DungeonGUI, Serializable {
      */
     private DungeonGameFrame myDungeonGameFrame;
 
+
     /**
      * Creates an instance of console display.
      *
@@ -44,6 +45,7 @@ public class ConsoleDisplay implements DungeonGUI, Serializable {
         myMain = theMain;
 
     }
+
 
     @Override
     public void display() {
@@ -58,7 +60,9 @@ public class ConsoleDisplay implements DungeonGUI, Serializable {
         String username = "";
 
         // Prompt the user.
-        System.out.print("\nWould you like a new game (N) or load a game (L)? ");
+        System.out.print(
+                "\nWould you like a new game (N) or load a game (L)? "
+        );
 
         // Load if 'L', otherwise new game.
         boolean load = scanner.nextLine()
@@ -75,7 +79,9 @@ public class ConsoleDisplay implements DungeonGUI, Serializable {
             heroChar = myHeroSelectionFrame.display();
 
             // Prompt and get user input.
-            System.out.print("Please input your username (up to 13 characters): ");
+            System.out.print(
+                    "Please input your username (up to 13 characters): "
+            );
             username = scanner.nextLine();
 
         }

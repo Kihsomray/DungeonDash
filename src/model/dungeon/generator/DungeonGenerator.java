@@ -29,6 +29,7 @@ public interface DungeonGenerator {
      */
     Cell[][] generate();
 
+
     /**
      * Gets the number of rooms in the generated dungeon.
      *

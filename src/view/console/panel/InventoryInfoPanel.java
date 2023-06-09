@@ -3,13 +3,27 @@ package view.console.panel;
 import model.entity.hero.Hero;
 import view.console.pattern.Color;
 
+/**
+ * A type of console panel that generates the inventory's info.
+ *
+ * @version 1.0.0
+ * @author Kihsomray
+ */
 public class InventoryInfoPanel extends ConsolePanel {
 
+    /** Hero to generate info for. */
     private final Hero myHero;
 
+
+    /**
+     * Create an instance of inventory info panel.
+     *
+     * @param theHero Hero to create the panel for.
+     */
     public InventoryInfoPanel(final Hero theHero) {
         myHero = theHero;
     }
+
 
     @Override
     public String generate() {

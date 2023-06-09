@@ -32,6 +32,12 @@ public abstract class ConsoleFrame implements Serializable {
     /** Generic width separator. */
     public static final String GENERIC_SEPARATOR_3 = "   ";
 
+
+    /**
+     * Get user input.
+     *
+     * @return A char of user input from console.
+     */
     protected static char getInput() {
 
         // Get the user input.
@@ -42,6 +48,5 @@ public abstract class ConsoleFrame implements Serializable {
         return input.length() > 0 ? input.charAt(0) : ' ';
 
     }
-
 
 }

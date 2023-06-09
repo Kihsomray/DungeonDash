@@ -13,8 +13,6 @@ import java.io.Serializable;
  */
 public abstract class DungeonCharacter implements Entity, Serializable {
 
-    //      FIELDS      //
-
     /** Character name. */
     private final String myName;
 
@@ -39,8 +37,6 @@ public abstract class DungeonCharacter implements Entity, Serializable {
     /** Last damage taken */
     private int myLastDamage;
 
-
-    //      CONSTRUCTORS        //
 
     /**
      * Create an instance of DungeonCharacter.
@@ -73,82 +69,6 @@ public abstract class DungeonCharacter implements Entity, Serializable {
 
     }
 
-
-    //      ACCESSORS      //
-
-    /**
-     * Get character name.
-     *
-     * @return Name of character.
-     */
-    public final String getName() {
-        return myName;
-    }
-
-    /**
-     * Get current health.
-     *
-     * @return Current health.
-     */
-    public final int getHP() {
-        return myHP;
-    }
-
-    /**
-     * Get maximum health.
-     *
-     * @return Maximum health.
-     */
-    public final int getMaxHP() {
-        return myMaxHP;
-    }
-
-    /**
-     * Get minimum damage.
-     *
-     * @return Minimum damage.
-     */
-    public final int getMinDamage() {
-        return myMinDamage;
-    }
-
-    /**
-     * Get maximum damage.
-     *
-     * @return Maximum damage.
-     */
-    public final int getMaxDamage() {
-        return myMaxDamage;
-    }
-
-    /**
-     * Get attack speed.
-     *
-     * @return Attack speed.
-     */
-    public final int getAttackSpeed() {
-        return myAttackSpeed;
-    }
-
-    /**
-     * Get hit chance.
-     *
-     * @return Hit chance.
-     */
-    public final double getHitChance() {
-        return myHitChance;
-    }
-
-    /**
-     * Get last damage dealt to this character.
-     *
-     * @return Last damage dealt.
-     */
-    public int getLastDamage() {
-        return myLastDamage;
-    }
-
-    //        MUTATORS        //
 
     /**
      * Attacks this character.
@@ -243,6 +163,79 @@ public abstract class DungeonCharacter implements Entity, Serializable {
                 Utility.RANDOM.nextInt(theMinDamage, theMaxDamage + 1)
         );
 
+    }
+
+
+    /**
+     * Get character name.
+     *
+     * @return Name of character.
+     */
+    public final String getName() {
+        return myName;
+    }
+
+    /**
+     * Get current health.
+     *
+     * @return Current health.
+     */
+    public final int getHP() {
+        return myHP;
+    }
+
+    /**
+     * Get maximum health.
+     *
+     * @return Maximum health.
+     */
+    public final int getMaxHP() {
+        return myMaxHP;
+    }
+
+    /**
+     * Get minimum damage.
+     *
+     * @return Minimum damage.
+     */
+    public final int getMinDamage() {
+        return myMinDamage;
+    }
+
+    /**
+     * Get maximum damage.
+     *
+     * @return Maximum damage.
+     */
+    public final int getMaxDamage() {
+        return myMaxDamage;
+    }
+
+    /**
+     * Get attack speed.
+     *
+     * @return Attack speed.
+     */
+    public final int getAttackSpeed() {
+        return myAttackSpeed;
+    }
+
+    /**
+     * Get hit chance.
+     *
+     * @return Hit chance.
+     */
+    public final double getHitChance() {
+        return myHitChance;
+    }
+
+    /**
+     * Get last damage dealt to this character.
+     *
+     * @return Last damage dealt.
+     */
+    public int getLastDamage() {
+        return myLastDamage;
     }
 
 }
