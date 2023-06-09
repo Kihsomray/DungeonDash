@@ -44,6 +44,7 @@ public class Neighbors implements Serializable {
 
     }
 
+
     /**
      * Gets a random non-null neighbor.
      *
@@ -107,6 +108,7 @@ public class Neighbors implements Serializable {
     public Passable getWest() {
         return myWest;
     }
+
 
     /**
      * Set north passable.
