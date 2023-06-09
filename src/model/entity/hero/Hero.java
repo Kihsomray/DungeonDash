@@ -290,9 +290,6 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
         // Clear enemies
         room.getEnemies().clear();
 
-        // Transfer the inventory.
-        room.getInventory().addAllTo(myInventory);
-
         // Return the result.
         return result;
 

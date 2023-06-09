@@ -28,6 +28,13 @@ public class Door implements Passable {
     private boolean hasEntered;
 
 
+    /**
+     * Creates an instance of a door.
+     *
+     * @param theX X coordinate of this cell.
+     * @param theY Y coordinate of this cell.
+     * @param theIsEntrance Is this door an entrance.
+     */
     public Door(final int theX, final int theY, final boolean theIsEntrance) {
 
         myX = theX;
@@ -39,6 +46,24 @@ public class Door implements Passable {
 
         // Default to the door not being entered yet.
         hasEntered = false;
+
+    }
+
+
+    /**
+     * Used to capture when the hero has walked through.
+     * If all pillars are obtained, the hero has passed through.
+     *
+     * @param theHero Hero in question.
+     */
+    @Override
+    public void interactWith(final Hero theHero) {
+
+        // Checks if the 4th pillar is non-null.
+        if (theHero.getInventory().getSlots()[3] == null) return;
+
+        // Sets entered to true.
+        hasEntered = true;
 
     }
 
@@ -76,24 +101,6 @@ public class Door implements Passable {
      */
     public boolean hasEntered() {
         return hasEntered;
-    }
-
-
-    /**
-     * Used to capture when the hero has walked through.
-     * If all pillars are obtained, the hero has passed through.
-     *
-     * @param theHero Hero in question.
-     */
-    @Override
-    public void interactWith(final Hero theHero) {
-
-        // Checks if the 4th pillar is non-null.
-        if (theHero.getInventory().getSlots()[3] == null) return;
-
-        // Sets entered to true.
-        hasEntered = true;
-
     }
 
 }

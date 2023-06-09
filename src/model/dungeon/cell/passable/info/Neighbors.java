@@ -46,6 +46,63 @@ public class Neighbors implements Serializable {
 
 
     /**
+     * Set north passable.
+     *
+     * @param theNorth Passable to set.
+     * @param theSetOther Should we set the adjacent room to point here?
+     */
+    public void setNorth(final Passable theNorth, final boolean theSetOther) {
+
+        this.myNorth = theNorth;
+        if (theSetOther && theNorth != null)
+            theNorth.getNeighbors().setSouth(myPassable, false);
+
+    }
+
+    /**
+     * Set east passable.
+     *
+     * @param theEast Passable to set.
+     * @param theSetOther Should we set the adjacent room to point here?
+     */
+    public void setEast(final Passable theEast, final boolean theSetOther) {
+
+        this.myEast = theEast;
+        if (theSetOther && theEast != null)
+            theEast.getNeighbors().setWest(myPassable, false);
+
+    }
+
+    /**
+     * Set south passable.
+     *
+     * @param theSouth Passable to set.
+     * @param theSetOther Should we set the adjacent room to point here?
+     */
+    public void setSouth(final Passable theSouth, final boolean theSetOther) {
+
+        this.mySouth = theSouth;
+        if (theSetOther && theSouth != null)
+            theSouth.getNeighbors().setNorth(myPassable, false);
+
+    }
+
+    /**
+     * Set west passable.
+     *
+     * @param theWest Passable to set.
+     * @param theSetOther Should we set the adjacent room to point here?
+     */
+    public void setWest(final Passable theWest, final boolean theSetOther) {
+
+        this.myWest = theWest;
+        if (theSetOther && theWest != null)
+            theWest.getNeighbors().setEast(myPassable, false);
+
+    }
+
+
+    /**
      * Gets a random non-null neighbor.
      *
      * @param thePassableIgnore Which passables should be ignored.
@@ -107,63 +164,6 @@ public class Neighbors implements Serializable {
      */
     public Passable getWest() {
         return myWest;
-    }
-
-
-    /**
-     * Set north passable.
-     *
-     * @param theNorth Passable to set.
-     * @param theSetOther Should we set the adjacent room to point here?
-     */
-    public void setNorth(final Passable theNorth, final boolean theSetOther) {
-
-        this.myNorth = theNorth;
-        if (theSetOther && theNorth != null)
-            theNorth.getNeighbors().setSouth(myPassable, false);
-
-    }
-
-    /**
-     * Set east passable.
-     *
-     * @param theEast Passable to set.
-     * @param theSetOther Should we set the adjacent room to point here?
-     */
-    public void setEast(final Passable theEast, final boolean theSetOther) {
-
-        this.myEast = theEast;
-        if (theSetOther && theEast != null)
-            theEast.getNeighbors().setWest(myPassable, false);
-
-    }
-
-    /**
-     * Set south passable.
-     *
-     * @param theSouth Passable to set.
-     * @param theSetOther Should we set the adjacent room to point here?
-     */
-    public void setSouth(final Passable theSouth, final boolean theSetOther) {
-
-        this.mySouth = theSouth;
-        if (theSetOther && theSouth != null)
-            theSouth.getNeighbors().setNorth(myPassable, false);
-
-    }
-
-    /**
-     * Set west passable.
-     *
-     * @param theWest Passable to set.
-     * @param theSetOther Should we set the adjacent room to point here?
-     */
-    public void setWest(final Passable theWest, final boolean theSetOther) {
-
-        this.myWest = theWest;
-        if (theSetOther && theWest != null)
-            theWest.getNeighbors().setEast(myPassable, false);
-
     }
 
 }
