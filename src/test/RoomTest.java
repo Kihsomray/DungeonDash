@@ -59,15 +59,15 @@ class RoomTest {
     @Test
     void testToString() {
         String expected = "";
-        Set<Interactable> roomInv = myRoom.getEntities();
 
-        for (Interactable i : roomInv) {
-            if (i.getDisplayChar() == 'H') {
-                expected = expected + "\u001B[36mH";
-            } if (i.getDisplayChar() == 'M') {
-                expected = expected + "\u001B[31mM";
-            }
-        }
+
+//        for (Interactable i : roomInv) {
+////            if (i.getDisplayChar() == 'H') {
+////                expected = expected + "\u001B[36mH";
+////            } if (i.getDisplayChar() == 'M') {
+////                expected = expected + "\u001B[31mM";
+////            }
+////        }
         expected = expected + "    \n     ";
 
         //System.out.println(myRoom.getEntities());

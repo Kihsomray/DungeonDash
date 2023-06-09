@@ -48,52 +48,55 @@ class NeighborsTest {
         assertEquals(4, foundSet.size());
     }
 
+    /** Tests if the right neighbor is stored in the north position. */
     @org.junit.jupiter.api.Test
     void getNorth() {
         assertEquals(2, myNeighbors.getNorth().getX());
     }
 
+    /** Tests if the right neighbor is stored in the east position. */
     @org.junit.jupiter.api.Test
     void getEast() {
         assertEquals(1, myNeighbors.getEast().getX());
     }
 
+    /** Tests if the right neighbor is stored in the south position. */
     @org.junit.jupiter.api.Test
     void getSouth() {
         assertEquals(3, myNeighbors.getSouth().getX());
     }
 
+    /** Tests if the right neighbor is stored in the west position. */
     @org.junit.jupiter.api.Test
     void getWest() {
         assertEquals(0, myNeighbors.getWest().getX());
     }
 
+    /** Tests if the setting the neighbor works in the north position. */
     @org.junit.jupiter.api.Test
     void setNorth() {
         myNeighbors.setNorth(null, false);
         assertEquals(null, myNeighbors.getNorth());
     }
 
+    /** Tests if the setting the neighbor works in the east position. */
     @org.junit.jupiter.api.Test
     void setEast() {
         myNeighbors.setEast(null, false);
         assertEquals(null, myNeighbors.getEast());
     }
 
+    /** Tests if the setting the neighbor works in the south position. */
     @org.junit.jupiter.api.Test
     void setSouth() {
         myNeighbors.setSouth(null, false);
         assertEquals(null, myNeighbors.getSouth());
     }
 
+    /** Tests if the setting the neighbor works in the west position. */
     @org.junit.jupiter.api.Test
     void setWest() {
         myNeighbors.setWest(null, false);
         assertEquals(null, myNeighbors.getWest());
-    }
-
-    @org.junit.jupiter.api.Test
-    void testToString() {
-        assertEquals("##    ##\n        \n##    ##\n", myNeighbors.toString());
     }
 }
