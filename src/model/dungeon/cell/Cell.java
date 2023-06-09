@@ -2,6 +2,12 @@ package model.dungeon.cell;
 
 import java.io.Serializable;
 
+/**
+ * A cell represents a location in a maze with given data.
+ *
+ * @version 1.0.0
+ * @author Kihsomray
+ */
 public interface Cell extends Serializable {
 
     /**
