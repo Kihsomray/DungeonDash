@@ -1,4 +1,4 @@
-package test;
+package test.finished;
 
 import model.entity.DungeonCharacterFactory;
 import model.entity.enemy.monster.Monster;
