@@ -12,6 +12,7 @@ import java.util.*;
 /**
  * Utility class for the model.
  *
+ * @version 1.0.1
  * @author Patrick Hern
  * @author Kihsomray
  */
