@@ -10,9 +10,13 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ *  Class to test the Neighbors object.
+ */
 class NeighborsTest {
 
-    Neighbors myNeighbors;
+    /** Set up a neighbors object to test all the methods. */
+    private Neighbors myNeighbors;
 
     /** Set up a Neighbors object and set up dummy Passable as neighbors. */
     @BeforeEach
