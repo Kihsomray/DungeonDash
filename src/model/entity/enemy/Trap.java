@@ -6,11 +6,34 @@ import view.console.pattern.Color;
 
 import java.io.Serializable;
 
+/**
+ * A type of enemy that inflicts a percentage of damage on the hero.
+ *
+ * @version 1.0.0
+ * @author Kihsomray
+ */
 public class Trap implements Enemy, Serializable {
 
+    /** Minimum HP loss percentage. */
     private static final double MIN_HP_LOSS_PERCENTAGE = 0.08;
 
+    /** Maximum HP loss percentage. */
     private static final double MAX_HP_LOSS_PERCENTAGE = 0.16;
+
+
+    /**
+     * Does the trap's effect on the hero.
+     *
+     * @param theHero Hero to damage.
+     */
+    public void damageHero(final Hero theHero) {
+
+        // Inflict damage on the hero.
+        theHero.receiveDamage((int) (Utility.RANDOM.nextDouble(
+                MIN_HP_LOSS_PERCENTAGE, MAX_HP_LOSS_PERCENTAGE) *
+                theHero.getHP()));
+
+    }
 
 
     @Override
@@ -26,17 +49,6 @@ public class Trap implements Enemy, Serializable {
     @Override
     public String getColoredDisplay() {
         return Color.GREEN + getDisplayChar();
-    }
-
-    /**
-     * Does the trap's effect on the hero.
-     *
-     * @param theHero Hero to damage.
-     */
-    public void damageHero(final Hero theHero) {
-        theHero.receiveDamage((int) (Utility.RANDOM.nextDouble(
-                MIN_HP_LOSS_PERCENTAGE, MAX_HP_LOSS_PERCENTAGE) *
-                theHero.getHP()));
     }
 
 }

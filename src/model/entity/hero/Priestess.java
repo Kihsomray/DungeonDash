@@ -13,24 +13,28 @@ import model.entity.enemy.monster.Monster;
  */
 public class Priestess extends Hero {
 
-    //        FIELDS        //
-
+    /** Default HP. */
     public static final int DEFAULT_HP = 315;
 
+    /** Default minimum damage. */
     public static final int DEFAULT_MIN_DAMAGE = 35;
 
+    /** Default maximum damage. */
     public static final int DEFAULT_MAX_DAMAGE = 55;
 
+    /** Default attack speed. */
     public static final int DEFAULT_ATTACK_SPEED = 5;
 
+    /** Default hit chance. */
     private static final double DEFAULT_HIT_CHANCE = 0.7;
 
+    /** Default block chance. */
     private static final double DEFAULT_BLOCK_CHANCE = 0.3;
 
-    // Ability minimum heal.
+    /** Ability minimum heal. */
     private static final int ABILITY_MIN_HEAL = 30;
 
-    // Ability maximum heal.
+    /** Ability maximum heal. */
     private static final int ABILITY_MAX_HEAL = 65;
 
     /** 41 x 20 representation of the priestess */
@@ -57,8 +61,6 @@ public class Priestess extends Hero {
             "                                         ";
 
 
-    //        CONSTRUCTORS        //
-
     /**
      * Creates an instance of Priestess
      */
@@ -76,8 +78,6 @@ public class Priestess extends Hero {
 
     }
 
-
-    //        MUTATORS        //
 
     /**
      * Attack a monster.

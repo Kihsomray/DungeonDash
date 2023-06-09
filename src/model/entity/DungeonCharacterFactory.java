@@ -30,7 +30,7 @@ public class DungeonCharacterFactory {
      * Used to make this as a utility class.
      */
     private DungeonCharacterFactory() {
-
+        // Nothing.
     }
 
     /**
