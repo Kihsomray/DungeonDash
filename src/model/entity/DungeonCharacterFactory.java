@@ -12,32 +12,34 @@ import model.entity.enemy.monster.Monster;
 import model.entity.enemy.monster.MonsterData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A factory to build Monsters/Heroes from a SQLite database.
  *
- * @version 1.0.0
+ * @version 1.0.1
  * @author Patrick Hern
  * @author Kihsomray
  */
 public class DungeonCharacterFactory {
+
     /** ArrayList of Monsters to randomly select from. **/
-    private static final ArrayList<MonsterData> MONSTER_DATA = new ArrayList<>();
+    private static final List<MonsterData> MONSTER_DATA = readFromSQLiteDB();
 
     /**
-     * Constructor that initializes the ArrayList of Monster and
-     * reads input from the database.
+     * Used to make this as a utility class.
      */
-    public DungeonCharacterFactory() {
-        readFromSQLiteDB();
+    private DungeonCharacterFactory() {
+
     }
 
     /**
      * Opens the database connection to "DungeonCharacters.db", queries for
      * all monsters, adds them to an ArrayList, then closes.
      */
-    private void readFromSQLiteDB() {
+    private static List<MonsterData> readFromSQLiteDB() {
 
+        // SQLite source.
         SQLiteDataSource dataSrc = null;
 
         // Open the data source, if you can.
@@ -46,8 +48,7 @@ public class DungeonCharacterFactory {
             dataSrc = new SQLiteDataSource();
             dataSrc.setUrl("jdbc:sqlite:DungeonCharacters.db");
 
-        }
-        catch (Exception theException) {
+        } catch (final Exception theException) {
 
             theException.printStackTrace();
             System.exit(0);
@@ -56,6 +57,9 @@ public class DungeonCharacterFactory {
 
         // Query the Monsters table for all monsters.
         String queryMonstersTable = "SELECT * FROM Monsters ORDER BY Name";
+
+        // List of data.
+        final List<MonsterData> data = new ArrayList<>();
 
         // Open connection to the database and create a statement.
         try (
@@ -69,7 +73,7 @@ public class DungeonCharacterFactory {
             // Read in the data, and add a new monster to the ArrayList
             while(results.next()) {
 
-                MONSTER_DATA.add(
+                data.add(
                         new MonsterData (
                                 results.getString("Name"        ),
                                 results.getInt(   "HP"          ),
@@ -85,13 +89,15 @@ public class DungeonCharacterFactory {
 
             }
             results.close();
-        }
-        catch (SQLException theException) {
+
+        } catch (final SQLException theException) {
 
             theException.printStackTrace();
             System.exit(0);
 
         }
+
+        return data;
 
     }
 

@@ -1,7 +1,5 @@
 package view.console.pattern;
 
-import model.util.Utility;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,7 +43,7 @@ public class PatternGenerator implements Serializable {
         myColorize = theColorize;
 
         // Default wall color.
-        myWallColor = Color.GREY;
+        myWallColor = Color.BLACK;
 
         // Initializes counter to 0.
         myCounter = 0;
