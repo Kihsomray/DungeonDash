@@ -6,7 +6,6 @@ import model.entity.hero.Hero;
 import model.util.Utility;
 import view.console.panel.*;
 import view.console.util.BattleUtility;
-import view.console.util.ConsoleDisplayUtility;
 
 /**
  * A type of console frame that contains the main dungeon game display.
@@ -15,6 +14,12 @@ import view.console.util.ConsoleDisplayUtility;
  * @author Kihsomray
  */
 public class DungeonGameFrame extends ConsoleFrame {
+
+    /** Minimum wait time delay. */
+    public static final long MIN_RESPONSE_WAIT_MS = 1000L;
+
+    /** Maximum wait time delay. */
+    public static final long MAX_RESPONSE_WAIT_MS = 1500L;
 
     /** Array of answers to your questions from Tom. */
     private static final String[] ASK_TOM = {
@@ -245,15 +250,15 @@ public class DungeonGameFrame extends ConsoleFrame {
     }
 
     /**
-     * Delays the game with values mention in the utility class.
+     * Delays the game with values mention at the top of the class.
      */
     private void delayGame() {
         try {
 
-            // Wait between 0.5 and 3.0 seconds.
+            // Wait between 1.0 and 1.5 seconds.
             Thread.sleep(Utility.RANDOM.nextLong(
-                    ConsoleDisplayUtility.MIN_ENEMY_RESPONSE_WAIT_MS,
-                    ConsoleDisplayUtility.MAX_ENEMY_RESPONSE_WAIT_MS)
+                    MIN_RESPONSE_WAIT_MS,
+                    MAX_RESPONSE_WAIT_MS)
             );
 
         } catch (final InterruptedException ie) {

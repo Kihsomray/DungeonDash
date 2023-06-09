@@ -38,12 +38,14 @@ public final class Color {
     /** White ANSI value. */
     public static final String WHITE = "\u001B[37m";
 
+
     /**
      * Private constructor to assert singleton class.
      */
     private Color() {
 
     }
+
 
     /**
      * Retrieves a specific ANSI console color. Will return the color based on
@@ -72,6 +74,5 @@ public final class Color {
         return "\u001B[3" + theColor + 'm';
 
     }
-
 
 }

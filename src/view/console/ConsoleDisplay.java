@@ -34,6 +34,7 @@ public class ConsoleDisplay implements DungeonGUI, Serializable {
      */
     private DungeonGameFrame myDungeonGameFrame;
 
+
     /**
      * Creates an instance of console display.
      *
@@ -44,6 +45,7 @@ public class ConsoleDisplay implements DungeonGUI, Serializable {
         myMain = theMain;
 
     }
+
 
     @Override
     public void display() {

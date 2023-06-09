@@ -8,9 +8,19 @@ import java.io.Serializable;
 
 import static view.console.frame.ConsoleFrame.*;
 
+/**
+ * A console panel is a segment of the displayed information to console.
+ *
+ * @version 1.0.0
+ * @author Kihsomray
+ */
 public abstract class ConsolePanel implements Serializable {
 
-
+    /**
+     * Appends a simple horizontal border.
+     *
+     * @param theStringBuilder String Builder to append to.
+     */
     protected static void appendSimpleHorizontal(
             final StringBuilder theStringBuilder
     ) {
@@ -24,6 +34,11 @@ public abstract class ConsolePanel implements Serializable {
 
     }
 
+    /**
+     * Appends a vertical border with text between.
+     *
+     * @param theStringBuilder String Builder to append to.
+     */
     protected static void appendTextVertical(
             final StringBuilder theStringBuilder,
             final String theText,
@@ -40,6 +55,11 @@ public abstract class ConsolePanel implements Serializable {
 
     }
 
+    /**
+     * Appends an inventory row.
+     *
+     * @param theStringBuilder String Builder to append to.
+     */
     protected static void appendInventoryRow(
             final StringBuilder theStringBuilder,
             final Hero theHero,
@@ -64,6 +84,11 @@ public abstract class ConsolePanel implements Serializable {
 
     }
 
+    /**
+     * Appends a row header bar.
+     *
+     * @param theStringBuilder String Builder to append to.
+     */
     protected static void appendRowHeaderBar(
             final StringBuilder theStringBuilder,
             final int theStart,
@@ -84,7 +109,11 @@ public abstract class ConsolePanel implements Serializable {
 
     }
 
+    /**
+     * Generates a string representation of the panel.
+     *
+     * @return String representation.
+     */
     public abstract String generate();
-
 
 }

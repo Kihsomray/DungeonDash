@@ -7,10 +7,23 @@ import view.console.pattern.ProgressBar;
 
 import static view.console.frame.ConsoleFrame.*;
 
+/**
+ * A type of console panel that generates the monster's info, if any.
+ * Will remain blank if the hero is not battling a monster.
+ *
+ * @version 1.0.0
+ * @author Kihsomray
+ */
 public class MonsterInfoPanel extends ConsolePanel {
 
+    /** Hero to generate info for. */
     private final Hero myHero;
 
+    /**
+     * Create an instance of monster info panel.
+     *
+     * @param theHero Hero to create the panel for.
+     */
     public MonsterInfoPanel(final Hero theHero) {
         myHero = theHero;
     }

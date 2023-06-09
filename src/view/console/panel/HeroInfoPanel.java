@@ -6,13 +6,27 @@ import view.console.pattern.ProgressBar;
 
 import static view.console.frame.ConsoleFrame.*;
 
+/**
+ * A type of console panel that generates the hero's info.
+ *
+ * @version 1.0.0
+ * @author Kihsomray
+ */
 public class HeroInfoPanel extends ConsolePanel {
 
+    /** Hero to generate info for. */
     private final Hero myHero;
 
+
+    /**
+     * Create an instance of hero info panel.
+     *
+     * @param theHero Hero to create the panel for.
+     */
     public HeroInfoPanel(final Hero theHero) {
         myHero = theHero;
     }
+
 
     @Override
     public String generate() {

@@ -33,6 +33,7 @@ public class PatternGenerator implements Serializable {
     /** Color of text if selected. */
     private String myTextColor;
 
+
     /**
      * Constructs a new pattern generator.
      *
@@ -52,6 +53,7 @@ public class PatternGenerator implements Serializable {
         myTextColor = Color.WHITE;
 
     }
+
 
     /**
      * Generates a single non-colorized random wall character.
