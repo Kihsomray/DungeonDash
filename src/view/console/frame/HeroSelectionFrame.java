@@ -74,7 +74,7 @@ public final class HeroSelectionFrame extends ConsoleFrame {
      */
     private String generate(final char theHero) {
 
-        final StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder("\n\n\n\n\n\n\n\n\n\n");
         final Hero hero = Utility.generateHeroFromChar(theHero, "");
 
         // Top border of header and stats.

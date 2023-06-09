@@ -251,7 +251,7 @@ public class DungeonGameFrame extends ConsoleFrame {
                 myToolTipPanel.generate()).split("\n");
 
         // String builder.
-        final StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder("\n\n\n\n\n\n\n\n\n\n");
 
         // Loop through and add each
         for (
