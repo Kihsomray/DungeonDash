@@ -8,6 +8,9 @@ package view.console.pattern;
  */
 public final class Color {
 
+    /** Reset ANSI value. */
+    public static final String RESET = "\033[0m";
+
     /** Bold ANSI value. */
     public static final String BOLD = "\u001B[1m";
 

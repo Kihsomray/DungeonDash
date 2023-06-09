@@ -2,7 +2,6 @@ package controller;
 
 import model.util.Utility;
 import model.dungeon.Dungeon;
-import model.entity.DungeonCharacterFactory;
 import view.DungeonGUI;
 import view.console.ConsoleDisplay;
 
@@ -14,7 +13,7 @@ import java.io.Serializable;
  * @author Kihsomray
  * @author Patrick Hern
  */
-public class DungeonAdventure implements Serializable {
+public final class DungeonAdventure implements Serializable {
 
     /** Instance of the GUI - view. */
     private final DungeonGUI myGUI;
