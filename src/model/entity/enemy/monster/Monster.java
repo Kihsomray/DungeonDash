@@ -4,6 +4,7 @@ import model.util.Utility;
 import model.entity.DungeonCharacter;
 import model.entity.enemy.Enemy;
 import model.entity.hero.Hero;
+import view.console.pattern.Color;
 
 import java.io.Serializable;
 
@@ -139,7 +140,7 @@ public class Monster extends DungeonCharacter implements Enemy, Serializable {
      */
     @Override
     public String getColoredDisplay() {
-        return Utility.getColor('1') + getDisplayChar();
+        return Color.RED + getDisplayChar();
     }
 
 

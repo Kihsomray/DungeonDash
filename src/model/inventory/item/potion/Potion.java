@@ -3,6 +3,7 @@ package model.inventory.item.potion;
 import model.util.Utility;
 import model.entity.hero.Hero;
 import model.inventory.item.Item;
+import view.console.pattern.Color;
 
 import java.io.Serializable;
 
@@ -38,7 +39,7 @@ public abstract class Potion implements Item, Serializable {
      */
     @Override
     public String getColoredDisplay() {
-        return Utility.getColor('6') + getDisplayChar();
+        return Color.CYAN + getDisplayChar();
     }
 
 }

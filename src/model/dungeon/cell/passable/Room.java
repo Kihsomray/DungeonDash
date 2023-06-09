@@ -15,7 +15,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Room implements Passable, Serializable {
+public class Room implements Passable {
 
     /** Constant for monster spawn rate. */
     private static final double MONSTER_SPAWN_RATE = 0.5;

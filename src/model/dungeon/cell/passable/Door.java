@@ -3,10 +3,9 @@ package model.dungeon.cell.passable;
 import model.util.Utility;
 import model.dungeon.cell.passable.info.Neighbors;
 import model.entity.hero.Hero;
+import view.console.pattern.Color;
 
-import java.io.Serializable;
-
-public class Door implements Passable, Serializable {
+public class Door implements Passable {
 
     private final int myX;
     private final int myY;
@@ -37,9 +36,8 @@ public class Door implements Passable, Serializable {
 
     @Override
     public String toString() {
-        return Utility.getColor('3')
-                + (myIsEntrance ? "<_^_>\n" : ">_^_<\n")
-                + Utility.getColor('3') + "[]|[]";
+        return Color.YELLOW + (myIsEntrance ? "<_^_>\n" :
+                ">_^_<\n") + Color.YELLOW + "[]|[]";
     }
 
     @Override

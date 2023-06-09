@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import static view.console.frame.ConsoleFrame.PATTERN;
 
-public class Wall implements Cell, Serializable {
+public class Wall implements Cell {
 
     private final int myX;
     private final int myY;

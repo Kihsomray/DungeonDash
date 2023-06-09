@@ -11,6 +11,7 @@ import model.inventory.item.potion.Potion;
 import model.entity.DungeonCharacter;
 import model.inventory.HeroInventory;
 import model.entity.enemy.monster.Monster;
+import view.console.pattern.Color;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -159,7 +160,7 @@ public abstract class Hero extends DungeonCharacter implements Serializable {
      */
     @Override
     public String getColoredDisplay() {
-        return Utility.getColor('7') + getDisplayChar();
+        return Color.WHITE + getDisplayChar();
     }
 
     /**

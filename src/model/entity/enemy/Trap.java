@@ -2,6 +2,7 @@ package model.entity.enemy;
 
 import model.entity.hero.Hero;
 import model.util.Utility;
+import view.console.pattern.Color;
 
 import java.io.Serializable;
 
@@ -24,7 +25,7 @@ public class Trap implements Enemy, Serializable {
      */
     @Override
     public String getColoredDisplay() {
-        return Utility.getColor('2') + getDisplayChar();
+        return Color.GREEN + getDisplayChar();
     }
 
     /**

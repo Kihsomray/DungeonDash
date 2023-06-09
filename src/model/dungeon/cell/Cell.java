@@ -2,7 +2,7 @@ package model.dungeon.cell;
 
 import java.io.Serializable;
 
-public interface Cell {
+public interface Cell extends Serializable {
 
     /**
      * Get the X coordinate of the cell.
