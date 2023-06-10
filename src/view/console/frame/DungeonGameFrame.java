@@ -152,7 +152,7 @@ public class DungeonGameFrame extends ConsoleFrame {
 
                 }
 
-            // If there is a battle.
+                // If there is a battle.
             } else {
 
                 final int previousMonsterDamage = myHero.getBattle()

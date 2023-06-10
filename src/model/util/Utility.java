@@ -33,32 +33,16 @@ public final class Utility {
         // Nothing.
     }
 
-    /** This Overload only exists for testing purposes. ONLY TEST BRANCH */
-    public static void saveDungeonState(final Dungeon theDungeon) {
-        saveDungeonState(theDungeon, "test");
-    }
-
     /**
      * Saves the current Dungeon state to file.
      *
      * @param theDungeon Dungeon to save.
+     * @param theSaveName Name of dungeon save.
      */
-    public static void saveDungeonState(final Dungeon theDungeon, String theTest) {
-
-        // Ask the user to name the file.
-        System.out.print("Name your save file (Ex. \"save1\"): ");
-
-        // Get the save name.
-        //String saveName = SCANNER.nextLine();
-        String saveName = theTest;
-
-        // Keep asking the user until valid name entered.
-        while (saveName.isBlank()) {
-
-            System.out.print("Please enter a non-empty name: ");
-            saveName = SCANNER.nextLine();
-
-        }
+    public static void saveDungeonState(final Dungeon theDungeon,
+                                        final String theSaveName) {
+        // The save file's name.
+        String saveName = theSaveName;
 
         // Concat the file extension.
         saveName += "." + SAVE_FILE_EXTENSION;
@@ -94,41 +78,23 @@ public final class Utility {
 
     }
 
-    /** This Overload only exists for testing purposes. ONLY TEST BRANCH */
-    public static Dungeon loadDungeonState(final Dungeon theDungeon) {
-        return loadDungeonState(theDungeon, "test");
-    }
-
     /**
      * Loads a dungeon state and returns it.
      *
      * @param theDungeon Dungeon to use in case of failure.
      * @return Resulting Dungeon.
      */
-    public static Dungeon loadDungeonState(final Dungeon theDungeon, String theTest) {
-
-        // Ask the user for the name of the file.
-        System.out.print("Enter the file name to load (Ex. \"save1\"): ");
-
-        // Get the load name.
-//        String saveName = SCANNER.nextLine();
-        String saveName = theTest;
-
-        // Keep asking the user until valid file name entered.
-        while (saveName.isBlank() || !new File(saveName).exists()) {
-
-            System.out.print("Please enter a non-empty name: ");
-            saveName = SCANNER.nextLine();
-            break;
-        }
+    public static Dungeon loadDungeonState(final Dungeon theDungeon,
+                                           final String theLoadName) {
+        String loadGameName = theLoadName;
 
         // Concat the file extension.
-        saveName += "." + SAVE_FILE_EXTENSION;
+        loadGameName += "." + SAVE_FILE_EXTENSION;
 
         try {
 
             // Start the save with file input stream.
-            final FileInputStream fileStream = new FileInputStream(saveName);
+            final FileInputStream fileStream = new FileInputStream(loadGameName);
 
             // Pass in the filestream to an object input stream.
             final ObjectInputStream inStream =
@@ -148,7 +114,7 @@ public final class Utility {
 
             // Input/output exception.
             System.out.println("Could not find file '"
-                    + saveName + "': " + theIOException);
+                    + loadGameName + "'");
 
         } catch (ClassNotFoundException theCNFException) {
 
