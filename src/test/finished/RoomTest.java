@@ -1,4 +1,4 @@
-package test;
+package test.finished;
 
 import model.Interactable;
 import model.dungeon.cell.passable.Room;

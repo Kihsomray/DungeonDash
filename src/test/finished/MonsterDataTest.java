@@ -1,4 +1,4 @@
-package test;
+package test.finished;
 
 import model.entity.enemy.monster.MonsterData;
 import org.junit.jupiter.api.BeforeEach;

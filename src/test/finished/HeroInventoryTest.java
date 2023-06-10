@@ -1,4 +1,4 @@
-package test;
+package test.finished;
 
 import model.inventory.HeroInventory;
 import model.inventory.item.Item;

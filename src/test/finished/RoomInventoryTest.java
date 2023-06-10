@@ -1,4 +1,4 @@
-package test;
+package test.finished;
 
 import model.inventory.RoomInventory;
 import model.inventory.item.potion.HealthPotion;

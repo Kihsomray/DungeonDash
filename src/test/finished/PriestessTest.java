@@ -1,23 +1,23 @@
-package test;
+package test.finished;
 
 import model.entity.enemy.monster.Monster;
+import model.entity.hero.Priestess;
 import model.entity.hero.Hero;
-import model.entity.hero.Thief;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/** Class to test Thief. */
-class ThiefTest {
+/** Class to test Priestess. */
+class PriestessTest {
 
-    /** Hero to test Thief with. */
+    /** Hero to test Priestess with. */
     Hero myHero;
 
     /** Set up the hero beforehand. */
     @BeforeEach
     void setUp() {
-        myHero = new Thief("Thief");
+        myHero = new Priestess("Priestess");
     }
 
     /** Testing the attackMonster method. */
@@ -35,14 +35,16 @@ class ThiefTest {
     void attackMonsterSpecial() {
         Monster myMonster = new Monster("name", 100, 30, 30,
                 3, 1, 40, 40, 1);
+        myMonster.attackHero(myHero);
+        int hp = myHero.getHP();
         myHero.attackMonster(myMonster, true);
 
-        assertTrue(myMonster.getHP() <= 100);
+        assertTrue(myHero.getHP() > hp);
     }
 
     /** Testing the display character. */
     @Test
     void getDisplayChar() {
-        assertEquals('T', myHero.getDisplayChar());
+        assertEquals('P', myHero.getDisplayChar());
     }
 }
