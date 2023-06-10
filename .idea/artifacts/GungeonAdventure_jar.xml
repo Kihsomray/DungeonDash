@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="GungeonAdventure:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/GungeonAdventure_jar</output-path>
-    <root id="archive" name="DungeonDash.jar">
-      <element id="module-output" name="DungeonDash" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/sqlite-jdbc-3.42.0.0.jar" path-in-jar="/" />
-    </root>
-  </artifact>
-</component>

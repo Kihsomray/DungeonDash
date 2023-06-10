@@ -126,15 +126,11 @@ public class ConsoleDisplay implements DungeonGUI, Serializable {
         String saveName = SCANNER.nextLine();
 
         // Keep asking the user until valid file name entered.
-        while (saveName.isBlank() || !new File(saveName).exists()) {
+        while (saveName.isBlank() || !new File(saveName + ".ser").exists()) {
 
             System.out.print("Please enter a non-empty name "
                     + "(\"E\" to start a new game): ");
             saveName = SCANNER.nextLine();
-
-            if (Objects.equals(saveName, "E")) {
-                break;
-            }
 
         }
 
