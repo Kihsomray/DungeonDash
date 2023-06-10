@@ -1,4 +1,4 @@
-package test.finished;
+package test;
 
 import model.dungeon.Dungeon;
 import model.entity.hero.Hero;
