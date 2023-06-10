@@ -1,4 +1,4 @@
-package test.finished;
+package test;
 
 import model.dungeon.cell.Wall;
 import model.dungeon.cell.passable.Room;

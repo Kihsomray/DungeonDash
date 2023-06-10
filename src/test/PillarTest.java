@@ -1,4 +1,4 @@
-package test.finished;
+package test;
 
 import model.inventory.item.collectable.Pillar;
 import org.junit.jupiter.api.BeforeEach;
