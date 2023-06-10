@@ -23,13 +23,13 @@ import java.util.Set;
 public class Room implements Passable {
 
     /** Constant for monster spawn rate. */
-    private static final double MONSTER_SPAWN_RATE = 0.5;
+    private static final double MONSTER_SPAWN_RATE = 0.35;
 
     /** Constant for trap spawn rate. */
-    private static final double TRAP_SPAWN_RATE = 0.15;
+    private static final double TRAP_SPAWN_RATE = 0.2;
 
     /** Constant for potion spawn rate. */
-    private static final double POTION_SPAWN_RATE = 0.10;
+    private static final double POTION_SPAWN_RATE = 0.15;
 
     /** X coordinate of this cell. */
     private final int myX;
