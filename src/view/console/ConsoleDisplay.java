@@ -6,9 +6,13 @@ import view.DungeonGUI;
 import view.console.frame.DungeonGameFrame;
 import view.console.frame.HeroSelectionFrame;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Scanner;
+
+import static model.util.Utility.SCANNER;
 
 /**
  * A type of GUI for DungeonAdventure that is displayed in console.
@@ -93,7 +97,9 @@ public class ConsoleDisplay implements DungeonGUI, Serializable {
         if (load) {
 
             // Set the dungeon to previous state.
-            myMain.setDungeon(Utility.loadDungeonState(myMain.getDungeon()));
+            myMain.setDungeon(Utility.loadDungeonState(
+                    myMain.getDungeon(), queryForGameName()
+            ));
 
         }
 
@@ -106,6 +112,33 @@ public class ConsoleDisplay implements DungeonGUI, Serializable {
         // Display the dungeon game frame.
         myDungeonGameFrame.display();
 
+    }
+
+    /**
+     * Queries the user for the name of the game they wish to load.
+     * @return Returns the String of the save to load.
+     */
+    private String queryForGameName() {
+        // Ask the user for the name of the file.
+        System.out.print("Enter the file name to load (Ex. \"save1\"): ");
+
+        // Get the load name.
+        String saveName = SCANNER.nextLine();
+
+        // Keep asking the user until valid file name entered.
+        while (saveName.isBlank() || !new File(saveName).exists()) {
+
+            System.out.print("Please enter a non-empty name "
+                    + "(\"E\" to start a new game): ");
+            saveName = SCANNER.nextLine();
+
+            if (Objects.equals(saveName, "E")) {
+                break;
+            }
+
+        }
+
+        return saveName;
     }
 
 }

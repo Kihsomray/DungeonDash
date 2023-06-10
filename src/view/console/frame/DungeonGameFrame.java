@@ -7,6 +7,8 @@ import model.util.Utility;
 import view.console.panel.*;
 import view.console.util.BattleUtility;
 
+import static model.util.Utility.SCANNER;
+
 /**
  * A type of console frame that contains the main dungeon game display.
  *
@@ -117,7 +119,7 @@ public class DungeonGameFrame extends ConsoleFrame {
 
                     case 'N':
                         // Save dungeon's current state.
-                        Utility.saveDungeonState(myDungeon);
+                        Utility.saveDungeonState(myDungeon, queryForSaveName());
                         break;
 
                 }
@@ -247,6 +249,27 @@ public class DungeonGameFrame extends ConsoleFrame {
         sendUI("\nWinner winner chicken dinner!");
 
 
+    }
+
+    /**
+     * Queries the user to name their save file.
+     * @return Returns the name of the save file.
+     */
+    private String queryForSaveName() {
+        // Ask the user to name the file.
+        System.out.print("Name your save file (Ex. \"save1\"): ");
+
+        // Get the save name.
+        String saveName = SCANNER.nextLine();
+
+        // Keep asking the user until valid name entered.
+        while (saveName.isBlank()) {
+
+            System.out.print("Please enter a non-empty name: ");
+            saveName = SCANNER.nextLine();
+
+        }
+        return saveName;
     }
 
     /**
