@@ -130,7 +130,7 @@ public class PrimsGenerator implements DungeonGenerator {
     /**
      * Generates entities for this dungeon.
      */
-    private void generateEntities() {
+    public void generateEntities() {
 
         // Gets a random number of steps.
         int steps = Utility.RANDOM.nextInt(
@@ -216,7 +216,7 @@ public class PrimsGenerator implements DungeonGenerator {
      * @param theY Y coordinate of cell.
      * @return If the wall is suitable to be a room.
      */
-    private boolean checkSurrounding(final int theX, final int theY) {
+    public boolean checkSurrounding(final int theX, final int theY) {
 
         // Counter for found rooms
         int found = 0;
@@ -244,7 +244,7 @@ public class PrimsGenerator implements DungeonGenerator {
      * @param theX X coordinate of cell.
      * @param theY Y coordinate of cell.
      */
-    private void addSurrounding(final int theX, final int theY) {
+    public void addSurrounding(final int theX, final int theY) {
 
         final Neighbors neighbors = ((Passable) getCellAt(theX, theY)).getNeighbors();
 
@@ -269,7 +269,7 @@ public class PrimsGenerator implements DungeonGenerator {
      * @param theX X coordinate of cell.
      * @param theY Y coordinate of cell.
      */
-    private Passable addIfWall(final int theX, final int theY) {
+    public Passable addIfWall(final int theX, final int theY) {
 
         // Get the surrounding cells, making sure no IOBE.
         Cell cell = getCellAt(theX, theY);
@@ -293,7 +293,7 @@ public class PrimsGenerator implements DungeonGenerator {
     /**
      * Fills the 2D array of Cells to contain strictly walls.
      */
-    private void fillWalls() {
+    public void fillWalls() {
 
         // Loop through width
         for (int i = 0; i < myWidth; i++) {
@@ -318,7 +318,7 @@ public class PrimsGenerator implements DungeonGenerator {
      * @param theY Y coordinate of cell.
      * @return If the cell is passable.
      */
-    private boolean isPassable(final int theX, final int theY) {
+    public boolean isPassable(final int theX, final int theY) {
         return getCellAt(theX, theY) instanceof Passable;
     }
 
@@ -329,7 +329,7 @@ public class PrimsGenerator implements DungeonGenerator {
      * @param theY Y coordinate of cell.
      * @return Cell at that location if not IOB. Otherwise, null.
      */
-    private Cell getCellAt(final int theX, final int theY) {
+    public Cell getCellAt(final int theX, final int theY) {
 
         // X out of bounds.
         if (theX > myWidth - 1 || theX < 0) return null;
