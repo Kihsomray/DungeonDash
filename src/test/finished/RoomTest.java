@@ -2,19 +2,13 @@ package test.finished;
 
 import model.Interactable;
 import model.dungeon.cell.passable.Room;
-import model.entity.enemy.Trap;
-import model.entity.enemy.monster.Monster;
 import model.entity.hero.Hero;
 import model.entity.hero.Warrior;
 import model.inventory.Inventory;
 import model.inventory.item.Item;
-import model.inventory.item.potion.HealthPotion;
-import model.inventory.item.potion.VisionPotion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.Set;
-import java.util.TreeSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
