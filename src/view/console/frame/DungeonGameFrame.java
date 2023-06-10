@@ -14,6 +14,7 @@ import static model.util.Utility.SCANNER;
  *
  * @version 1.0.0
  * @author Kihsomray
+ * @author Patrick Hern
  */
 public class DungeonGameFrame extends ConsoleFrame {
 

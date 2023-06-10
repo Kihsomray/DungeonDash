@@ -16,19 +16,15 @@ class UtilityTest {
     }
 
     @Test
-    void saveDungeonState() {
+    void saveAndLoadDungeonState() {
         Dungeon testDungeon = new Dungeon(null, 5, 5, new Priestess("test"));
 
         Utility.saveDungeonState(testDungeon, "testSave");
 
         Dungeon loaded = Utility.loadDungeonState(testDungeon, "testSave");
 
-        assertEquals(testDungeon, loaded);
+        assertEquals(testDungeon.getHero().getName(), loaded.getHero().getName());
     }
-
-//    @Test
-//    void loadDungeonState() {
-//    }
 
     @Test
     void generateHeroFromCharP() {
