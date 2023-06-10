@@ -1,4 +1,4 @@
-package test;
+package test.finished;
 
 import model.Interactable;
 import model.dungeon.cell.passable.Room;
@@ -14,12 +14,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
+import java.util.TreeSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /** Testing the Room class. */
 class RoomTest {
 
+    /** Room to test the class with. */
     Room myRoom;
 
     /** Setting up a Room. */
@@ -28,30 +30,19 @@ class RoomTest {
         myRoom = new Room(1, 2);
     }
 
+    /** Testing the toString for the Room. */
     @Test
     void testToString() {
-        String outStr = "     \n" +
-                "     ";
         Set<Interactable> set = myRoom.getInteractables();
 
+        String toString = myRoom.toString();
+
         for (Interactable i : set) {
-            if (i instanceof Monster) {
-                outStr = "\u001B[31mM" + outStr;
-            }
-            if (i instanceof HealthPotion) {
-                outStr = "\u001B[36mH " + outStr;
-            } if (i instanceof VisionPotion) {
-                outStr = "\u001B[36mV" + outStr;
-            } if (i instanceof Trap) {
-                outStr = "\u001B[32mT  " + outStr;
-            }
+            assertTrue(toString.contains(i.getColoredDisplay()));
         }
-
-        outStr.replace(" ", ""); // TODO FIGURE THIS OUT
-
-        assertEquals(outStr, myRoom.toString().replace(" ", ""));
     }
 
+    /** Test if interactWith works correctly with a dummy hero. */
     @Test
     void interactWith() {
         Hero dHero = new Warrior("test");
@@ -64,11 +55,13 @@ class RoomTest {
         }
     }
 
+    /** Test the getX method. */
     @Test
     void getX() {
         assertEquals(1, myRoom.getX());
     }
 
+    /** Test the getY method. */
     @Test
     void getY() {
         assertEquals(2, myRoom.getY());
