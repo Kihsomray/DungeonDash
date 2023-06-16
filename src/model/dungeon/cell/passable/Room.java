@@ -32,7 +32,7 @@ public class Room implements Passable {
     /** Constant for potion spawn rate. */
     private static final double POTION_SPAWN_RATE = 0.10;
 
-    private static final String roomArtPath = "res" + File.separator + "GreyTile64.png";
+    private static final String ART_PATH = "res" + File.separator + "GreyTile64.png";
 
     /** X coordinate of this cell. */
     private final int myX;
@@ -126,11 +126,6 @@ public class Room implements Passable {
 
     }
 
-    public Set<Enemy> getEnemies() {
-        final Set<Enemy> enemies = new HashSet<>(myEnemies);
-        return enemies;
-    }
-
     /**
      * Randomizes the spawns of the monsters, traps, and potions.
      * Makes sure entrances and exits cannot spawn these secondary
@@ -156,6 +151,11 @@ public class Room implements Passable {
 
     }
 
+
+    @Override
+    public String getArtPath() {
+        return ART_PATH;
+    }
 
     @Override
     public int getX() {
@@ -207,11 +207,6 @@ public class Room implements Passable {
     @Override
     public Neighbors getNeighbors() {
         return myNeighbors;
-    }
-
-    @Override
-    public String getArtPath() {
-        return roomArtPath;
     }
 
 }

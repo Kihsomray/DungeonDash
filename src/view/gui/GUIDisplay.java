@@ -3,12 +3,9 @@ package view.gui;
 import controller.DungeonAdventure;
 import view.DungeonGUI;
 
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 public class GUIDisplay implements DungeonGUI {
@@ -67,13 +64,11 @@ public class GUIDisplay implements DungeonGUI {
         String userName = "L Bozo"; // TODO implement choosing a name
 
 
-        startButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.remove(startView);
-                System.out.println("Show the choose character screen.");
-                chooseCharacter(frame);
-                //displayMainScene(frame, chosen, userName);
-            }
+        startButton.addActionListener(e -> {
+            frame.remove(startView);
+            System.out.println("Show the choose character screen.");
+            chooseCharacter(frame);
+            //displayMainScene(frame, chosen, userName);
         });
         // Choose a character and then initialize the dungeon then go to main game loop
     }
@@ -162,26 +157,20 @@ public class GUIDisplay implements DungeonGUI {
 
         theFrame.revalidate();
 
-        warriorChoice.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                theFrame.remove(characterPanel);
-                System.out.println("Chosen warrior.");
-                displayMainScene(theFrame, 'W', "Warrior");
-            }
+        warriorChoice.addActionListener(e -> {
+            theFrame.remove(characterPanel);
+            System.out.println("Chosen warrior.");
+            displayMainScene(theFrame, 'W', "Warrior");
         });
-        priestessChoice.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                theFrame.remove(characterPanel);
-                System.out.println("Chosen Priestess.");
-                displayMainScene(theFrame, 'P', "Priestess");
-            }
+        priestessChoice.addActionListener(e -> {
+            theFrame.remove(characterPanel);
+            System.out.println("Chosen Priestess.");
+            displayMainScene(theFrame, 'P', "Priestess");
         });
-        thiefChoice.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                theFrame.remove(characterPanel);
-                System.out.println("Chosen thief.");
-                displayMainScene(theFrame, 'T', "Thief");
-            }
+        thiefChoice.addActionListener(e -> {
+            theFrame.remove(characterPanel);
+            System.out.println("Chosen thief.");
+            displayMainScene(theFrame, 'T', "Thief");
         });
 
         return;

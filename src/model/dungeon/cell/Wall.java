@@ -1,5 +1,7 @@
 package model.dungeon.cell;
 
+import java.io.File;
+
 import static view.console.frame.ConsoleFrame.PATTERN;
 
 /**
@@ -10,6 +12,8 @@ import static view.console.frame.ConsoleFrame.PATTERN;
  * @author Kihsomray
  */
 public class Wall implements Cell {
+
+    private static final String ART_PATH = "res" + File.separator + "DarkTile.png";
 
     /** X coordinate of this cell. */
     private final int myX;
@@ -31,6 +35,10 @@ public class Wall implements Cell {
 
     }
 
+    @Override
+    public String getArtPath() {
+        return ART_PATH;
+    }
 
     @Override
     public int getX() {

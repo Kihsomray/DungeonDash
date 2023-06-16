@@ -4,6 +4,7 @@ import model.entity.hero.Hero;
 import model.util.Utility;
 import view.console.pattern.Color;
 
+import java.io.File;
 import java.io.Serializable;
 
 /**
@@ -20,6 +21,8 @@ public class Trap implements Enemy, Serializable {
     /** Maximum HP loss percentage. */
     private static final double MAX_HP_LOSS_PERCENTAGE = 0.16;
 
+    private static final String trapArtPath = "res" + File.separator + "Hole.png";
+
 
     /**
      * Does the trap's effect on the hero.
@@ -35,6 +38,11 @@ public class Trap implements Enemy, Serializable {
 
     }
 
+
+    @Override
+    public String getArtPath() {
+        return trapArtPath;
+    }
 
     @Override
     public char getDisplayChar() {

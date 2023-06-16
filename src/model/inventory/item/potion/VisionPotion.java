@@ -37,14 +37,6 @@ public class VisionPotion extends Potion {
     }
 
 
-    @Override
-    public String usePotion(final Hero theHero) {
-
-        theHero.enableExtraVisibility();
-        return "Visibility increased!";
-
-    }
-
     public String getArtPath() {
         return visionPotionArtPath;
     }

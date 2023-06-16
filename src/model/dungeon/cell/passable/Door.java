@@ -4,6 +4,8 @@ import model.dungeon.cell.passable.info.Neighbors;
 import model.entity.hero.Hero;
 import view.console.pattern.Color;
 
+import java.io.File;
+
 /**
  * A type of passable that poses as an exit or entrance.
  *
@@ -11,6 +13,8 @@ import view.console.pattern.Color;
  * @author Kihsomray
  */
 public class Door implements Passable {
+
+    private static final String ART_PATH = "res" + File.separator + "Door.png";
 
     /** X coordinate of this cell. */
     private final int myX;
@@ -67,6 +71,11 @@ public class Door implements Passable {
 
     }
 
+
+    @Override
+    public String getArtPath() {
+        return ART_PATH;
+    }
 
     @Override
     public int getX() {

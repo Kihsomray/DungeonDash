@@ -24,5 +24,10 @@ public interface Cell extends Serializable {
      */
     int getY();
 
+    /**
+     * Get the art path of the given cell.
+     *
+     * @return Art file path of cell.
+     */
     String getArtPath();
 }

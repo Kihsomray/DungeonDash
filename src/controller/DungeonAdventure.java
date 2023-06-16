@@ -2,10 +2,8 @@ package controller;
 
 import model.util.Utility;
 import model.dungeon.Dungeon;
-import model.sprite.hero.Priestess;
-import model.sprite.hero.Thief;
 import view.DungeonGUI;
-import view.console.ConsoleDisplay;
+import view.gui.GUIDisplay;
 
 import java.io.Serializable;
 

@@ -10,6 +10,7 @@ import model.Interactable;
  */
 public interface Item extends Interactable {
 
+
     public String getSlotArtPath();
 
 }

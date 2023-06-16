@@ -4,19 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="afced3ce-4e42-4ba0-b638-4aedcef5b563" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/GungeonAdventure_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/SQLite.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/sqlite_jdbc_3_42_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/sqlite_jdbc_3_42_0_0.xml" afterDir="false" />
+    <list default="true" id="afced3ce-4e42-4ba0-b638-4aedcef5b563" name="Changes" comment="Revert &quot;Change branch name&quot;&#10;&#10;This reverts commit da5078bc">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DungeonAdventure.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DungeonAdventure.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/console/ConsoleDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/console/ConsoleDisplay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/DungeonAdventure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/DungeonAdventure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/dungeon/cell/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/dungeon/cell/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/dungeon/cell/Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/dungeon/cell/Wall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/dungeon/cell/passable/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/dungeon/cell/passable/Door.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/dungeon/cell/passable/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/dungeon/cell/passable/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/inventory/item/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/inventory/item/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/inventory/item/collectable/Pillar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/inventory/item/collectable/Pillar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/inventory/item/potion/HealthPotion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/inventory/item/potion/HealthPotion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/inventory/item/potion/VisionPotion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/inventory/item/potion/VisionPotion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/gui/GUIDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/gui/GUIDisplay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/gui/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/gui/Map.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,22 +31,36 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2R0AmHHPFoZZjD9dekOrGkzEuVI" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="DungeonAdventure" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="controller.DungeonAdventure" />
       <module name="DungeonAdventure" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="DungeonAdventure" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="DungeonAdventure" />
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -61,5 +76,16 @@
       <updated>1686376781603</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

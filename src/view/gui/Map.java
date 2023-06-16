@@ -2,12 +2,12 @@ package view.gui;
 
 
 import model.dungeon.Dungeon;
-import model.dungeon.tile.Cell;
-import model.dungeon.tile.passable.Passable;
-import model.dungeon.tile.passable.Room;
+import model.dungeon.cell.Cell;
+import model.dungeon.cell.passable.Passable;
+import model.dungeon.cell.passable.Room;
+import model.entity.enemy.Enemy;
+import model.entity.hero.Hero;
 import model.inventory.item.Item;
-import model.sprite.enemy.Enemy;
-import model.sprite.hero.Hero;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
