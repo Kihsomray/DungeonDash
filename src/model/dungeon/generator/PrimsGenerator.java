@@ -1,13 +1,13 @@
 package model.dungeon.generator;
 
-import model.Utility;
-import model.dungeon.tile.Cell;
-import model.dungeon.tile.Wall;
-import model.dungeon.tile.passable.Door;
-import model.dungeon.tile.passable.Passable;
-import model.dungeon.tile.passable.Neighbors;
-import model.dungeon.tile.passable.Room;
-import model.sprite.hero.Hero;
+import model.util.Utility;
+import model.dungeon.cell.Cell;
+import model.dungeon.cell.Wall;
+import model.dungeon.cell.passable.Door;
+import model.dungeon.cell.passable.Passable;
+import model.dungeon.cell.passable.info.Neighbors;
+import model.dungeon.cell.passable.Room;
+import model.entity.hero.Hero;
 import model.inventory.item.collectable.Collectable;
 import model.inventory.item.collectable.Pillar;
 
@@ -46,6 +46,7 @@ public class PrimsGenerator implements DungeonGenerator {
     /** Exit room. */
     private Door myExit;
 
+
     /**
      * Base constructor for Prim's Generator.
      *
@@ -65,6 +66,7 @@ public class PrimsGenerator implements DungeonGenerator {
         myEntrance = myExit = null;
 
     }
+
 
     @Override
     public Cell[][] generate() {
@@ -125,10 +127,16 @@ public class PrimsGenerator implements DungeonGenerator {
 
     }
 
+    /**
+     * Generates entities for this dungeon.
+     */
     private void generateEntities() {
 
         // Gets a random number of steps.
-        int steps = Utility.RANDOM.nextInt(myRoomCounter, myRoomCounter * 2) - 1;
+        int steps = Utility.RANDOM.nextInt(
+                myRoomCounter,
+                myRoomCounter * 2
+        ) - 1;
 
         // Get origin.
         Stack<PassableInfo> previous = new Stack<>();
@@ -139,8 +147,6 @@ public class PrimsGenerator implements DungeonGenerator {
 
             // Set temp to current.
             final PassableInfo temp = current;
-
-            //System.out.println(current.myPassable.getNeighbors());
 
             // Set current to next.
             current = new PassableInfo(current.myPassable
@@ -162,16 +168,18 @@ public class PrimsGenerator implements DungeonGenerator {
 
             }
 
-            // Set previous to old current (temp).
-            // ----- previous = temp;
-
         }
 
+        // Get the coordinates.
+        final int passX = current.myPassable.getX();
+        final int passY = current.myPassable.getY();
+
         // Set the exit.
-        final Passable passable = current.myPassable;
-        myCells[passable.getX()][passable.getY()] = myExit
-                = new Door(passable.getX(), passable.getY(), false);
-        addSurrounding(passable.getX(), passable.getY());
+        myCells[passX][passY] = myExit
+                = new Door(passX, passY, false);
+
+        // Add the surroundings.
+        addSurrounding(passX, passY);
 
         // All the pillars.
         Stack<Collectable> collectables = new Stack<>();
@@ -198,7 +206,6 @@ public class PrimsGenerator implements DungeonGenerator {
             // Otherwise, add the pillar to that spot.
             ((Room) cell).getInventory().addItem(collectables.pop());
         }
-
 
     }
 
@@ -229,17 +236,6 @@ public class PrimsGenerator implements DungeonGenerator {
         // Return the found amount
         return found == 1;
 
-    }
-
-    /**
-     * Checks if the cell is passable.
-     *
-     * @param theX X coordinate of cell.
-     * @param theY Y coordinate of cell.
-     * @return If the cell is passable.
-     */
-    private boolean isPassable(final int theX, final int theY) {
-        return getCellAt(theX, theY) instanceof Passable;
     }
 
     /**
@@ -295,26 +291,6 @@ public class PrimsGenerator implements DungeonGenerator {
     }
 
     /**
-     * Gets a cell at a certain location.
-     *
-     * @param theX X coordinate of cell.
-     * @param theY Y coordinate of cell.
-     * @return Cell at that location if not IOB. Otherwise, null.
-     */
-    private Cell getCellAt(final int theX, final int theY) {
-
-        // X out of bounds.
-        if (theX > myWidth - 1 || theX < 0) return null;
-
-        // Y out of bounds.
-        if (theY > myHeight - 1 || theY < 0) return null;
-
-        // Return cell at location
-        return myCells[theX][theY];
-
-    }
-
-    /**
      * Fills the 2D array of Cells to contain strictly walls.
      */
     private void fillWalls() {
@@ -331,6 +307,38 @@ public class PrimsGenerator implements DungeonGenerator {
             }
 
         }
+
+    }
+
+
+    /**
+     * Checks if the cell is passable.
+     *
+     * @param theX X coordinate of cell.
+     * @param theY Y coordinate of cell.
+     * @return If the cell is passable.
+     */
+    private boolean isPassable(final int theX, final int theY) {
+        return getCellAt(theX, theY) instanceof Passable;
+    }
+
+    /**
+     * Gets a cell at a certain location.
+     *
+     * @param theX X coordinate of cell.
+     * @param theY Y coordinate of cell.
+     * @return Cell at that location if not IOB. Otherwise, null.
+     */
+    private Cell getCellAt(final int theX, final int theY) {
+
+        // X out of bounds.
+        if (theX > myWidth - 1 || theX < 0) return null;
+
+        // Y out of bounds.
+        if (theY > myHeight - 1 || theY < 0) return null;
+
+        // Return cell at location
+        return myCells[theX][theY];
 
     }
 
@@ -364,21 +372,44 @@ public class PrimsGenerator implements DungeonGenerator {
         return myHero;
     }
 
-    private class PassableInfo {
 
+    /**
+     * Aids the generator in creating the dungeon.
+     */
+    private static class PassableInfo {
+
+        /**
+         * Current passable.
+         */
         private final Passable myPassable;
+
+        /**
+         * Blacklisted passables to not revisit.
+         */
         private final Set<Passable> myBlacklist;
 
+        /**
+         * Creates an instance of PassableInfo.
+         *
+         * @param thePassable Passable in question.
+         */
         public PassableInfo(final Passable thePassable) {
+
             myPassable = thePassable;
+
+            // Empty hashset.
             myBlacklist = new HashSet<>();
+
         }
 
+        /**
+         * Adds an item to this passable's blacklist.
+         *
+         * @param thePassable Passable to add.
+         */
         public void addBlacklist(final Passable thePassable) {
             myBlacklist.add(thePassable);
         }
-
-
 
     }
 

@@ -1,8 +1,10 @@
 package model.inventory.item.potion;
 
-import model.Utility;
-import model.sprite.hero.Hero;
+import model.entity.hero.Hero;
 import model.inventory.item.Item;
+import view.console.pattern.Color;
+
+import java.io.Serializable;
 
 /**
  * A type of item that can give the hero a certain effect.
@@ -10,24 +12,15 @@ import model.inventory.item.Item;
  * @version 1.0.0
  * @author Kihsomray
  */
-public abstract class Potion implements Item {
-
-
-    /**
-     * Creates a potion object.
-     */
-    public Potion() {
-
-    }
+public abstract class Potion implements Item, Serializable {
 
     /**
      * Use a potion on the hero.
      *
      * @return Message from using the potion.
      */
-    public String usePotion(final Hero theHero) {
-        return "Not implemented";
-    }
+    public abstract void applyPotion(final Hero theHero);
+
 
     /**
      * Gets the colored display of the hero.
@@ -36,7 +29,7 @@ public abstract class Potion implements Item {
      */
     @Override
     public String getColoredDisplay() {
-        return Utility.getColor('6') + getDisplayChar();
+        return Color.CYAN + getDisplayChar();
     }
 
 }

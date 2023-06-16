@@ -1,26 +1,40 @@
 package model.dungeon;
 
 import controller.DungeonAdventure;
-import model.Utility;
+import model.dungeon.cell.passable.Door;
 import model.dungeon.generator.PrimsGenerator;
 import model.dungeon.generator.DungeonGenerator;
-import model.dungeon.tile.Cell;
-import model.dungeon.tile.passable.Passable;
-import model.sprite.hero.Hero;
+import model.dungeon.cell.Cell;
+import model.entity.hero.Hero;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.io.Serializable;
 
-public class Dungeon {
+/**
+ * A dungeon contains the back-end data for the DungeonAdventure game. This
+ * data ranges from a 2D array of mazes, the hero and all of its data, along
+ * with any other necessary data.
+ *
+ * @version 1.0.0
+ * @author Kihsomray
+ * @author Patrick Hern
+ */
+public class Dungeon implements Serializable {
 
+    /** Main instance of the program. */
     private final DungeonAdventure myMain;
 
     /** The dungeon/maze made of Rooms. */
     private final Cell[][] myMaze;
 
+    /** Exit door of the dungeon. */
+    private final Door myExit;
+
+    /** Hero corresponding to this dungeon. */
     private final Hero myHero;
 
+    /** Number of rooms in the dungeon. */
     private final int myRoomCount;
+
 
     /**
      * Constructor for the dungeon that creates a new dungeon
@@ -37,11 +51,13 @@ public class Dungeon {
         myHero = theHero;
 
         // Initialize the Dungeon using Prim's generator.
-        // TODO - create character selection, pass it in here.
         final DungeonGenerator generator = new PrimsGenerator(theWidth, theHeight, theHero);
 
         // Generate the maze.
         myMaze = generator.generate();
+
+        // Gets the exit.
+        myExit = generator.getExit();
 
         // Gets the room count.
         myRoomCount = generator.getRoomCount();
@@ -49,100 +65,58 @@ public class Dungeon {
     }
 
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(generateBorder());
-
-        for (int i = myMaze[0].length - 1; i >= 0; i--) {
-
-            Queue<String> lowerHalf = new LinkedList<>();
-            sb.append(Utility.generateSegment()).append(' ');
-
-            for (Cell[] cells : myMaze) {
-
-                Cell cell = cells[i];
-
-                if (myHero.getCurrentPassable() == cell) {
-
-                    sb.append(Utility.getColor('8')).append(" _*_  ");
-                    lowerHalf.add(Utility.getColor('8') + " /^\\ ");
-
-                } else if ((myHero.isExtraVisibility() &&
-                        (Math.abs(cell.getX() - myHero.getCurrentPassable().getX()) < 3 &&
-                                Math.abs(cell.getY() - myHero.getCurrentPassable().getY()) < 3))
-                ) {
-
-                    String[] split = cell.toString().split("\n");
-
-                    sb.append(split[0]).append(' ');
-                    lowerHalf.add(split[1]);
-
-                } else if (cell instanceof Passable &&
-                        !myHero.hasDiscovered((Passable) cell)
-                ) {
-
-                    sb.append(Utility.getColor('1')).append("***** ");
-                    lowerHalf.add(Utility.getColor('1') + "*****");
-
-                } else {
-
-                    String[] split = cell.toString().split("\n");
-
-                    sb.append(split[0]).append(' ');
-                    lowerHalf.add(split[1]);
-
-                }
-
-            }
-
-            sb.append(Utility.generateSegment()).append("\n").append(Utility.generateSegment()).append(' ');
-
-            while (!lowerHalf.isEmpty()) {
-                sb.append(lowerHalf.poll()).append(' ');
-            }
-
-            sb.append(Utility.generateSegment()).append('\n');
-
-        }
-
-        final String[] dungeonString = sb.append(generateBorder()).append('\n').toString().split("\n");
-        final String[] heroString = myHero.toString().split("\n");
-
-        sb = new StringBuilder();
-
-        for (int i = 0; i < dungeonString.length; i++) {
-            sb.append(heroString[i])
-                    .append("     ")
-                    .append(dungeonString[i])
-                    .append('\n');
-        }
-
-        return sb.toString();
-
-    }
-
-    private String generateBorder() {
-        final StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < myMaze.length + 1; j++) {
-                sb.append(Utility.generateSegment()).append(' ');
-            }
-            sb.append(Utility.generateSegment()).append("\n");
-        }
-        return sb.toString();
-    }
-
+    /**
+     * Gets the hero of this dungeon.
+     *
+     * @return Hero binded to this dungeon.
+     */
     public Hero getHero() {
         return myHero;
     }
 
+    /**
+     * Gets the maze of the dungeon.
+     *
+     * @return Maze contained in the dungeon.
+     */
+    public Cell[][] getMaze() {
+        return myMaze;
+    }
+
+    /**
+     * Gets the number of rooms contained in the dungeon.
+     *
+     * @return Rooms in the dungeon.
+     */
     public int getRoomCount() {
         return myRoomCount;
     }
 
-    public Cell[][] getMaze() {
-        return myMaze.clone();
+    /**
+     * Gets the width of the dungeon.
+     *
+     * @return Width of the dungeon.
+     */
+    public int getMyWidth() {
+        return myMaze.length;
     }
+
+    /**
+     * Gets the height of the dungeon.
+     *
+     * @return Height of the dungeon.
+     */
+    public int getMyHeight() {
+        return myMaze[0].length;
+    }
+
+    /**
+     * Checks if player has walked through the exit.
+     *
+     * @return Is the game still being played.
+     */
+    public boolean isGamePlaying() {
+        return !myExit.hasEntered();
+    }
+
 }

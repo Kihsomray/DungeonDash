@@ -1,20 +1,19 @@
 package model.inventory.item.potion;
 
-import model.sprite.hero.Hero;
+import model.entity.hero.Hero;
 
 import java.io.File;
 
 /**
  * A type of potion that allows a hero to see adjacent rooms.
- * Only the 4 adjacent room will be visible until the hero moves.
+ *
+ * Only the surrounding room will be visible until the hero moves.
  *
  * @version 1.0.0
  * @author Kihsomray
  * @author Patribird
  */
 public class VisionPotion extends Potion {
-
-    //        FIELDS        //
 
     /** Display character of vision potion */
     private static final char DISPLAY_CHAR = 'V';
@@ -23,17 +22,14 @@ public class VisionPotion extends Potion {
     private static final String visionSlotPath = "res" + File.separator + "InventoryRes" + File.separator + "VisionSlot.png";
 
 
-    //        CONSTRUCTORS        //
+    @Override
+    public void applyPotion(final Hero theHero) {
 
-    /**
-     * Creates a vision potion object.
-     */
-    public VisionPotion() {
+        // Give the hero more visibility.
+        theHero.enableExtraVisibility();
 
     }
 
-
-    //        ACCESSORS        //
 
     @Override
     public char getDisplayChar() {

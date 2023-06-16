@@ -1,10 +1,11 @@
 package model.inventory;
 
 import com.sun.nio.sctp.IllegalUnbindException;
-import model.Utility;
+import model.util.Utility;
 import model.inventory.item.collectable.Collectable;
 import model.inventory.item.Item;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,18 +15,16 @@ import java.util.Set;
  *
  * @version 1.0.0
  * @author Kihsomray
+ * @author Patrick Hern
  */
-public class HeroInventory implements Inventory {
+public class HeroInventory implements Inventory, Serializable {
 
-    /**
-     * Inventory array of items.
-     */
+    /** Inventory array of items. */
     private final Item[] myInventorySlots;
 
-    /**
-     * Width of the inventory.
-     */
+    /** Width of the inventory. */
     private final int myWidth;
+
 
     /**
      * Creates a new HeroInventory.
@@ -55,86 +54,20 @@ public class HeroInventory implements Inventory {
         myWidth = theWidth;
     }
 
-    /**
-     * Get the height of the inventory.
-     *
-     * @return Height of the inventory.
-     */
-    public int getHeight() {
-        return myInventorySlots.length / myWidth;
-    }
 
     /**
-     * Get the width of the inventory.
+     * Removes an item from the inventory, if present.
      *
-     * @return Width of the inventory.
+     * @param theItem Item to remove.
      */
-    public int getWidth() {
-        return myWidth;
-    }
+    public void removeItem(final Item theItem) {
 
-    /**
-     * Gets an item at an X and Y coordinate within the inventory.
-     *
-     * X = 0, Y = 0 will be the item in position 0.
-     *
-     * @param theX X-coordinate.
-     * @param theY Y-coordinate.
-     * @return Item at that inventory location.
-     * @throws IndexOutOfBoundsException If values out of range.
-     */
-    public Item getItemAt(
-            final int theX,
-            final int theY,
-            final boolean theRemoveItem
-    ) {
-
-        // If remove the item.
-        return theRemoveItem ?
-
-                // Call the swap method with null.
-                swapItemAt(theX, theY, null) :
-
-                // Otherwise, return the item at the location.
-                myInventorySlots[theX + myWidth * theY];
-
-    }
-
-    /**
-     * Set an item at a specific location.
-     *
-     * X = 0, Y = 0 will be the item in position 0.
-     *
-     * @param theX X-coordinate.
-     * @param theY Y-coordinate.
-     * @param theItem The item to place in.
-     * @throws IndexOutOfBoundsException If values out of range.
-     * @throws IllegalUnbindException If there is an item in the spot.
-     * @throws IllegalArgumentException If invalid collectable in reservation.
-     */
-    public void setItemAt(
-            final int theX,
-            final int theY,
-            final Item theItem
-    ) {
-
-        // Is there an item there?
-        if (getItemAt(theX, theY, false) != null)
-            throw new IllegalUnbindException(
-                    "There is an item in that spot!"
-            );
-
-        // Index value of the array.
-        final int index = theX + myWidth * theY;
-
-        // Check collectable slots
-        if (index < 4 && !(theItem instanceof Collectable))
-            throw new IllegalArgumentException(
-                    "A non-collectable cannot be placed in that spot!"
-            );
-
-        // Set the item
-        myInventorySlots[index] = theItem;
+        for (int i = 0; i < myInventorySlots.length; i++) {
+            if (myInventorySlots[i] == theItem) {
+                myInventorySlots[i] = null;
+                return;
+            }
+        }
 
     }
 
@@ -174,28 +107,6 @@ public class HeroInventory implements Inventory {
 
     }
 
-
-    /**
-     * Gets the inventory as a set.
-     *
-     * @return Inventory as a set.
-     */
-    @Override
-    public Set<Item> getInventory() {
-        return new HashSet<>(Arrays.stream(myInventorySlots).toList());
-    }
-
-    /**
-     * Checks if the inventory contains an item.
-     *
-     * @param theItem Item to check.
-     * @return If the inventory contains an item.
-     */
-    @Override
-    public boolean containsItem(final Item theItem) {
-        return Arrays.stream(myInventorySlots).anyMatch(e -> e == theItem);
-    }
-
     /**
      * Add an item to the inventory.
      *
@@ -228,100 +139,83 @@ public class HeroInventory implements Inventory {
 
     }
 
+
+    /**
+     * Get the height of the inventory.
+     *
+     * @return Height of the inventory.
+     */
+    public int getHeight() {
+        return myInventorySlots.length / myWidth;
+    }
+
+    /**
+     * Get the width of the inventory.
+     *
+     * @return Width of the inventory.
+     */
+    public int getWidth() {
+        return myWidth;
+    }
+
+
+    /**
+     * Gets an item at an X and Y coordinate within the inventory.
+     *
+     * X = 0, Y = 0 will be the item in position 0.
+     *
+     * @param theX X-coordinate.
+     * @param theY Y-coordinate.
+     * @return Item at that inventory location.
+     * @throws IndexOutOfBoundsException If values out of range.
+     */
+    public Item getItemAt(
+            final int theX,
+            final int theY,
+            final boolean theRemoveItem
+    ) {
+
+        // If remove the item.
+        return theRemoveItem ?
+
+                // Call the swap method with null.
+                swapItemAt(theX, theY, null) :
+
+                // Otherwise, return the item at the location.
+                myInventorySlots[theX + myWidth * theY];
+
+    }
+
+
+    /**
+     * Gets the inventory as a set.
+     *
+     * @return Inventory as a set.
+     */
     @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-
-        // Append header.
-        appendBar(sb);
-
-        appendSegment(sb, true, 3);
-        sb.append(Utility.getColor('8'))
-                .append("    I N V E N T O R Y     ");
-        appendSegment(sb, false, 3);
-
-        // Append spacer.
-        appendBar(sb);
-
-        // Append pillar collection.
-        appendInventory(0, 4, sb, Utility.getColor('3') + "?");
-
-
-        // Append info row 1.
-        appendInfoBar(0, 4, sb);
-
-        // Append movable inventory 1.
-        appendInventory(4, 8, sb, Utility.getColor('2') + "+");
-
-        // Append info row 2.
-        appendInfoBar(4, 8, sb);
-
-        // Append movable inventory 2.
-        appendInventory(8, 12, sb, Utility.getColor('2') + "+");
-
-        // Append footer.
-        appendBar(sb);
-
-        return sb.toString();
+    public Set<Item> getInventory() {
+        return new HashSet<>(Arrays.stream(myInventorySlots).toList());
     }
 
-    private void appendBar(final StringBuilder theStringBuilder) {
-        for (int i = 0; i < 4; i++) {
-            appendSegment(theStringBuilder, true, 1);
-            appendSegment(theStringBuilder, true, 5);
-        }
-        appendSegment(theStringBuilder, false, 1);
+    /**
+     * Get a copy of the inventory as an array.
+     *
+     * @return Copy of slots in inventory.
+     */
+    public Item[] getSlots() {
+        return Arrays.copyOf(myInventorySlots, myInventorySlots.length);
     }
 
-    private void appendInventory(
-            final int theStart,
-            final int theEnd,
-            final StringBuilder theStringBuilder,
-            final String theEmptyChar
-
-    ) {
-
-        for (int i = theStart; i < theEnd; i++) {
-            appendSegment(theStringBuilder, true, 1);
-            final Item item = myInventorySlots[i];
-            theStringBuilder.append("  ")
-                    .append(item == null ?
-                            theEmptyChar
-                            : item.getColoredDisplay())
-                    .append("   ");
-        }
-        appendSegment(theStringBuilder, false, 1);
-
+    /**
+     * Checks if the inventory contains an item.
+     *
+     * @param theItem Item to check.
+     * @return If the inventory contains an item.
+     */
+    @Override
+    public boolean containsItem(final Item theItem) {
+        return Arrays.stream(myInventorySlots).anyMatch(e -> e == theItem);
     }
 
-    private void appendInfoBar(
-            final int theStart,
-            final int theEnd,
-            final StringBuilder theStringBuilder
-
-    ) {
-
-        for (int i = theStart + 1; i < theEnd + 1; i++) {
-            appendSegment(theStringBuilder, true, 1);
-            theStringBuilder.append("-(")
-                    .append(Utility.getColor('8'))
-                    .append(i)
-                    .append(Utility.getColor('7'))
-                    .append(")- ");
-        }
-        appendSegment(theStringBuilder, false, 1);
-
-    }
-
-    private void appendSegment(
-            final StringBuilder theStringBuilder,
-            final boolean theSpace,
-            final int theWidth
-    ) {
-
-        theStringBuilder.append(Utility.generateSegment(theWidth))
-                .append(theSpace ? ' ' : '\n');
-
-    }
 
 }

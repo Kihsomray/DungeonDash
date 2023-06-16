@@ -1,96 +1,140 @@
 package view.console;
 
 import controller.DungeonAdventure;
-import model.Utility;
-import model.sprite.hero.Hero;
-import model.sprite.hero.Priestess;
-import model.sprite.hero.Thief;
-import model.sprite.hero.Warrior;
+import model.util.Utility;
 import view.DungeonGUI;
+import view.console.frame.DungeonGameFrame;
+import view.console.frame.HeroSelectionFrame;
 
-import java.io.IOException;
+import java.io.File;
+import java.io.Serializable;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Scanner;
 
-public class ConsoleDisplay implements DungeonGUI {
+import static model.util.Utility.SCANNER;
 
+/**
+ * A type of GUI for DungeonAdventure that is displayed in console.
+ *
+ * @version 1.0.0
+ * @author Kihsomray
+ * @author Patrick Hern
+ */
+public class ConsoleDisplay implements DungeonGUI, Serializable {
+
+    /**
+     * Instance of main.
+     */
     private final DungeonAdventure myMain;
 
-    private static final String INTRO_TIP = "TIP: W for warrior, T for thief, P for priestess\n" +
-            "Type letter twice to confirm.";
+    /**
+     * Instance of hero selection frame.
+     */
+    private HeroSelectionFrame myHeroSelectionFrame;
 
+    /**
+     * Instance of dungeon game frame.
+     */
+    private DungeonGameFrame myDungeonGameFrame;
+
+
+    /**
+     * Creates an instance of console display.
+     *
+     * @param theMain Main instance (controller).
+     */
     public ConsoleDisplay(final DungeonAdventure theMain) {
 
         myMain = theMain;
 
     }
 
+
+    @Override
     public void display() {
 
-        System.out.println(Utility.generateCharacterMenu('W', INTRO_TIP));
+        // Scanner object.
+        final Scanner scanner = new Scanner(System.in);
 
-        char chosen = ' ';
+        // Selected hero, defaulted to warrior.
+        char heroChar = 'W';
 
-        while(true) {
+        // Username, by default- empty.
+        String username = "";
 
-            char input = new Scanner(System.in)
-                    .next()
-                    .toUpperCase(Locale.ROOT)
-                    .charAt(0);
+        // Prompt the user.
+        System.out.print(
+                "\nWould you like a new game (N) or load a game (L)? "
+        );
 
-            if (input == 'W' || input == 'T' || input == 'P')
-                System.out.println(Utility.generateCharacterMenu(input, INTRO_TIP));
+        // Load if 'L', otherwise new game.
+        boolean load = scanner.nextLine()
+                .toUpperCase(Locale.ROOT)
+                .charAt(0) == 'L';
 
-            // if selected twice.
-            if (input == chosen) break;
-            chosen = input;
+        // If not load, prompt for username.
+        if (!load) {
 
-        }
+            // Start with hero selection frame.
+            myHeroSelectionFrame = new HeroSelectionFrame();
 
-        System.out.print("Please input your username (up to 13 characters): ");
-        myMain.initializeDungeon(chosen, new Scanner(System.in).nextLine());
+            // Display the hero selection.
+            heroChar = myHeroSelectionFrame.display();
 
-        while(true) {
-
-            System.out.println(myMain.getDungeon());
-
-            char input = new Scanner(System.in)
-                    .next()
-                    .toUpperCase(Locale.ROOT)
-                    .charAt(0);
-
-            switch (input) {
-
-                case 'W':
-                    myMain.getDungeon().getHero().moveNorth();
-                    break;
-
-                case 'A':
-                    myMain.getDungeon().getHero().moveWest();
-                    break;
-
-                case 'S':
-                    myMain.getDungeon().getHero().moveSouth();
-                    break;
-
-                case 'D':
-                    myMain.getDungeon().getHero().moveEast();
-                    break;
-
-                case '1', '2', '3', '4', '5', '6', '7', '8':
-                    myMain.getDungeon().getHero().useInventoryItem(input - 48);
-                    break;
-
-
-            }
+            // Prompt and get user input.
+            System.out.print(
+                    "Please input your username (up to 13 characters): "
+            );
+            username = scanner.nextLine();
 
         }
 
+        // Get the player's input for username.
+        myMain.initializeDungeon(heroChar, username);
 
+        // Load if needed.
+        if (load) {
 
+            // Set the dungeon to previous state.
+            myMain.setDungeon(Utility.loadDungeonState(
+                    myMain.getDungeon(), queryForGameName()
+            ));
+
+        }
+
+        // New line in console.
+        System.out.println();
+
+        // Create new dungeon game frame.
+        myDungeonGameFrame = new DungeonGameFrame(myMain.getDungeon());
+
+        // Display the dungeon game frame.
+        myDungeonGameFrame.display();
 
     }
 
+    /**
+     * Queries the user for the name of the game they wish to load.
+     * @return Returns the String of the save to load.
+     */
+    private String queryForGameName() {
+        // Ask the user for the name of the file.
+        System.out.print("Enter the file name to load (Ex. \"save1\"): ");
 
+        // Get the load name.
+        String saveName = SCANNER.nextLine();
+
+        // Keep asking the user until valid file name entered.
+        while (saveName.isBlank() || !new File(saveName + ".ser").exists()) {
+
+            System.out.print("Please enter a non-empty name "
+                    + "(\"E\" to start a new game): ");
+            saveName = SCANNER.nextLine();
+
+        }
+
+        return saveName;
+    }
 
 }
